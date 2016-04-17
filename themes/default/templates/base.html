@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block page_title %}Massificados{% endblock %}</title>
+    {% block extra_css %}
+    {% endblock %}
+</head>
+<body>
+    {% block header %}
+        {% include "header.html" %}
+    {% endblock %}
+
+    {% block content %}
+
+    {% endblock %}
+
+    {% block footer %}
+        {% include "footer.html" %}
+    {% endblock %}
+
+    {% block footer_scripts %}
+    {% endblock %}
+</body>
+</html>
