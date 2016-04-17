@@ -63,4 +63,3 @@ class SocialMedia():
 
 class Template():
     pass
-

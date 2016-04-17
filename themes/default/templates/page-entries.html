@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="featurette" id="{% block sec_id %}{% endblock %}">
+    <div class="row"><div class="col-md-1"></div>
+      <div class="col-md-5">
+        <div class="thumbnail">
+          <img src="..." alt="...">
+          <div class="caption">
+            <h3>{% trans "Usuário" %}</h3>
+            <p>{% trans "Aqui você pode gerenciar suas contas de usuários" %}</p>
+            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Verificar</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="thumbnail">
+          <img src="..." alt="...">
+          <div class="caption">
+            <h3>{% trans "Perfis" %}</h3>
+            <p>{% trans "Aqui você configura Perfis de Acesso pré-definidos para cada usuário" %}</p>
+            <p>
+                <a href="#" class="btn btn-primary" role="button">Ir para Perfis de Usuário</a>
+            </p>
+          </div>
+        </div>
+      </div>
+        <div class="col-md-1"></div>
+    </div>
+ </div>
+{% endblock %}

@@ -43,6 +43,4 @@ class AbstractMassificadoUser(AbstractBaseUser, PermissionsMixin):
 
 
 class MassificadoUser(AbstractMassificadoUser):
-
-    class Meta(AbstractMassificadoUser.Meta):
-        swappable = 'AUTH_USER_MODEL'
+    pass

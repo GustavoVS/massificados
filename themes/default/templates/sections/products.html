@@ -1,0 +1,16 @@
+{% extends "base-sec.html" %}
+
+{% block section_content %}
+    <div class="row">
+        <div class="col-md-3">
+            <ul>
+                {% for product in home_product %}
+                    <li>{{ product.name }} | {{ product.description }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-3">
+            {{ LOGO }}
+        </div>
+    </div>
+{% endblock %}

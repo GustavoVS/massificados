@@ -16,12 +16,19 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from core.views import IndexView
+from core.views import IndexView, EntriesView
+from user_account.views import EntriesProfilesView, EntriesUsersView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', IndexView, name='index_view'),
+    url(r'^$', IndexView.as_view(), name='index_view'),
+    url(r'^sac/', EntriesView.as_view(), name='sac'),
 
-    #login Django (Já entra dando tiro)
+    url(r'^entries/$', EntriesView.as_view(), name='entries'),
+    url(r'^entries/users/$', EntriesUsersView.as_view(), name='entries_users'),
+    url(r'^entries/profiles/$', EntriesProfilesView.as_view(), name='entries_profiles'),
+
+
     url(r'^accounts/', include('allauth.urls')),
+
 ]
