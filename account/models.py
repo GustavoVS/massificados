@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+<<<<<<< 05de4a47d8314ad297d83dba34cde24ada157137
 import re
 from django.db import models
 from django.core import validators
@@ -49,3 +50,7 @@ class MassificadoUser(AbstractMassificadoUser):
 
 
 
+=======
+
+from django.db import models
+>>>>>>> Entidades de Parceiros, Venda e Produtos
