@@ -1,16 +1,25 @@
 {% extends "base-sec.html" %}
+{% load i18n %}
+
 
 {% block section_content %}
-    <div class="row">
-        <div class="col-md-3">
-            <ul>
+    <div id="services-section" class="text-center">
+        <div class="container">
+            <div class="row">
+                <div class="section-title wow fadeInDown">
+                    <h2>{% trans 'Products' %}</h2>
+                        <hr>
+                    <div class="clearfix"></div>
+                    <p>{% trans "O banco Sofisa oferece Produtos e Serviços para clientes Pessoa Física e Jurídica de forma online, segura e sem burocracia. Conheça mais abaixo" %}</p>
+                </div>
+                <div class="space"></div>
                 {% for product in home_product %}
-                    <li>{{ product.name }} | {{ product.description }}</li>
+                    <div class="col-md-3 col-sm-6 service wow fadeInUp" data-wow-delay="200ms"> <i class="fa fa-desktop"></i>
+                        <h4><strong>{{ product.name }}</strong></h4>
+                        <p>{{ product.description }}</p>
+                    </div>
                 {% endfor %}
-            </ul>
-        </div>
-        <div class="col-md-3">
-            {{ LOGO }}
+            </div>
         </div>
     </div>
 {% endblock %}

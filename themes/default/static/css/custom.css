@@ -427,7 +427,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#032731', end
 	padding: 0;
 }
 #about-section li:before {
-	content: "✓";
+	content: "âœ“";
 	color: #f3ca27;
 	padding-right: 5px;
 }
@@ -644,4 +644,11 @@ label {
 .hover-bg .hover-text {
 	padding: 22% 10%;
 }
+}
+
+.logo-header{
+    padding: 2px 0;
+}
+.logo-header > img {
+    height: 100%
 }
