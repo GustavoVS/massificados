@@ -1,29 +1,56 @@
 {% load i18n %}
 {% load static %}
+{% load account %}
 
 
 <nav id="menu" class="navbar navbar-default navbar-fixed-top on">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-header"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
         <a class="logo-header" class="navbar-brand" href="/">
             <img  src="{% static 'img/partner-sofisa/ls49.png' %}" alt="">
         </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse" id="nav-header">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#index.html" class="page-scroll">{% trans "Home" %}</a></li>
-        <li class=""><a href="#entries" class="page-scroll">{% trans "Cadastros" %}</a></li>
-        <li class=""><a href="#notifications" class="page-scroll">{% trans "Notificações" %}</a></li>
-        <li class=""><a href="#products" class="page-scroll">{% trans "Produtos" %}</a></li>
-        <li class=""><a href="#dashBoard" class="page-scroll">{% trans "DashBoard" %}</a></li>
-        <li class=""><a href="#production" class="page-scroll">{% trans "Produção" %}</a></li>
-        <li class=""><a href="#SAC" class="page-scroll">{% trans "SAC" %}</a></li>
-        <li class=""><a href="#pefil" class="page-scroll">{% trans "Meu Perfil" %}</a></li>
-        <li class=""><a href="#logout" class="page-scroll">{% trans "Sair" %}</a></li>
+        <li><a href="/" class="page-scroll">{% trans "Home" %}</a></li>
+        <li><a href="#sec-products" class="page-scroll">{% trans "Products" %}</a></li>
+        <li><a href="#sec-about" class="page-scroll">{% trans "About" %}</a></li>
+        <li><a href="#sec-contact" class="page-scroll">{% trans "Contact Us" %}</a></li>
+        <li><a href="#sac" class="page-scroll">{% trans "SAC" %}</a></li>
+        {% if user.is_authenticated %}
+            {% if user.is_admin or user.is_superuser %}
+                <li><a href="#dashBoard" class="page-scroll">{% trans "Dashboard" %}</a></li>
+                <li><a href="#production" class="page-scroll">{% trans "Production" %}</a></li>
+                <li><a href="{% url 'entries' %}" class="page-scroll">{% trans "Entries" %}</a></li>
+            {% endif %}
+            <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">{% user_display user %}</a>
+              <ul class="dropdown-menu">
+                <li><a href="#">{% trans "My Profile" %}</a></li>
+                <li><a href="#notifications" class="page-scroll">{% trans "Notifications" %}</a></li>
+                <li class="divider"></li>
+                <li><a href="{% url 'account_logout' %}">{% trans 'Logout' %}</a></li>
+              </ul>
+            </li>
+        {% else %}
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+              <ul id="login-dp" class="dropdown-menu">
+                <li>
+                   <div class="row">
+                      <div class="col-outmd-12">
+                         {% include '_login.html' %}
+                      </div>
+                   </div>
+                </li>
+              </ul>
+          </li>
+        {% endif %}
+
+
       </ul>
     </div>
     <!-- /.navbar-collapse -->

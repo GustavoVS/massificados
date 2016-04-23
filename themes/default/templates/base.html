@@ -29,7 +29,9 @@
 
     <title>{% block page_title %}Massificados{% endblock %}</title>
 
-
+    {% if not user.is_authenticated %}
+        <link href="{% static 'css/signin.css' %}" rel="stylesheet">
+    {% endif %}
     {% block extra_head %}
     {% endblock %}
 </head>
@@ -59,7 +61,7 @@
     <script src="{% static 'js/jqBootstrapValidation.js' %}"></script>
 
     <!-- Custom -->
-    <script src="{% static 'js/contact_me.js' %}"></script>
+    <!--script src="{% static 'js/contact_me.js' %}"></script -->
     <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/modernizr.custom.js' %}"></script>
     <script src="{% static 'js/owl.carousel.js' %}"></script>
