@@ -168,3 +168,8 @@ LOGIN_REDIRECT_URL = '/'
 
 AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",
                            "allauth.account.auth_backends.AuthenticationBackend")
+
+ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
+ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_ADAPTER = 'mysite.account_adapter.NoNewUsersAccountAdapter'
+ACCOUNT_ADAPTER = 'user_account.adapter.NoSignUp'
