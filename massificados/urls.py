@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.conf import settings
 from core.views import IndexView, EntriesView
 from user_account.views import EntriesProfilesView, EntriesUsersView
 
@@ -28,7 +29,12 @@ urlpatterns = [
     url(r'^entries/users/$', EntriesUsersView.as_view(), name='entries_users'),
     url(r'^entries/profiles/$', EntriesProfilesView.as_view(), name='entries_profiles'),
 
-
     url(r'^accounts/', include('allauth.urls')),
-
 ]
+
+
+
+if 'rosetta' in settings.INSTALLED_APPS:
+    urlpatterns += [
+        url(r'^rosetta/', include('rosetta.urls')),
+    ]

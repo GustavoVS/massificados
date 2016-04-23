@@ -1,0 +1,201 @@
+#
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-23 00:31-0300\n"
+"PO-Revision-Date: 2016-04-23 00:11-0300\n"
+"Last-Translator:   <gustavo.silva.vs@gmail.com>\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Translated-Using: django-rosetta 0.7.11\n"
+
+#: .\massificados\settings.py:139
+msgid "Brazilian Portuguese"
+msgstr ""
+
+#: .\massificados\settings.py:140
+msgid "English"
+msgstr ""
+
+#: .\partner\models.py:13
+msgid "Date created"
+msgstr ""
+
+#: .\product\models.py:27
+msgid "Individual"
+msgstr ""
+
+#: .\product\models.py:28
+msgid "Legal Person"
+msgstr ""
+
+#: .\product\models.py:50
+msgid "Protection"
+msgstr ""
+
+#: .\product\models.py:51
+msgid "Condition"
+msgstr ""
+
+#: .\product\models.py:52
+msgid "Profile"
+msgstr ""
+
+#: .\product\models.py:53
+msgid "Profile Detail"
+msgstr ""
+
+#: .\product\models.py:54
+msgid "Sale"
+msgstr ""
+
+#: .\product\models.py:55
+msgid "Information"
+msgstr ""
+
+#: .\product\models.py:56
+msgid "Deadline"
+msgstr ""
+
+#: .\product\models.py:79
+msgid "Buyer"
+msgstr ""
+
+#: .\product\models.py:80
+msgid "Insurance Company"
+msgstr ""
+
+#: .\product\models.py:81
+msgid "Partner - Superintendent"
+msgstr ""
+
+#: .\product\models.py:82
+msgid "Partner - Administrator"
+msgstr ""
+
+#: .\product\models.py:83
+msgid "GalCorr - Operational"
+msgstr ""
+
+#: .\product\models.py:84
+msgid "GalCorr - Commercial"
+msgstr ""
+
+#: .\product\models.py:85
+msgid "GalCorr - Manager"
+msgstr ""
+
+#: .\product\models.py:86
+msgid "GalCorr - Administrator"
+msgstr ""
+
+#: .\themes\default\templates\header.html:18
+msgid "Home"
+msgstr ""
+
+#: .\themes\default\templates\header.html:19
+msgid "Cadastros"
+msgstr ""
+
+#: .\themes\default\templates\header.html:20
+msgid "Notificações"
+msgstr ""
+
+#: .\themes\default\templates\header.html:21
+#, fuzzy
+#| msgid "Products"
+msgid "Produtos"
+msgstr "Produtos"
+
+#: .\themes\default\templates\header.html:22
+msgid "DashBoard"
+msgstr ""
+
+#: .\themes\default\templates\header.html:23
+#, fuzzy
+#| msgid "Products"
+msgid "Produção"
+msgstr "Produtos"
+
+#: .\themes\default\templates\header.html:24
+msgid "SAC"
+msgstr ""
+
+#: .\themes\default\templates\header.html:25
+msgid "Meu Perfil"
+msgstr ""
+
+#: .\themes\default\templates\header.html:26
+msgid "Sair"
+msgstr ""
+
+#: .\themes\default\templates\page-entries.html:11
+msgid "Usuário"
+msgstr ""
+
+#: .\themes\default\templates\page-entries.html:12
+msgid "Aqui você pode gerenciar suas contas de usuários"
+msgstr ""
+
+#: .\themes\default\templates\page-entries.html:21
+msgid "Perfis"
+msgstr ""
+
+#: .\themes\default\templates\page-entries.html:22
+msgid "Aqui você configura Perfis de Acesso pré-definidos para cada usuário"
+msgstr ""
+
+#: .\themes\default\templates\sections\products.html:10
+msgid "Products"
+msgstr "Produtos"
+
+#: .\themes\default\templates\sections\products.html:13
+msgid ""
+"O banco Sofisa oferece Produtos e Serviços para clientes Pessoa Física e "
+"Jurídica de forma online, segura e sem burocracia. Conheça mais abaixo"
+msgstr ""
+
+#: .\user_account\models.py:13
+msgid "Username"
+msgstr ""
+
+#: .\user_account\models.py:14
+msgid ""
+"Required. 30 characters or fewer. Letters, numbers and ./+/-/_ characters"
+msgstr ""
+
+#: .\user_account\models.py:17
+msgid "Enter a valid username."
+msgstr ""
+
+#: .\user_account\models.py:19
+msgid "Email address"
+msgstr ""
+
+#: .\user_account\models.py:23
+msgid "First name"
+msgstr ""
+
+#: .\user_account\models.py:24
+msgid "Last name"
+msgstr ""
+
+#: .\user_account\models.py:25
+msgid "Staff status"
+msgstr ""
+
+#: .\user_account\models.py:26
+msgid "Active"
+msgstr ""
+
+#: .\user_account\models.py:27
+msgid "Date joined"
+msgstr ""
+
+#: .\user_account\models.py:30
+msgid "user"
+msgstr ""
+
+#: .\user_account\models.py:31
+msgid "users"
+msgstr ""
