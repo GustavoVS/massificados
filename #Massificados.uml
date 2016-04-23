@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DjangoModelDependency</ID>
+  <OriginalElement>#Massificados</OriginalElement>
+  <nodes>
+    <node x="390.40625" y="237.0">product.models.MethodPayment</node>
+    <node x="681.1177083333333" y="79.0">product.models.InsuranceCompany</node>
+    <node x="71.5" y="158.0">partner.models.Partner</node>
+    <node x="845.9388134057971" y="313.26956521739135">product.models.Status</node>
+    <node x="897.40625" y="158.0">product.models.Question</node>
+    <node x="50.0" y="706.0">user_account.models.MassificadoUser</node>
+    <node x="824.40625" y="237.0">product.models.Profile</node>
+    <node x="423.9278079710144" y="318.6608695652174">product.models.Bank</node>
+    <node x="238.9375" y="79.0">product.models.FileType</node>
+    <node x="46.5" y="548.0">django.contrib.auth.models.Permission</node>
+    <node x="200.40625" y="237.0">partner.models.Campaign</node>
+    <node x="0.0" y="627.0">django.contrib.auth.models.Group</node>
+    <node x="1084.40625" y="158.0">sale.models.Detail</node>
+    <node x="1076.40625" y="79.0">sale.models.Deadline</node>
+    <node x="18.5" y="469.0">django.contrib.contenttypes.models.ContentType</node>
+    <node x="601.40625" y="316.0">product.models.ActionStatusEmails</node>
+    <node x="17.0" y="237.0">partner.models.Sac</node>
+    <node x="618.40625" y="237.0">product.models.ActionStatus</node>
+    <node x="486.03125" y="158.0">product.models.Product</node>
+    <node x="421.9375" y="79.0">product.models.Branch</node>
+    <node x="1088.90625" y="0.0">sale.models.Sale</node>
+    <node x="5.0" y="316.0">partner.models.SacItem</node>
+    <node x="1037.65625" y="237.0">sale.models.Response</node>
+    <node x="0.0" y="395.0">partner.models.SacPhone</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="sale.models.Response" target="product.models.Question">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="user_account.models.MassificadoUser" target="django.contrib.auth.models.Group">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="partner.models.SacItem" target="partner.models.Sac">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="product.models.ActionStatus" target="product.models.Status">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="sale.models.Deadline" target="sale.models.Sale">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="product.models.Product" target="product.models.InsuranceCompany">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="django.contrib.auth.models.Permission" target="django.contrib.contenttypes.models.ContentType">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="product.models.Profile" target="product.models.Product">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="product.models.ActionStatus" target="product.models.Product">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="sale.models.Response" target="sale.models.Detail">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="product.models.ActionStatusEmails" target="product.models.ActionStatus">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="product.models.Product" target="product.models.Branch">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="product.models.MethodPayment" target="product.models.Product">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="partner.models.SacPhone" target="partner.models.SacItem">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="django.contrib.auth.models.Group" target="django.contrib.auth.models.Permission">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="product.models.Profile" target="product.models.Question">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="partner.models.Campaign" target="partner.models.Partner">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="partner.models.Sac" target="partner.models.Partner">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="product.models.MethodPayment" target="product.models.Bank">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="sale.models.Detail" target="sale.models.Deadline">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="partner.models.Campaign" target="product.models.Product">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="product.models.Product" target="product.models.FileType">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="user_account.models.MassificadoUser" target="django.contrib.auth.models.Permission">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.9274193548387096" x="476.2956521739131" y="307.2260869565217" />
+  <SelectedNodes>
+    <node>product.models.Bank</node>
+  </SelectedNodes>
+  <Categories />
+</Diagram>
+

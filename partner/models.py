@@ -22,9 +22,9 @@ class Campaign(models.Model):
         Partner,
         on_delete=models.CASCADE
     )
-    product = models.OneToOneField(
+    product = models.ForeignKey(
         Product,
-        on_delete=models.CASCADE,
+        on_delete=models.CASCADE
     )
 
 

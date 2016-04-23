@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 from django.db import models
 from jsonfield import JSONField
+from core.models import FileType
+from core.models import Status
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -9,17 +11,14 @@ class InsuranceCompany(models.Model):
     name = models.CharField(max_length=30)
     susep = models.CharField(max_length=12)
 
+
 class Bank(models.Model):
     name = models.CharField(max_length=30)
     code = models.IntegerField()
 
-# Eu só precisava de uma classe, mas o Tony Ramos
+
 class Branch(models.Model):
     name = models.CharField(max_length=50)
-
-
-class FileType(models.Model):
-    name = models.CharField(max_length = 20)
 
 
 class Product(models.Model):
@@ -32,14 +31,19 @@ class Product(models.Model):
     description = models.TextField()
     declaration = models.TextField()
     kind_person = models.CharField(max_length=1, choices=KIND_PERSON_CHOICES)
-    insurance_company = models.ForeignKey(InsuranceCompany)
-    branch = models.ForeignKey(Branch)
+    insurance_company = models.OneToOneField(InsuranceCompany, on_delete=models.CASCADE)
+    branch = models.OneToOneField(Branch, on_delete=models.CASCADE)
     file_type = models.ForeignKey(FileType)
+
 
 class MethodPayment(models.Model):
     name = models.CharField(max_length=15)
     product = models.ForeignKey(Product)
     bank = models.ForeignKey(Bank)
+
+
+class Profile(models.Model):
+    product = models.OneToOneField(Product, on_delete=models.CASCADE)
 
 
 class Question(models.Model):
@@ -57,16 +61,8 @@ class Question(models.Model):
     )
     type = models.CharField(max_length=1, choices= TYPE_CHOICES)
     domain = JSONField
+    profile = models.ForeignKey(Profile)
     # domain_value e result_value
-
-
-class Profile(models.Model):
-    product = models.OneToOneField(Product, on_delete=models.CASCADE)
-    question = models.ManyToManyField(Question)
-
-
-class Status(models.Model):
-    name = models.CharField(max_length=100)
 
 
 class ActionStatus(models.Model):

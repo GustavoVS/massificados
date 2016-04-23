@@ -6,6 +6,9 @@ from django.core import validators
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
+from partner.models import Partner
+from core.models import Status
+from core.models import FileType
 
 class AbstractMassificadoUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_REGEXP = re.compile('^[\w.+-]+$')
@@ -41,6 +44,11 @@ class AbstractMassificadoUser(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         return self.first_name
 
+    partner = models.ForeignKey(Partner)
+
 
 class MassificadoUser(AbstractMassificadoUser):
     pass
+    # status = models.ForeignKey(Status)
+    # file_type = models.ForeignKey(FileType)
+
