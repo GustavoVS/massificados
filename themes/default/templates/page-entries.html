@@ -1,32 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n %}
 
 {% block content %}
-<div class="featurette" id="{% block sec_id %}{% endblock %}">
-    <div class="row"><div class="col-md-1"></div>
-      <div class="col-md-5">
-        <div class="thumbnail">
-          <img src="..." alt="...">
-          <div class="caption">
-            <h3>{% trans "Users" %}</h3>
-            <p>{% trans "Here you can manage the User Accounts" %}</p>
-            <p><a href="{% url 'entries-users' %}" class="btn btn-primary" role="button">{% trans 'Go to User Accounts' %}</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-5">
-        <div class="thumbnail">
-          <img src="..." alt="...">
-          <div class="caption">
-            <h3>{% trans "Profiles" %}</h3>
-            <p>{% trans "Here you can set pre made Access Profiles for each User Type" %}</p>
-            <p>
-                <a href="{% url 'entries-profiles' %}" class="btn btn-primary" role="button">{% trans "Go to User Profiles" %}</a>
-            </p>
-          </div>
-        </div>
-      </div>
-        <div class="col-md-1"></div>
-    </div>
- </div>
+    {% include 'page-entries-section.html' %}
 {% endblock %}

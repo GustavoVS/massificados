@@ -1,0 +1,11 @@
+{% extends 'base-sec.html' %}
+{% load i18n %}
+
+{% block section-title %}{{ user }}{% endblock %}
+
+{% block section-content %}
+    <form action="" method="post">{% csrf_token %}
+        {{ form }}
+        <button type="submit">{% trans 'Register User' %}</button>
+    </form>
+{% endblock %}

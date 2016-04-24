@@ -18,7 +18,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
 from core.views import IndexView, EntriesView
-from user_account.views import EntriesProfilesView, EntriesUsersView
+from user_account.views import EntriesProfilesView, EntriesUsersView, EntrieUserEditView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -29,11 +29,11 @@ urlpatterns = [
 
     url(r'^entries/users/$', EntriesUsersView.as_view(), name='entries-users'),
     url(r'^entries/users/new/', EntriesUsersView.as_view(), name='entries-users-new'),
-    url(r'^entries/users/edit/$', EntriesUsersView.as_view(), name='entries-users-edit'),
+    url(r'^entries/users/(?P<pk>[0-9]+)/$', EntrieUserEditView.as_view(), name='entries-users-edit'),
 
     url(r'^entries/profiles/$', EntriesProfilesView.as_view(), name='entries-profiles'),
     url(r'^entries/profiles/new/$', EntriesProfilesView.as_view(), name='entries-profiles-new'),
-    url(r'^entries/profiles/edit/$', EntriesProfilesView.as_view(), name='entries-profiles-edit'),
+    url(r'^entries/profiles/(?P<pk>[0-9]+)/$', EntriesProfilesView.as_view(), name='entries-profiles-edit'),
 
     url(r'^accounts/', include('allauth.urls')),
 ]

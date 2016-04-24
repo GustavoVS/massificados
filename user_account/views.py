@@ -14,6 +14,17 @@ class EntriesUsersView(LoginRequiredMixin, MassificadoPageListView):
         return MassificadoUser.objects.all()
 
 
+class EntrieUserNewView(LoginRequiredMixin, CreateView):
+    model = MassificadoUser
+    template_name = 'page-entries-user.html'
+
+
+class EntrieUserEditView(LoginRequiredMixin, UpdateView):
+    model = MassificadoUser
+    template_name = 'page-entries-user.html'
+    fields = ['first_name']
+
+
 class EntriesProfilesView(LoginRequiredMixin, MassificadoPageListView):
     context_object_name = 'profiles'
     template_name = 'page-entries-profiles.html'
@@ -21,17 +32,3 @@ class EntriesProfilesView(LoginRequiredMixin, MassificadoPageListView):
     def get_queryset(self):
         return Group.objects.all()
 
-
-class EntrieUserNewView(LoginRequiredMixin, CreateView):
-    form_class = EntrieUserNewForm
-    template_name = 'page-entries-user.html'
-
-    def get_success_url(self):
-        return
-
-class EntrieUserEditView(LoginRequiredMixin, UpdateView):
-    form_class = EntrieUserEditForm
-    template_name = 'page-entries-user.html'
-
-    def get_success_url(self):
-        return

@@ -16,18 +16,19 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="nav-header">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/" class="page-scroll">{% trans "Home" %}</a></li>
-        <li><a href="#sec-products" class="page-scroll">{% trans "Products" %}</a></li>
-        <li><a href="#sec-about" class="page-scroll">{% trans "About" %}</a></li>
-        <li><a href="#sec-contact" class="page-scroll">{% trans "Contact Us" %}</a></li>
-        <li><a href="#sac" class="page-scroll">{% trans "SAC" %}</a></li>
+        <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-about" class="page-scroll">{% trans "About" %}</a></li>
+        <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-products" class="page-scroll">{% trans "Products" %}</a></li>
+        <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-contact" class="page-scroll">{% trans "Contact Us" %}</a></li>
+        <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sac" class="page-scroll">{% trans "SAC" %}</a></li>
         {% if user.is_authenticated %}
             {% if user.is_admin or user.is_superuser %}
-                <li><a href="#dashBoard" class="page-scroll">{% trans "Dashboard" %}</a></li>
-                <li><a href="#production" class="page-scroll">{% trans "Production" %}</a></li>
+                <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#dashBoard" class="page-scroll">{% trans "Dashboard" %}</a></li>
+                <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#production" class="page-scroll">{% trans "Production" %}</a></li>
                 <li><a href="{% url 'entries' %}" class="page-scroll">{% trans "Entries" %}</a></li>
             {% endif %}
-            <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">{% user_display user %}</a>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <b>{% user_display user %}</b><span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="#">{% trans "My Profile" %}</a></li>
                 <li><a href="#notifications" class="page-scroll">{% trans "Notifications" %}</a></li>
@@ -37,7 +38,7 @@
             </li>
         {% else %}
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b><span class="caret"></span></a>
               <ul id="login-dp" class="dropdown-menu">
                 <li>
                    <div class="row">
