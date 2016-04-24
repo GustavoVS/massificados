@@ -8,12 +8,15 @@ from django.utils.translation import ugettext_lazy as _
 
 class Partner(models.Model):
     name = models.CharField(max_length=100)
-    logo = models.FilePathField()
+    logo = models.FileField()
     slug = models.CharField(max_length=50)
     date_create = models.DateTimeField(_('Date created'), default=timezone.now)
     modificate = models.DateField()
     email = models.EmailField()
     cnpj = models.CharField(max_length=18)
+
+    def __unicode__(self):
+        return self.name
 
 
 class Campaign(models.Model):
@@ -27,6 +30,9 @@ class Campaign(models.Model):
         on_delete=models.CASCADE
     )
 
+    def __unicode__(self):
+        return self.name
+
 
 class Sac(models.Model):
     name = models.CharField(max_length=100)
@@ -35,14 +41,21 @@ class Sac(models.Model):
         on_delete=models.CASCADE
     )
 
+    def __unicode__(self):
+        return self.name
+
 
 class SacItem(models.Model):
     name = models.CharField(max_length=100)
     detail = models.TextField()
+    hour = models.CharField(max_length=100, null=True)
     sac = models.ForeignKey(
         Sac,
         on_delete=models.CASCADE
     )
+
+    def __unicode__(self):
+        return self.name
 
 
 class SacPhone(models.Model):
@@ -52,6 +65,9 @@ class SacPhone(models.Model):
         SacItem,
         on_delete=models.CASCADE
     )
+
+    def __unicode__(self):
+        return self.description
 
 class Adress():
     pass
