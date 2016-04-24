@@ -9,11 +9,29 @@
 {% endblock %}
 
 
-{% block section_content %}
-    {% for product in home_product %}
-        <div class="col-md-3 col-sm-6 service wow fadeInUp" data-wow-delay="200ms"> <i class="fa fa-desktop"></i>
-            <h4><strong>{{ product.name }}</strong></h4>
-            <p>{{ product.description }}</p>
+{% block section-content %}
+    {% if products_j %}
+        <div class = "products-pj">
+            <h3><strong>For Company</strong></h3>
+            {% for product in products_j %}
+                <div class = "product-pj">
+                    <div class="col-md-3 col-sm-6 service wow fadeInUp" data-wow-delay="200ms"> <i class="fa fa-delicious"></i>
+                        <h4><strong>{{ product.name }}</strong></h4>
+                        <p>{{ product.description }}</p>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-    {% endfor %}
+    {% endif %}
+    <div class = "products-pf">
+        <h3><strong>For Peoples</strong></h3>
+        {% for product in products_f %}
+            <div class = "product-pf">
+                <div class="col-md-3 col-sm-6 service wow fadeInUp" data-wow-delay="200ms"> <i class="fa fa-delicious"></i>
+                    <h4><strong>{{ product.name }}</strong></h4>
+                    <p>{{ product.description }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

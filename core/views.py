@@ -13,10 +13,18 @@ class MassificadoPageListView(ListView):
 
 
 class IndexView(MassificadoPageListView):
+    model = Product
     context_object_name = 'home_product'
     template_name = "index.html"
+
     def get_queryset(self):
-        return Product.objects.filter(kind_person='F')
+        return Product.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['products_f'] = Product.objects.filter(kind_person='F')
+        context['products_j'] = Product.objects.filter(kind_person='J')
+        return context
 
 
 class EntriesView(LoginRequiredMixin, MassificadoPageListView):

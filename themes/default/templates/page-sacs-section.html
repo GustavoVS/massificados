@@ -1,0 +1,32 @@
+{% extends "base-sec.html" %}
+{% load i18n %}
+
+
+{% block section-id %}sec-sacs{% endblock %}
+{% block section-title %}{% trans 'SAC' %}{% endblock %}
+{% block section-desc %}
+    <p>{% trans "Fale com a Sofisa - Telefones e SAC" %}</p>
+{% endblock %}
+
+
+{% block section-content %}
+    {% for sac in sacs %}
+        <div class="col-md-10 col-sm-1 service wow fadeInUp" data-wow-delay="200ms"> <i class="fa fa-phone"></i>
+            <div class = "sac">
+                <h3><strong>{{ sac.name }}</strong></h3>
+                {% for item in sac.sacitem_set.all %}
+                    <div class = "sac-item">
+                        {% for phone in item.sacphone_set.all %}
+                            <div class="sac-fone">
+                                <h5>{{ phone.description }} - <strong>{{ phone.number }}</strong></h5>
+                            </div>
+                        {% endfor %}
+                        <h4><strong>{{ item.name }}</strong></h4>
+                        <h4><strong>{{ item.detail }}</strong></h4>
+                        <h4><strong>{{ item.hour }}</strong></h4>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

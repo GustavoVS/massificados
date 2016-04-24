@@ -221,7 +221,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#032731', end
 }
 
 /* Sac Section */
-#sec-sac {
+#sec-sacs {
 	padding: 80px 0 50px 0;
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#032731+0,032e3a+20,032e3a+100,032731+100 */
 	background: rgb(3,39,49); /* Old browsers */
@@ -231,13 +231,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#032731', end
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#032731', endColorstr='#032731', GradientType=0 ); /* IE6-9 */
 	color: #5b777f;
 }
-#sec-sac h4 {
+#sec-sacs h4 {
 	color: #81969c;
 }
 .space {
 	margin-top: 40px;
 }
-#sec-sac i.fa {
+#sec-sacs i.fa {
 	font-size: 40px;
 	border: 0;
 	width: 80px;
@@ -249,7 +249,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#032731', end
 	color: #f3ca27;
 	transition: all 0.5s;
 }
-#sec-sac .service:hover>i.fa {
+#sec-sacs .service:hover>i.fa {
 	background: #0b3540;
 }
 

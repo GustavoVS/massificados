@@ -11,14 +11,23 @@ class InsuranceCompany(models.Model):
     name = models.CharField(max_length=30)
     susep = models.CharField(max_length=12)
 
+    def __unicode__(self):
+        return self.name
+
 
 class Bank(models.Model):
     name = models.CharField(max_length=30)
     code = models.IntegerField()
 
+    def __unicode__(self):
+        return self.name
+
 
 class Branch(models.Model):
     name = models.CharField(max_length=50)
+
+    def __unicode__(self):
+        return self.name
 
 
 class Product(models.Model):
@@ -31,15 +40,21 @@ class Product(models.Model):
     description = models.TextField()
     declaration = models.TextField()
     kind_person = models.CharField(max_length=1, choices=KIND_PERSON_CHOICES)
-    insurance_company = models.OneToOneField(InsuranceCompany, on_delete=models.CASCADE)
-    branch = models.OneToOneField(Branch, on_delete=models.CASCADE)
-    file_type = models.ForeignKey(FileType)
+    insurance_company = models.ForeignKey(InsuranceCompany, on_delete=models.CASCADE)
+    branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
+    file_type = models.ManyToManyField(FileType)
+
+    def __unicode__(self):
+        return self.name
 
 
 class MethodPayment(models.Model):
     name = models.CharField(max_length=15)
     product = models.ForeignKey(Product)
     bank = models.ForeignKey(Bank)
+
+    def __unicode__(self):
+        return self.name
 
 
 class Profile(models.Model):
@@ -63,6 +78,9 @@ class Question(models.Model):
     domain = JSONField
     profile = models.ForeignKey(Profile)
     # domain_value e result_value
+
+    def __unicode__(self):
+        return self.name
 
 
 class ActionStatus(models.Model):
