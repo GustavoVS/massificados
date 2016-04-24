@@ -1,0 +1,35 @@
+{% extends 'base-sec.html' %}
+{% load i18n %}
+
+{% block section-title %}{% trans 'Profiles' %}{% endblock %}
+{% block section-title %}user-profiles{% endblock %}
+
+{% block section-content %}
+    {% if user.is_authenticated and  user.is_superuser %}
+        <div class="row">
+            <div class="text-left col-md-12">
+                <a href="{% url 'entries-users-new' %}" class="btn btn-info" role="button">
+                    <span class="fa fa-plus"></span>
+                </a>
+            </div>
+        </div>
+    {% endif %}
+    {% if profiles %}
+    {% for profile in profiles %}
+        <div class="row">
+            <div class="col-md-6">
+                {{ profile }}
+            </div>
+            <div class="col-md-6">
+                {{ profile.name }}
+            </div>
+        </div>
+    {% endfor %}
+    {% else %}
+        <div class="row">
+            <div class="text-col-md-8">
+                {% trans 'Clica nu +' %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
