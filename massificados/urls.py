@@ -19,11 +19,12 @@ from django.contrib import admin
 from django.conf import settings
 from core.views import IndexView, EntriesView
 from user_account.views import EntriesProfilesView, EntriesUsersView
+from partner.views import SacsListView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', IndexView.as_view(), name='index_view'),
-    url(r'^sac/', EntriesView.as_view(), name='sac'),
+    url(r'^sac/$', SacsListView.as_view(), name='sacs'),
 
     url(r'^entries/$', EntriesView.as_view(), name='entries'),
     url(r'^entries/users/$', EntriesUsersView.as_view(), name='entries_users'),

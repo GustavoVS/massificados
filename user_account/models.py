@@ -44,7 +44,7 @@ class AbstractMassificadoUser(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         return self.first_name
 
-    partner = models.ForeignKey(Partner)
+    # partner = models.ForeignKey(Partner)
 
 
 class MassificadoUser(AbstractMassificadoUser):

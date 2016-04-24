@@ -17,10 +17,10 @@
     <div class="collapse navbar-collapse" id="nav-header">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/" class="page-scroll">{% trans "Home" %}</a></li>
-        <li><a href="#sec-products" class="page-scroll">{% trans "Products" %}</a></li>
         <li><a href="#sec-about" class="page-scroll">{% trans "About" %}</a></li>
+        <li><a href="#sec-products" class="page-scroll">{% trans "Products" %}</a></li>
         <li><a href="#sec-contact" class="page-scroll">{% trans "Contact Us" %}</a></li>
-        <li><a href="#sac" class="page-scroll">{% trans "SAC" %}</a></li>
+        <li><a href="{% url 'sacs' %}"  class="page-scroll">{% trans "SAC" %}</a></li>
         {% if user.is_authenticated %}
             {% if user.is_admin or user.is_superuser %}
                 <li><a href="#dashBoard" class="page-scroll">{% trans "Dashboard" %}</a></li>
