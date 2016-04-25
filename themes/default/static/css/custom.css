@@ -691,3 +691,9 @@ label {
 .logo-header > img {
     height: 100%
 }
+
+.col-centered {
+    display:inline-block;
+    float:none;
+    margin-right:-4px;
+}
