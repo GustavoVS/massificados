@@ -1,0 +1,104 @@
+{% extends 'base-sec.html' %}
+{% load i18n %}
+
+{% block section-id %}{% endblock %}
+{% block section-title %}
+    {% if profile.pk %}
+        {% trans 'Edit Role' %}
+    {% else %}
+        {% trans 'Create Role' %}
+    {% endif %}
+{% endblock %}
+{% block section-content %}
+    <form action="" method="post">{% csrf_token %}
+        <button type="submit" class="btn-btn-success">{% trans 'Save Rola' %}</button>
+        <div class="space"></div>
+        <div class="form-group">
+            {% for error in form.name.errors %}
+                <small>{{ error|escape }}</small>
+            {% endfor %}
+            <label for="name">{{ form.name.label }}</label>
+            <input type="text" class="form-control" value="{{ form.name.value }}"
+                   name="{{ form.name.name }}"
+                   id="name" placeholder="{{ form.name.label }}">
+        </div>
+
+
+        <div class="container">
+            <h3>{% trans 'Entries' %}</h3>
+            <hr>
+            <div class="row">
+                <div class="col-md-4  col-md-offset-1">
+                    {% trans 'Page Name' %}
+                </div>
+                <div class="col-md-3">
+                    {% trans 'Can View' %}
+                </div>
+                <div class="col-md-3">
+                    {% trans 'Can Edit' %}
+                </div>
+            </div>
+            {% for page in entries_pages %}
+                <div class="row">
+                    <div class="col-md-4 col-offset-1">
+                        {{ page.name }}
+                    </div>
+                    <div class="col-md-3">
+                        <input name='{{ page.can_view }}' type="checkbox">
+                    </div>
+                    <div class="col-md-3">
+                        <input name='{{ page.can_edit }}' type="checkbox">
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="section">
+            <h3>{% trans 'Product Sale' %}</h3>
+            <div>
+
+            </div>
+        </div>
+
+        {% comment %}
+            <select data-placeholder="{{ form.permissions.label }}" class="hidden chosen-select" multiple
+                    name="{{ form.permissions.name }}" id="id_permissions">
+                <option value=""></option>
+                {% for value, text in form.permissions.field.choices %}
+                    <option value="{{ value }}" {% if value in form.permissions.value %}selected{% endif %}>{{ text }}</option>
+                {% endfor %}
+            </select>
+        {% endcomment %}
+    </form>
+{% endblock %}
+
+
+
+
+Cadastro
+    Usuário - View
+    Usuário - Edit
+    Perfil - View
+    Perfil - Edit
+    Produto - View
+    Produto - Edit
+    Parça - View
+    Parça - Edit
+    Campainha - View
+    Campainha - Edit
+    Sac - View
+    Sac - Edit
+    ShunpoBoard - View
+    Produção - View
+
+
+Venda - Produto
+    View
+    Edit
+    - Status
+        Ver
+        Editar
+        Atribuir
+    - Arquivos
+        Ver
+        Edit

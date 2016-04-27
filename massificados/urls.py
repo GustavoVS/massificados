@@ -19,6 +19,10 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from core.views import IndexView, EntriesView
+from user_account.views import (EntriesProfilesView, EntriesUsersView, EntrieUserEditView, EntrieProfileNewView,
+                                EntrieProfileEditView)
+
+
 from partner.views import SacsListView
 from user_account.views import EntriesProfilesView, EntriesUsersView, EntrieUserEditView
 
@@ -34,8 +38,8 @@ urlpatterns = [
     url(r'^entries/users/(?P<pk>[0-9]+)/$', EntrieUserEditView.as_view(), name='entries-users-edit'),
 
     url(r'^entries/profiles/$', EntriesProfilesView.as_view(), name='entries-profiles'),
-    url(r'^entries/profiles/new/$', EntriesProfilesView.as_view(), name='entries-profiles-new'),
-    url(r'^entries/profiles/(?P<pk>[0-9]+)/$', EntriesProfilesView.as_view(), name='entries-profiles-edit'),
+    url(r'^entries/profiles/new/$', EntrieProfileNewView.as_view(), name='entries-profiles-new'),
+    url(r'^entries/profiles/(?P<pk>[0-9]+)/$', EntrieProfileEditView.as_view(), name='entries-profiles-edit'),
 
     url(r'^accounts/', include('allauth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

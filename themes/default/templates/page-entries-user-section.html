@@ -6,6 +6,13 @@
 {% block section-content %}
     <form action="" method="post">{% csrf_token %}
         {{ form }}
-        <button type="submit">{% trans 'Register User' %}</button>
+        <ul class="list-group checked-list-box">
+            {% for permission_group in permission_groups %}
+                <li class="list-group-item">{{ permission_group.name }}</li>
+            {% empty %}
+                <li>what the heckt</li>
+            {% endfor %}
+        </ul>
+        <button type="submit">{% trans 'Save User' %}</button>
     </form>
 {% endblock %}

@@ -2,34 +2,34 @@
 {% load i18n %}
 
 {% block section-title %}{% trans 'Profiles' %}{% endblock %}
-{% block section-title %}user-profiles{% endblock %}
+{% block section-id %}user-profiles{% endblock %}
 
 {% block section-content %}
     {% if user.is_authenticated and  user.is_superuser %}
         <div class="row">
             <div class="text-left col-md-12">
-                <a href="{% url 'entries-users-new' %}" class="btn btn-info" role="button">
-                    <span class="fa fa-plus"></span>
-                </a>
+                <marquee scrolldelay="1" autospeed>
+                    <a href="{% url 'entries-profiles-new' %}" class="btn btn-info" role="button">
+                        <span class="fa fa-plus"></span>
+                    </a>
+                </marquee>
             </div>
         </div>
     {% endif %}
-    {% if profiles %}
+
+    <div class="row">
     {% for profile in profiles %}
-        <div class="row">
-            <div class="col-md-6">
-                {{ profile }}
-            </div>
-            <div class="col-md-6">
-                {{ profile.name }}
+        <div class="col-md-4 col-centered">
+            <div class="thumbnail">
+                <div class="caption">
+                <h3>{{ profile.name }}</h3>
+                <p>
+                    <a href="{% url 'entries-profiles-edit' profile.pk %}"
+                       class="btn btn-primary" role="button">{% trans 'Edit Profile' %}</a>
+                </p>
+                </div>
             </div>
         </div>
     {% endfor %}
-    {% else %}
-        <div class="row">
-            <div class="text-col-md-8">
-                {% trans 'Clica nu +' %}
-            </div>
-        </div>
-    {% endif %}
+    </div>
 {% endblock %}
