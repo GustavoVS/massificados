@@ -36,7 +36,7 @@ class Product(models.Model):
         ('J', _('Legal Person')),
     )
     name = models.CharField(max_length=100)
-    image = models.FileField()
+    image = models.ImageField(upload_to='uploads/%Y/%m/%d/')
     description = models.TextField()
     declaration = models.TextField()
     kind_person = models.CharField(max_length=1, choices=KIND_PERSON_CHOICES)

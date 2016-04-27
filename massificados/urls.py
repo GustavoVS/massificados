@@ -17,13 +17,15 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
+from django.conf.urls.static import static
 from core.views import IndexView, EntriesView
+from partner.views import SacsListView
 from user_account.views import EntriesProfilesView, EntriesUsersView, EntrieUserEditView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', IndexView.as_view(), name='index_view'),
-    url(r'^sac/', EntriesView.as_view(), name='sac'),
+    url(r'^sac/', SacsListView.as_view(), name='sac'),
 
     url(r'^entries/$', EntriesView.as_view(), name='entries'),
 
@@ -36,8 +38,7 @@ urlpatterns = [
     url(r'^entries/profiles/(?P<pk>[0-9]+)/$', EntriesProfilesView.as_view(), name='entries-profiles-edit'),
 
     url(r'^accounts/', include('allauth.urls')),
-]
-
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 if 'rosetta' in settings.INSTALLED_APPS:

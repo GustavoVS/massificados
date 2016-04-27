@@ -10,28 +10,52 @@
 
 
 {% block section-content %}
-    {% if products_j %}
-        <div class = "products-pj">
-            <h3><strong>For Company</strong></h3>
-            {% for product in products_j %}
-                <div class = "product-pj">
-                    <div class="col-md-3 col-sm-6 service wow fadeInUp" data-wow-delay="200ms"> <i class="fa fa-delicious"></i>
-                        <h4><strong>{{ product.name }}</strong></h4>
-                        <p>{{ product.description }}</p>
+    {% if products %}
+        <div id="products-show">
+            {% for product in products %}
+                <div id= "sec-product{{ product.id }}" class = "row hidden product-show">
+                    <div class="col-md-12 col-sm-6 service wow fadeInUp" data-wow-delay="200ms">
+                        <i class="fa"><img src="{{ product.image.url }}" class="img-responsive">
+                            <h4><strong>{{ product.name }}</strong></h4>
+                            <p>{{ product.description }}</p>
+                        </i>
                     </div>
                 </div>
             {% endfor %}
         </div>
     {% endif %}
-    <div class = "products-pf">
-        <h3><strong>For Peoples</strong></h3>
-        {% for product in products_f %}
-            <div class = "product-pf">
-                <div class="col-md-3 col-sm-6 service wow fadeInUp" data-wow-delay="200ms"> <i class="fa fa-delicious"></i>
-                    <h4><strong>{{ product.name }}</strong></h4>
-                    <p>{{ product.description }}</p>
+    {% if products_j %}
+        <div class = "products-pj">
+            <h3><strong>For Company</strong></h3>
+            {% for product in products_j %}
+                <div class = "product-pj">
+                    <div class="col-md-3 col-sm-6 service wow fadeInUp" data-wow-delay="200ms">
+                        <i class="fa"><img src="{{ product.image.url }}" class="img-responsive">
+                            <h4><strong>{{ product.name }}</strong></h4>
+                            <p>{{ product.description }}</p>
+                            <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info" role="button">
+                                <span class="fa fa-plus"></span>
+                            </a>
+                        </i>
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
-    </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% if products_f %}
+        <div class = "products-pf">
+            <h3><strong>For Peoples</strong></h3>
+            {% for product in products_f %}
+                <div class = "product-pf">
+                    <div class="col-md-3 col-sm-6 service wow fadeInUp" data-wow-delay="200ms"> <i class="fa fa-delicious"></i>
+                        <h4><strong>{{ product.name }}</strong></h4>
+                        <p>{{ product.description }}</p>
+                        <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info" role="button">
+                            <span class="fa fa-plus"></span>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 {% endblock %}

@@ -3,25 +3,25 @@
 <form class="form" role="form" method="post" action="{% url 'account_login' %}"  id="login-nav">
     {% csrf_token %}
     <div class="form-group">
-       <label class="sr-only" for="exampleInputEmail2">{% trans 'E-mail or username' %}</label>
+       <label class="sr-only" for="exampleInputEmail2">{% trans 'E-mail ou Usuário' %}</label>
        <input type="text" class="form-control" id="login" name="login" value="{{form.login.value}}"
-              placeholder="{% trans 'E-mail or username' %}" required>
+              placeholder="{% trans 'E-mail ou Usuário' %}" required>
         {% for error in form.login.errors %}
             <small>{{error}}</small>
         {% endfor %}
     </div>
     <div class="form-group">
-       <label class="sr-only" for="exampleInputPassword2">{% trans 'Password' %}</label>
+       <label class="sr-only" for="exampleInputPassword2">{% trans 'Senha' %}</label>
        <input type="password" class="form-control" name="password" id="password"
-              placeholder="{% trans 'Password' %}" required>
+              placeholder="{% trans 'Senha' %}" required>
     </div>
     <div class="form-group">
-       <button type="submit" class="btn btn-primary btn-block">{% trans 'Sign in' %}</button>
+       <button type="submit" class="btn btn-primary btn-block">{% trans 'Entrar' %}</button>
     </div>
     <div class="divider"></div>
     <div class="checkbox">
        <label>
-       <input type="checkbox" id="id_remember"> {% trans "Remember" %}
+       <input type="checkbox" id="id_remember"> {% trans "Relembrar" %}
        </label>
         <div class="help-block text-right">
             <a href="{% url 'account_reset_password' %}">{% trans 'Forget the password?' %}</a>

@@ -5,3 +5,14 @@
     {% include "sections/products.html" %}
     {% include "sections/contact.html" %}
 {% endblock %}
+
+{% block footer_scripts %}
+    <script>
+        $('.product-href').click(function(){
+            $('.product-show').hide(400);
+            $('#' + $(this).attr('data-href') )
+                 .removeClass('hidden')
+                 .show(400);
+        });
+    </script>
+{%  endblock %}

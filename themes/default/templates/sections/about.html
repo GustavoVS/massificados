@@ -1,32 +1,43 @@
 {% extends 'base-sec.html'%}
 {% load i18n %}
 
-{% block section-title%}<strong>{% trans 'About us' %}</strong> {% endblock %}
+{% block section-title%}<strong>{% trans 'Sobre o Banco Sofisa' %}</strong> {% endblock %}
 {% block section-id %}sec-about{% endblock %}
 {% block section-content %}
-    <div class="col-md-6 wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;"> <img src="img/about.png" class="img-responsive"> </div>
+    <div class="col-md-6 wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
+        <img src="static/img/partner-sofisa/about9.png" class="img-responsive">
+    </div>
     <div class="col-md-6 wow fadeInRight animated" style="visibility: visible; animation-name: fadeInRight;">
-        <h4>Who We Are</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec ornare diam commodo nibh ante facilisis bibendum.</p>
+        <h3>{% trans 'Quem Somos' %}</h3>
+        <p>
+            O Banco Sofisa S.A, uma instituição fundada em 1961 e uma das mais tradicionais instituições financeiras do país. Nestes mais de 50 anos de história, o Banco Sofisa tornou-se conhecido pela solidez e tradição de bons serviços prestados.
+            Especializado no atendimento a empresas e grandes investidores, o Banco está presente grande parte do território nacional desde sua sede na Alameda Santos, 1496 em São Paulo e através de suas agências.
+            Em toda sua história, os negócios do Banco Sofisa foram respaldados por uma sólida estrutura financeira, assegurada por altos índices de capitalização. Este conforto de um balanço robusto para os investidores é confirmado pelos ratings atribuídos, que reconhecem sua solidez financeira, disciplina na administração de riscos, alta qualidade de ativos e performance financeira consistente.
+            Para mais informações sobre o Banco Sofisa S.A, acesse o site Sofisa em
+           <a href="http://www.sofisa.com.br">www.sofisa.com.br</a>
+        </p>
         <div class="space"></div>
-        <h4>What We Do</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at.</p>
-        <div class="space"></div><div class="list-style">
+        <h3>{% trans 'O que fazemos' %}</h3>
+        <p>O Banco Sofisa oferece produtos e serviços para clientes pessoas físicas de forma 100% online, segura e sem burocracia. Nesta página você poderá conhecer um pouco de cada um de nossos produtos e serviços, suas características e como o Banco Sofisa os distribui sem cobrança de taxas ou tarifas.</p>
+        <div class="space"></div>
+        <div class="list-style">
           <div class="row">
             <div class="col-lg-6 col-sm-6 col-xs-12">
+              <h4>Para Pessoas</h4>
               <ul>
-                <li>Lorem ipsum dolor</li>
-                <li>Consectetur adipiscing</li>
-                <li>Duis sed dapibus leo</li>
-                <li>Sed commodo nibh ante</li>
+                <li>Seguro Viagem</li>
+                <li>Vida Individual</li>
+                <li>Automóvel</li>
+                <li>Perda e Roubo de Equipamentos</li>
               </ul>
             </div>
             <div class="col-lg-6 col-sm-6 col-xs-12">
+               <h4>Para Empresas</h4>
               <ul>
-                <li>Lorem ipsum dolor</li>
-                <li>Consectetur adipiscing</li>
-                <li>Duis sed dapibus leo</li>
-                <li>Sed commodo nibh ante</li>
+                <li>Vida em Grupo</li>
+                <li>Vida em Grupo Global</li>
+                <li>Acidentes Pessoais Coletivo</li>
+                <li>Prestamista</li>
               </ul>
             </div>
           </div>

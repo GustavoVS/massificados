@@ -197,9 +197,8 @@ header p {
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#032731', endColorstr='#032731', GradientType=0 ); /* IE6-9 */
 	color: #5b777f;
 }
-#sec-products h4 {
+#sec-products h3 {
 	color: #81969c;
-	text-transform: uppercase;
 }
 .space {
 	margin-top: 40px;
@@ -231,7 +230,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#032731', end
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#032731', endColorstr='#032731', GradientType=0 ); /* IE6-9 */
 	color: #5b777f;
 }
-#sec-sacs h4 {
+#sec-sacs h3 {
 	color: #81969c;
 }
 .space {
@@ -346,14 +345,14 @@ ol.type li a:hover {
 	opacity: 0;
 	transition: all 0.5s;
 }
-.hover-bg .hover-text>h4 {
+.hover-bg .hover-text>h3 {
 	opacity: 0;
 	-webkit-transform: translateY(100%);
 	transform: translateY(100%);
 	transition: all 0.3s;
 	font-size: 20px;
 }
-.hover-bg:hover .hover-text>h4 {
+.hover-bg:hover .hover-text>h3 {
 	opacity: 1;
 	-webkit-backface-visibility: hidden;
 	-webkit-transform: translateY(0);
@@ -458,15 +457,25 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#032731', end
 }
 #sec-about h4 {
 	color: #81969c;
+	font-size: 16px;
+	text-align: left;
+}
+#sec-about h3 {
+	color: #81969c;
 	font-size: 20px;
+	text-align: left;
+}
+#sec-about p {
+	text-align: left;
 }
 #sec-about li {
+	text-align: left;
 	margin-bottom: 6px;
 	list-style: none;
 	padding: 0;
 }
 #sec-about li:before {
-	content: "âœ“";
+	content: "✓";
 	color: #f3ca27;
 	padding-right: 5px;
 }
