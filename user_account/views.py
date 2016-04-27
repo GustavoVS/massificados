@@ -70,16 +70,16 @@ class EntrieProfileEditView(LoginRequiredMixin, UpdateView):
     template_name = 'page-entries-profile.html'
     fields = ['name', 'permissions']
 
-#    def get_context_data(self, **kwargs):
-#        context = super(EntrieProfileEditView, self).get_context_data(**kwargs)
-#        context['entries_pages'] = []
-#        for page in ENTRIES_PAGES:
-#           context['entries_pages'] += {
-#                'name': page[0],
-#               'can_view': '%s_can_view' % page[0],
-#               'can_edit': '%s_can_edit' % page[0],
-#           }
-#       return context
+    def get_context_data(self, **kwargs):
+        context = super(EntrieProfileEditView, self).get_context_data(**kwargs)
+        # context += ENTRIES_PAGES
+        context['entries_pages'] = ({
+                'name': page[1],
+                'can_view': '%s_can_view' % page[0],
+                'can_edit': '%s_can_edit' % page[0],
+        } for page in ENTRIES_PAGES )
+
+        return context
 
     def get_success_url(self):
         return reverse_lazy('entries-profiles')
