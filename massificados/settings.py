@@ -27,6 +27,7 @@ SECRET_KEY = 'rjy@i6@99qth)#8o!)z!hjk^mi@l7d6$#gfa_pu!91@i&2jtbf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = []
 
@@ -50,6 +51,8 @@ INSTALLED_APPS = [
     'partner',
     'product',
     'sale',
+    'core',
+    'address',
 
     #3rd
     'allauth',
@@ -155,8 +158,12 @@ LOCALE_PATHS = (
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
+
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'webfiles', 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'webfiles', 'media')
+
 STATICFILES_DIRS = (
 
     os.path.join(THEMES_DIR, 'default', 'static'),
@@ -173,3 +180,13 @@ ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_ADAPTER = 'mysite.account_adapter.NoNewUsersAccountAdapter'
 ACCOUNT_ADAPTER = 'user_account.adapter.NoSignUp'
+
+
+if DEBUG:
+    MIDDLEWARE_CLASSES += (
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    )
+    INSTALLED_APPS += (
+        'debug_toolbar',
+    )
+    INTERNAL_IPS = ('127.0.0.1', )
