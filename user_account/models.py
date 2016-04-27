@@ -10,6 +10,7 @@ from partner.models import Partner
 from core.models import Status
 from core.models import FileType
 
+
 class AbstractMassificadoUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_REGEXP = re.compile('^[\w.+-]+$')
     username = models.CharField(

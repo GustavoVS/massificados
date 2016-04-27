@@ -25,7 +25,7 @@
             {% if user.is_admin or user.is_superuser %}
                 <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#dashBoard" class="page-scroll">{% trans "Dashboard" %}</a></li>
                 <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#production" class="page-scroll">{% trans "Produção" %}</a></li>
-                <li><a href="{% url 'entries' %}" class="page-scroll">{% trans "Castros" %}</a></li>
+                <li><a href="{% url 'entries' %}" class="page-scroll">{% trans "Cadastros" %}</a></li>
             {% endif %}
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">

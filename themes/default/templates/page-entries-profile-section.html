@@ -11,7 +11,7 @@
 {% endblock %}
 {% block section-content %}
     <form action="" method="post">{% csrf_token %}
-        <button type="submit" class="btn-btn-success">{% trans 'Save Rola' %}</button>
+        <button type="submit" class="btn-btn-success">{% trans 'Save Role' %}</button>
         <div class="space"></div>
         <div class="form-group">
             {% for error in form.name.errors %}
@@ -27,27 +27,27 @@
         <div class="container">
             <h3>{% trans 'Entries' %}</h3>
             <hr>
-            <div class="row">
-                <div class="col-md-4  col-md-offset-1">
+            <div class="row" style="margin: auto; max-width: 600px">
+                <div class="col-md-4">
                     {% trans 'Page Name' %}
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     {% trans 'Can View' %}
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     {% trans 'Can Edit' %}
                 </div>
             </div>
             {% for page in entries_pages %}
-                <div class="row">
-                    <div class="col-md-4 col-offset-1">
+                <div class="row" style="margin: auto; max-width: 600px">
+                    <div class="col-md-4">
                         {{ page.name }}
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <input name='{{ page.can_view }}' type="checkbox">
                     </div>
-                    <div class="col-md-3">
-                        <input name='{{ page.can_edit }}' type="checkbox">
+                    <div class="col-md-4">
+                        <input name='{{ page.can_view }}' type="checkbox">
                     </div>
                 </div>
             {% endfor %}
