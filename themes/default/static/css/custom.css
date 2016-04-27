@@ -661,13 +661,22 @@ a:focus, .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:acti
 }
 /* Footer */
 #footer {
-	background: #032731;
+	background: #bcbbbb;
 	padding: 15px 0 10px 0;
-	color: #42626b;
+	color: #032731;
 	text-align: center;
 }
 #footer p {
 	margin-top: 10px;
+}
+
+#footer a {
+	color: #032731;
+	transition: all 0.5s;
+}
+#footer a:hover, a:focus {
+	text-decoration: none;
+	color: #f1c40f;
 }
 
 @media (max-width: 768px) {
@@ -705,4 +714,11 @@ label {
     display:inline-block;
     float:none;
     margin-right:-4px;
+}
+
+#footerlogos {
+	background: #ebebeb	;
+	padding: 15px 0 10px 0;
+	color: #42626b;
+	text-align: center;
 }
