@@ -4,8 +4,21 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import Group
 
+from product.models import Status
 
 User = get_user_model()
+# todo: compartilhar essa lista com o views.py
+ENTRIES_PAGES = [
+    ('user', _('Users')),
+    ('profile', _('Users Profile')),
+    ('product', _('Products')),
+    ('partner', _('Partners')),
+    ('campaign', _('Campaign')),
+    ('sac', _('Sac')),
+    ('dashboard', _('DashBoard')),
+    ('report', _('Production Reports')),
+]
+
 
 
 class BaseUserEditForm(forms.ModelForm):
@@ -46,3 +59,28 @@ class EntrieUserForm(BaseUserEditForm):
     fields = ('first_name', 'last_name', 'groups')
     def save(self, commit=True):
         pass
+
+class EntrieProfileEditForm(forms.ModelForm):
+
+    # status = forms.ModelMultipleChoiceFields(coerce  = Status.objects.all())
+
+    class Meta:
+        model = Group
+        fields = []
+
+    def save(self, commit=True):
+        perms = []
+
+        for page in ENTRIES_PAGES:
+            perm = '%s_can_view' % page[0]
+            if self.cleaned_data[perm]:
+                perms.append(perm)
+
+            perm = '%s_can_edit' % page[0]
+            if self.cleaned_data[perm]:
+                perms.append(perm)
+
+        self.model.permissions = perms
+
+
+        return super(EntrieProfileEditForm, self).save(commit=commit)

@@ -7,12 +7,10 @@
 {% block section-content %}
     {% if user.is_authenticated and  user.is_superuser %}
         <div class="row">
-            <div class="text-left col-md-12">
-                <marquee scrolldelay="1" autospeed>
-                    <a href="{% url 'entries-profiles-new' %}" class="btn btn-info" role="button">
-                        <span class="fa fa-plus"></span>
-                    </a>
-                </marquee>
+            <div class="text-center col-md-12">
+                <a href="{% url 'entries-profiles-new' %}" class="btn btn-info" role="button">
+                    <span class="fa fa-plus"></span>
+                </a>
             </div>
         </div>
     {% endif %}
