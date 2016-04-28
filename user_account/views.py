@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView, UpdateView
 from core.views import MassificadoPageListView
 from .models import MassificadoUser
-from .forms import EntrieUserForm
+from .forms import EntrieUserForm, EntrieProfileEditForm
 
 
 ENTRIES_PAGES = [
@@ -66,18 +66,19 @@ class EntrieProfileNewView(LoginRequiredMixin, CreateView):
 
 class EntrieProfileEditView(LoginRequiredMixin, UpdateView):
     model = Group
+    form_class = EntrieProfileEditForm
     context_object_name = 'profile'
     template_name = 'page-entries-profile.html'
     fields = ['name', 'permissions']
 
     def get_context_data(self, **kwargs):
         context = super(EntrieProfileEditView, self).get_context_data(**kwargs)
-        # context += ENTRIES_PAGES
+
         context['entries_pages'] = ({
-                'name': page[1],
-                'can_view': '%s_can_view' % page[0],
-                'can_edit': '%s_can_edit' % page[0],
-        } for page in ENTRIES_PAGES )
+            'name': page[1],
+            'can_view': '%s_can_view' % page[0],
+            'can_edit': '%s_can_edit' % page[0],
+        } for page in ENTRIES_PAGES)
 
         return context
 
