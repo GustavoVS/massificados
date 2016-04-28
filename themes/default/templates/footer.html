@@ -1,46 +1,48 @@
 {% load  static %}
-
+<!-- todo: row & refactor class & remove <br> -->
 <div id="footer">
     <div class="container">
-    <div class="col-md-8 col-md-offset-2 wow fadeInUp" data-wow-delay="200ms">
-        <br><br>
-        <div class="col-md-4">
-        <a href="#adress" class="page-scroll">
-            <i class="fa fa-map-marker fa-2x"></i>
-            <p>Endereço</p>
-        </a>
-        </div>
-        <div class="col-md-4">
-        <a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-contact" class="page-scroll">
-            <i class="fa fa-envelope-o fa-2x"></i>
-            <p>Fale Conosco</p>
-        </a>
-        </div>
-        <div class="col-md-4">
-        <a href="{% url 'sac' %}" class="page-scroll">
-            <i class="fa fa-phone fa-2x"></i>
-            <p>Telefone e SAC</p>
-        </a>
-        </div>
+        <br>
+        <div class="col-md-8 col-md-offset-2 wow fadeInUp" data-wow-delay="200ms">
+            <div class="col-md-4">
+            <a href="#adress" class="page-scroll">
+                <i class="fa fa-map-marker fa-2x"></i>
+                <p>Endereço</p>
+            </a>
+            </div>
+            <div class="col-md-4">
+            <a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-contact" class="page-scroll">
+                <i class="fa fa-envelope-o fa-2x"></i>
+                <p>Fale Conosco</p>
+            </a>
+            </div>
+            <div class="col-md-4">
+            <a href="{% url 'sac' %}" class="page-scroll">
+                <i class="fa fa-phone fa-2x"></i>
+                <p>Telefone e SAC</p>
+            </a>
+            </div>
             <div class="clearfix"></div>
+            <br>
         </div>
     </div>
     <div id= "footerlogos" class="col-md-12 ">
-        <div class="col-md-8 col-md-offset-2 wow fadeInUp">
-          <div class="col-md-4">
-                <i class="fa fa-1x"><img src="{% static 'img/partner-sofisa/sofisa50-02.png' %}"  class="img-responsive"></i>
-          </div>
-          <div class="col-md-4">
-                <i class="fa fa-1x"><img src="{% static 'img/galcorr/m50blue.png' %}" class="img-responsive"></i>
-          </div>
-          <div class="col-md-4">
-                <i class="fa fa-1x"><img src="{% static 'img/light/lightblue60.png' %}" class="img-responsive"></i>
-          </div>
-          <div class="clearfix"></div>
-        <div id= "footerlogos" class="col-md-12 ">
-    <p>Todos os direitos reservados ®. powered by
-        <a href="http://www.lightstudios.com.br" rel="nofollow">Light Studios</a> &
-        <a href="http://www.galcorr.com.br/" rel="nofollow">GalCorr</a>
-    </p>
+            <br>
+            <div class="col-md-8 col-md-offset-2 wow fadeInUp">
+                <div class="col-md-4">
+                    <i class="fa fa-1x"><img src="{% static 'img/partner-sofisa/sofisa50-02.png' %}"  class="img-responsive"></i>
+                </div>
+                <div class="col-md-4">
+                    <i class="fa fa-1x"><img src="{% static 'img/galcorr/m50blue.png' %}" class="img-responsive"></i>
+                </div>
+                <div class="col-md-4">
+                    <i class="fa fa-1x"><img src="{% static 'img/light/lightblue60.png' %}" class="img-responsive"></i>
+                </div>
+                <div class="clearfix"></div>
+                <p>Todos os direitos reservados ®. powered by
+                    <a href="http://www.lightstudios.com.br" rel="nofollow">Light Studios</a> &
+                    <a href="http://www.galcorr.com.br/" rel="nofollow">GalCorr</a>
+                </p>
+            </div>
     </div>
 </div>
