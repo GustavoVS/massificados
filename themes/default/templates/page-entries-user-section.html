@@ -1,18 +1,121 @@
 {% extends 'base-sec.html' %}
 {% load i18n %}
 
-{% block section-title %}{{ user }}{% endblock %}
+{% block section-title %}
+    {% if user_entrie %}
+        {{ user_entrie }}
+    {% else %}
+        {% trans 'Create User' %}
+    {% endif %}
+{% endblock %}
 
 {% block section-content %}
-    <form action="" method="post">{% csrf_token %}
-        {{ form }}
-        <ul class="list-group checked-list-box">
-            {% for permission_group in permission_groups %}
-                <li class="list-group-item">{{ permission_group.name }}</li>
-            {% empty %}
-                <li>what the heckt</li>
+    <form action="" method="post" class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+        {% csrf_token %}
+        <div class="visible-xs">
+            <button type="submit" class="btn btn-success pull-left">{% trans 'Save User' %}</button>
+            <a href="{% url 'entries-users' %}" role="button" class="btn btn-warning pull-right">
+                {% trans 'Cancel' %}
+            </a>
+        </div>
+        <div class="form-group">
+            {% for error in form.username.errors %}
+                <small>{{ error|escape }}</small>
             {% endfor %}
-        </ul>
-        <button type="submit">{% trans 'Save User' %}</button>
+            <label for="{{ form.username.name }}">{{ form.username.label  }}</label>
+            <input type="text" class="form-control" value="{{ form.username.value|default:'' }}"
+                   name="{{ form.username.name }}"
+                   id="username" placeholder="{{ form.username.label }}">
+        </div>
+        <div class="form-group">
+            {% for error in form.password1.errors %}
+                <small>{{ error|escape }}</small>
+            {% endfor %}
+            <label for="{{ form.password1.name }}">{{ form.password1.label  }}</label>
+            <input type="password" class="form-control" value="{{ form.password1.value|default:'' }}"
+                   name="{{ form.password1.name }}"
+                   id="password1" placeholder="{{ form.password1.label }}">
+        </div>
+        <div class="form-group">
+            {% for error in form.password2.errors %}
+                <small>{{ error|escape }}</small>
+            {% endfor %}
+            <label for="{{ form.password2.name }}">{{ form.password2.label  }}</label>
+            <input type="password" class="form-control" value="{{ form.password2.value|default:'' }}"
+                   name="{{ form.password2.name }}"
+                   id="password2" placeholder="{{ form.password2.label }}">
+        </div>
+        <div class="form-group">
+            {% for error in form.first_name.errors %}
+                <small>{{ error|escape }}</small>
+            {% endfor %}
+            <label for="first_name">{{ form.first_name.label  }}</label>
+            <input type="text" class="form-control" value="{{ form.first_name.value|default:'' }}"
+                   name="{{ form.first_name.name }}"
+                   id="first_name" placeholder="{{ form.first_name.label }}">
+        </div>
+        <div class="form-group">
+            {% for error in form.last_name.errors %}
+                <small>{{ error|escape }}</small>
+            {% endfor %}
+            <label for="last_name">{{ form.last_name.label|escape }}</label>
+            <input type="text" class="form-control" value="{{ form.last_name.value|default:'' }}"
+                   name="{{ form.last_name.name }}"
+                   id="last_name" placeholder="{{ form.last_name.label }}">
+        </div>
+        <div class="form-group">
+            {% for error in form.email.errors %}
+                <small>{{ error|escape }}</small>
+            {% endfor %}
+            <label for="email">{{ form.email.label|escape }}</label>
+            <input type="mail" class="form-control" value="{{ form.email.value|default:'' }}"
+                   name="{{ form.email.name }}"
+                   id="email" placeholder="{{ form.email.label }}">
+        </div>
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">{% trans 'Permissions' %}</div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        {% for error in form.is_active.errors %}
+                            <small>{{ error|escape }}</small>
+                        {% endfor %}
+                        {{ form.is_active.label }}
+                        <div class="material-switch pull-right">
+                            <input type="checkbox" name="{{ form.is_active.name }}"
+                                   id="{{ form.is_active.name }}"
+                                   {% if form.is_active %}checked="checked"{% endif %}>
+                            <label for="{{ form.is_active.name }}" class="label-primary"></label>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        {% for error in form.is_staff.errors %}
+                            <small>{{ error|escape }}</small>
+                        {% endfor %}
+                        {{ form.is_staff.label }}
+                        <div class="material-switch pull-right">
+                            <input type="checkbox" name="{{ form.is_staff.name }}"
+                                   id="{{ form.is_staff.name }}"
+                                   {% if form.is_staff %}checked="checked"{% endif %}>
+                            <label for="{{ form.is_staff.name }}" class="label-primary"></label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="{{ form.groups.name }}">{{ form.groups.label }}</label>
+            <select class="selectpicker" name="{{ form.groups.name }}" id="{{ form.groups.name }}">
+                {% for v, n in form.fields.groups.choices %}
+                    <option value="{{ v }}"{% if form.fields.groups.value.0 == x %} selected{% endif %}>{{ n }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <button type="submit" class="btn btn-success pull-left">{% trans 'Save User' %}</button>
+            <a href="{% url 'entries-users' %}" role="button" class="btn btn-warning pull-right">
+                {% trans 'Cancel' %}
+            </a>
+        </div>
     </form>
 {% endblock %}

@@ -2,7 +2,7 @@
 from django.contrib.auth import get_user_model
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, Permission
 
 from product.models import Status
 
@@ -20,20 +20,18 @@ ENTRIES_PAGES = [
 ]
 
 
+class EntrieUserForm(forms.ModelForm):
+    is_staff = forms.BooleanField(required=False)
+    is_active = forms.BooleanField(required=False)
 
-class BaseUserEditForm(forms.ModelForm):
-    email = forms.RegexField(label=_("email"), max_length=75, regex=r"^[\w.@+-]+$")
     password1 = forms.CharField(widget=forms.PasswordInput, label=_("Password"), required=False)
     password2 = forms.CharField(widget=forms.PasswordInput, label=_("Password (again)"), required=False)
-    groups = forms.ModelMultipleChoiceField(Group.objects.none(), widget=forms.CheckboxSelectMultiple)
-    model = User
+
+    groups = forms.ModelChoiceField(queryset=Group.objects.all())
 
     class Meta:
         model = User
-        fields = []
-
-    def clean_username(self):
-        return self.instance.username
+        fields = ('username', 'first_name', 'last_name', 'email')
 
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
@@ -44,43 +42,38 @@ class BaseUserEditForm(forms.ModelForm):
         return password2
 
     def save(self, commit=True):
-
         if self.cleaned_data['password1']:
             self.instance.set_password(self.cleaned_data['password1'])
-        return super(ProfileEditForm, self).save(commit=commit)
+        r = super(EntrieUserForm, self).save(commit=commit)
+        self.instance.groups.clear()
+        self.instance.groups.add(self.cleaned_data['groups'])
+        return r
 
-    def __init__(self, pass_a_Q_object=None, *args, **kwargs):
-        super(BaseUserEditForm, self).__init__(*args, **kwargs)
-        if pass_a_Q_object:
-            self.fields['permissions'].queryset = Group.objects.filter(pass_a_Q_object)
-
-
-class EntrieUserForm(BaseUserEditForm):
-    fields = ('first_name', 'last_name', 'groups')
-    def save(self, commit=True):
-        pass
 
 class EntrieProfileEditForm(forms.ModelForm):
+    entries = []
+    status = []
 
-    # status = forms.ModelMultipleChoiceFields(coerce  = Status.objects.all())
+    entries = forms.MultipleChoiceField(
+                label='Entries',
+                choices=[(c.id, c.name)
+                    for c in Permission.objects.filter(
+                        name__icontains='sac'
+                    )
+                ]
+    )
+
+    status = forms.MultipleChoiceField(label='Status', choices=[(m.id, m.name)
+                          for m in Permission.objects.filter(name__icontains='status')
+                      ])
 
     class Meta:
         model = Group
-        fields = []
+        fields = ['name', 'permissions']
 
     def save(self, commit=True):
-        perms = []
+        # for v in self.cleaned_data['entries']:
 
-        for page in ENTRIES_PAGES:
-            perm = '%s_can_view' % page[0]
-            if self.cleaned_data[perm]:
-                perms.append(perm)
-
-            perm = '%s_can_edit' % page[0]
-            if self.cleaned_data[perm]:
-                perms.append(perm)
-
-        self.model.permissions = perms
-
+        # self.Group.permissions = self.cleaned_data['permissions_entries']
 
         return super(EntrieProfileEditForm, self).save(commit=commit)
