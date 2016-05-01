@@ -29,7 +29,7 @@ SECRET_KEY = 'rjy@i6@99qth)#8o!)z!hjk^mi@l7d6$#gfa_pu!91@i&2jtbf'
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1:8000']
 
 AUTH_USER_MODEL = 'user_account.MassificadoUser'
 
@@ -177,8 +177,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, '..', 'www', 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'www', 'media')
 
 STATICFILES_DIRS = (
-
     os.path.join(THEMES_DIR, 'default', 'static'),
+)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
 LOGIN_URL = '/accounts/login/'
