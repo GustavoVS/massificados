@@ -3,9 +3,9 @@
 
 
 {% block section-id %}sec-products{% endblock %}
-{% block section-title %}{% trans 'Produtos' %}{% endblock %}
+{% block section-title %}{% endblock %}
 {% block section-desc %}
-    <p>{% trans "O banco Sofisa oferece Produtos e Serviços para clientes Pessoa Física e Jurídica de forma online, segura e sem burocracia. Conheça mais abaixo" %}</p>
+{#     <p>{ % trans "O banco Sofisa oferece Produtos e Serviços para clientes Pessoa Física e Jurídica de forma online, segura e sem burocracia. Conheça mais abaixo" % }</p> #}
 {% endblock %}
 
 
@@ -13,7 +13,7 @@
     <div id="products-show">
         {% for product in products %}
             <div id= "sec-product{{ product.id }}" class = "row hidden product-show">
-                <div class="col-md-12 col-sm-12 service wow fadeInUp" data-wow-delay="200ms">
+                <div class="col-md-12 col-sm-12 col-sm-12 col-xs-12 service wow fadeInUp" data-wow-delay="200ms">
                     <div class="panel panel-primary">
                         <div id='panel-product' class="panel-heading">
                             <h4>{{ product.name }}</h4>
@@ -25,80 +25,137 @@
             </div>
         {% endfor %}
     </div>
-    {% if products %}
+    {% if products %} {# menu lateral #}
         <div class="row">
-            {% if products_j %}
-                {% if products_f %}
-                    <div class = "products-pj col-lg-6 col-md-6 col-sm-6">
-                {% else %}
-                    <div class = "products-pj col-lg-12 col-md-12 col-sm-12">
-                {% endif %}
-                        {% for product in products_j %}
-                            <div class = "product-pj">
-                                {% if products_f %}
-                                    <div class="col-lg-6 col-md-12 col-sm-12">
-                                {% else %}
-                                    <div class="col-lg-3 col-md-6 col-sm-6">
-                                {% endif %}
-                                        <div class="panel panel-primary">
-                                            <div class="panel-heading">
-                                                <h4>{{ product.name }}</h4>
-                                                <p>{{ product.introduction }}</p>
-                                                <i class="fa"><img src="{{ product.icon1.url }}" class="img-responsive"></i>
-                                                <i class="fa"><img src="{{ product.icon2.url }}" class="img-responsive"></i>
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="panel-button" >
-                                                    <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info" role="button">
-                                                        <span class="fa fa-plus"> Saiba mais</span>
-                                                    </a>
-                                                    <a  class="page-scroll btn btn-primary" role="button">
-                                                        <span class="fa fa-cart-plus"> Contratar</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div >
-                            </div>
-                        {% endfor %}
-                    </div>
-            {% endif %}
-            {% if products_f %}
+            <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+               <div class="list-group">
+                <a class="list-group-item text-center active" data-remote="true"  id="categoria_todos">
+                  Todos os Produtos
+                </a>
                 {% if products_j %}
-                    <div class = "products-pf col-lg-6 col-md-6 col-sm-6">
-                {% else %}
-                    <div class = "products-pf col-lg-12 col-md-12 col-sm-12">
-                {% endif %}
-                        {% for product in products_f %}
-                            <div class = "product-pf">
-                                {% if products_j %}
-                                    <div class="col-lg-6 col-md-12 col-sm-12">
-                                {% else %}
-                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                    <a class="list-group-item" data-remote="true" href="#sub_produtos_pj" id="categoria_pj" data-toggle="collapse" data-parent="#categoria_pj" >
+                      <span class="fa fa-briefcase"></span>
+                      <span>Para Empresas</span>
+                      <span class="menu-ico-collapse"><i class="fa fa-chevron-down"></i></span>
+                    </a>
+                    <div class="collapse list-group-submenu" id="sub_produtos_pj">
+                        {% for product in products_j %}
+                            <div class="list-group-item sub-item" data-parent="#sub_categoria_pj" >
+                                <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info" role="button">
+                                    <span class="fa fa-plus"></span>
+                                </a>
+                                {% if user.is_authenticated %}
+                                    <a  class="page-scroll btn btn-primary" role="button">
+                                        <span class="fa fa-cart-plus"></span>
+                                    </a>
                                 {% endif %}
-                                        <div class="panel panel-primary">
-                                            <div class="panel-heading">
-                                                <h4>{{ product.name }}</h4>
-                                                <p>{{ product.introduction }}</p>
-                                                <i class="fa"><img src="{{ product.icon1.url }}" class="img-responsive"></i>
-                                                <i class="fa"><img src="{{ product.icon2.url }}" class="img-responsive"></i>
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="panel-button" >
-                                                    <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info" role="button">
-                                                        <span class="fa fa-plus"> Saiba mais</span>
-                                                    </a>
-                                                    <a  class="page-scroll btn btn-primary" role="button">
-                                                        <span class="fa fa-cart-plus"> Contratar</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div >
+                                {{ product.name }}
                             </div>
                         {% endfor %}
                     </div>
-            {% endif %}
+                {% endif %}
+                {% if products_f %}
+                    <a class="list-group-item" data-remote="true" href="#sub_produtos_pf" id="categoria_pf" data-toggle="collapse" data-parent="#categoria_pf" >
+                      <span class="fa fa-user"></span>
+                      <span>Para Pessoas</span>
+                      <span class="menu-ico-collapse"><i class="fa fa-chevron-down"></i></span>
+                    </a>
+                    <div class="collapse list-group-submenu" id="sub_produtos_pf">
+                        {% for product in products_f %}
+                            <div class="list-group-item sub-item" data-parent="#sub_categoria_pf" >
+                                <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info" role="button">
+                                    <span class="fa fa-plus"></span>
+                                </a>
+                                {% if user.is_authenticated %}
+                                    <a  class="page-scroll btn btn-primary" role="button">
+                                        <span class="fa fa-cart-plus"></span>
+                                    </a>
+                                {% endif %}
+                                {{ product.name }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                </div>
+            </div>
+            <div class=" col-lg-9 col-md-9 col-sm-12 col-xs-12"> {# colunas de produtos #}
+                {% if products_j %}
+                    {% if products_f %}
+                        <div class = "products-pj col-lg-6 col-md-6 col-sm-6">
+                    {% else %}
+                        <div class = "products-pj col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    {% endif %}
+                            {% for product in products_j %}
+                                <div class = "product-pj">
+                                    {% if products_f %}
+                                        <div class="col-lg-6 col-md-6">
+                                    {% else %}
+                                        <div class="col-lg-4 col-md-4">
+                                    {% endif %}
+                                            <div class="panel panel-primary">
+                                                <div class="panel-heading">
+                                                    <h4>{{ product.name }}</h4>
+                                                    <p>{{ product.introduction }}</p>
+                                                    <i class="fa"><img src="{{ product.icon1.url }}" class="img-responsive"></i>
+                                                    <i class="fa"><img src="{{ product.icon2.url }}" class="img-responsive"></i>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="product-pj-panel-button" >
+                                                        <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info col-lg-12 col-md-12 col-sm-6 col-xs-6 role="button">
+                                                            <span class="fa fa-plus"> Saiba mais</span>
+                                                        </a>
+                                                        {% if user.is_authenticated %}
+                                                            <a  class="page-scroll btn btn-primary col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
+                                                                <span class="fa fa-cart-plus"> Contratar</span>
+                                                            </a>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div >
+                                </div>
+                            {% endfor %}
+                        </div>
+                {% endif %}
+                {% if products_f %}
+                    {% if products_j %}
+                        <div class = "products-pf col-lg-6 col-md-6 col-sm-6">
+                    {% else %}
+                        <div class = "products-pf col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    {% endif %}
+                            {% for product in products_f %}
+                                <div class = "product-pf">
+                                    {% if products_j %}
+                                        <div class="col-lg-6 col-md-6">
+                                    {% else %}
+                                        <div class="col-lg-4 col-md-4">
+                                    {% endif %}
+                                            <div class="panel panel-primary">
+                                                <div class="panel-heading">
+                                                    <h4>{{ product.name }}</h4>
+                                                    <p>{{ product.introduction }}</p>
+                                                    <i class="fa"><img src="{{ product.icon1.url }}" class="img-responsive"></i>
+                                                    <i class="fa"><img src="{{ product.icon2.url }}" class="img-responsive"></i>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="product-pf-panel-button" >
+                                                        <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
+                                                            <span class="fa fa-plus"> Saiba mais</span>
+                                                        </a>
+                                                        {% if user.is_authenticated %}
+                                                            <a  class="page-scroll btn btn-primary col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
+                                                                <span class="fa fa-cart-plus"> Contratar</span>
+                                                            </a>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div >
+                                </div>
+                            {% endfor %}
+                        </div>
+                {% endif %}
+            </div>
         </div>
     {% endif %}
 {% endblock %}
