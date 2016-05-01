@@ -37,6 +37,9 @@ class Product(models.Model):
     )
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='uploads/%Y/%m/%d/')
+    icon1 = models.ImageField(upload_to='uploads/%Y/%m/%d/')
+    icon2 = models.ImageField(upload_to='uploads/%Y/%m/%d/')
+    introduction = models.CharField(max_length=50)
     description = models.TextField()
     declaration = models.TextField()
     kind_person = models.CharField(max_length=1, choices=KIND_PERSON_CHOICES)
@@ -57,8 +60,10 @@ class MethodPayment(models.Model):
         return self.name
 
 
-class Profile(models.Model):
-    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+class Domain(models.Model):
+    name = models.CharField(max_length=100)
+    result_value = models.CharField(max_length=100)
+    domain_value = models.CharField(max_length=100)
 
 
 class Question(models.Model):
@@ -74,13 +79,18 @@ class Question(models.Model):
         ('in', _('Information')),
         ('dl', _('Deadline')),
     )
-    type = models.CharField(max_length=1, choices= TYPE_CHOICES)
-    domain = JSONField
-    profile = models.ForeignKey(Profile)
-    # domain_value e result_value
+    type = models.CharField(max_length=2, choices=TYPE_CHOICES)
+    domain = models.ManyToManyField(Domain)
+    # domain_value e result_value domain = JSONField
 
     def __unicode__(self):
         return self.name
+
+
+class Profile(models.Model):
+    name = models.CharField(max_length=100)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    question = models.ManyToManyField(Question)
 
 
 class ActionStatus(models.Model):

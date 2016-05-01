@@ -10,119 +10,95 @@
 
 
 {% block section-content %}
-    {% if products %}
-        <div id="products-show">
-            {% for product in products %}
-                <div id= "sec-product{{ product.id }}" class = "row hidden product-show">
-                    <div class="col-md-12 col-sm-6 service wow fadeInUp" data-wow-delay="200ms">
-                        <div class="panel panel-primary">
-                            <div id='panel-product' class="panel-heading">
-                                <h4>{{ product.name }}</h4>
-                                <p>{{ product.description }}</p>
-                                <p>{{ product.description }}</p>
-                                <p>{{ product.description }}</p>
-                                <p>{{ product.description }}</p>
-                                <i class="fa"><img src="{{ product.image.url }}" class="img-responsive"></i>
-                                <i class="fa"><img src="{{ product.image.url }}" class="img-responsive"></i>
-                            </div>
+    <div id="products-show">
+        {% for product in products %}
+            <div id= "sec-product{{ product.id }}" class = "row hidden product-show">
+                <div class="col-md-12 col-sm-12 service wow fadeInUp" data-wow-delay="200ms">
+                    <div class="panel panel-primary">
+                        <div id='panel-product' class="panel-heading">
+                            <h4>{{ product.name }}</h4>
+                            <p>{{ product.description }}</p>
+                            <i class="fa"><img src="{{ product.image.url }}" class="img-responsive"></i>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
-    {% endif %}
-    {% if products_j %}
-        <div class = "products-pj">
-            <h3><strong>Para Empresas</strong></h3>
-            {% for product in products_j %}
-                <div class = "product-pj">
-                    <div class="col-md-3 col-sm-6 service wow fadeInUp" data-wow-delay="200ms">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h4>{{ product.name }}</h4>
-                                <p>{{ product.description }}</p>
-                                <i class="fa"><img src="{{ product.image.url }}" class="img-responsive"></i>
-                                <i class="fa"><img src="{{ product.image.url }}" class="img-responsive"></i>
+            </div>
+        {% endfor %}
+    </div>
+    {% if products %}
+        <div class="row">
+            {% if products_j %}
+                {% if products_f %}
+                    <div class = "products-pj col-lg-6 col-md-6 col-sm-6">
+                {% else %}
+                    <div class = "products-pj col-lg-12 col-md-12 col-sm-12">
+                {% endif %}
+                        {% for product in products_j %}
+                            <div class = "product-pj">
+                                {% if products_f %}
+                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                {% else %}
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                {% endif %}
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <h4>{{ product.name }}</h4>
+                                                <p>{{ product.introduction }}</p>
+                                                <i class="fa"><img src="{{ product.icon1.url }}" class="img-responsive"></i>
+                                                <i class="fa"><img src="{{ product.icon2.url }}" class="img-responsive"></i>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="panel-button" >
+                                                    <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info" role="button">
+                                                        <span class="fa fa-plus"> Saiba mais</span>
+                                                    </a>
+                                                    <a  class="page-scroll btn btn-primary" role="button">
+                                                        <span class="fa fa-cart-plus"> Contratar</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div >
                             </div>
-                            <div class="panel-body">Saiba Mais
-                                <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info" role="button">
-                                    <span class="fa fa-plus"></span>
-                                </a>
-                            </div>
-                        </div >
+                        {% endfor %}
                     </div>
-                </div>
-                <div class = "product-pj">
-                    <div class="col-md-3 col-sm-6 service wow fadeInUp" data-wow-delay="200ms">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h4>{{ product.name }}</h4>
-                                <p>{{ product.description }}</p>
-                                <i class="fa"><img src="{{ product.image.url }}" class="img-responsive"></i>
-                                <i class="fa"><img src="{{ product.image.url }}" class="img-responsive"></i>
+            {% endif %}
+            {% if products_f %}
+                {% if products_j %}
+                    <div class = "products-pf col-lg-6 col-md-6 col-sm-6">
+                {% else %}
+                    <div class = "products-pf col-lg-12 col-md-12 col-sm-12">
+                {% endif %}
+                        {% for product in products_f %}
+                            <div class = "product-pf">
+                                {% if products_j %}
+                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                {% else %}
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                {% endif %}
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <h4>{{ product.name }}</h4>
+                                                <p>{{ product.introduction }}</p>
+                                                <i class="fa"><img src="{{ product.icon1.url }}" class="img-responsive"></i>
+                                                <i class="fa"><img src="{{ product.icon2.url }}" class="img-responsive"></i>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="panel-button" >
+                                                    <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info" role="button">
+                                                        <span class="fa fa-plus"> Saiba mais</span>
+                                                    </a>
+                                                    <a  class="page-scroll btn btn-primary" role="button">
+                                                        <span class="fa fa-cart-plus"> Contratar</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div >
                             </div>
-                            <div class="panel-body">Saiba Mais
-                                <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info" role="button">
-                                    <span class="fa fa-plus"></span>
-                                </a>
-                            </div>
-                        </div >
+                        {% endfor %}
                     </div>
-                </div>
-
-                <div class = "product-pj">
-                    <div class="col-md-3 col-sm-6 service wow fadeInUp" data-wow-delay="200ms">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h4>{{ product.name }}</h4>
-                                <p>{{ product.description }}</p>
-                                <i class="fa"><img src="{{ product.image.url }}" class="img-responsive"></i>
-                                <i class="fa"><img src="{{ product.image.url }}" class="img-responsive"></i>
-                            </div>
-                            <div class="panel-body">Saiba Mais
-                                <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info" role="button">
-                                    <span class="fa fa-plus"></span>
-                                </a>
-                            </div>
-                        </div >
-                    </div>
-                </div>
-
-                <div class = "product-pj">
-                    <div class="col-md-3 col-sm-6 service wow fadeInUp" data-wow-delay="200ms">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h4>{{ product.name }}</h4>
-                                <p>{{ product.description }}</p>
-                                <i class="fa"><img src="{{ product.image.url }}" class="img-responsive"></i>
-                                <i class="fa"><img src="{{ product.image.url }}" class="img-responsive"></i>
-                            </div>
-                            <div class="panel-body">Saiba Mais
-                                <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info" role="button">
-                                    <span class="fa fa-plus"></span>
-                                </a>
-                            </div>
-                        </div >
-                    </div>
-                </div>
-
-            {% endfor %}
-        </div>
-    {% endif %}
-    {% if products_f %}
-        <div class = "products-pf">
-            <h3><strong>Para Pessoas</strong></h3>
-            {% for product in products_f %}
-                <div class = "product-pf">
-                    <div class="col-md-3 col-sm-6 service wow fadeInUp" data-wow-delay="200ms"> <i class="fa fa-delicious"></i>
-                        <h4><strong>{{ product.name }}</strong></h4>
-                        <p>{{ product.description }}</p>
-                        <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info" role="button">
-                            <span class="fa fa-plus"></span>
-                        </a>
-                    </div>
-                </div>
-            {% endfor %}
+            {% endif %}
         </div>
     {% endif %}
 {% endblock %}

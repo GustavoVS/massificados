@@ -724,16 +724,38 @@ label {
 }
 #panel-product {
 	background: #ebebeb	;
-	/*padding: 15px 15px 15px 15px;
+	padding: 15px 15px 15px 15px;
 	color: #42626b;
-	text-align: center; */
+	text-align: center;
 }
-.product-pj {
-	text-align: left;
+.products-pj {
+	background: #843534	;
+    padding: 75px 15px 15px 15px;
+    border-radius: 10px;
 }
-
-.panel-primary > .panel-heading {
+.products-pj .panel-heading {
 	color: #fff;
 	background-color: #2C5E9E;
 	border-color: #337ab7;
+}
+.products-pf {
+	background: #67b168;
+    padding: 75px 15px 15px 15px;
+    border-radius: 10px;
+}
+
+.products-pf .panel-heading {
+	color: #fff;
+	background-color: #42626b;
+	border-color: #337ab7;
+}
+
+.product-pj {
+	text-align: left;
+}
+.product-pf {
+	text-align: left;
+}
+.panel-button span {
+	width: 80px;
 }

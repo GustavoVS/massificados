@@ -18,7 +18,10 @@
     <div class="collapse navbar-collapse" id="nav-header">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-about" class="page-scroll">{% trans "Sobre nós" %}</a></li>
-        <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-products" class="page-scroll">{% trans "Produtos" %}</a></li>
+        <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-products" class="page-scroll">{% trans "Produtos " %}
+                <span class="fa fa-cart-plus"></span>
+            </a>
+        </li>
         <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-contact" class="page-scroll">{% trans "Fale conosco" %}</a></li>
         <li><a href="{% url 'sac' %}" class="page-scroll">{% trans "SAC" %}</a></li>
         {% if user.is_authenticated %}
