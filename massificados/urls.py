@@ -17,7 +17,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
-from django.conf.urls.static import static
+# from django.conf.urls.static import static
 from core.views import IndexView, EntriesView
 from user_account.views import (EntriesProfilesView, EntriesUsersView, EntrieUserNewView, EntrieUserEditView,
                                 EntrieProfileNewView, EntrieProfileEditView)
@@ -42,7 +42,7 @@ urlpatterns = [
     url(r'^entries/profiles/(?P<pk>[0-9]+)/$', EntrieProfileEditView.as_view(), name='entries-profiles-edit'),
 
     url(r'^accounts/', include('allauth.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
 
 if 'rosetta' in settings.INSTALLED_APPS:

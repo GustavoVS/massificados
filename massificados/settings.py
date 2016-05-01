@@ -26,10 +26,10 @@ THEMES_DIR = os.path.join(BASE_DIR, 'themes')
 SECRET_KEY = 'rjy@i6@99qth)#8o!)z!hjk^mi@l7d6$#gfa_pu!91@i&2jtbf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1:8000']
 
 AUTH_USER_MODEL = 'user_account.MassificadoUser'
 
@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rosetta',
+    'django_extensions',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -104,13 +105,24 @@ WSGI_APPLICATION = 'massificados.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'massificados',
+if 'RDS_DB_NAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'massificados',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -161,12 +173,17 @@ LOCALE_PATHS = (
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'webfiles', 'static')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'webfiles', 'media')
+# STATIC_ROOT = os.path.join(BASE_DIR, '..', 'www', 'static')
+STATIC_ROOT = 'static'
+MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'www', 'media')
 
 STATICFILES_DIRS = (
-
     os.path.join(THEMES_DIR, 'default', 'static'),
+)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
 LOGIN_URL = '/accounts/login/'
@@ -190,3 +207,8 @@ if DEBUG:
         'debug_toolbar',
     )
     INTERNAL_IPS = ('127.0.0.1', )
+
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}
