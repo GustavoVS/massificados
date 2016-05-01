@@ -19,8 +19,8 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from core.views import IndexView, EntriesView
-from user_account.views import (EntriesProfilesView, EntriesUsersView, EntrieUserEditView, EntrieProfileNewView,
-                                EntrieProfileEditView)
+from user_account.views import (EntriesProfilesView, EntriesUsersView, EntrieUserNewView, EntrieUserEditView,
+                                EntrieProfileNewView, EntrieProfileEditView)
 
 
 from partner.views import SacsListView
@@ -34,7 +34,7 @@ urlpatterns = [
     url(r'^entries/$', EntriesView.as_view(), name='entries'),
 
     url(r'^entries/users/$', EntriesUsersView.as_view(), name='entries-users'),
-    url(r'^entries/users/new/', EntriesUsersView.as_view(), name='entries-users-new'),
+    url(r'^entries/users/new/', EntrieUserNewView.as_view(), name='entries-users-new'),
     url(r'^entries/users/(?P<pk>[0-9]+)/$', EntrieUserEditView.as_view(), name='entries-users-edit'),
 
     url(r'^entries/profiles/$', EntriesProfilesView.as_view(), name='entries-profiles'),

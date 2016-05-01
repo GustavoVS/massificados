@@ -24,27 +24,29 @@ ENTRIES_PAGES = [
 class EntriesUsersView(LoginRequiredMixin, MassificadoPageListView):
     context_object_name = 'users'
     template_name = 'page-entries-users.html'
+
     def get_queryset(self):
         return MassificadoUser.objects.all()
 
 
 class EntrieUserNewView(LoginRequiredMixin, CreateView):
     model = MassificadoUser
+    conetxt_object_name = 'user_entrie'
+    form_class = EntrieUserForm
     template_name = 'page-entries-user.html'
+
+    def get_success_url(self):
+        return reverse_lazy('entries-users')
 
 
 class EntrieUserEditView(LoginRequiredMixin, UpdateView):
     model = MassificadoUser
+    conetxt_object_name = 'user_entrie'
     form_class = EntrieUserForm
     template_name = 'page-entries-user.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(EntrieUserNewView, self).get_context_data(**kwargs)
-        context['permission_groups'] = Group.objects.all()
-        return context
-
     def get_success_url(self):
-        pass
+        return reverse_lazy('entries-users')
 
 
 class EntriesProfilesView(LoginRequiredMixin, MassificadoPageListView):
@@ -69,18 +71,6 @@ class EntrieProfileEditView(LoginRequiredMixin, UpdateView):
     form_class = EntrieProfileEditForm
     context_object_name = 'profile'
     template_name = 'page-entries-profile.html'
-    fields = ['name', 'permissions']
-
-    def get_context_data(self, **kwargs):
-        context = super(EntrieProfileEditView, self).get_context_data(**kwargs)
-
-        context['entries_pages'] = ({
-            'name': page[1],
-            'can_view': '%s_can_view' % page[0],
-            'can_edit': '%s_can_edit' % page[0],
-        } for page in ENTRIES_PAGES)
-
-        return context
 
     def get_success_url(self):
         return reverse_lazy('entries-profiles')
