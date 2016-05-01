@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rosetta',
+    'django_extensions',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -190,3 +191,8 @@ if DEBUG:
         'debug_toolbar',
     )
     INTERNAL_IPS = ('127.0.0.1', )
+
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}
