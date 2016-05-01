@@ -54,18 +54,18 @@ class EntrieProfileEditForm(forms.ModelForm):
     entries = []
     status = []
 
-    entries = forms.MultipleChoiceField(
-                label='Entries',
-                choices=[(c.id, c.name)
-                    for c in Permission.objects.filter(
-                        name__icontains='sac'
-                    )
-                ]
-    )
+    # entries = forms.MultipleChoiceField(
+    #             label='Entries',
+    #             choices=[(c.id, c.name)
+    #                 for c in Permission.objects.filter(
+    #                     name__icontains='sac'
+    #                 )
+    #             ]
+    # )
 
-    status = forms.MultipleChoiceField(label='Status', choices=[(m.id, m.name)
-                          for m in Permission.objects.filter(name__icontains='status')
-                      ])
+    # status = forms.MultipleChoiceField(label='Status', choices=[(m.id, m.name)
+    #                       for m in Permission.objects.filter(name__icontains='status')
+    #                   ])
 
     class Meta:
         model = Group
