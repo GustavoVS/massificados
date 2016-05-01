@@ -2,200 +2,365 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-23 00:31-0300\n"
-"PO-Revision-Date: 2016-04-23 00:11-0300\n"
-"Last-Translator:   <gustavo.silva.vs@gmail.com>\n"
+"POT-Creation-Date: 2016-05-01 02:00+0000\n"
+"PO-Revision-Date: 2016-05-01 02:13+0000\n"
+"Last-Translator: ab  <x@mail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Translated-Using: django-rosetta 0.7.11\n"
 
-#: .\massificados\settings.py:139
+#: massificados/settings.py:142
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Português Braisleiro"
 
-#: .\massificados\settings.py:140
+#: massificados/settings.py:143
 msgid "English"
-msgstr ""
+msgstr "Inglês"
 
-#: .\partner\models.py:13
+#: partner/models.py:13 sale/models.py:19
 msgid "Date created"
-msgstr ""
+msgstr "Data de Criação"
 
-#: .\product\models.py:27
+#: product/models.py:35
 msgid "Individual"
-msgstr ""
+msgstr "Individual"
 
-#: .\product\models.py:28
+#: product/models.py:36
 msgid "Legal Person"
-msgstr ""
+msgstr "Pessoa Física"
 
-#: .\product\models.py:50
+#: product/models.py:69
 msgid "Protection"
-msgstr ""
+msgstr "Proteção"
 
-#: .\product\models.py:51
+#: product/models.py:70
 msgid "Condition"
-msgstr ""
+msgstr "Condição"
 
-#: .\product\models.py:52
+#: product/models.py:71
 msgid "Profile"
-msgstr ""
+msgstr "Perfil"
 
-#: .\product\models.py:53
+#: product/models.py:72
 msgid "Profile Detail"
-msgstr ""
+msgstr "Detalhe do Perfil"
 
-#: .\product\models.py:54
+#: product/models.py:73
 msgid "Sale"
-msgstr ""
+msgstr "Venda"
 
-#: .\product\models.py:55
+#: product/models.py:74
 msgid "Information"
-msgstr ""
+msgstr "Informação"
 
-#: .\product\models.py:56
+#: product/models.py:75
 msgid "Deadline"
-msgstr ""
+msgstr "Vigência"
 
-#: .\product\models.py:79
+#: product/models.py:93
 msgid "Buyer"
-msgstr ""
+msgstr "Comprador"
 
-#: .\product\models.py:80
+#: product/models.py:94
 msgid "Insurance Company"
-msgstr ""
+msgstr "Seguradora"
 
-#: .\product\models.py:81
+#: product/models.py:95
 msgid "Partner - Superintendent"
-msgstr ""
+msgstr "Parceiro - Super Intendente"
 
-#: .\product\models.py:82
+#: product/models.py:96
 msgid "Partner - Administrator"
-msgstr ""
+msgstr "Parceiro - Administrador"
 
-#: .\product\models.py:83
+#: product/models.py:97
 msgid "GalCorr - Operational"
-msgstr ""
+msgstr "GalCorr - Operacional"
 
-#: .\product\models.py:84
+#: product/models.py:98
 msgid "GalCorr - Commercial"
-msgstr ""
+msgstr "GalCorr - Comercial"
 
-#: .\product\models.py:85
+#: product/models.py:99
 msgid "GalCorr - Manager"
-msgstr ""
+msgstr "GalCorr - Gerente"
 
-#: .\product\models.py:86
+#: product/models.py:100
 msgid "GalCorr - Administrator"
+msgstr "GalCorr - Administrador"
+
+#: themes/default/templates/_login.html:6
+#: themes/default/templates/_login.html:8
+msgid "E-mail ou Usuário"
 msgstr ""
 
-#: .\themes\default\templates\header.html:18
-msgid "Home"
+#: themes/default/templates/_login.html:14
+#: themes/default/templates/_login.html:16
+msgid "Senha"
 msgstr ""
 
-#: .\themes\default\templates\header.html:19
-msgid "Cadastros"
+#: themes/default/templates/_login.html:19
+#: themes/default/templates/account/login.html:8
+msgid "Entrar"
 msgstr ""
 
-#: .\themes\default\templates\header.html:20
-msgid "Notificações"
+#: themes/default/templates/_login.html:24
+msgid "Relembrar"
 msgstr ""
 
-#: .\themes\default\templates\header.html:21
+#: themes/default/templates/_login.html:27
+msgid "Forget the password?"
+msgstr "Esqueceu sua senha?"
+
+#: themes/default/templates/header.html:20
+msgid "Sobre nós"
+msgstr ""
+
+#: themes/default/templates/header.html:21
+#: themes/default/templates/sections/products.html:6
 #, fuzzy
 #| msgid "Products"
 msgid "Produtos"
 msgstr "Produtos"
 
-#: .\themes\default\templates\header.html:22
-msgid "DashBoard"
+#: themes/default/templates/header.html:22
+msgid "Fale conosco"
 msgstr ""
 
-#: .\themes\default\templates\header.html:23
+#: themes/default/templates/header.html:23
+#: themes/default/templates/page-sacs-section.html:6
+msgid "SAC"
+msgstr ""
+
+#: themes/default/templates/header.html:26
+msgid "Dashboard"
+msgstr ""
+
+#: themes/default/templates/header.html:27
 #, fuzzy
 #| msgid "Products"
 msgid "Produção"
 msgstr "Produtos"
 
-#: .\themes\default\templates\header.html:24
-msgid "SAC"
+#: themes/default/templates/header.html:28
+msgid "Cadastros"
 msgstr ""
 
-#: .\themes\default\templates\header.html:25
+#: themes/default/templates/header.html:34
 msgid "Meu Perfil"
 msgstr ""
 
-#: .\themes\default\templates\header.html:26
+#: themes/default/templates/header.html:35
+msgid "Notificações"
+msgstr ""
+
+#: themes/default/templates/header.html:37
 msgid "Sair"
 msgstr ""
 
-#: .\themes\default\templates\page-entries.html:11
-msgid "Usuário"
-msgstr ""
+#: themes/default/templates/page-entries-profile-section.html:7
+msgid "Edit Role"
+msgstr "Editar Perfil"
 
-#: .\themes\default\templates\page-entries.html:12
-msgid "Aqui você pode gerenciar suas contas de usuários"
-msgstr ""
+#: themes/default/templates/page-entries-profile-section.html:9
+msgid "Create Role"
+msgstr "Criar Perfil"
 
-#: .\themes\default\templates\page-entries.html:21
-msgid "Perfis"
-msgstr ""
+#: themes/default/templates/page-entries-profile-section.html:14
+msgid "Save Role"
+msgstr "Salvar Perfil"
 
-#: .\themes\default\templates\page-entries.html:22
-msgid "Aqui você configura Perfis de Acesso pré-definidos para cada usuário"
-msgstr ""
+#: themes/default/templates/page-entries-profile-section.html:32
+#: themes/default/templates/page-entries-section.html:4
+msgid "Entries"
+msgstr "Cadastros"
 
-#: .\themes\default\templates\sections\products.html:10
-msgid "Products"
+#: themes/default/templates/page-entries-profile-section.html:36
+msgid "Page Name"
+msgstr "Nome da Página"
+
+#: themes/default/templates/page-entries-profile-section.html:39
+msgid "Can View"
+msgstr "Pode Visualizar"
+
+#: themes/default/templates/page-entries-profile-section.html:42
+msgid "Can Edit"
+msgstr "Pode Editar"
+
+#: themes/default/templates/page-entries-profile-section.html:61
+#, fuzzy
+#| msgid "Products"
+msgid "Product Sale"
 msgstr "Produtos"
 
-#: .\themes\default\templates\sections\products.html:13
+#: themes/default/templates/page-entries-profiles-section.html:4
+#: themes/default/templates/page-entries-section.html:21
+msgid "Profiles"
+msgstr "Perfis"
+
+#: themes/default/templates/page-entries-profiles-section.html:26
+msgid "Edit Profile"
+msgstr "Editar Perfil"
+
+#: themes/default/templates/page-entries-section.html:11
+#: themes/default/templates/page-entries-users-section.html:5
+#: user_account/forms.py:12 user_account/views.py:13
+msgid "Users"
+msgstr "Usuários"
+
+#: themes/default/templates/page-entries-section.html:12
+msgid "Here you can manage the User Accounts"
+msgstr "Aqui você pode administrar as Contas de Usuário"
+
+#: themes/default/templates/page-entries-section.html:13
+msgid "Go to User Accounts"
+msgstr "Ir para as Contas de Úsuário"
+
+#: themes/default/templates/page-entries-section.html:22
+msgid "Here you can set pre made Access Profiles for each User Type"
+msgstr "Aqui você pode fazer Perfis de Acesso pra cada Tipo de Usuário"
+
+#: themes/default/templates/page-entries-section.html:24
+msgid "Go to User Profiles"
+msgstr "Ir para Perfis de Usuário"
+
+#: themes/default/templates/page-entries-user-section.html:8
+msgid "Create User"
+msgstr "Criar Usuário"
+
+#: themes/default/templates/page-entries-user-section.html:16
+#: themes/default/templates/page-entries-user-section.html:115
+msgid "Save User"
+msgstr "Salvar Usuário"
+
+#: themes/default/templates/page-entries-user-section.html:18
+#: themes/default/templates/page-entries-user-section.html:117
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: themes/default/templates/page-entries-user-section.html:77
+msgid "Permissions"
+msgstr "Permissões"
+
+#: themes/default/templates/page-entries-users-section.html:14
+msgid "Search for a User"
+msgstr "Pesquisar usuário"
+
+#: themes/default/templates/page-entries-users-section.html:35
+msgid "Edit User"
+msgstr "Editar Usuário"
+
+#: themes/default/templates/page-sacs-section.html:8
+msgid "Fale com a Sofisa - Telefones e SAC"
+msgstr ""
+
+#: themes/default/templates/sections/about.html:4
+msgid "Sobre o Banco Sofisa"
+msgstr ""
+
+#: themes/default/templates/sections/about.html:11
+msgid "Quem Somos"
+msgstr ""
+
+#: themes/default/templates/sections/about.html:20
+msgid "O que fazemos"
+msgstr ""
+
+#: themes/default/templates/sections/contact.html:7
+msgid "Fale conosco "
+msgstr ""
+
+#: themes/default/templates/sections/products.html:8
 msgid ""
 "O banco Sofisa oferece Produtos e Serviços para clientes Pessoa Física e "
 "Jurídica de forma online, segura e sem burocracia. Conheça mais abaixo"
 msgstr ""
 
-#: .\user_account\models.py:13
-msgid "Username"
-msgstr ""
+#: user_account/forms.py:13 user_account/views.py:14
+msgid "Users Profile"
+msgstr "Perfil de Usuário"
 
-#: .\user_account\models.py:14
+#: user_account/forms.py:14 user_account/views.py:15
+msgid "Products"
+msgstr "Produtos"
+
+#: user_account/forms.py:15 user_account/views.py:16
+msgid "Partners"
+msgstr "Parceiros"
+
+#: user_account/forms.py:16 user_account/views.py:17
+msgid "Campaign"
+msgstr "Campanha"
+
+#: user_account/forms.py:17 user_account/views.py:18
+msgid "Sac"
+msgstr "Sac"
+
+#: user_account/forms.py:18 user_account/views.py:19
+msgid "DashBoard"
+msgstr "DashBoard"
+
+#: user_account/forms.py:19 user_account/views.py:20
+#, fuzzy
+#| msgid "Products"
+msgid "Production Reports"
+msgstr "Produtos"
+
+#: user_account/forms.py:27
+msgid "Password"
+msgstr "Senha"
+
+#: user_account/forms.py:28
+msgid "Password (again)"
+msgstr "Senha (novamente)"
+
+#: user_account/forms.py:41
+msgid "The two password fields didn't match."
+msgstr "As senhas não conferem"
+
+#: user_account/models.py:17
+msgid "Username"
+msgstr "Nome do Usuário"
+
+#: user_account/models.py:18
 msgid ""
 "Required. 30 characters or fewer. Letters, numbers and ./+/-/_ characters"
 msgstr ""
+"O campo pode conter 30 caracteres ou menos, letras, números e os caracteres "
+"./+/-/_ "
 
-#: .\user_account\models.py:17
+#: user_account/models.py:21
 msgid "Enter a valid username."
-msgstr ""
+msgstr "Coloque um nome de usuário válido"
 
-#: .\user_account\models.py:19
+#: user_account/models.py:23
 msgid "Email address"
-msgstr ""
+msgstr "Endereço de e-mail"
 
-#: .\user_account\models.py:23
+#: user_account/models.py:27
 msgid "First name"
-msgstr ""
+msgstr "Primeiro Nome"
 
-#: .\user_account\models.py:24
+#: user_account/models.py:28
 msgid "Last name"
-msgstr ""
+msgstr "Sobrenome"
 
-#: .\user_account\models.py:25
+#: user_account/models.py:29
 msgid "Staff status"
-msgstr ""
+msgstr "Status Staff"
 
-#: .\user_account\models.py:26
+#: user_account/models.py:30
 msgid "Active"
-msgstr ""
+msgstr "Ativo"
 
-#: .\user_account\models.py:27
+#: user_account/models.py:31
 msgid "Date joined"
-msgstr ""
+msgstr "Data de Criação"
 
-#: .\user_account\models.py:30
+#: user_account/models.py:34
 msgid "user"
-msgstr ""
+msgstr "úsuário"
 
-#: .\user_account\models.py:31
+#: user_account/models.py:35
 msgid "users"
-msgstr ""
+msgstr "usuários"
