@@ -15,6 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.conf import settings
 # from django.conf.urls.static import static
@@ -42,7 +43,7 @@ urlpatterns = [
     url(r'^entries/profiles/(?P<pk>[0-9]+)/$', EntrieProfileEditView.as_view(), name='entries-profiles-edit'),
 
     url(r'^accounts/', include('allauth.urls')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 if 'rosetta' in settings.INSTALLED_APPS:

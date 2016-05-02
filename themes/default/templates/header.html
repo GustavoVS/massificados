@@ -10,20 +10,22 @@
           <span class="sr-only">Toggle navigation</span>
       </button>
         <a class="logo-header" class="navbar-brand" href="/">
-            <img  src="{% static 'img/partner-sofisa/lsofisa.png' %}" alt="">
+            <img  src="{% static 'img/partner-sofisa/sofisa70.png' %}" alt="" class="img-responsive">
         </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="nav-header">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-about" class="page-scroll">{% trans "Sobre nós" %}</a></li>
+{#        <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-about" class="page-scroll">{% trans "Sobre nós" %}</a></li>#}
         <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-products" class="page-scroll">{% trans "Produtos " %}
-                <span class="fa fa-shopping-cart fa-lg"></span>
+{#                {% if user.is_authenticated %}#}
+                    <span class="fa fa-shopping-cart fa-lg"></span>
+{#                {% endif %}#}
             </a>
         </li>
-        <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-contact" class="page-scroll">{% trans "Fale conosco" %}</a></li>
-        <li><a href="{% url 'sac' %}" class="page-scroll">{% trans "SAC" %}</a></li>
+{#        <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-contact" class="page-scroll">{% trans "Fale conosco" %}</a></li>#}
+{#        <li><a href="{% url 'sac' %}" class="page-scroll">{% trans "SAC" %}</a></li>#}
         {% if user.is_authenticated %}
             {% if user.is_admin or user.is_superuser %}
                 <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#dashBoard" class="page-scroll">{% trans "Dashboard" %}</a></li>
@@ -42,7 +44,11 @@
             </li>
         {% else %}
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Entrar</b><span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <b>Entrar</b>
+                <span class="fa fa-lock fa-lg"></span>
+                <span class="caret"></span>
+            </a>
               <ul id="login-dp" class="dropdown-menu">
                 <li>
                    <div class="row">

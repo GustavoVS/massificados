@@ -22,8 +22,8 @@ class IndexView(MassificadoPageListView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['products_f'] = list(Product.objects.filter(kind_person='J'))*10
-        context['products_j'] = list(Product.objects.filter(kind_person='J'))*10
+        context['products_f'] = list(Product.objects.filter(kind_person='F'))*8
+        context['products_j'] = list(Product.objects.filter(kind_person='J'))*8
         context['products'] = list(Product.objects.all()) *20
         return context
 

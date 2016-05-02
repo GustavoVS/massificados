@@ -1,28 +1,12 @@
 body, html {
-	font-family: 'Lato', sans-serif;
-	text-rendering: optimizeLegibility !important;
-	-webkit-font-smoothing: antialiased !important;
-	color: #1c424d;
+    font-family: 'Lato', sans-serif;
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+    color: #1c424d;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-image: url("/static/img/partner-sofisa/fundo.png") !important;
 }
-/*h1 {
-	font-weight: 700;
-}
-h1 strong {
-	font-weight: 900;
-}
-h2 {
-	font-size: 36px;
-	margin: 0;
-}
-h3 {
-	font-size: 16px;
-	font-weight: 700;
-}
-h5 {
-	text-transform: uppercase;
-	font-weight: 700;
-	line-height: 20px;
-}*/
 p {
 	font-family: 'Open Sans', sans-serif;
 	font-size: 13px;
@@ -83,25 +67,17 @@ ul, ol {
 }
 
 .section-title {
-	padding: 30px 0;
+
+    padding: 45px 0px 0px 0px;
 }
 .section-title h2 {
 	font-weight: 400;
 	margin-bottom: 26px;
 }
-hr {
-	height: 3px;
-	width: 60px;
-	position: relative;
-	background: #626a29;
-	border: 0;
-	margin-bottom: 30px;
-}
+
 
 /* Home Style */
 header {
-	background: url(../img/header-bg.jpg) no-repeat bottom center;
-	background-size: cover;
 	color: #d9e0e2;
 	position: relative;
 	height: 100%;
@@ -143,18 +119,20 @@ header p {
 }
 /* Services Section */
 #sec-products {
-	padding: 80px 0 100px 0;
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#032731+0,032e3a+20,032e3a+100,032731+100 */
-	background: rgb(3,39,49); /* Old browsers */
-	background: -moz-linear-gradient(top, rgba(3,39,49,1) 0%, rgba(3,46,58,1) 20%, rgba(3,46,58,1) 100%, rgba(3,39,49,1) 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(top, rgba(3,39,49,1) 0%, rgba(3,46,58,1) 20%, rgba(3,46,58,1) 100%, rgba(3,39,49,1) 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(to bottom, rgba(3,39,49,1) 0%, rgba(3,46,58,1) 20%, rgba(3,46,58,1) 100%, rgba(3,39,49,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#032731', endColorstr='#032731', GradientType=0 ); /* IE6-9 */
-	color: #5b777f;
+	padding: 20px 0px 100px 20px;
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e2e2e2+0,d0e5ad+1,dbdbdb+63,dbdbdb+89,dbdbdb+92,fefefe+100 */
+background: #e2e2e2; /* Old browsers */
+background: -moz-linear-gradient(top,  #e2e2e2 0%, #d0e5ad 1%, #f9f9f9 61%, #f9f9f9 61%, #ffffff 63%, #f9f9f9 64%, #f9f9f9 64%, #ffffff 66%, #ffffff 70%, #fefefe 76%, #fefefe 76%, #fefefe 79%, #fefefe 79%, #dbdbdb 88%, #dbdbdb 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #e2e2e2 0%,#d0e5ad 1%,#f9f9f9 61%,#f9f9f9 61%,#ffffff 63%,#f9f9f9 64%,#f9f9f9 64%,#ffffff 66%,#ffffff 70%,#fefefe 76%,#fefefe 76%,#fefefe 79%,#fefefe 79%,#dbdbdb 88%,#dbdbdb 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #e2e2e2 0%,#d0e5ad 1%,#f9f9f9 61%,#f9f9f9 61%,#ffffff 63%,#f9f9f9 64%,#f9f9f9 64%,#ffffff 66%,#ffffff 70%,#fefefe 76%,#fefefe 76%,#fefefe 79%,#fefefe 79%,#dbdbdb 88%,#dbdbdb 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#dbdbdb',GradientType=0 ); /* IE6-9 */
+
+	color: #519662;
 }
 #sec-products h3 {
 	color: #81969c;
 }
+
 .space {
 	margin-top: 40px;
 }
@@ -164,14 +142,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#032731', end
 
 /* Sac Section */
 #sec-sacs {
-	padding: 80px 0 50px 0;
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#032731+0,032e3a+20,032e3a+100,032731+100 */
-	background: rgb(3,39,49); /* Old browsers */
-	background: -moz-linear-gradient(top, rgba(3,39,49,1) 0%, rgba(3,46,58,1) 20%, rgba(3,46,58,1) 100%, rgba(3,39,49,1) 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(top, rgba(3,39,49,1) 0%, rgba(3,46,58,1) 20%, rgba(3,46,58,1) 100%, rgba(3,39,49,1) 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(to bottom, rgba(3,39,49,1) 0%, rgba(3,46,58,1) 20%, rgba(3,46,58,1) 100%, rgba(3,39,49,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#032731', endColorstr='#032731', GradientType=0 ); /* IE6-9 */
-	color: #5b777f;
+	padding: 80px 0 100px 0;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e2e2e2+0,dbdbdb+50,d1d1d1+51,fefefe+100;Grey+Gloss+%231 */
+	background: #e2e2e2; /* Old browsers */
+	background: -moz-linear-gradient(top,  #e2e2e2 0%, #dbdbdb 50%, #d1d1d1 51%, #fefefe 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=0 ); /* IE6-9 */
+	color: #519662;
 }
 #sec-sacs h3 {
 	color: #81969c;
@@ -389,7 +367,6 @@ ol.type li a:hover {
 }
 /* About Section */
 #sec-about {
-	padding: 80px 0;
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#032731+0,032e3a+20,032e3a+100,032731+100 */
 	background: rgb(3,39,49); /* Old browsers */
 	background: -moz-linear-gradient(top, rgba(3,39,49,1) 0%, rgba(3,46,58,1) 20%, rgba(3,46,58,1) 100%, rgba(3,39,49,1) 100%); /* FF3.6-15 */
@@ -712,12 +689,18 @@ label {
 	transition: all 0.5s;
 }
 
-.products-pj > .product-pf {
-	background: #FFFFFF;
-    padding: 75px 15px 15px 15px;
-    border-radius: 10px;
-    opacity: 0.15;
-    filter: alpha(opacity=15);
+#products-pj  {
+	/*background: #FFFFFF;*/
+    border-radius: 2px;
+    padding-top: 0;
+    margin-top: 0;
+    /*opacity: 0.10;*/
+    filter: alpha(opacity=80);
+}
+
+#products-pj h3{
+    padding-top: 0;
+    margin-top: 0;
 }
 
 .products-pj .panel-primary {
@@ -749,13 +732,18 @@ label {
 	transition: all 0.5s;
 }
 
-.products-pf > .products-pf {
-	background: #FFFFFF;
-    padding: 75px 15px 15px 15px;
-    border-radius: 10px;
-    opacity: 0.15;
-    filter: alpha(opacity=15);
+#products-pf  {
+	/*background: #FFFFFF;*/
+    border-radius: 2px;
+    padding-top: 0;
+    margin-top: 0;
 }
+
+#products-pf h3{
+    padding-top: 0;
+    margin-top: 0;
+}
+
 .products-pf .panel-primary {
 	border-color: #DBC575;
     -webkit-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
@@ -769,6 +757,8 @@ label {
 }
 .product-pf {
 	text-align: left;
+}
+#products {
 }
 .product-pf-panel-button span {
 }

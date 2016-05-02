@@ -3,31 +3,32 @@
 
 
 {% block section-id %}sec-products{% endblock %}
-{% block section-title %}{% endblock %}
+{% block section-title-class %}col-md-offset-3 col-lg-offset-3{% endblock %}
+{% block section-title %}{% trans 'Produtos' %}{% endblock %}
 {% block section-desc %}
 {#     <p>{ % trans "O banco Sofisa oferece Produtos e Serviços para clientes Pessoa Física e Jurídica de forma online, segura e sem burocracia. Conheça mais abaixo" % }</p> #}
 {% endblock %}
 
 
 {% block section-content %}
-    <div id="products-show">
-        {% for product in products %}
-            <div id= "sec-product{{ product.id }}" class = "row hidden product-show">
-                <div class="col-md-12 col-sm-12 col-sm-12 col-xs-12 service wow fadeInUp" data-wow-delay="200ms">
-                    <div class="panel panel-primary">
-                        <div id='panel-product' class="panel-heading">
-                            <h4>{{ product.name }}</h4>
-                            <p>{{ product.description }}</p>
-                            <i class="fa"><img src="{{ product.image.url }}" class="img-responsive"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
     {% if products %} {# menu lateral #}
         <div class="row">
-            <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+            <div id="products-show">
+                {% for product in products %}
+                    <div id= "sec-product{{ product.id }}" class = "row hidden product-show">
+                        <div class="col-md-12 col-sm-12 col-sm-12 col-xs-12 service wow fadeInUp" data-wow-delay="200ms">
+                            <div class="panel panel-primary">
+                                <div id='panel-product' class="panel-heading">
+                                    <h4>{{ product.name }}</h4>
+                                    <p>{{ product.description }}</p>
+                                    <i class="fa"><img src="{{ product.image.url }}" class="img-responsive"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="menu-products col-lg-3 col-md-3 hidden-sm hidden-xs">
                <div class="list-group">
                 <a class="list-group-item text-center active" data-remote="true"  id="categoria_todos">
                   Todos os Produtos
@@ -81,10 +82,12 @@
             <div class=" col-lg-9 col-md-9 col-sm-12 col-xs-12"> {# colunas de produtos #}
                 {% if products_j %}
                     {% if products_f %}
-                        <div class = "products-pj col-lg-6 col-md-6 col-sm-6">
+                        <div class = "products-pj col-lg-6 col-md-6 col-sm-6" id = "products-pj">
                     {% else %}
-                        <div class = "products-pj col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class = "products-pj col-lg-12 col-md-12 col-sm-12 col-xs-12" id = "products-pj">
                     {% endif %}
+                            <h2> Produtos para Empresas</h2>
+                            <hr>
                             {% for product in products_j %}
                                 <div class = "product-pj">
                                     {% if products_f %}
@@ -119,10 +122,12 @@
                 {% endif %}
                 {% if products_f %}
                     {% if products_j %}
-                        <div class = "products-pf col-lg-6 col-md-6 col-sm-6">
+                        <div class = "products-pf col-lg-6 col-md-6 col-sm-6" id = "products-pf">
                     {% else %}
-                        <div class = "products-pf col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class = "products-pf col-lg-12 col-md-12 col-sm-12 col-xs-12" id = "products-pf">
                     {% endif %}
+                            <h2>Produtos para Pessoas</h2>
+                            <hr>
                             {% for product in products_f %}
                                 <div class = "product-pf">
                                     {% if products_j %}
