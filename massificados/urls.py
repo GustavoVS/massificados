@@ -20,6 +20,9 @@ from django.contrib import admin
 from django.conf import settings
 # from django.conf.urls.static import static
 from core.views import IndexView, EntriesView
+from sale.views import CreateSaleView
+from sale.views import FullSaleView
+from sale.views import SalesView
 from user_account.views import (EntriesProfilesView, EntriesUsersView, EntrieUserNewView, EntrieUserEditView,
                                 EntrieProfileNewView, EntrieProfileEditView)
 
