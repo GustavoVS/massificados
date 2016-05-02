@@ -22,7 +22,6 @@ class Command(BaseCommand):
         if not Partner.objects.filter(id=1).exists():
             p = Partner(
                 name='Sofisa',
-                slug='sofisa',
                 email='sofisa@mail.com',
                 cnpj='60.889.128.0001-80',
             )
