@@ -26,7 +26,7 @@ THEMES_DIR = os.path.join(BASE_DIR, 'themes')
 SECRET_KEY = 'rjy@i6@99qth)#8o!)z!hjk^mi@l7d6$#gfa_pu!91@i&2jtbf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1:8000']
@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     #Massificados
     'user_account',
     'partner',
@@ -53,13 +52,15 @@ INSTALLED_APPS = [
     'sale',
     'core',
     'address',
-
     #3rd
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'rosetta',
     'django_extensions',
+    'notifications',
+    'bootstrap3',
+    'django_bootstrap_dynamic_formsets',
 ]
 
 MIDDLEWARE_CLASSES = [

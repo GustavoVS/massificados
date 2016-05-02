@@ -46,6 +46,7 @@ class Product(models.Model):
     insurance_company = models.ForeignKey(InsuranceCompany, on_delete=models.CASCADE)
     branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
     file_type = models.ManyToManyField(FileType)
+    is_lead = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.name

@@ -31,7 +31,7 @@ class EntriesUsersView(LoginRequiredMixin, MassificadoPageListView):
 
 class EntrieUserNewView(LoginRequiredMixin, CreateView):
     model = MassificadoUser
-    conetxt_object_name = 'user_entrie'
+    context_object_name = 'user_entrie'
     form_class = EntrieUserForm
     template_name = 'page-entries-user.html'
 
@@ -41,7 +41,7 @@ class EntrieUserNewView(LoginRequiredMixin, CreateView):
 
 class EntrieUserEditView(LoginRequiredMixin, UpdateView):
     model = MassificadoUser
-    conetxt_object_name = 'user_entrie'
+    context_object_name = 'user_entrie'
     form_class = EntrieUserForm
     template_name = 'page-entries-user.html'
 

@@ -1,0 +1,23 @@
+{% extends 'base-sec.html' %}
+{% load i18n %}
+{% load bootstrap3 %}
+{% load bootstrap_dynamic_formsets %}
+
+{% block section-id %}page-sake-sec{% endblock %}
+
+{% block section-title %}{% trans 'New Sale' %}{% endblock %}
+
+{% block section-content %}
+    <form action="" method="post" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {#% bootstrap_dynamic_formset f0 %#}
+        {% bootstrap_dynamic_formset f1 can_delete=True %}
+
+        <div class="panel">
+            {% bootstrap_button "Save" button_type="submit" button_class="btn-success pull-right" icon="ok" %}
+            {% url 'index_view' as href_url %}
+            {% bootstrap_button "Cancel" href=href_url button_class="btn-danger pull-left" icon="remove" %}
+        </div>
+    </form>
+{% endblock %}
