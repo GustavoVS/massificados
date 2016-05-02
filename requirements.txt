@@ -5,10 +5,15 @@ cement==2.8.2
 colorama==0.3.7
 decorator==4.0.9
 Django==1.9.5
+django-address==0.1.5
 django-allauth==0.25.2
+django-bootstrap-dynamic-formsets==0.4.5
+django-bootstrap3==7.0.1
 django-debug-toolbar==1.4
 django-extensions==1.6.3
 django-mako-plus==3.3.4
+django-model-utils==2.5
+django-notifications-hq==1.1
 django-rosetta==0.7.11
 docker-py==1.7.2
 dockerpty==0.4.1
@@ -33,6 +38,7 @@ psycopg2==2.6.1
 ptyprocess==0.5.1
 python-dateutil==2.5.3
 python-openid==2.2.5
+pytz==2016.4
 PyYAML==3.11
 requests==2.9.1
 requests-oauthlib==0.6.1
