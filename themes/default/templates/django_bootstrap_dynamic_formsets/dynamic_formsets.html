@@ -13,11 +13,11 @@
                 <button type="button" class="btn btn-default btn-sm up-form"><span class="glyphicon glyphicon-arrow-up" style="vertical-align:middle"></span></button>
                 <button type="button" class="btn btn-default btn-sm down-form"><span class="glyphicon glyphicon-arrow-down" style="vertical-align:middle"></span></button>
             {% endif %}
-                {% if can_delete %}
-                    <!--<button type="button" class="btn btn-default btn-sm delete-form"><span class="glyphicon glyphicon-remove" style="vertical-align:middle"></span></button>-->
-                    {% bootstrap_button "" button_type="button" button_class="btn-danger  delete-form" icon="remove" %}
-                {% endif %}
-                {% bootstrap_button "" button_type="button" button_class="btn-success  add-form" icon="plus" %}
+            {% if can_delete %}
+                <!--<button type="button" class="btn btn-default btn-sm delete-form"><span class="glyphicon glyphicon-remove" style="vertical-align:middle"></span></button>-->
+                {% bootstrap_button "" button_type="button" button_class="btn-danger delete-form" icon="remove" %}
+            {% endif %}
+            {% bootstrap_button "" button_type="button" button_class="btn-success add-form" icon="plus" %}
 
         </div>
     </div>
@@ -31,15 +31,15 @@
             <div>
                 {% if can_order %}
                     <button type="button" class="btn btn-default btn-sm sort-handle"><span class="glyphicon glyphicon-move" style="vertical-align:middle"></span></button>
-                    <button type="button" class="btn btn-default btn-sm up-form"><span class="glyphicon glyphicon-arrow-up" style="vertical-align:middle"></span></button>
+                    <button type="button" class="btn btn-default btn-sm up-form"><span class="glyphicon glyphicon-arrow-up" style="vertical-align:middle"></span></button>1
                     <button type="button" class="btn btn-default btn-sm down-form"><span class="glyphicon glyphicon-arrow-down" style="vertical-align:middle"></span></button>
                 {% endif %}
 
                 {% if can_delete %}
                     <!--<button type="button" class="btn btn-default btn-sm delete-form"><span class="glyphicon glyphicon-remove" style="vertical-align:middle"></span></button>-->
-                    {% bootstrap_button "" button_type="button" button_class="btn-danger  delete-form" icon="remove" %}
+                    {% bootstrap_button "" button_type="button" button_class="btn-danger delete-form" icon="remove" %}
                 {% endif %}
-                {% bootstrap_button "" button_type="button" button_class="btn-success  add-form" icon="plus" %}
+                {% bootstrap_button "" button_type="button" button_class="btn-success add-form" icon="plus" %}
 
             </div>
         </div>

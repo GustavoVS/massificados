@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django import forms
 from django.forms.models import inlineformset_factory
 
@@ -31,7 +32,7 @@ class BuyerForm(forms.ModelForm):
 class BuyerAddressForm(forms.ModelForm):
     class Meta:
         model = BuyerAddress
-        fields = ['street', 'district', 'complement', 'number', 'city', 'state', 'postal_code', 'is_main', ]
+        fields = ['street', 'district', 'complement', 'number', 'city', 'state', 'postal_code', ]
 
-AddressBuyerFormset = inlineformset_factory(Buyer, BuyerAddress, form=BuyerAddressForm, extra=1)
-SaleBuyerFormSet = inlineformset_factory(Buyer, Sale, form=SaleForm, extra=1)
+AddressBuyerFormset = inlineformset_factory(Buyer, BuyerAddress, form=BuyerAddressForm, extra=0, min_num=1)
+SaleBuyerFormSet = inlineformset_factory(Buyer, Sale, form=SaleForm, extra=0, min_num=1)

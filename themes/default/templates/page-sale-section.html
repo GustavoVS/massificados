@@ -1,5 +1,6 @@
 {% extends 'base-sec.html' %}
 {% load i18n %}
+{# formset 1 #}
 {% load bootstrap3 %}
 {% load bootstrap_dynamic_formsets %}
 
@@ -11,8 +12,8 @@
     <form action="" method="post" class="form">
         {% csrf_token %}
         {% bootstrap_form form %}
-        {#% bootstrap_dynamic_formset f0 %#}
-        {% bootstrap_dynamic_formset f1 can_delete=True %}
+        <h3>Endereços</h3>
+        {% bootstrap_dynamic_formset addressbuyer can_delete=True %}
 
         <div class="panel">
             {% bootstrap_button "Save" button_type="submit" button_class="btn-success pull-right" icon="ok" %}
