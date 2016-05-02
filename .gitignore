@@ -1,7 +1,5 @@
 *.pyc
 .idea/
-/static/
-/webfiles/
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

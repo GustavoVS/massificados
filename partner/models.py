@@ -4,20 +4,28 @@ from django.db import models
 from product.models import Product
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.sites.models import Site
 
 
 class Partner(models.Model):
     name = models.CharField(max_length=100)
-    logo = models.FileField()
-    slug = models.CharField(max_length=50)
+    logo = models.FileField(null=True)
     date_create = models.DateTimeField(_('Date created'), default=timezone.now)
-    modificate = models.DateField()
     email = models.EmailField()
     cnpj = models.CharField(max_length=18)
+    site = models.OneToOneField(Site)
 
     def __unicode__(self):
         return self.name
 
+
+    def save(self, *args, **kwargs):
+        # if not self.site:
+        #     s = Site(domain='slug', name=self.name)
+        #     s.save()
+        #     self.site = s
+
+        return super(Partner, self).save(*args, **kwargs)
 
 class Campaign(models.Model):
     name = models.CharField(max_length=100)

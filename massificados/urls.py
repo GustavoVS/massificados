@@ -20,6 +20,9 @@ from django.contrib import admin
 from django.conf import settings
 # from django.conf.urls.static import static
 from core.views import IndexView, EntriesView
+from sale.views import CreateSaleView
+from sale.views import FullSaleView
+from sale.views import SalesView
 from user_account.views import (EntriesProfilesView, EntriesUsersView, EntrieUserNewView, EntrieUserEditView,
                                 EntrieProfileNewView, EntrieProfileEditView)
 
@@ -43,6 +46,13 @@ urlpatterns = [
     url(r'^entries/profiles/(?P<pk>[0-9]+)/$', EntrieProfileEditView.as_view(), name='entries-profiles-edit'),
 
     url(r'^accounts/', include('allauth.urls')),
+
+
+    url(r'^sales/$', SalesView.as_view(), name='sales'),
+    # url(r'^product/sale/$', CreateSaleView.as_view(), name='product-sale'),
+    url(r'^product/(?P<productpk>[0-9]+)/sale/$', CreateSaleView.as_view(), name='product-sale'),
+    url(r'^sale/(?P<pk>[0-9]+)/$', FullSaleView.as_view(), name='sale-full'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

@@ -108,7 +108,7 @@
                                                             <span class="fa fa-plus"> Saiba mais</span>
                                                         </a>
                                                         {% if user.is_authenticated %}
-                                                            <a  class="page-scroll btn btn-primary col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
+                                                            <a href="{% url 'product-sale' product.pk %}" class="page-scroll btn btn-primary col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
                                                                 <span class="fa fa-cart-plus"> Contratar</span>
                                                             </a>
                                                         {% endif %}
@@ -148,7 +148,7 @@
                                                             <span class="fa fa-plus"> Saiba mais</span>
                                                         </a>
                                                         {% if user.is_authenticated %}
-                                                            <a  class="page-scroll btn btn-primary col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
+                                                            <a href="{% url 'product-sale' product.pk %}" class="page-scroll btn btn-primary col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
                                                                 <span class="fa fa-cart-plus"> Contratar</span>
                                                             </a>
                                                         {% endif %}

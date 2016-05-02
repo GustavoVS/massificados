@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
 from jsonfield import JSONField
@@ -6,27 +7,30 @@ from product.models import Question, Product
 from partner.models import Partner
 from user_account.models import MassificadoUser
 from django.utils import timezone
-from address.models import AddressField
 from django.utils.translation import ugettext_lazy as _
-
-
-class Address (models.Model):
-    address = AddressField()
 
 
 class Buyer(models.Model):
     name = models.CharField(max_length=100)
     date_create = models.DateTimeField(_('Date created'), default=timezone.now)
-    modificate = models.DateField()
     email = models.EmailField()
     cnpj = models.CharField(max_length=18)
-    address = models.ForeignKey(Address)
+
+
+class BuyerAddress(models.Model):
+    buyer = models.ForeignKey(Buyer)
+    street = models.CharField(_('Street'), max_length=100)
+    district = models.CharField(_('District'), max_length=20)
+    complement = models.CharField(_('Complement'), max_length=20, null=True)
+    number = models.CharField(_('Number'), max_length=6)
+    city = models.CharField(_("City"), max_length=20)
+    state = models.CharField(_("State"), max_length=20)
+    postal_code = models.CharField(_('Postal Code'), max_length=9)
+    is_main = models.BooleanField(_('Main Address'))
 
 
 class Sale(models.Model):
-    create_timestamp = models.DateField()
-    modificate_timestamp = models.DateField()
-    email = models.EmailField()
+    create_timestamp = models.DateField(default=timezone.now())
     product = models.ForeignKey(Product)
     partner = models.ForeignKey(Partner)
     buyer = models.ForeignKey(Buyer)

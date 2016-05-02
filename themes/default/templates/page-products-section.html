@@ -1,0 +1,23 @@
+{% extends 'base-sec.html' %}
+{% load i18n %}
+
+{% block section-title %}{% trans {% endblock %}
+{% block section-id %}page-product{% endblock %}
+
+
+{% block section-content %}
+
+    <div class="row">
+        {% for product in products %}
+            <div class="col-md-4">
+                <div class="panel">
+                    <h3></h3>
+                    <p></p>
+                    <a href="{% url 'product-new' product.id %}">
+                        {% trans 'Sell Product' %}
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
