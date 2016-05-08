@@ -13,12 +13,19 @@
         {% csrf_token %}
         {% bootstrap_form form %}
         <h3>Endereços</h3>
-        {% bootstrap_dynamic_formset addressbuyer can_delete=True %}
-
-        <div class="panel">
-            {% bootstrap_button "Save" button_type="submit" button_class="btn-success pull-right" icon="ok" %}
-            {% url 'index_view' as href_url %}
-            {% bootstrap_button "Cancel" href=href_url button_class="btn-danger pull-left" icon="remove" %}
+        <div class="row">
+            <div class="col-md-12">
+                {% bootstrap_dynamic_formset addressbuyer can_delete=True form_wrapper="col-md-4 well" %}
+            </div>
         </div>
+        <input type="hidden" name="productpk" value="{{ productpk }}">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                {% bootstrap_button "Save" button_type="submit" button_class="btn-success pull-right" icon="ok" %}
+                {% url 'index_view' as href_url %}
+                {% bootstrap_button "Cancel" href=href_url button_class="btn-danger pull-left" icon="remove" %}
+            </div>
+        </div>
+
     </form>
 {% endblock %}

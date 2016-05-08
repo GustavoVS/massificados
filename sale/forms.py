@@ -26,7 +26,7 @@ class FullSaleForm(forms.ModelForm):
 class BuyerForm(forms.ModelForm):
     class Meta:
         model = Buyer
-        fields = ['name', 'email', 'cnpj',]
+        fields = ['name', 'email', 'cpf_cnpj',]
 
 
 class BuyerAddressForm(forms.ModelForm):

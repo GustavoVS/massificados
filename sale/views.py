@@ -23,50 +23,29 @@ class CreateSaleView(LoginRequiredMixin, CreateView):
     form_class = BuyerForm
     template_name = 'page-sale.html'
     context_object = 'sale'
-    # formsets = [SaleBuyerFormSet, AddressBuyerFormset,]
-    # formsets = [AddressBuyerFormset,]
-    product = ''
 
     def get_context_data(self, **kwargs):
         data = super(CreateSaleView, self).get_context_data(**kwargs)
-        self.product = Product.objects.get(pk=self.kwargs['productpk'])
-        # for i, form in enumerate(self.formsets):
-        #     data['f%d' % i] = form()
+        data['productpk'] = self.kwargs['productpk']
         data['addressbuyer'] = AddressBuyerFormset()
         return data
 
     def form_valid(self, form):
-        form.save()
-        f = AddressBuyerFormset(self.request.POST)
-        if f.is_valid():
-            f.instance.buyer = self.model
-            f.save()
-
+        response = super(CreateSaleView, self).form_valid(form)
+        addresses = AddressBuyerFormset(self.request.POST)
+        if addresses.is_valid():
+            addresses.instance.buyer = self.object
+            addresses.save()
         sale = Sale()
-        sale.product = self.product
-        sale.buyer = self.model
-        # todo: Tirar esse hardcode do pértinêr
-        sale.partner = Partner.objects.get(id=1)
-        # Status inicial
-        sale.status = Status.objects.get(id=1)
+        sale.product = Product.objects.get(pk=self.request.POST['productpk'])
+        sale.buyer = self.object
+        sale.partner = Partner.objects.get(id=1)  # todo: Tirar esse hardcode do pértinêr
+        sale.status = Status.objects.get(id=1)  # Status inicial
         sale.save()
-        # self.model.product = self.product
-        # for form in self.formsets:
-        #     f = form(self.request.POST)
-        #     if f.is_valid():
-        #         f.instance.buyer = self.model
-        #         # f.instance = self.object
-        #         f.save()
-
-        return super(CreateSaleView, self).form_valid(form)
-
-    # def get_context_data(self, **kwargs):
-    #     context = super(CreateSaleView, self).get_context_data(**kwargs)
-    #     context['product'] = Product.objects.get(slug=self.kwargs['productpk'])
-    #     return context
+        return response
 
     def get_success_url(self):
-        return reverse_lazy('')
+        return reverse_lazy('index_view')
 
 
 class FullSaleView(LoginRequiredMixin, UpdateView):
