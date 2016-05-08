@@ -5,7 +5,16 @@ body, html {
     color: #1c424d;
     background-repeat: no-repeat;
     background-size: 100%;
-    background-image: url("/static/img/partner-sofisa/fundo.png") !important;
+    /*background-image: url("/static/img/partner-sofisa/fundo.png") !important;*/
+}
+h1 {
+	padding: 0px 0px 0px 0px;
+    -webkit-margin-before: 0.67em;
+    -webkit-margin-after: 0.67em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    color: #00314b;
+    zoom: 1;
 }
 p {
 	font-family: 'Open Sans', sans-serif;
@@ -57,7 +66,7 @@ ul, ol {
 	left: 50%;
 	top: 50%;
 	width: 64px;
-	height: 64px;
+	height: 64px;''
 	margin: -32px 0 0 -32px;
 	padding: 0;
 }
@@ -120,14 +129,7 @@ header p {
 /* Services Section */
 #sec-products {
 	padding: 20px 0px 100px 20px;
-/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e2e2e2+0,d0e5ad+1,dbdbdb+63,dbdbdb+89,dbdbdb+92,fefefe+100 */
-background: #e2e2e2; /* Old browsers */
-background: -moz-linear-gradient(top,  #e2e2e2 0%, #d0e5ad 1%, #f9f9f9 61%, #f9f9f9 61%, #ffffff 63%, #f9f9f9 64%, #f9f9f9 64%, #ffffff 66%, #ffffff 70%, #fefefe 76%, #fefefe 76%, #fefefe 79%, #fefefe 79%, #dbdbdb 88%, #dbdbdb 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top,  #e2e2e2 0%,#d0e5ad 1%,#f9f9f9 61%,#f9f9f9 61%,#ffffff 63%,#f9f9f9 64%,#f9f9f9 64%,#ffffff 66%,#ffffff 70%,#fefefe 76%,#fefefe 76%,#fefefe 79%,#fefefe 79%,#dbdbdb 88%,#dbdbdb 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom,  #e2e2e2 0%,#d0e5ad 1%,#f9f9f9 61%,#f9f9f9 61%,#ffffff 63%,#f9f9f9 64%,#f9f9f9 64%,#ffffff 66%,#ffffff 70%,#fefefe 76%,#fefefe 76%,#fefefe 79%,#fefefe 79%,#dbdbdb 88%,#dbdbdb 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#dbdbdb',GradientType=0 ); /* IE6-9 */
 
-	color: #519662;
 }
 #sec-products h3 {
 	color: #81969c;
@@ -599,29 +601,7 @@ a:focus, .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:acti
 	color: #f1c40f;
 }
 
-@media (max-width: 768px) {
-.content {
-	padding: 40% 0 0;
-}
-}
 
-@media (max-width: 603px) {
-#menu.navbar-default {
-	background-color: rgba(0, 0, 0, 0.7);
-}
-label {
-	float: none !important
-}
-.hover-bg .hover-text {
-	padding: 12% 10%;
-}
-}
-
-@media (max-width: 360px) {
-.hover-bg .hover-text {
-	padding: 22% 10%;
-}
-}
 
 .logo-header{
     padding: 2px 0;

@@ -86,7 +86,7 @@
                     {% else %}
                         <div class = "products-pj col-lg-12 col-md-12 col-sm-12 col-xs-12" id = "products-pj">
                     {% endif %}
-                            <h2> Produtos para Empresas</h2>
+                            <h2>Para Empresas</h2>
                             <hr>
                             {% for product in products_j %}
                                 <div class = "product-pj">
@@ -97,10 +97,12 @@
                                     {% endif %}
                                             <div class="panel panel-primary">
                                                 <div class="panel-heading">
-                                                    <h4>{{ product.name }}</h4>
+                                                    <h5>{{ product.name }}</h5>
                                                     <p>{{ product.introduction }}</p>
-                                                    <i class="fa"><img src="{{ product.icon1.url }}" class="img-responsive"></i>
-                                                    <i class="fa"><img src="{{ product.icon2.url }}" class="img-responsive"></i>
+                                                    {% if user.is_authenticated %}
+                                                        <i class="fa"><img src="{{ product.icon1.url }}" class="img-responsive"></i>
+                                                        <i class="fa"><img src="{{ product.icon2.url }}" class="img-responsive"></i>
+                                                    {% endif %}
                                                 </div>
                                                 <div class="panel-body">
                                                     <div class="product-pj-panel-button" >
@@ -126,7 +128,7 @@
                     {% else %}
                         <div class = "products-pf col-lg-12 col-md-12 col-sm-12 col-xs-12" id = "products-pf">
                     {% endif %}
-                            <h2>Produtos para Pessoas</h2>
+                            <h2>Para Pessoas</h2>
                             <hr>
                             {% for product in products_f %}
                                 <div class = "product-pf">
@@ -137,10 +139,12 @@
                                     {% endif %}
                                             <div class="panel panel-primary">
                                                 <div class="panel-heading">
-                                                    <h4>{{ product.name }}</h4>
+                                                    <h5>{{ product.name }}</h5>
                                                     <p>{{ product.introduction }}</p>
-                                                    <i class="fa"><img src="{{ product.icon1.url }}" class="img-responsive"></i>
-                                                    <i class="fa"><img src="{{ product.icon2.url }}" class="img-responsive"></i>
+                                                    {% if user.is_authenticated %}
+                                                        <i class="fa"><img src="{{ product.icon1.url }}" class="img-responsive"></i>
+                                                        <i class="fa"><img src="{{ product.icon2.url }}" class="img-responsive"></i>
+                                                    {% endif %}
                                                 </div>
                                                 <div class="panel-body">
                                                     <div class="product-pf-panel-button" >

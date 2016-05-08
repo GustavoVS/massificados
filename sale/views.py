@@ -45,7 +45,7 @@ class CreateSaleView(LoginRequiredMixin, CreateView):
         sale = Sale()
         sale.product = self.product
         sale.buyer = self.model
-        # todo: Tirar esse hardcode do pértinêr
+        # todo: Tirar esse hardcode do partner
         sale.partner = Partner.objects.get(id=1)
         # Status inicial
         sale.status = Status.objects.get(id=1)

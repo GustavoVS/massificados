@@ -68,21 +68,50 @@ class Domain(models.Model):
 
 
 class Question(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.TextField()
+    default = models.TextField()
     message = models.CharField(max_length=100)
     required = models.BooleanField()
-    TYPE_CHOICES = (
-        ('pt', _('Protection')),
-        ('co', _('Condition')),
-        ('pr', _('Profile')),
-        ('pd', _('Profile Detail')),
-        ('sl', _('Sale')),
-        ('in', _('Information')),
-        ('dl', _('Deadline')),
+    comment = models.BooleanField()
+    TYPE_GROUP_CHOICES = (
+        ('he', _('Header')),
+        ('br', _('Broker')),    # Corretora
+        ('cl', _('Client')),    # Cliente
+        ('in', _('Insured')),   # Segurado
+        ('co', _('Commercial Protection')),     # Coberturas que da home - para exibir
+        ('pr', _('Profile Protection')),    # Coberturas do Perfil - para contratar
+        ('te', _('tenant')),   # Locatário
+        ('ps', _('Process')),   #Dados do processo
+        ('le', _('Legal Opinion')), #Parecer Juridico
+        ('ot', _('Other information')), #Outras informações
+        ('ct', _('Collection')),    # Prêmio
+        ('cd', _('Condition')),  # Condições do Produto
+        ('fo', _('Footer')),
     )
-    type = models.CharField(max_length=2, choices=TYPE_CHOICES)
+    type_group = models.CharField(max_length=2, choices=TYPE_GROUP_CHOICES)
+    TYPE_PROFILE_CHOICES = (
+        ('pr', _('Profile Deadline')),
+        ('pd', _('Profile Detail')),
+    )
+    type_profile = models.CharField(max_length=2, choices=TYPE_PROFILE_CHOICES)
+    TYPE_DATA_CHOICES = (
+        ('va', _('VarChar')),
+        ('ch', _('CheckBox')),
+        ('fl', _('Float')),
+        ('li', _('Link')),
+        ('ra', _('Range')),
+        ('da', _('Date')),
+        ('te', _('Text')),
+        ('pe', _('Percent')),
+    )
+    type_data = models.CharField(max_length=2, choices=TYPE_DATA_CHOICES)
+    mask = models.CharField(max_length=50)
+    rule = models.CharField(max_length=100)
+    is_default = models.BooleanField(default=False)
+    is_visible = models.BooleanField(default=False)
+    is_printable = models.BooleanField(default=False)
     domain = models.ManyToManyField(Domain)
-    # domain_value e result_value domain = JSONField
+    # todo:domain_value e result_value domain = JSONField, type data, rule
 
     def __unicode__(self):
         return self.name

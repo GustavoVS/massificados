@@ -85,4 +85,17 @@ class Response(models.Model):
     )
     question_value = JSONField
     result_value = JSONField
+
+    class Meta:
+        abstract = True
+
+
+class ResponseDeadLine(Response):
+    deadline = models.ForeignKey(Deadline)
+
+
+class ResponseDatail(Response):
     detail = models.ForeignKey(Detail)
+
+
+
