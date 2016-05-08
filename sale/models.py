@@ -11,10 +11,13 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Buyer(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(_('Name'), max_length=100)
     date_create = models.DateTimeField(_('Date created'), default=timezone.now)
-    email = models.EmailField()
-    cnpj = models.CharField(max_length=18)
+    email = models.EmailField(_('E-mail'))
+    cpf_cnpj = models.CharField(_('CPF/CNPJ'), max_length=18)
+
+    def __unicode__(self):
+        return self.name
 
 
 class BuyerAddress(models.Model):
@@ -28,43 +31,58 @@ class BuyerAddress(models.Model):
     postal_code = models.CharField(_('Postal Code'), max_length=9)
     is_main = models.BooleanField(_('Main Address'))
 
+    def __unicode__(self):
+        return self.street
+
 
 class Sale(models.Model):
-    create_timestamp = models.DateField(default=timezone.now())
+    create_timestamp = models.DateField(_('Date Created'), default=timezone.now())
     product = models.ForeignKey(Product)
     partner = models.ForeignKey(Partner)
     buyer = models.ForeignKey(Buyer)
     status = models.ForeignKey(Status)
 
+    def __unicode__(self):
+        return '%s (%s)' % (self.product, self.buyer)
+
 
 class File(models.Model):
     file_type = models.ForeignKey(FileType)
     sale = models.ForeignKey(Sale)
-    file = models.FileField()
+    file = models.FileField(_('File'))
+
+    def __unicode__(self):
+        return self.file_type
 
 
 class Quote(models.Model):
-    number = models.IntegerField()
-    value = models.FloatField()
-    payment_date = models.DateField()
-    maturity_date = models.DateField()
+    number = models.IntegerField(_('Number'))
+    value = models.FloatField(_('Value'))
+    payment_date = models.DateField(_('Payment Date'))
+    maturity_date = models.DateField(_('Maturity Date'))
     sale = models.ForeignKey(Sale)
+
+    def __unicode__(self):
+        return 'Quote %s' % self.number
 
 
 class SubQuote(models.Model):
-    number = models.IntegerField()
-    value = models.FloatField()
-    percentage = models.FloatField()
-    payment_date = models.DateField()
-    maturity_date = models.DateField()
+    number = models.IntegerField(_('Number'))
+    value = models.FloatField(_('Value'))
+    percentage = models.FloatField(_('Percentage'))
+    payment_date = models.DateField(_('Payment Date'))
+    maturity_date = models.DateField(_('Maturity Date'))
     sale = models.ForeignKey(Sale)
     quote = models.ForeignKey(Quote)
     user = models.ForeignKey(MassificadoUser)
 
+    def __unicode__(self):
+        return 'Sub Quote %d' % self.number
+
 
 class Deadline(models.Model):
-    begin = models.DateField()
-    end = models.DateField()
+    begin = models.DateField(_('Begin'))
+    end = models.DateField(_('End'))
     sale = models.ForeignKey(
         Sale,
         on_delete=models.CASCADE
