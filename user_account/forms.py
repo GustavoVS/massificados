@@ -27,7 +27,7 @@ class EntrieUserForm(forms.ModelForm):
     password1 = forms.CharField(widget=forms.PasswordInput, label=_("Password"), required=False)
     password2 = forms.CharField(widget=forms.PasswordInput, label=_("Password (again)"), required=False)
 
-    groups = forms.ModelChoiceField(queryset=Group.objects.all())
+    groups = forms.ModelChoiceField(queryset=Group.objects.all(), initial=1)
 
     class Meta:
         model = User

@@ -20,9 +20,7 @@ from django.contrib import admin
 from django.conf import settings
 # from django.conf.urls.static import static
 from core.views import IndexView, EntriesView
-from sale.views import CreateSaleView
-from sale.views import FullSaleView
-from sale.views import SalesView
+from sale.views import ProductionView, CreateBuyerView, EditBuyerView, EditProductProfileView
 from user_account.views import (EntriesProfilesView, EntriesUsersView, EntrieUserNewView, EntrieUserEditView,
                                 EntrieProfileNewView, EntrieProfileEditView)
 
@@ -48,10 +46,16 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
 
 
-    url(r'^sales/$', SalesView.as_view(), name='sales'),
+    # url(r'^sales/$', SalesView.as_view(), name='sales'),
     # url(r'^product/sale/$', CreateSaleView.as_view(), name='product-sale'),
-    url(r'^product/(?P<productpk>[0-9]+)/sale/$', CreateSaleView.as_view(), name='product-sale'),
-    url(r'^sale/(?P<pk>[0-9]+)/$', FullSaleView.as_view(), name='sale-full'),
+    url(r'^product/(?P<productpk>[0-9]+)/buyer/$', CreateBuyerView.as_view(), name='product-new-buyer'),
+    url(r'^product/(?P<productpk>[0-9]+)/buyer/(?P<pk>[0-9]+)$', EditBuyerView.as_view(), name='product-edit-buyer'),
+
+    url(r'^product/(?P<productpk>[0-9]+)/buyer/(?P<pk>[0-9]+)/profile$', EditProductProfileView.as_view(), name='product-profile'),
+
+    # url(r'^sale/(?P<pk>[0-9]+)/$', FullSaleView.as_view(), name='sale-full'),
+
+    url(r'^production/$', ProductionView.as_view(), name='production'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

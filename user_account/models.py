@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 import re
 from django.db import models
 from django.core import validators
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager, Group
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from partner.models import Partner
@@ -30,6 +30,7 @@ class AbstractMassificadoUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(_('Active'), default=True)
     date_joined = models.DateTimeField(_('Date joined'), default=timezone.now)
 
+
     class Meta:
         verbose_name = _('user')
         verbose_name_plural = _('users')
@@ -53,3 +54,6 @@ class MassificadoUser(AbstractMassificadoUser):
     # status = models.ForeignKey(Status)
     # file_type = models.ForeignKey(FileType)
 
+
+class MassificadoGroups(Group):
+    username = models.ForeignKey(MassificadoUser)

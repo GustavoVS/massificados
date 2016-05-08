@@ -18,7 +18,9 @@
                 {% bootstrap_dynamic_formset addressbuyer can_delete=True form_wrapper="col-md-4 well" %}
             </div>
         </div>
-        <input type="hidden" name="productpk" value="{{ productpk }}">
+        {% if productpk %}
+            <input type="hidden" name="productpk" value="{{ productpk }}">
+        {% endif %}
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 {% bootstrap_button "Save" button_type="submit" button_class="btn-success pull-right" icon="ok" %}

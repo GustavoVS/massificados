@@ -17,29 +17,29 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="nav-header">
       <ul class="nav navbar-nav navbar-right">
-{#        <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-about" class="page-scroll">{% trans "Sobre nós" %}</a></li>#}
-        <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-products" class="page-scroll">{% trans "Produtos " %}
+{#        <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-about" class="page-scroll">{% trans "About us" %}</a></li>#}
+        <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-products" class="page-scroll">{% trans "Products" %}
 {#                {% if user.is_authenticated %}#}
                     <span class="fa fa-shopping-cart fa-lg"></span>
 {#                {% endif %}#}
             </a>
         </li>
-{#        <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-contact" class="page-scroll">{% trans "Fale conosco" %}</a></li>#}
+{#        <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-contact" class="page-scroll">{% trans "Contact Us" %}</a></li>#}
 {#        <li><a href="{% url 'sac' %}" class="page-scroll">{% trans "SAC" %}</a></li>#}
         {% if user.is_authenticated %}
             {% if user.is_admin or user.is_superuser %}
                 <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#dashBoard" class="page-scroll">{% trans "Dashboard" %}</a></li>
-                <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#production" class="page-scroll">{% trans "Produção" %}</a></li>
-                <li><a href="{% url 'entries' %}" class="page-scroll">{% trans "Cadastros" %}</a></li>
-                <li><a href="#notifications" class="page-scroll">{% trans "Notificações" %}</a></li>
+                <li><a href="{% url 'production' %}" class="page-scroll">{% trans "Production" %}</a></li>
+                <li><a href="{% url 'entries' %}" class="page-scroll">{% trans "Entries" %}</a></li>
             {% endif %}
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <b>{% user_display user %}</b><span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#">{% trans "Meu Perfil" %}</a></li>
+                <li><a href="#">{% trans "My Profile" %}</a></li>
+                <li><a href="#notifications" class="page-scroll">{% trans "Notifications" %}</a></li>
                 <li class="divider"></li>
-                <li><a href="{% url 'account_logout' %}">{% trans 'Sair' %}</a></li>
+                <li><a href="{% url 'account_logout' %}">{% trans 'Logout' %}</a></li>
               </ul>
             </li>
         {% else %}
