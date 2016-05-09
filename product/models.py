@@ -69,29 +69,27 @@ class Domain(models.Model):
 
 class Question(models.Model):
     name = models.TextField()
-    default = models.TextField()
     message = models.CharField(max_length=100)
-    required = models.BooleanField()
-    comment = models.BooleanField()
+
     TYPE_GROUP_CHOICES = (
-        ('he', _('Header')),
-        ('br', _('Broker')),    # Corretora
-        ('cl', _('Client')),    # Cliente
-        ('in', _('Insured')),   # Segurado
-        ('co', _('Commercial Protection')),     # Coberturas que da home - para exibir
-        ('pr', _('Profile Protection')),    # Coberturas do Perfil - para contratar
-        ('te', _('tenant')),   # Locatário
-        ('ps', _('Process')),   #Dados do processo
-        ('le', _('Legal Opinion')), #Parecer Juridico
-        ('ot', _('Other information')), #Outras informações
-        ('ct', _('Collection')),    # Prêmio
-        ('cd', _('Condition')),  # Condições do Produto
-        ('fo', _('Footer')),
+        ('hea', _('Header')),
+        ('bro', _('Broker')),    # Corretora
+        ('cli', _('Client')),    # Cliente
+        ('ins', _('Insured')),   # Segurado
+        ('com', _('Commercial Protection')),     # Coberturas que da home - para exibir
+        ('pro', _('Profile Protection')),    # Coberturas do Perfil - para contratar
+        ('ten', _('Tenant')),   # Locatário
+        ('pss', _('Process')),   #Dados do processo
+        ('leg', _('Legal Opinion')), #Parecer Juridico
+        ('oth', _('Other information')), #Outras informações
+        ('col', _('Collection')),    # Prêmio
+        ('cdn', _('Condition')),  # Condições do Produto
+        ('foo', _('Footer')),
     )
     type_group = models.CharField(max_length=2, choices=TYPE_GROUP_CHOICES)
     TYPE_PROFILE_CHOICES = (
-        ('pr', _('Profile Deadline')),
-        ('pd', _('Profile Detail')),
+        ('pdl', _('Profile Deadline')),
+        ('pdt', _('Profile Detail')),
     )
     type_profile = models.CharField(max_length=2, choices=TYPE_PROFILE_CHOICES)
     TYPE_DATA_CHOICES = (
@@ -105,12 +103,16 @@ class Question(models.Model):
         ('pe', _('Percent')),
     )
     type_data = models.CharField(max_length=2, choices=TYPE_DATA_CHOICES)
-    mask = models.CharField(max_length=50)
-    rule = models.CharField(max_length=100)
+    rule = models.CharField(max_length=100)     # regra
     is_default = models.BooleanField(default=False)
-    is_visible = models.BooleanField(default=False)
+    is_visible = models.BooleanField(default=True)
     is_printable = models.BooleanField(default=False)
+    is_required = models.BooleanField(default=False)
+    is_comment = models.BooleanField(default=False)
+    default_value = models.CharField(max_length=100)
     domain = models.ManyToManyField(Domain)
+    beginner_status = models.ForeignKey(Status)
+
     # todo:domain_value e result_value domain = JSONField, type data, rule
 
     def __unicode__(self):

@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-04 23:39+0000\n"
-"PO-Revision-Date: 2016-05-04 23:33+0000\n"
-"Last-Translator:   <gustavo.sila.vssdfa@teste.com>\n"
+"PO-Revision-Date: 2016-05-08 14:46+0000\n"
+"Last-Translator:   <r.cabral.n@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Translated-Using: django-rosetta 0.7.11\n"
@@ -23,11 +23,11 @@ msgstr "Data de Criação"
 
 #: product/models.py:35
 msgid "Individual"
-msgstr "Individual"
+msgstr "Pessoa Fisica"
 
 #: product/models.py:36
 msgid "Legal Person"
-msgstr "Pessoa Física"
+msgstr "Pessoa Juridica"
 
 #: product/models.py:75
 msgid "Protection"
@@ -91,7 +91,7 @@ msgstr "GalCorr - Administrador"
 
 #: sale/models.py:22
 msgid "Street"
-msgstr ""
+msgstr "Rua"
 
 #: sale/models.py:23
 msgid "District"
@@ -99,23 +99,23 @@ msgstr ""
 
 #: sale/models.py:24
 msgid "Complement"
-msgstr ""
+msgstr "Complemento"
 
 #: sale/models.py:25
 msgid "Number"
-msgstr ""
+msgstr "Número"
 
 #: sale/models.py:26
 msgid "City"
-msgstr ""
+msgstr "Cidade"
 
 #: sale/models.py:27
 msgid "State"
-msgstr ""
+msgstr "Estado"
 
 #: sale/models.py:28
 msgid "Postal Code"
-msgstr ""
+msgstr "CEP"
 
 #: sale/models.py:29
 #, fuzzy
@@ -126,7 +126,7 @@ msgstr "Endereço de e-mail"
 #: themes/default/templates/_login.html:6
 #: themes/default/templates/_login.html:8
 msgid "E-mail ou Usuário"
-msgstr ""
+msgstr "Usuário ou Email"
 
 #: themes/default/templates/_login.html:14
 #: themes/default/templates/_login.html:16
@@ -358,8 +358,8 @@ msgstr "Nome do Usuário"
 msgid ""
 "Required. 30 characters or fewer. Letters, numbers and ./+/-/_ characters"
 msgstr ""
-"O campo pode conter 30 caracteres ou menos, letras, números e os "
-"caracteres ./+/-/_ "
+"O campo pode conter 30 caracteres ou menos, letras, números e os caracteres "
+"./+/-/_ "
 
 #: user_account/models.py:21
 msgid "Enter a valid username."

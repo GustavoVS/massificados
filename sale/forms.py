@@ -24,7 +24,7 @@ class QuoteSaleForm(forms.ModelForm):
         model = Quote
         fields = ['number', 'payment_date', 'value', 'maturity_date']
 
-QuoteSaleFormset = inlineformset_factory(Sale, Quote, form=QuoteSaleForm, extra=0, min_num=1)
+QuoteSaleFormset = inlineformset_factory(Deadline, Quote, form=QuoteSaleForm, extra=0, min_num=1)
 
 
 class DeadlineSaleForm(forms.ModelForm):
@@ -42,4 +42,4 @@ class FileSaleForm(forms.ModelForm):
         model = File
         fields = ['file', 'file_type']
 
-FileSaleFormset = inlineformset_factory(Sale, File, form=FileSaleForm, extra=0, min_num=1)
+FileSaleFormset = inlineformset_factory(Deadline, File, form=FileSaleForm, extra=0, min_num=1)

@@ -40,15 +40,28 @@ class Sale(models.Model):
     product = models.ForeignKey(Product)
     partner = models.ForeignKey(Partner)
     buyer = models.ForeignKey(Buyer)
-    status = models.ForeignKey(Status)
 
     def __unicode__(self):
         return '%s (%s)' % (self.product, self.buyer)
 
 
+class Deadline(models.Model):
+    active = models.BooleanField(default=True)
+    begin = models.DateField(_('Begin'))
+    end = models.DateField(_('End'))
+    status = models.ForeignKey(Status)
+    payment = models.FloatField(_('Payment'))
+    proposal = models.CharField(_('Proposal'), max_length=100)
+    policy = models.CharField(_('Policy'), max_length=100)
+    sale = models.ForeignKey(
+        Sale,
+        on_delete=models.CASCADE
+    )
+
+
 class File(models.Model):
     file_type = models.ForeignKey(FileType)
-    sale = models.ForeignKey(Sale)
+    deadline = models.ForeignKey(Deadline)
     file = models.FileField(_('File'))
 
     def __unicode__(self):
@@ -60,7 +73,7 @@ class Quote(models.Model):
     value = models.FloatField(_('Value'))
     payment_date = models.DateField(_('Payment Date'))
     maturity_date = models.DateField(_('Maturity Date'))
-    sale = models.ForeignKey(Sale)
+    deadline = models.ForeignKey(Deadline)
 
     def __unicode__(self):
         return 'Quote %s' % self.number
@@ -72,21 +85,12 @@ class SubQuote(models.Model):
     percentage = models.FloatField(_('Percentage'))
     payment_date = models.DateField(_('Payment Date'))
     maturity_date = models.DateField(_('Maturity Date'))
-    sale = models.ForeignKey(Sale)
+    deadline = models.ForeignKey(Deadline)
     quote = models.ForeignKey(Quote)
     user = models.ForeignKey(MassificadoUser)
 
     def __unicode__(self):
         return 'Sub Quote %d' % self.number
-
-
-class Deadline(models.Model):
-    begin = models.DateField(_('Begin'))
-    end = models.DateField(_('End'))
-    sale = models.ForeignKey(
-        Sale,
-        on_delete=models.CASCADE
-    )
 
 
 class Detail(models.Model):
