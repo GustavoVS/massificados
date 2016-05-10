@@ -2,8 +2,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from jsonfield import JSONField
-from core.models import Status, FileType
-from product.models import Question, Product
+from product.models import Question, Product, Status, FileType
 from partner.models import Partner
 from user_account.models import MassificadoUser
 from django.utils import timezone
@@ -11,9 +10,15 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Buyer(models.Model):
+    KIND_PERSON_CHOICES = (
+        ('F', _('Individual')),
+        ('J', _('Legal Person')),
+    )
     name = models.CharField(_('Name'), max_length=100)
     date_create = models.DateTimeField(_('Date created'), default=timezone.now)
     email = models.EmailField(_('E-mail'))
+    phone = models.CharField(_('Phone'), max_length=14)
+    kind_person = models.CharField(_('Kind Person'), max_length=1, choices=KIND_PERSON_CHOICES)
     cpf_cnpj = models.CharField(_('CPF/CNPJ'), max_length=18)
 
     def __unicode__(self):
@@ -29,7 +34,7 @@ class BuyerAddress(models.Model):
     city = models.CharField(_("City"), max_length=20)
     state = models.CharField(_("State"), max_length=20)
     postal_code = models.CharField(_('Postal Code'), max_length=9)
-    is_main = models.BooleanField(_('Main Address'))
+    is_main = models.BooleanField(_('Main Address'), default=True)
 
     def __unicode__(self):
         return self.street
@@ -57,6 +62,9 @@ class Deadline(models.Model):
         Sale,
         on_delete=models.CASCADE
     )
+
+    def get_questions(self):
+        return self.sale.product.profile.questions_set.get(type_profile='pdl')
 
 
 class File(models.Model):
@@ -94,10 +102,14 @@ class SubQuote(models.Model):
 
 
 class Detail(models.Model):
+    name = models.CharField(max_length=50)
     deadline = models.ForeignKey(
         Deadline,
         on_delete=models.CASCADE
     )
+
+    def __unicode__(self):
+        return name
 
 
 class Response(models.Model):
@@ -105,18 +117,19 @@ class Response(models.Model):
         Question,
         on_delete=models.CASCADE
     )
-    question_value = JSONField
-    result_value = JSONField
+    value = models.TextField()
 
     class Meta:
         abstract = True
 
 
-class ResponseDeadLine(Response):
+class ResponseDeadline(Response):
     deadline = models.ForeignKey(Deadline)
 
+    def __unicode__(self):
+        return '%s (%s - %s)' %(self.value, self.question, self.deadline)
 
-class ResponseDatail(Response):
+class ResponseDetail(Response):
     detail = models.ForeignKey(Detail)
 
 

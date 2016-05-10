@@ -46,19 +46,6 @@ class EntrieUserEditView(LoginRequiredMixin, UpdateView):
     form_class = EntrieUserForm
     template_name = 'page-entries-user.html'
 
-    # def get(self, request, *args, **kwargs):
-    #     import ipdb; ipdb.set_trace()
-    #     form = self.form_class(initial={'groups': self.model.groups.all()[0].pk})
-    #     return render(request, self.template_name, {'form': form})
-    # def get_initial(self):
-    #     # import ipdb; ipdb.set_trace()
-    #
-    #     return super(EntrieUserEditView, self).get_initial()
-
-    def __init__(self, exp = None, *args, **kwargs):
-        super(PaymentForm, self).__init__(*args, **kwargs)
-
-
     def get_success_url(self):
         return reverse_lazy('entries-users')
 

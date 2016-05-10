@@ -7,8 +7,6 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserM
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from partner.models import Partner
-from core.models import Status
-from core.models import FileType
 
 
 class AbstractMassificadoUser(AbstractBaseUser, PermissionsMixin):
@@ -29,7 +27,7 @@ class AbstractMassificadoUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(_('Staff status'), default=False)
     is_active = models.BooleanField(_('Active'), default=True)
     date_joined = models.DateTimeField(_('Date joined'), default=timezone.now)
-
+    partner = models.ForeignKey(Partner)
 
     class Meta:
         verbose_name = _('user')
@@ -46,13 +44,11 @@ class AbstractMassificadoUser(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         return self.first_name
 
-    # partner = models.ForeignKey(Partner)
+
 
 
 class MassificadoUser(AbstractMassificadoUser):
     pass
-    # status = models.ForeignKey(Status)
-    # file_type = models.ForeignKey(FileType)
 
 
 class MassificadoGroups(Group):

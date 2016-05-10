@@ -6,9 +6,9 @@ from django.core.paginator import Paginator
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView
-from .models import Sale, Partner, Buyer, Status
-from .forms import BuyerForm, AddressBuyerFormset
-from product.models import Product
+from .models import Sale, Partner, Buyer, Status, ResponseDetail, ResponseDeadline
+from .forms import BuyerForm, AddressBuyerFormset, FileDeadlineFormset, DeadlineSaleFormset, DetailDeadlineFormset
+from product.models import Product, Question
 
 
 class ProductionView(LoginRequiredMixin, ListView):
@@ -17,36 +17,74 @@ class ProductionView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         # todo: filter sales by the user and his permissions
-        # sale_page = Paginator(Sale.objects.all(), 1000)
-        return Paginator(Sale.objects.all(), 1000).page(1)
+        sales = Sale.objects.all()
+        return Paginator(sales, 1000).page(1)
 
 
 class CreateBuyerView(LoginRequiredMixin, CreateView):
     model = Buyer
     form_class = BuyerForm
     template_name = 'page-sale.html'
+    context_object_name = 'buyer'
 
     def get_context_data(self, **kwargs):
         data = super(CreateBuyerView, self).get_context_data(**kwargs)
         data['productpk'] = self.kwargs['productpk']
         data['addressbuyer'] = AddressBuyerFormset()
+        data['show_all'] = False
+        product = Product.objects.get(pk=self.kwargs['productpk'])
+        if not product.is_lead:
+            data['show_all'] = True
+            data['deadlinesale'] = DeadlineSaleFormset()
+            data['filedeadline'] = FileDeadlineFormset()
+            data['questiondeadline'] = product.profile.question_set.filter(type_profile='pdl').order_by('order_number')
+            data['detaildeadline'] = DetailDeadlineFormset()
+            data['questiondetail'] = product.profile.question_set.filter(type_profile='pdt').order_by('order_number')
+
         return data
 
     def form_valid(self, form):
         response = super(CreateBuyerView, self).form_valid(form)
         addresses = AddressBuyerFormset(self.request.POST)
-        if addresses.is_valid():
-            addresses.instance.buyer = self.object
-            addresses.save()
+        import ipdb
+        ipdb.set_trace()
+        for form in addresses.forms:
+            if form.is_valid():
+                form.instance.buyer = self.object
+                form.save()
+
         sale = Sale()
         sale.product = Product.objects.get(pk=self.request.POST['productpk'])
         sale.buyer = self.object
         sale.partner = Partner.objects.get(id=1)  # todo: Tirar esse hardcode do pértinêr
-        sale.status = Status.objects.get(id=1)  # Status inicial
         sale.save()
+
+        deadline = DeadlineSaleFormset(self.request.POST)
+        for form in deadline.forms:
+            if form.is_valid():
+                form.instance.sale = sale
+                form.save()
+
+                for k, v in self.request.POST.iteritems():
+                    if k.split('-')[0] == 'q_resp':
+                        q = Question.objects.get(id=k.split('-')[1])
+                        response_deadline = ResponseDeadline(
+                            question=q,
+                            value=v,
+                            deadline=form.instance
+                        )
+                        response_deadline.save()
+
+                files = FileDeadlineFormset(self.request.POST)
+                for file_form in files.forms:
+                    if file_form.is_valid():
+                        file_form.instance.deadline = form.instance
+                        file_form.save()
+
         return response
 
     def get_success_url(self):
+        # todo: if "permissions" to redirect to determineted url
         return reverse_lazy('index_view')
 
 
@@ -54,25 +92,55 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
     model = Buyer
     form_class = BuyerForm
     template_name = 'page-sale.html'
+    context_object_name = 'buyer'
 
     def get_context_data(self, **kwargs):
         data = super(EditBuyerView, self).get_context_data(**kwargs)
-        data['addressbuyer'] = AddressBuyerFormset()
+        data['addressbuyer'] = AddressBuyerFormset(instance=self.object)
+        data['show_all'] = False
+        if not Product.objects.get(pk=self.kwargs['productpk']).is_lead:
+            data['show_all'] = True
+            sale = self.object.sale_set.all()[0]
+            data['deadlinesale'] = DeadlineSaleFormset(instance=sale)
+            data['filedeadline'] = FileDeadlineFormset(instance=sale.deadline_set.all()[0])
+            data['detaildeadline'] = DetailDeadlineFormset(instance=sale.deadline_set.all()[0])
+            questions_deadlines = sale.product.profile.question_set.filter(type_profile='pdl').order_by('order_number')
+            deadline = sale.deadline_set.all()[0]
+            data['responsequestiondeadline'] = {}
+            for quest in questions_deadlines:
+                if quest.responsedeadline_set.filter(deadline=deadline).exists():
+                    quest.value = quest.responsedeadline_set.get(deadline=deadline).value
+            data['questiondeadline'] = questions_deadlines
         return data
 
     def form_valid(self, form):
         response = super(EditBuyerView, self).form_valid(form)
-        addresses = AddressBuyerFormset(self.request.POST)
-        if addresses.is_valid():
-            addresses.instance.buyer = self.object
-            addresses.save()
+        addresses = AddressBuyerFormset(self.request.POST, instance=self.object)
+        for form in addresses.forms:
+            if form.is_valid():
+                form.save()
+        sale = self.object.sale_set.all()[0]
+        deadline = DeadlineSaleFormset(self.request.POST, instance=sale)
+
+        for form in deadline.forms:
+            if form.is_valid():
+                form.save()
+                for k, v in self.request.POST.iteritems():
+                    if k.split('-')[0] == 'q_resp':
+                        q = Question.objects.get(id=k.split('-')[1])
+                        ResponseDeadline.objects.update_or_create(
+                            question=q,
+                            deadline=form.instance,
+                            defaults={'value': v}
+                        )
+
+                files = FileDeadlineFormset(self.request.POST, instance=form.instance)
+                for file_form in files.forms:
+                    if file_form.is_valid():
+                        file_form.save()
+
         return response
 
     def get_success_url(self):
+        # todo: if "permissions" to redirect to determineted url
         return reverse_lazy('index_view')
-
-
-class EditProductProfileView(LoginRequiredMixin, DetailView):
-    model = Sale
-    # form_class = ProductProfileForm
-    template_name = 'page-sale-product-view.html'

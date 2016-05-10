@@ -21,17 +21,17 @@ ENTRIES_PAGES = [
 
 
 class EntrieUserForm(forms.ModelForm):
-    is_staff = forms.BooleanField(required=False)
-    is_active = forms.BooleanField(required=False)
+    # is_staff = forms.BooleanField(required=False)
+    # is_active = forms.BooleanField(required=False)
 
     password1 = forms.CharField(widget=forms.PasswordInput, label=_("Password"), required=False)
     password2 = forms.CharField(widget=forms.PasswordInput, label=_("Password (again)"), required=False)
 
-    groups = forms.ModelChoiceField(queryset=Group.objects.all(), initial=1)
+    groups = forms.ModelChoiceField(queryset=Group.objects.all())
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email')
+        fields = ('username', 'first_name', 'last_name', 'email', 'partner')
 
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')

@@ -60,7 +60,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'notifications',
     'bootstrap3',
-    'django_bootstrap_dynamic_formsets',
+    'django_bootstrap_dynamic_formsets',  # https://pypi.python.org/pypi/django-bootstrap-dynamic-formsets/0.4.5
 ]
 
 MIDDLEWARE_CLASSES = [

@@ -2,8 +2,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from jsonfield import JSONField
-from core.models import FileType
-from core.models import Status
+
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -30,30 +29,53 @@ class Branch(models.Model):
         return self.name
 
 
+class Profile(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return self.name
+
+
+class FileType(models.Model):
+    name = models.CharField(max_length=20)
+
+    def __unicode__(self):
+        return self.name
+
+
+class Status(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return self.name
+
+
 class Product(models.Model):
     KIND_PERSON_CHOICES = (
         ('F', _('Individual')),
         ('J', _('Legal Person')),
     )
-    name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='uploads/%Y/%m/%d/')
-    icon1 = models.ImageField(upload_to='uploads/%Y/%m/%d/')
-    icon2 = models.ImageField(upload_to='uploads/%Y/%m/%d/')
-    introduction = models.CharField(max_length=50)
-    description = models.TextField()
-    declaration = models.TextField()
+    name = models.CharField(_('Name'), max_length=100)
+    image = models.ImageField(_('Image'), upload_to='uploads/%Y/%m/%d/', blank=True)
+    icon1 = models.ImageField(_('Icon 1'), upload_to='uploads/%Y/%m/%d/', blank=True)
+    icon2 = models.ImageField(_('Icon 2'), upload_to='uploads/%Y/%m/%d/', blank=True)
+    introduction = models.CharField(_('Introduction'), max_length=50)
+    description = models.TextField(_('Description'))
+    declaration = models.TextField(_('Declaration'), blank=True)
     kind_person = models.CharField(max_length=1, choices=KIND_PERSON_CHOICES)
     insurance_company = models.ForeignKey(InsuranceCompany, on_delete=models.CASCADE)
     branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
     file_type = models.ManyToManyField(FileType)
     is_lead = models.BooleanField(default=False)
+    begin_status = models.ForeignKey(Status, null=True)
+    profile = models.ForeignKey(Profile, null=True)
 
     def __unicode__(self):
         return self.name
 
 
 class MethodPayment(models.Model):
-    name = models.CharField(max_length=15)
+    name = models.CharField(_('Name'), max_length=15)
     product = models.ForeignKey(Product)
     bank = models.ForeignKey(Bank)
 
@@ -61,68 +83,64 @@ class MethodPayment(models.Model):
         return self.name
 
 
-class Domain(models.Model):
-    name = models.CharField(max_length=100)
-    result_value = models.CharField(max_length=100)
-    domain_value = models.CharField(max_length=100)
-
-
 class Question(models.Model):
-    name = models.TextField()
-    message = models.CharField(max_length=100)
+    name = models.CharField(_('Name'), max_length=50)
+    hint = models.CharField(_('Hint'), max_length=100, blank=True)
 
     TYPE_GROUP_CHOICES = (
         ('hea', _('Header')),
-        ('bro', _('Broker')),    # Corretora
-        ('cli', _('Client')),    # Cliente
-        ('ins', _('Insured')),   # Segurado
-        ('com', _('Commercial Protection')),     # Coberturas que da home - para exibir
-        ('pro', _('Profile Protection')),    # Coberturas do Perfil - para contratar
-        ('ten', _('Tenant')),   # Locatário
-        ('pss', _('Process')),   #Dados do processo
-        ('leg', _('Legal Opinion')), #Parecer Juridico
-        ('oth', _('Other information')), #Outras informações
-        ('col', _('Collection')),    # Prêmio
-        ('cdn', _('Condition')),  # Condições do Produto
+        ('bro', _('Broker')),                       # Corretora
+        ('cli', _('Client')),                       # Cliente
+        ('ins', _('Insured')),                      # Segurado
+        ('com', _('Commercial Protection')),        # Coberturas que da home - para exibir
+        ('pro', _('Profile Protection')),           # Coberturas do Perfil - para contratar
+        ('ten', _('Tenant')),                       # Locatário
+        ('pss', _('Process')),                      # Dados do processo
+        ('leg', _('Legal Opinion')),                # Parecer Juridico
+        ('oth', _('Other information')),            # Outras informações
+        ('col', _('Collection')),                   # Prêmio
+        ('cdn', _('Condition')),                    # Condições do Produto
         ('foo', _('Footer')),
     )
-    type_group = models.CharField(max_length=2, choices=TYPE_GROUP_CHOICES)
+    type_group = models.CharField(max_length=3, choices=TYPE_GROUP_CHOICES)
     TYPE_PROFILE_CHOICES = (
         ('pdl', _('Profile Deadline')),
         ('pdt', _('Profile Detail')),
     )
-    type_profile = models.CharField(max_length=2, choices=TYPE_PROFILE_CHOICES)
+    type_profile = models.CharField(max_length=3, choices=TYPE_PROFILE_CHOICES)
     TYPE_DATA_CHOICES = (
-        ('va', _('VarChar')),
-        ('ch', _('CheckBox')),
-        ('fl', _('Float')),
-        ('li', _('Link')),
-        ('ra', _('Range')),
-        ('da', _('Date')),
-        ('te', _('Text')),
-        ('pe', _('Percent')),
+        ('input', _('Input')),
+        ('checkbox', _('CheckBox')),
+        ('float', _('Float')),
+        ('link', _('Link')),
+        ('select', _('Select')),
+        ('date', _('Date')),
+        ('text', _('Text')),
+        ('percent', _('Percent')),
+        ('number', _('Number')),
     )
-    type_data = models.CharField(max_length=2, choices=TYPE_DATA_CHOICES)
-    rule = models.CharField(max_length=100)     # regra
+    type_data = models.CharField(max_length=10, choices=TYPE_DATA_CHOICES)
+    rule = models.CharField(max_length=100, blank=True)
     is_default = models.BooleanField(default=False)
     is_visible = models.BooleanField(default=True)
     is_printable = models.BooleanField(default=False)
     is_required = models.BooleanField(default=False)
     is_comment = models.BooleanField(default=False)
-    default_value = models.CharField(max_length=100)
-    domain = models.ManyToManyField(Domain)
-    beginner_status = models.ForeignKey(Status)
-
-    # todo:domain_value e result_value domain = JSONField, type data, rule
+    default_value = models.CharField(max_length=100, blank=True)
+    order_number = models.IntegerField(null=True)
+    print_col_width = models.IntegerField(null=True)
+    profile = models.ForeignKey(Profile)
 
     def __unicode__(self):
         return self.name
 
 
-class Profile(models.Model):
+class Domain(models.Model):
     name = models.CharField(max_length=100)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    question = models.ManyToManyField(Question)
+    question = models.ForeignKey(Question)
+
+    def __unicode__(self):
+        return self.name
 
 
 class ActionStatus(models.Model):

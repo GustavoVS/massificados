@@ -12,20 +12,23 @@ class Command(BaseCommand):
     help = 'Cria usuários default para o início da aplicação'
 
     def handle(self, *args, **options):
-        if not User.objects.filter(username="admin").exists():
-            User.objects.create_superuser("admin", "admin@admin.com", "boasenha2016#")
 
-        if not User.objects.filter(username="demo").exists():
-            u = User(username="demo", email="demo@demo.com", password="massificadodemo")
-            u.save()
-
-        if not Partner.objects.filter(id=1).exists():
+        if Partner.objects.filter(id=1).exists():
+            p = Partner.objects.get(id=1)
+        else:
+            s = Site(domain='sofisa', name='Sofisa')
+            s.save()
             p = Partner(
                 name='Sofisa',
                 email='sofisa@mail.com',
                 cnpj='60.889.128.0001-80',
+                site=s,
             )
-            s = Site(domain='sofisa', name='Sofisa')
-            s.save()
-            p.site = s
             p.save()
+
+        if not User.objects.filter(username="admin").exists():
+            User.objects.create_superuser("admin", "admin@admin.com", "boasenha2016#", partner=p)
+
+        if not User.objects.filter(username="demo").exists():
+            u = User(username="demo", email="demo@demo.com", password="massificadodemo", partner=p)
+            u.save()

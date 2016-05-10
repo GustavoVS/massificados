@@ -2,30 +2,253 @@
 {% load i18n %}
 {# formset 1 #}
 {% load bootstrap3 %}
-{% load bootstrap_dynamic_formsets %}
 
 {% block section-id %}page-sake-sec{% endblock %}
 
-{% block section-title %}{% trans 'New Sale' %}{% endblock %}
+{% block section-title %}
+    {% if buyer.pk %}
+        {{ buyer }}
+    {% else %}
+        {% trans 'New Sale' %}
+    {% endif %}
+{% endblock %}
 
 {% block section-content %}
     <form action="" method="post" class="form">
         {% csrf_token %}
-        {% bootstrap_form form %}
-        <h3>Endereços</h3>
-        <div class="row">
-            <div class="col-md-12">
-                {% bootstrap_dynamic_formset addressbuyer can_delete=True form_wrapper="col-md-4 well" %}
-            </div>
-        </div>
         {% if productpk %}
             <input type="hidden" name="productpk" value="{{ productpk }}">
         {% endif %}
+        <h3>{% trans 'Buyer' %}</h3>
+        <div class="well">
+            <div class="row">
+                {% for field in form %}
+                    {% bootstrap_field field form_group_class='form-group col-md-4' %}
+                {% endfor %}
+            </div>
+        </div>
+        <h3>{% trans 'Address' %}</h3>
+        <div class="well">
+            <div class="row">
+                {{ addressbuyer.management_form }}
+                {% for form in addressbuyer.forms %}
+                    {% for field in form %}
+                        {% bootstrap_field field form_group_class='form-group col-md-4' %}
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+        {% if show_all %}
+            <h3>{% trans 'Deadline' %}</h3>
+            <div class="well">
+                <div class="row">
+                    {{ deadlinesale.management_form }}
+                    {% for form in deadlinesale.forms %}
+
+                        {% for field in form %}
+                            {% bootstrap_field field form_group_class='form-group col-md-4' %}
+                        {% endfor %}
+                    {% endfor %}
+                    {% for question in questiondeadline %}
+                        {% if question.type_data = 'input' or question.type_data = 'link' or question.type_data = 'float' or question.type_data = 'percent' or question.type_data = 'date' or question.type_data = 'number'%}
+                            <div class="form-group col-md-4">
+                                <label class="control-label" for="{{ q_name }}">
+                                    {% if question.is_required %}
+                                    <strong>{{ question.name }}</strong>
+                                    {% else %}{{ question.name }}
+                                    {% endif %}
+                                </label>
+                                <input type="{% if question.type_data = 'number' %}number{% else %}text{% endif %}" name="q_resp-{{ question.pk }}" id="q_resp-{{ question.pk }}"
+                                       title="{{ question.hint }}"
+                                       placeholder="{{ question.name }}"
+                                       class="form-control mask-{{ question.type_data }}"
+                                       value="{{ question.value|default_if_none:question.default_value }}"
+                                       {% if question.is_required %}required{% endif %}>
+                            </div>
+                        {% elif question.type_data = 'checkbox' %}
+                            <div class="form-group col-md-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="q_resp-{{ question.pk }}"
+                                               title="{{ question.hint }}"
+                                               placeholder="{{ question.name }}"
+                                               id="q_resp-{{ question.pk }}">
+                                    {% if question.is_required %}
+                                        <strong>{{ question.name }}</strong>
+                                    {% else %}{{ question.name }}
+                                    {% endif %}
+
+                                    </label>
+                                </div>
+                            </div>
+                        {% elif question.type_data = 'select' %}
+                            <div class="form-group col-md-4">
+                                <label class="control-label" for="{{ q_name }}">
+                                    {% if question.is_required %}
+                                    <strong>{{ question.name }}</strong>
+                                    {% else %}{{ question.name }}
+                                    {% endif %}
+                                </label>
+                                <select title="{{ question.hint }}" class="form-control" name="q_resp-{{ question.pk }}"
+                                        id="q_resp-{{ question.pk }}" {% if question.is_required %}required{% endif %}>
+                                    <option value="">---------</option>
+                                    {% for opt in question.domain_set.all %}
+                                        <option value="{{ opt }}">{{ opt }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        {% elif question.type_data = 'text' %}
+                            <div class="form-group col-md-12">
+                            <label class="control-label" for="{{ q_name }}">
+                                {% if question.is_required %}
+                                <strong>{{ question.name }}</strong>
+                                {% else %}{{ question.name }}
+                                {% endif %}
+                            </label>
+                            <textarea class="form-control" rows="3" name="q_resp-{{ question.pk }}" id="q_resp-{{ question.pk }}"></textarea>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>
+                            {% trans 'Details' %}
+                            <button type="button" class="btn btn-success pull-right" data-toggle="modal"
+                                    data-target="#detaildeadlinesale_add">
+                                <span class="fa fa-plus"></span>
+                            </button>
+                        </h4>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="modal fade" id="detaildeadlinesale_add" tabindex="-1" role="dialog" aria-labelledby="detaildeadlinesale_add_title">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="detaildeadlinesale_add_title">{% trans "Insert Detail" %}</h4>
+                                    </div>
+                                      <div class="modal-body">
+                                          <div class="row">
+                                              {% for field in detaildeadline.empty_form %}
+                                                {% bootstrap_field field form_group_class='form-group col-md-4' %}
+                                              {%endfor %}
+                                            {% for question in questiondeadline %}
+                                                {% if question.type_data = 'input' or question.type_data = 'link' or question.type_data = 'float' or question.type_data = 'percent' or question.type_data = 'date' or question.type_data = 'number'%}
+                                                    <div class="form-group col-md-4">
+                                                        <label class="control-label" for="{{ q_name }}">
+                                                            {% if question.is_required %}
+                                                            <strong>{{ question.name }}</strong>
+                                                            {% else %}{{ question.name }}
+                                                            {% endif %}
+                                                        </label>
+                                                        <input type="{% if question.type_data = 'number' %}number{% else %}text{% endif %}" name="q_resp-{{ question.pk }}" id="q_resp-{{ question.pk }}"
+                                                               title="{{ question.hint }}"
+                                                               placeholder="{{ question.name }}"
+                                                               class="form-control mask-{{ question.type_data }}"
+                                                               value="{{ question.value|default_if_none:question.default_value }}"
+                                                               {% if question.is_required %}required{% endif %}>
+                                                    </div>
+                                                {% elif question.type_data = 'checkbox' %}
+                                                    <div class="form-group col-md-4">
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input type="checkbox" name="q_resp-{{ question.pk }}"
+                                                                       title="{{ question.hint }}"
+                                                                       placeholder="{{ question.name }}"
+                                                                       id="q_resp-{{ question.pk }}">
+                                                            {% if question.is_required %}
+                                                                <strong>{{ question.name }}</strong>
+                                                            {% else %}{{ question.name }}
+                                                            {% endif %}
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                {% elif question.type_data = 'select' %}
+                                                    <div class="form-group col-md-4">
+                                                        <label class="control-label" for="{{ q_name }}">
+                                                            {% if question.is_required %}
+                                                            <strong>{{ question.name }}</strong>
+                                                            {% else %}{{ question.name }}
+                                                            {% endif %}
+                                                        </label>
+                                                        <select title="{{ question.hint }}" class="form-control" name="q_resp-{{ question.pk }}"
+                                                                id="q_resp-{{ question.pk }}" {% if question.is_required %}required{% endif %}>
+                                                            <option value="">---------</option>
+                                                            {% for opt in question.domain_set.all %}
+                                                                <option value="{{ opt }}">{{ opt }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                {% elif question.type_data = 'text' %}
+                                                    <div class="form-group col-md-12">
+                                                    <label class="control-label" for="{{ q_name }}">
+                                                        {% if question.is_required %}
+                                                        <strong>{{ question.name }}</strong>
+                                                        {% else %}{{ question.name }}
+                                                        {% endif %}
+                                                    </label>
+                                                    <textarea class="form-control" rows="3" name="q_resp-{{ question.pk }}" id="q_resp-{{ question.pk }}"></textarea>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                            </div>
+                                      </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                            {% trans 'Cancel' %}
+                                        </button>
+                                        <button type="button" class="btn btn-primary">
+                                            {% trans 'Add' %}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{ detaildeadlinesale.management_form }}
+
+                        {% for form in detaildeadlinesale.forms %}
+                            {% for field in form %}
+                                {% bootstrap_field field form_group_class='form-group col-md-4' %}
+                            {% endfor %}
+                        {% empty %}
+                            <p class="text-center">{% trans 'Press "+" button to insert Items' %}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+        {% endif %}
+
+        <h3>
+            {% trans 'Attachements' %}
+            <button type="button" class="btn btn-success pull-right"><span class="fa fa-plus"></span></button>
+        </h3>
+        <div class="well">
+            <div class="hidden">
+                {{ filedeadline.empty_form }}
+            </div>
+            {{ filedeadline.management_form }}
+            {% for f in filedeadline %}
+                <div class="col-md-4">
+                    <p>{{ f.filetype }}</p>
+                    <div>
+                        {{ f.file }}
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-center">{% trans "No attachaments" %}</p>
+            {% endfor %}
+        </div>
         <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                {% bootstrap_button "Save" button_type="submit" button_class="btn-success pull-right" icon="ok" %}
-                {% url 'index_view' as href_url %}
-                {% bootstrap_button "Cancel" href=href_url button_class="btn-danger pull-left" icon="remove" %}
+            <div class="col-md-12">
+                {% trans 'Save' as save_text %}
+                {% bootstrap_button save_text button_type="submit" button_class="btn-success pull-right" icon="ok" %}
+                {% url 'index_view' as href_cancel_btn %}
+                {% trans 'Cancel' as cancel_text %}
+                {% bootstrap_button cancel_text href=href_cancel_btn button_class="btn-danger pull-left" icon="remove" %}
             </div>
         </div>
 

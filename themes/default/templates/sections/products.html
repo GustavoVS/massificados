@@ -21,7 +21,7 @@
                                 <div id='panel-product' class="panel-heading">
                                     <h4>{{ product.name }}</h4>
                                     <p>{{ product.description }}</p>
-                                    <i class="fa"><img src="{{ product.image.url }}" class="img-responsive"></i>
+                                    <i class="fa"><img src="{% if product.image %}{{ product.image.url }}{% endif %}" class="img-responsive"></i>
                                 </div>
                             </div>
                         </div>
