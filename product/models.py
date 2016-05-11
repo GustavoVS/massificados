@@ -132,7 +132,12 @@ class Question(models.Model):
     profile = models.ForeignKey(Profile)
 
     def __unicode__(self):
-        return self.name
+        type_profile_desc = ''
+        for choice in self.TYPE_PROFILE_CHOICES:
+            if choice[0] == self.type_profile:
+                type_profile_desc = choice[1]
+                break
+        return '%s (%s)' % (self.name, type_profile_desc)
 
 
 class Domain(models.Model):

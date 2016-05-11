@@ -38,8 +38,8 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
             data['deadlinesale'] = DeadlineSaleFormset()
             data['filedeadline'] = FileDeadlineFormset()
             data['questiondeadline'] = product.profile.question_set.filter(type_profile='pdl').order_by('order_number')
-            data['detaildeadline'] = DetailDeadlineFormset()
-            data['questiondetail'] = product.profile.question_set.filter(type_profile='pdt').order_by('order_number')
+            data['detail_deadline'] = DetailDeadlineFormset()
+            data['question_detail'] = product.profile.question_set.filter(type_profile='pdt').order_by('order_number')
 
         return data
 
@@ -103,7 +103,7 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
             sale = self.object.sale_set.all()[0]
             data['deadlinesale'] = DeadlineSaleFormset(instance=sale)
             data['filedeadline'] = FileDeadlineFormset(instance=sale.deadline_set.all()[0])
-            data['detaildeadline'] = DetailDeadlineFormset(instance=sale.deadline_set.all()[0])
+            data['detail_deadline'] = DetailDeadlineFormset(instance=sale.deadline_set.all()[0])
             questions_deadlines = sale.product.profile.question_set.filter(type_profile='pdl').order_by('order_number')
             deadline = sale.deadline_set.all()[0]
             data['responsequestiondeadline'] = {}

@@ -46,4 +46,4 @@ class DetailDeadlineForm(forms.ModelForm):
     def __init__(self, question=None, *args, **kwargs):
         return super(DetailDeadlineForm, self).__init__(*args, **kwargs)
 
-DetailDeadlineFormset = inlineformset_factory(Deadline, Detail, form=DetailDeadlineForm, extra=1, min_num=1, can_delete=False)
+DetailDeadlineFormset = inlineformset_factory(Deadline, Detail, form=DetailDeadlineForm, extra=0, min_num=0, can_delete=False)
