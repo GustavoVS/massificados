@@ -21,9 +21,7 @@ sudo gem install sass --no-ri --no-rdoc
 echo 'Massificados: Installing Virtualenv'
 echo ''
 
-sudo apt-get install python-virtualenv
-
-sudo virtualenv env
+virtualenv env
 
 echo 'Massificados: Installing App Dependencies'
 echo ''

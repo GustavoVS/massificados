@@ -1,10 +1,44 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load i18n %}
 
 {% block content %}
     {% include 'page-sale-section.html' %}
 {% endblock %}
 
 {% block footer_scripts %}
-    <script src="{% static 'js/modal-formset.js' %}"></script>
+    {# <script src="{% static 'js/modal-formset.js' %}"></script> #}
+    <script src="{% static 'js/jquery.formset.js' %}"></script>
+    <script type="text/javascript">
+
+        $(function() {
+            $('#detail_deadline > div.row').formset({
+                prefix: 'detail_set',
+                formCssClass: 'detail_deadline_formset',
+                addText: '<button type="button" class="btn btn-success pull-right"><span class="fa fa-plus"></span></button>',
+                added: function(el){
+                    $(el).find('div.accordion-toggle').each(function(){
+                        $(this).attr('data-target','#' + $(el).find('.collapse').attr('id'));
+                    });
+                },
+                removed: function(el){
+
+                },
+                formTemplate: '#detail_empty_form',
+                deleteText: '<button type="button" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button>',
+                deleteCssClass: 'pull-right col-md-2',
+                extraClasses: ['ro1', 'row2'],
+                attrUpdate: ['id', 'name', 'for', 'data-target', 'updatelabel'],
+                childElementSelector: 'input,select,textarea,label,div,button',
+            })
+        });
+        $(document).ready(function($) {
+            $('.save-detail').click(function(){
+                $('#' + $(this).attr('updatelabel') + '-label').html(
+                    $('input[name="' + $(this).attr('updatelabel')+'"]').val()
+                );
+                $($(this).attr('data-target')).collapse();
+            });
+        });
+    </script>
 {% endblock %}

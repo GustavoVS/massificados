@@ -46,6 +46,9 @@ class FileType(models.Model):
 class Status(models.Model):
     name = models.CharField(max_length=100)
 
+    class Meta:
+        verbose_name_plural='Status'
+
     def __unicode__(self):
         return self.name
 

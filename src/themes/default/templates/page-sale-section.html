@@ -114,202 +114,63 @@
                     <div class="col-md-12">
                         <h4>
                             {% trans 'Details' %}
-                            <button type="button" class="btn btn-success pull-right" data-toggle="modal"
-                                    data-target="#detail_deadline_add" modal-formset-id="detail_deadline_add">
-                                <span class="fa fa-plus"></span>
-                            </button>
                         </h4>
                     </div>
                     <div class="col-md-12">
-                        <div class="modal fade" id="detail_deadline_add" tabindex="-1" role="dialog" aria-labelledby="detail_deadline_add_title">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="detail_deadline_sale_add_title">{% trans "Insert Detail" %}</h4>
+                        <div id="detail_empty_form" style="display: none" class="row">
+                            <div data-toggle="collapse" data-target="#{{ detail_deadline.empty_form.prefix }}-f"
+                                 class="accordion-toggle col-md-10">
+                                <div id="{{detail_deadline.empty_form.name.html_name}}-label">
+                                    {% trans '(Empty)' as name_value %}
+                                    {{ detail_deadline.empty_form.name.value|default_if_none:name_value }}
+                                </div>
+                            </div>
+                            <div class="accordian-body collapse" id="{{ detail_deadline.empty_form.prefix }}-f">
+                                {% for field in detail_deadline.empty_form %}
+                                    <div class="col-md-4">
+                                        {% bootstrap_field field %}
                                     </div>
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                {% for field in detail_deadline.empty_form %}
-                                                    {% bootstrap_field field form_group_class='form-group col-md-4' %}
-                                                {%endfor %}
-                                                {% for question in question_detail %}
-                                                    {% if question.type_data = 'input' or question.type_data = 'link' or question.type_data = 'float' or question.type_data = 'percent' or question.type_data = 'date' or question.type_data = 'number'%}
-                                                        <div class="form-group col-md-4">
-                                                            <label class="control-label" for="{{ q_name }}">
-                                                                {% if question.is_required %}
-                                                                <strong>{{ question.name }}</strong>
-                                                                {% else %}{{ question.name }}
-                                                                {% endif %}
-                                                            </label>
-                                                            <input type="{% if question.type_data = 'number' %}number{% else %}text{% endif %}" name="q_resp-{{ question.pk }}" id="q_resp-{{ question.pk }}"
-                                                                   title="{{ question.hint }}"
-                                                                   placeholder="{{ question.name }}"
-                                                                   class="form-control mask-{{ question.type_data }}"
-                                                                   value="{{ question.value|default_if_none:question.default_value }}"
-                                                                   {% if question.is_required %}required{% endif %}>
-                                                        </div>
-                                                    {% elif question.type_data = 'checkbox' %}
-                                                        <div class="form-group col-md-4">
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" name="q_resp-{{ question.pk }}"
-                                                                           title="{{ question.hint }}"
-                                                                           placeholder="{{ question.name }}"
-                                                                           id="q_resp-{{ question.pk }}">
-                                                                {% if question.is_required %}
-                                                                    <strong>{{ question.name }}</strong>
-                                                                {% else %}{{ question.name }}
-                                                                {% endif %}
-
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    {% elif question.type_data = 'select' %}
-                                                        <div class="form-group col-md-4">
-                                                            <label class="control-label" for="{{ q_name }}">
-                                                                {% if question.is_required %}
-                                                                <strong>{{ question.name }}</strong>
-                                                                {% else %}{{ question.name }}
-                                                                {% endif %}
-                                                            </label>
-                                                            <select title="{{ question.hint }}" class="form-control" name="q_resp-{{ question.pk }}"
-                                                                    id="q_resp-{{ question.pk }}" {% if question.is_required %}required{% endif %}>
-                                                                <option value="">---------</option>
-                                                                {% for opt in question.domain_set.all %}
-                                                                    <option value="{{ opt }}">{{ opt }}</option>
-                                                                {% endfor %}
-                                                            </select>
-                                                        </div>
-                                                    {% elif question.type_data = 'text' %}
-                                                        <div class="form-group col-md-12">
-                                                        <label class="control-label" for="{{ q_name }}">
-                                                            {% if question.is_required %}
-                                                            <strong>{{ question.name }}</strong>
-                                                            {% else %}{{ question.name }}
-                                                            {% endif %}
-                                                        </label>
-                                                        <textarea class="form-control" rows="3" name="q_resp-{{ question.pk }}" id="q_resp-{{ question.pk }}"></textarea>
-                                                        </div>
-                                                    {% endif %}
-                                                {% endfor %}
-                                            </div>
-                                      </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">
-                                            {% trans 'Cancel' %}
-                                        </button>
-                                        <button type="button" class="btn btn-primary add-to-formset" formset-id="detail_deadline_sets"
-                                                default-formset="detail_deadline_add">
-                                            {% trans 'Add' %}
-                                        </button>
-                                    </div>
+                                {% endfor %}
+                                <div class="col-md-12">
+                                    <button data-toggle="collapse" data-target="#{{ detail_deadline.empty_form.prefix }}-f"
+                                            type="button" class="btn btn-info accordion-toggle save-detail"
+                                            updatelabel="{{ detail_deadline.empty_form.name.html_name }}">
+                                        {% trans 'Save' %}
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <div id="detail_deadline_sets">
+                        <div id="detail_deadline">
                             {% for form in detail_deadline.forms %}
-                                <div class="modal fade formset-group" id="detail_deadline_" tabindex="-1" role="dialog" aria-labelledby="detail_deadline_add_title">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title" id="detail_deadline_sale_add_title">{% trans "Insert Detail" %}</h4>
+                                <div class="row" id="{{ form.prefix }}-row">
+                                    <div data-toggle="collapse" data-target="#{{ form.prefix }}-f"
+                                         class="accordion-toggle col-md-10">
+                                        <div id="{{form.name.html_name}}-label">
+                                            {% trans '(Empty)' as name_value %}
+                                            {{ form.name.value|default_if_none:name_value }}
+                                        </div>
+                                    </div>
+                                    <div class="accordian-body collapse" id="{{ form.prefix }}-f">
+                                        {% for field in form %}
+                                            <div class="col-md-4">
+                                                {% bootstrap_field field %}
                                             </div>
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        {% for field in form %}
-                                                            {% bootstrap_field field form_group_class='form-group col-md-4' %}
-                                                        {%endfor %}
-                                                        {% for question in question_detail %}
-                                                            {% if question.type_data = 'input' or question.type_data = 'link' or question.type_data = 'float' or question.type_data = 'percent' or question.type_data = 'date' or question.type_data = 'number'%}
-                                                                <div class="form-group col-md-4">
-                                                                    <label class="control-label" for="{{ q_name }}">
-                                                                        {% if question.is_required %}
-                                                                        <strong>{{ question.name }}</strong>
-                                                                        {% else %}{{ question.name }}
-                                                                        {% endif %}
-                                                                    </label>
-                                                                    <input type="{% if question.type_data = 'number' %}number{% else %}text{% endif %}" name="q_resp-{{ question.pk }}" id="q_resp-{{ question.pk }}"
-                                                                           title="{{ question.hint }}"
-                                                                           placeholder="{{ question.name }}"
-                                                                           class="form-control mask-{{ question.type_data }}"
-                                                                           value="{{ question.value|default_if_none:question.default_value }}"
-                                                                           {% if question.is_required %}required{% endif %}>
-                                                                </div>
-                                                            {% elif question.type_data = 'checkbox' %}
-                                                                <div class="form-group col-md-4">
-                                                                    <div class="checkbox">
-                                                                        <label>
-                                                                            <input type="checkbox" name="q_resp-{{ question.pk }}"
-                                                                                   title="{{ question.hint }}"
-                                                                                   placeholder="{{ question.name }}"
-                                                                                   id="q_resp-{{ question.pk }}">
-                                                                        {% if question.is_required %}
-                                                                            <strong>{{ question.name }}</strong>
-                                                                        {% else %}{{ question.name }}
-                                                                        {% endif %}
-
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            {% elif question.type_data = 'select' %}
-                                                                <div class="form-group col-md-4">
-                                                                    <label class="control-label" for="{{ q_name }}">
-                                                                        {% if question.is_required %}
-                                                                        <strong>{{ question.name }}</strong>
-                                                                        {% else %}{{ question.name }}
-                                                                        {% endif %}
-                                                                    </label>
-                                                                    <select title="{{ question.hint }}" class="form-control" name="q_resp-{{ question.pk }}"
-                                                                            id="q_resp-{{ question.pk }}" {% if question.is_required %}required{% endif %}>
-                                                                        <option value="">---------</option>
-                                                                        {% for opt in question.domain_set.all %}
-                                                                            <option value="{{ opt }}">{{ opt }}</option>
-                                                                        {% endfor %}
-                                                                    </select>
-                                                                </div>
-                                                            {% elif question.type_data = 'text' %}
-                                                                <div class="form-group col-md-12">
-                                                                <label class="control-label" for="{{ q_name }}">
-                                                                    {% if question.is_required %}
-                                                                    <strong>{{ question.name }}</strong>
-                                                                    {% else %}{{ question.name }}
-                                                                    {% endif %}
-                                                                </label>
-                                                                <textarea class="form-control" rows="3" name="q_resp-{{ question.pk }}" id="q_resp-{{ question.pk }}"></textarea>
-                                                                </div>
-                                                            {% endif %}
-                                                        {% endfor %}
-                                                    </div>
-                                              </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger" data-dismiss="modal">
-                                                    {% trans 'Cancel' %}
-                                                </button>
-                                                <button type="button" class="btn btn-primary add-to-formset" formset-id=""
-                                                        default-formset="">
-                                                    {% trans 'Save' %}
-                                                </button>
-                                            </div>
+                                        {% endfor %}
+                                        <div class="col-md-12">
+                                            <button data-toggle="collapse" data-target="#{{ form.prefix }}-f"
+                                                    type="button" class="btn btn-info accordion-toggle save-detail"
+                                                    updatelabel="{{ form.name.html_name }}">
+                                                {% trans 'Save' %}
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             {% endfor %}
                         </div>
                         {{ detail_deadline.management_form }}
-
-                        {% for form in detail_deadline.forms %}
-                            {% for field in form %}
-                                {% bootstrap_field field form_group_class='form-group col-md-4' %}
-                            {% endfor %}
-                        {% empty %}
-                            <p class="text-center">{% trans 'Press "+" button to insert Items' %}</p>
-                        {% endfor %}
                     </div>
                 </div>
             </div>
-
         {% endif %}
 
         <h3>

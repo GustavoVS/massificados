@@ -9,13 +9,14 @@ from sale.models import Sale, Buyer, BuyerAddress, Deadline, Quote, File, Detail
 class BuyerForm(forms.ModelForm):
     class Meta:
         model = Buyer
-        fields = ['name', 'phone', 'email', 'kind_person', 'cpf_cnpj',]
+        fields = ['name', 'phone', 'email', 'kind_person', 'cpf_cnpj', ]
 
 
 class BuyerAddressForm(forms.ModelForm):
     class Meta:
         model = BuyerAddress
-        fields = ['street', 'district', 'complement', 'number', 'city', 'state', 'postal_code', ]
+        fields = ['street', 'district', 'complement',
+                  'number', 'city', 'state', 'postal_code', ]
 
 AddressBuyerFormset = inlineformset_factory(Buyer, BuyerAddress, form=BuyerAddressForm, extra=0, min_num=1,
                                             can_delete=False)
@@ -24,9 +25,10 @@ AddressBuyerFormset = inlineformset_factory(Buyer, BuyerAddress, form=BuyerAddre
 class DeadlineSaleForm(forms.ModelForm):
     class Meta:
         model = Deadline
-        fields = ['begin', 'end', 'status', 'payment', 'proposal', 'policy',]
+        fields = ['begin', 'end', 'status', 'payment', 'proposal', 'policy', ]
 
-DeadlineSaleFormset = inlineformset_factory(Sale, Deadline, form=DeadlineSaleForm, extra=0, min_num=1, can_delete=False)
+DeadlineSaleFormset = inlineformset_factory(
+    Sale, Deadline, form=DeadlineSaleForm, extra=0, min_num=1, can_delete=False)
 
 
 class FileDeadlineForm(forms.ModelForm):
@@ -35,7 +37,8 @@ class FileDeadlineForm(forms.ModelForm):
         model = File
         fields = ['file', 'file_type']
 
-FileDeadlineFormset = inlineformset_factory(Deadline, File, form=FileDeadlineForm, extra=0, min_num=0, can_delete=False)
+FileDeadlineFormset = inlineformset_factory(
+    Deadline, File, form=FileDeadlineForm, extra=0, min_num=0, can_delete=False)
 
 
 class DetailDeadlineForm(forms.ModelForm):
@@ -46,4 +49,5 @@ class DetailDeadlineForm(forms.ModelForm):
     def __init__(self, question=None, *args, **kwargs):
         return super(DetailDeadlineForm, self).__init__(*args, **kwargs)
 
-DetailDeadlineFormset = inlineformset_factory(Deadline, Detail, form=DetailDeadlineForm, extra=0, min_num=0, can_delete=False)
+DetailDeadlineFormset = inlineformset_factory(
+    Deadline, Detail, form=DetailDeadlineForm, extra=0, min_num=1, can_delete=False)

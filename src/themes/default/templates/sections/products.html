@@ -100,8 +100,8 @@
                                                     <h5>{{ product.name }}</h5>
                                                     <p>{{ product.introduction }}</p>
                                                     {% if user.is_authenticated %}
-                                                        <i class="fa"><img src="{{ product.icon1.url }}" class="img-responsive"></i>
-                                                        <i class="fa"><img src="{{ product.icon2.url }}" class="img-responsive"></i>
+                                                        <i class="fa"><img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" class="img-responsive"></i>
+                                                        <i class="fa"><img src="{% if product.icon2 %}{{ product.icon2.url }}{% endif %}" class="img-responsive"></i>
                                                     {% endif %}
                                                 </div>
                                                 <div class="panel-body">
@@ -142,8 +142,8 @@
                                                     <h5>{{ product.name }}</h5>
                                                     <p>{{ product.introduction }}</p>
                                                     {% if user.is_authenticated %}
-                                                        <i class="fa"><img src="{{ product.icon1.url }}" class="img-responsive"></i>
-                                                        <i class="fa"><img src="{{ product.icon2.url }}" class="img-responsive"></i>
+                                                        <i class="fa"><img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" class="img-responsive"></i>
+                                                        <i class="fa"><img src="{% if product.icon2 %}{{ product.icon2.url }}{% endif %}" class="img-responsive"></i>
                                                     {% endif %}
                                                 </div>
                                                 <div class="panel-body">

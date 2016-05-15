@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
-from django.db import transaction
+# from django.db import transaction
 from django.core.paginator import Paginator
-from django.views.generic.detail import DetailView
+# from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView
 from .models import Sale, Partner, Buyer, Status, ResponseDetail, ResponseDeadline
@@ -37,17 +37,18 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
             data['show_all'] = True
             data['deadlinesale'] = DeadlineSaleFormset()
             data['filedeadline'] = FileDeadlineFormset()
-            data['questiondeadline'] = product.profile.question_set.filter(type_profile='pdl').order_by('order_number')
+            data['questiondeadline'] = product.profile.question_set.filter(
+                type_profile='pdl').order_by('order_number')
             data['detail_deadline'] = DetailDeadlineFormset()
-            data['question_detail'] = product.profile.question_set.filter(type_profile='pdt').order_by('order_number')
+            data['question_detail'] = product.profile.question_set.filter(
+                type_profile='pdt').order_by('order_number')
 
         return data
 
     def form_valid(self, form):
         response = super(CreateBuyerView, self).form_valid(form)
         addresses = AddressBuyerFormset(self.request.POST)
-        import ipdb
-        ipdb.set_trace()
+
         for form in addresses.forms:
             if form.is_valid():
                 form.instance.buyer = self.object
@@ -56,7 +57,8 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
         sale = Sale()
         sale.product = Product.objects.get(pk=self.request.POST['productpk'])
         sale.buyer = self.object
-        sale.partner = Partner.objects.get(id=1)  # todo: Tirar esse hardcode do pértinêr
+        # todo: Tirar esse hardcode do pértinêr
+        sale.partner = Partner.objects.get(id=1)
         sale.save()
 
         deadline = DeadlineSaleFormset(self.request.POST)
@@ -74,6 +76,11 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
                             deadline=form.instance
                         )
                         response_deadline.save()
+
+                details = DetailDeadlineFormset(self.request.POST, instance=form.instance)
+                for detail_form in details.forms:
+                    if detail_form.is_valid():
+                        detail_form.save()
 
                 files = FileDeadlineFormset(self.request.POST)
                 for file_form in files.forms:
@@ -102,20 +109,26 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
             data['show_all'] = True
             sale = self.object.sale_set.all()[0]
             data['deadlinesale'] = DeadlineSaleFormset(instance=sale)
-            data['filedeadline'] = FileDeadlineFormset(instance=sale.deadline_set.all()[0])
-            data['detail_deadline'] = DetailDeadlineFormset(instance=sale.deadline_set.all()[0])
-            questions_deadlines = sale.product.profile.question_set.filter(type_profile='pdl').order_by('order_number')
+            data['filedeadline'] = FileDeadlineFormset(
+                instance=sale.deadline_set.all()[0])
+            data['detail_deadline'] = DetailDeadlineFormset(
+                instance=sale.deadline_set.all()[0])
+            questions_deadlines = sale.product.profile.question_set.filter(
+                type_profile='pdl').order_by('order_number')
             deadline = sale.deadline_set.all()[0]
             data['responsequestiondeadline'] = {}
             for quest in questions_deadlines:
                 if quest.responsedeadline_set.filter(deadline=deadline).exists():
-                    quest.value = quest.responsedeadline_set.get(deadline=deadline).value
+                    quest.value = quest.responsedeadline_set.get(
+                        deadline=deadline).value
             data['questiondeadline'] = questions_deadlines
         return data
 
     def form_valid(self, form):
         response = super(EditBuyerView, self).form_valid(form)
-        addresses = AddressBuyerFormset(self.request.POST, instance=self.object)
+        addresses = AddressBuyerFormset(
+            self.request.POST, instance=self.object)
+
         for form in addresses.forms:
             if form.is_valid():
                 form.save()
@@ -125,6 +138,7 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
         for form in deadline.forms:
             if form.is_valid():
                 form.save()
+
                 for k, v in self.request.POST.iteritems():
                     if k.split('-')[0] == 'q_resp':
                         q = Question.objects.get(id=k.split('-')[1])
@@ -134,7 +148,13 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
                             defaults={'value': v}
                         )
 
-                files = FileDeadlineFormset(self.request.POST, instance=form.instance)
+                details = DetailDeadlineFormset(self.request.POST, instance=form.instance)
+                for detail_form in details.forms:
+                    if detail_form.is_valid():
+                        detail_form.save()
+
+                files = FileDeadlineFormset(
+                    self.request.POST, instance=form.instance)
                 for file_form in files.forms:
                     if file_form.is_valid():
                         file_form.save()

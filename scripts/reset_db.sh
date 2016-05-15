@@ -2,7 +2,7 @@ echo ''
 echo 'Dropping Database'
 echo ''
 
-sudo rm -rf src/*/migrations/000*
+rm -rf src/*/migrations/000*
 env/bin/python src/manage.py makemigrations
 dropdb massificados
 createdb --encoding "UTF-8" massificados
