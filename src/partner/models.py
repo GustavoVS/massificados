@@ -18,7 +18,6 @@ class Partner(models.Model):
     def __unicode__(self):
         return self.name
 
-
     def save(self, *args, **kwargs):
         # if not self.site:
         #     s = Site(domain='slug', name=self.name)
@@ -26,6 +25,7 @@ class Partner(models.Model):
         #     self.site = s
 
         return super(Partner, self).save(*args, **kwargs)
+
 
 class Campaign(models.Model):
     name = models.CharField(max_length=100)
@@ -76,6 +76,7 @@ class SacPhone(models.Model):
 
     def __unicode__(self):
         return self.description
+
 
 class Adress():
     pass

@@ -29,7 +29,7 @@ SECRET_KEY = 'rjy@i6@99qth)#8o!)z!hjk^mi@l7d6$#gfa_pu!91@i&2jtbf'
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1:8000']
+ALLOWED_HOSTS = ['*',]
 
 AUTH_USER_MODEL = 'user_account.MassificadoUser'
 

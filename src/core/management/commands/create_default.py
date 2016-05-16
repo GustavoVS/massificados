@@ -3,9 +3,11 @@ from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
 from partner.models import Partner
 from django.contrib.sites.models import Site
-
+from product.models import Status
 
 User = get_user_model()
+
+DEFAUNTI_STATUS = ('A', 'B', 'C')
 
 
 class Command(BaseCommand):
@@ -32,3 +34,8 @@ class Command(BaseCommand):
         if not User.objects.filter(username="demo").exists():
             u = User(username="demo", email="demo@demo.com", password="massificadodemo", partner=p)
             u.save()
+
+        if not Status.objects.filter(id=1).exists:
+            for status_name in DEFAUNTI_STATUS:
+                st = Status(name=status_name)
+                st.save()
