@@ -162,6 +162,33 @@
                 {% endif %}
             </div>
             <div class="row">
+                {% if files %}
+                    <div class = " col-xs-12 col-sm-12 col-md-12 col-lg-12" id = "profiles-see">
+                        <div class="col-md-12">
+                            <h4>{% trans "The user can see the production in those profiles" %}</h4>
+                        </div>
+                        <hr>
+                        {% for file in files %}
+                            <div class=" col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class=" form-group ">
+                                    <input type="checkbox" name="profiles-see{{ file.pk }}" id="profiles-see{{ file.pk }}" autocomplete="off" />
+                                    <div class=" btn-group ">
+                                        <label for="profiles-see{{ file.pk }}" class=" btn btn-warning ">
+                                            <span class=" glyphicon glyphicon-ok "></span>
+                                            <span class=" glyphicon glyphicon-user "></span>
+                                            <span> </span>
+                                        </label>
+                                        <label for="profiles-see{{ file.pk }}" class=" btn btn-default active ">
+                                            {{ file.name }}
+                                        </label>
+                                    </div>
+                                </div>
+                             </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="row">
                 {% if status %}
                     <div class = " col-xs-12 col-sm-12 col-md-12 col-lg-12" id = "status-see">
                         <div class="col-md-12">
@@ -293,37 +320,7 @@
                     </div>
                 {% endif %}
             </div>
-            <div class="row">
-                {% if files %}
-                    <div class = " col-xs-12 col-sm-12 col-md-12 col-lg-12" id = "profiles-see">
-                        <div class="col-md-12">
-                            <h4>{% trans "The user can see the production in those profiles" %}</h4>
-                        </div>
-                        <hr>
-                        {% for file in files %}
-                            <div class=" col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                <div class=" form-group ">
-                                    <input type="checkbox" name="profiles-see{{ file.pk }}" id="profiles-see{{ file.pk }}" autocomplete="off" />
-                                    <div class=" btn-group ">
-                                        <label for="profiles-see{{ file.pk }}" class=" btn btn-warning ">
-                                            <span class=" glyphicon glyphicon-ok "></span>
-                                            <span class=" glyphicon glyphicon-user "></span>
-                                            <span> </span>
-                                        </label>
-                                        <label for="profiles-see{{ file.pk }}" class=" btn btn-default active ">
-                                            {{ file.name }}
-                                        </label>
-                                    </div>
-                                </div>
-                             </div>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-{#            </div>#}
-{##}
-{##}
-{##}
-{##}
+
 {#                                <div class=" col-xs-12 col-sm-6 ">#}
 {#                                    <h3>Standard Checkboxes</h3><hr />#}
 {#                                    <div class=" form-group ">#}
@@ -474,7 +471,7 @@
 {#                                        </div>#}
 {#                                    </div>#}
 {#                                </div>#}
-        </div>
+
 
 
 
@@ -523,22 +520,5 @@
                 {% endfor %}
             </select>
         {% endcomment %}
-    </form>
+   </form>
 {% endblock %}
-
-
-
-
-
-
-
-Venda - Produto
-    View
-    Edit
-    - Status
-        Ver
-        Editar
-        Atribuir
-    - Arquivos
-        Ver
-        Edit
