@@ -2,8 +2,8 @@
 from django import forms
 from django.forms.models import inlineformset_factory
 
-from product.models import Question
-from sale.models import Sale, Buyer, BuyerAddress, Deadline, Quote, File, Detail
+# from product.models import Question
+from sale.models import Sale, Buyer, BuyerAddress, Deadline, File, Detail
 
 
 class BuyerForm(forms.ModelForm):
@@ -35,10 +35,10 @@ class FileDeadlineForm(forms.ModelForm):
 
     class Meta:
         model = File
-        fields = ['file', 'file_type']
+        fields = ['document', 'file_type']
 
 FileDeadlineFormset = inlineformset_factory(
-    Deadline, File, form=FileDeadlineForm, extra=0, min_num=0, can_delete=False)
+    Deadline, File, form=FileDeadlineForm, extra=1, min_num=0, can_delete=False)
 
 
 class DetailDeadlineForm(forms.ModelForm):

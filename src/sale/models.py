@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
-from jsonfield import JSONField
 from product.models import Question, Product, Status, FileType
 from partner.models import Partner
 from user_account.models import MassificadoUser
@@ -70,7 +69,7 @@ class Deadline(models.Model):
 class File(models.Model):
     file_type = models.ForeignKey(FileType)
     deadline = models.ForeignKey(Deadline)
-    file = models.FileField(_('File'))
+    document = models.FileField(_('Document'))
 
     def __unicode__(self):
         return self.file_type

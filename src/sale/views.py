@@ -82,10 +82,9 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
                     if detail_form.is_valid():
                         detail_form.save()
 
-                files = FileDeadlineFormset(self.request.POST)
+                files = FileDeadlineFormset(self.request.POST, instance=form.instace)
                 for file_form in files.forms:
                     if file_form.is_valid():
-                        file_form.instance.deadline = form.instance
                         file_form.save()
 
         return response

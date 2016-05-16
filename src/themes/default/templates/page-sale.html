@@ -13,7 +13,7 @@
 
         $(function() {
             $('#detail_deadline > div.row').formset({
-                prefix: 'detail_set',
+                prefix: '{{ detail_deadline.perfix }}',
                 formCssClass: 'detail_deadline_formset',
                 addText: '<button type="button" class="btn btn-success pull-right"><span class="fa fa-plus"></span></button>',
                 added: function(el){
@@ -32,6 +32,7 @@
                 childElementSelector: 'input,select,textarea,label,div,button',
             })
         });
+
         $(document).ready(function($) {
             $('.save-detail').click(function(){
                 $('#' + $(this).attr('updatelabel') + '-label').html(
@@ -39,6 +40,15 @@
                 );
                 $($(this).attr('data-target')).collapse();
             });
+        });
+
+        $(function() {
+            $('#filedeadline_formset > .thumbnail').formset({
+                prefix: '{{ filedeadline.prefix }}',
+                formCssClass: 'file_deadline_formset',
+                formTemplate: '#file_empty_form',
+                attrUpdate: ['id', 'name', 'for', 'data-target', 'updatelabel'],
+            })
         });
     </script>
 {% endblock %}

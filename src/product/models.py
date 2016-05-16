@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
-from jsonfield import JSONField
-
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -47,7 +45,7 @@ class Status(models.Model):
     name = models.CharField(max_length=100)
 
     class Meta:
-        verbose_name_plural='Status'
+        verbose_name_plural = 'Status'
 
     def __unicode__(self):
         return self.name
