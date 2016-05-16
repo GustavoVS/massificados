@@ -2,15 +2,16 @@
 {% load static %}
 {% load account %}
 
+
 <nav id="menu" class="navbar navbar-default navbar-fixed-top on">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-header">
-          <span class="sr-only">Toggle navigation</span>
-      </button>
-        <a class="logo-header" class="navbar-brand" href="/">
-            <img  src="{% static 'img/partner-sofisa/sofisa70.png' %}" alt="" class="img-responsive">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-header">
+          <span class="sr-only">Menu</span>
+        </button>
+        <a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-products" class="page-scroll logo-header navbar-brand">
+            <img  src="{% static 'img/partner-sofisa/sofisa50x142.png' %}" alt="" class="img-responsive">
         </a>
     </div>
 
@@ -18,9 +19,10 @@
     <div class="collapse navbar-collapse" id="nav-header">
       <ul class="nav navbar-nav navbar-right">
 {#        <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-about" class="page-scroll">{% trans "About us" %}</a></li>#}
-        <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-products" class="page-scroll">{% trans "Products" %}
+        <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-products" class="page-scroll">
+            <span class="fa fa-shopping-cart fa-lg hidden-sm"></span>
+            {% trans "Products" %}
 {#                {% if user.is_authenticated %}#}
-                    <span class="fa fa-shopping-cart fa-lg"></span>
 {#                {% endif %}#}
             </a>
         </li>
@@ -28,26 +30,52 @@
 {#        <li><a href="{% url 'sac' %}" class="page-scroll">{% trans "SAC" %}</a></li>#}
         {% if user.is_authenticated %}
             {% if user.is_admin or user.is_superuser %}
-                <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#dashBoard" class="page-scroll">{% trans "Dashboard" %}</a></li>
-                <li><a href="{% url 'production' %}" class="page-scroll">{% trans "Production" %}</a></li>
-                <li><a href="{% url 'entries' %}" class="page-scroll">{% trans "Entries" %}</a></li>
+                <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#dashBoard" class="page-scroll">
+                        <span class="fa fa-area-chart fa-lg hidden-sm"></span>
+                        {% trans "Dashboard" %}
+                    </a>
+                </li>
+                <li><a href="{% url 'production' %}" class="page-scroll">
+                    <span class="fa fa-list fa-lg hidden-sm"></span>
+                    {% trans "Production" %}
+                    </a>
+                </li>
+                <li><a href="{% url 'entries' %}" class="page-scroll">
+                    <span class="fa fa-edit fa-lg hidden-sm"></span>
+                    {% trans "Entries" %}
+                    </a>
+                </li>
+                <li><a href="#notifications" class="page-scroll">
+                        <span class="fa fa-bell faa-ring animated faa-slow alert-bell fa-2x hidden-sm"></span>
+                        {% trans "Notifications" %}
+                    </a>
+                </li>
             {% endif %}
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <b>{% user_display user %}</b><span class="caret"></span></a>
+                    <span class="glyphicon glyphicon-user"></span>
+                    <b>{% user_display user %}</b>
+                    <span class="caret"></span>
+                </a>
               <ul class="dropdown-menu">
-                <li><a href="#">{% trans "My Profile" %}</a></li>
-                <li><a href="#notifications" class="page-scroll">{% trans "Notifications" %}</a></li>
+                <li><a href="#">
+                    <span class="fa fa-folder-open fa-lg "></span>
+                    {% trans "My Profile" %}
+                    </a>
+                </li>
                 <li class="divider"></li>
-                <li><a href="{% url 'account_logout' %}">{% trans 'Logout' %}</a></li>
+                <li><a href="{% url 'account_logout' %}">
+                    <span class="fa fa-sign-out fa-lg"></span>
+                    {% trans 'Logout' %}
+                    </a>
+                </li>
               </ul>
             </li>
         {% else %}
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <b>Entrar</b>
                 <span class="fa fa-lock fa-lg"></span>
-                <span class="caret"></span>
+                <b>{% trans "Login" %}</b>
             </a>
               <ul id="login-dp" class="dropdown-menu">
                 <li>

@@ -16,10 +16,7 @@ h1 {
     color: #00314b;
     zoom: 1;
 }
-p {
-	font-family: 'Open Sans', sans-serif;
-	font-size: 13px;
-}
+
 a {
 	color: #5b777f;
 	transition: all 0.5s;
@@ -114,22 +111,9 @@ header p {
 .color {
 	color: #f3ca27;
 }
-.btn-default {
-	color: #294d57;
-	font-family: 'Open Sans', sans-serif;
-	background-color: #f1c40f;
-	border: 0;
-	margin: 0 8px;
-	font-size: 18px;
-	transition: all 0.5s;
-}
-.btn-default:hover, .btn-default:focus, .btn-default.focus, .btn-default:active, .btn-default.active {
-	background-color: #c1a618;
-}
 /* Services Section */
 #sec-products {
-	padding: 20px 0px 100px 20px;
-
+	/*padding: 20px 0px 100px 20px;*/
 }
 #sec-products h3 {
 	color: #81969c;
@@ -357,16 +341,6 @@ ol.type li a:hover {
 	-ms-transform: rotate(90deg);
 	transform: rotate(90deg);
 }
-.portfolio-modal .btn-primary {
-	color: #a7b6ba;
-	background-color: #1d434e;
-	border-color: #1d434e;
-}
-.portfolio-modal .btn-primary:hover, .portfolio-modal .btn-primary:focus, .portfolio-modal .btn-primary.focus, .portfolio-modal .btn-primary:active, .portfolio-modal .btn-primary.active {
-	color: #a7b6ba;
-	background-color: #032e3a;
-	border-color: #032e3a;
-}
 /* About Section */
 #sec-about {
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#032731+0,032e3a+20,032e3a+100,032731+100 */
@@ -571,16 +545,8 @@ label {
 	color: #cc3300;
 	text-align: left;
 }
-.btn:active, .btn.active {
-	background-image: none;
-	outline: 0;
-	-webkit-box-shadow: none;
-	box-shadow: none;
-}
-a:focus, .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn.active.focus {
-	outline: none;
-	outline-offset: none;
-}
+
+
 /* Footer */
 #footer {
 	background: #ccd0ce;
@@ -599,15 +565,6 @@ a:focus, .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:acti
 #footer a:hover, a:focus {
 	text-decoration: none;
 	color: #f1c40f;
-}
-
-
-
-.logo-header{
-    padding: 2px 0;
-}
-.logo-header > img {
-    height: 100%
 }
 
 .col-centered {
@@ -651,10 +608,10 @@ a:focus, .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:acti
 .menu-product-pj .panel-primary {
 }
 .menu-product-pj .panel-heading {
-    padding: 1px 1px 1px 1px;
+    /*padding: 1px 1px 1px 1px;*/
 }
 .menu-product-pj .panel-body {
-    padding: 1px 1px 1px 1px;
+    /*padding: 1px 1px 1px 1px;*/
 }
 
 
@@ -672,8 +629,10 @@ a:focus, .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:acti
 #products-pj  {
 	/*background: #FFFFFF;*/
     border-radius: 2px;
-    padding-top: 0;
-    margin-top: 0;
+    /*padding-top: 0;*/
+    /*margin-top: 0;*/
+    margin: 0px;
+    padding: 0px;
     /*opacity: 0.10;*/
     filter: alpha(opacity=80);
 }
@@ -697,9 +656,6 @@ a:focus, .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:acti
 .product-pj {
 	text-align: left;
 }
-.product-pj-panel-button span {
-}
-
 
 .products-pf i.fa {
 	font-size: 40px;
@@ -715,8 +671,10 @@ a:focus, .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:acti
 #products-pf  {
 	/*background: #FFFFFF;*/
     border-radius: 2px;
-    padding-top: 0;
-    margin-top: 0;
+    /*padding-top: 0;*/
+    /*margin-top: 0;*/
+    margin: 0px;
+    padding: 0px;
 }
 
 #products-pf h3{
@@ -805,4 +763,56 @@ a:focus, .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:acti
      margin-bottom: -1px;
      border-bottom-right-radius: 0;
      border-bottom-left-radius: 0;
+}
+
+.container > .navbar-collapse, .container > .navbar-header {
+    margin-left: 10px;
+}
+
+#nav-header{
+    position: relative;
+}
+
+ul.navbar-nav {
+    /*bottom: 0;*/
+    /*position: absolute;*/
+    /*right: 0;*/
+    /*margin-bottom: -10px;*/
+}
+
+ul.navbar-nav > li > a {
+    /*vertical-align: bottom;*/
+
+    line-height: 50px ;
+    padding-bottom: 0px;
+    padding-top: 45px;
+}
+
+.alert-bell {
+    color: #008d6a !important;
+}
+
+.navbar-header > a {
+   padding: 20px 0px 0px 0px ;
+}
+.navbar-header  {
+   height: 80px ;
+}
+
+.navbar-nav .fa {
+    color: #d59936;
+}
+
+.navbar-nav .glyphicon {
+    color: #008d6a;
+}
+
+.control-label {
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
 }

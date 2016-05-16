@@ -2,6 +2,7 @@
 from django.contrib.auth.models import Group
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
+from product.models import Product, Status, FileType
 from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView, UpdateView
@@ -65,6 +66,15 @@ class EntrieProfileNewView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse_lazy('entries-profiles')
+
+    def get_context_data(self, **kwargs):
+        context = super(EntrieProfileNewView, self).get_context_data(**kwargs)
+        context['products_f'] = list(Product.objects.filter(kind_person='J')) * 18
+        context['products_j'] = list(Product.objects.filter(kind_person='J')) * 18
+        context['products'] = list(Product.objects.all())
+        context['status'] = Status.objects.all()
+        context['files'] = FileType.objects.all()
+        return context
 
 
 class EntrieProfileEditView(LoginRequiredMixin, UpdateView):

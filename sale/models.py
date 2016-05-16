@@ -56,6 +56,7 @@ class Deadline(models.Model):
     end = models.DateField(_('End'))
     status = models.ForeignKey(Status)
     payment = models.FloatField(_('Payment'))
+    detail_count = models.IntegerField(_('Detail Count'))
     proposal = models.CharField(_('Proposal'), max_length=100)
     policy = models.CharField(_('Policy'), max_length=100)
     sale = models.ForeignKey(

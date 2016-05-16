@@ -1,5 +1,6 @@
 {% extends 'base-sec.html' %}
 {% load i18n %}
+{% load bootstrap3 %}
 
 {% block section-id %}{% endblock %}
 {% block section-title %}
@@ -11,53 +12,507 @@
 {% endblock %}
 {% block section-content %}
     <form action="" method="post">{% csrf_token %}
-        <button type="submit" class="btn-btn-success">{% trans 'Save Role' %}</button>
+{#    <button type="submit" class="btn-btn-success">{% trans 'Save Role' %}</button>#}
         <div class="space"></div>
-        <div class="form-group">
-            {% for error in form.name.errors %}
-                <small>{{ error|escape }}</small>
-            {% endfor %}
-            <label for="name">{{ form.name.label }}</label>
-            <input type="text" class="form-control" value="{{ form.name.value }}"
-                   name="{{ form.name.name }}"
-                   id="name" placeholder="{{ form.name.label }}">
+        <div class="col-md-12">
+            {% bootstrap_field form.name %}
         </div>
-
         <div class="container">
-            <h3>{% trans 'Entries' %}</h3>
-            <hr>
-            <div class="row" style="margin: auto; max-width: 600px">
-                <div class="col-md-4">
-                    {% trans 'Page Name' %}
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>{% trans "Permissions of Menu" %}</h4><hr />
                 </div>
-                <div class="col-md-4">
-                    {% trans 'Can View' %}
+                <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class=" form-group ">
+                        <input type="checkbox" name="checkbox-products" id="checkbox-products" autocomplete="off" />
+                        <div class=" btn-group ">
+                            <label for="checkbox-products" class=" btn btn-primary ">
+                                <span class=" glyphicon glyphicon-ok "></span>
+                                <span> </span>
+                            </label>
+                            <label for="checkbox-products" class=" btn btn-primary active ">
+                                {% trans "Products" %}
+                            </label>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    {% trans 'Can Edit' %}
+                <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class=" form-group ">
+                        <input type="checkbox" name="checkbox-dashboard" id="checkbox-dashboard" autocomplete="off" />
+                        <div class=" btn-group ">
+                            <label for="checkbox-dashboard" class=" btn btn-primary ">
+                                <span class=" glyphicon glyphicon-ok "></span>
+                                <span> </span>
+                            </label>
+                            <label for="checkbox-dashboard" class=" btn btn-primary active ">
+                                {% trans "Dashboard" %}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class=" form-group ">
+                        <input type="checkbox" name="checkbox-production" id="checkbox-production" autocomplete="off" />
+                        <div class=" btn-group ">
+                            <label for="checkbox-production" class=" btn btn-primary ">
+                                <span class=" glyphicon glyphicon-ok "></span>
+                                <span> </span>
+                            </label>
+                            <label for="checkbox-production" class=" btn btn-primary active ">
+                                {% trans "Production" %}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class=" form-group ">
+                        <input type="checkbox" name="checkbox-entries" id="checkbox-entries" autocomplete="off" />
+                        <div class=" btn-group ">
+                            <label for="checkbox-entries" class=" btn btn-primary ">
+                                <span class=" glyphicon glyphicon-ok "></span>
+                                <span> </span>
+                            </label>
+                            <label for="checkbox-entries" class=" btn btn-primary active ">
+                                {% trans "Entries" %}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class=" form-group ">
+                        <input type="checkbox" name="checkbox-notifications" id="checkbox-notifications" autocomplete="off" />
+                        <div class=" btn-group ">
+                            <label for="checkbox-notifications" class=" btn btn-primary ">
+                                <span class=" glyphicon glyphicon-ok "></span>
+                                <span> </span>
+                            </label>
+                            <label for="checkbox-notifications" class=" btn btn-primary active ">
+                                {% trans "Notifications" %}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class=" form-group ">
+                        <input type="checkbox" name="checkbox-profile" id="checkbox-profile" autocomplete="off" />
+                        <div class=" btn-group ">
+                            <label for="checkbox-profile" class=" btn btn-primary ">
+                                <span class=" glyphicon glyphicon-ok "></span>
+                                <span> </span>
+                            </label>
+                            <label for="checkbox-profile" class=" btn btn-primary active ">
+                                {% trans "My Profile" %}
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
-            {% for page in entries_pages %}
-                <div class="row" style="margin: auto; max-width: 600px">
-                    <div class="col-md-4">
-                        {{ page.name }}
-                    </div>
-                    <div class="col-md-4">
-                        <input name='{{ page.can_view }}' type="checkbox">
-                    </div>
-                    <div class="col-md-4">
-                        <input name='{{ page.can_view }}' type="checkbox">
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-
-        <div class="section">
-            <h3>{% trans 'Product Sale' %}</h3>
-            <div>
-
+            <div class="row">
+                {% if products_j %}
+                        <div class = " col-xs-12 col-sm-12 col-md-12 col-lg-12" id = "products-pj">
+                            <div class="col-md-12">
+                                <h4>{% trans "For Companies" %}</h4>
+                            </div>
+                            <hr>
+                            {% for product in products_j %}
+                                <div class = "product-pj">
+                                    <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                                        <div class=" form-group ">
+                                            <input type="checkbox" name={{ product.name }} id={{ product.name }} autocomplete="off" />
+                                            <div class=" btn-group ">
+                                                <label for={{ product.name }} class=" btn btn-primary ">
+                                                    <span class=" glyphicon glyphicon-ok "></span>
+                                                    <span> </span>
+                                                </label>
+                                                <label for={{ product.name }} class=" btn btn-default active ">
+                                                    {{ product.name }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                     </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                {% endif %}
+                {% if products_f %}
+                        <div class = " col-xs-12 col-sm-12 col-md-12 col-lg-12" id = "products-pf">
+                            <div class="col-md-12">
+                                <h4>{% trans "For People" %}</h4>
+                            </div>
+                            <hr>
+                            {% for product in products_f %}
+                                <div class = "product-pf">
+                                    <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                                        <div class=" form-group ">
+                                            <input type="checkbox" name={{ product.name }} id={{ product.name }} autocomplete="off" />
+                                            <div class=" btn-group ">
+                                                <label for={{ product.name }} class=" btn btn-primary ">
+                                                    <span class=" glyphicon glyphicon-ok "></span>
+                                                    <span> </span>
+                                                </label>
+                                                <label for={{ product.name }} class=" btn btn-default active ">
+                                                    {{ product.name }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                     </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                {% endif %}
             </div>
+            <div class="row">
+                {% if status %}
+                    <div class = " col-xs-12 col-sm-12 col-md-12 col-lg-12" id = "status-see">
+                        <div class="col-md-12">
+                            <h4>{% trans "Status See" %}</h4>
+                        </div>
+                        <hr>
+                        {% for st in status %}
+                            <div class=" col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <div class=" form-group ">
+                                    <input type="checkbox" name="checkbox-status-see{{ st.pk }}" id="checkbox-status-see{{ st.pk }}" autocomplete="off" />
+                                    <div class=" btn-group ">
+                                        <label for="checkbox-status-see{{ st.pk }}" class=" btn btn-info ">
+                                            <span class=" glyphicon glyphicon-ok "></span>
+                                            <span> </span>
+                                        </label>
+                                        <label for="checkbox-status-see{{ st.pk }}" class=" btn btn-default active ">
+                                            {{ st.name }}
+                                        </label>
+                                    </div>
+                                </div>
+                             </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="row">
+                {% if status %}
+                    <div class = " col-xs-12 col-sm-12 col-md-12 col-lg-12" id = "status-edit">
+                        <div class="col-md-12">
+                            <h4>{% trans "Status Edit" %}</h4>
+                        </div>
+                        <hr>
+                        {% for st in status %}
+                            <div class=" col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <div class=" form-group ">
+                                    <input type="checkbox" name="checkbox-status-edit{{ st.pk }}" id="checkbox-status-edit{{ st.pk }}" autocomplete="off" />
+                                    <div class=" btn-group ">
+                                        <label for="checkbox-status-edit{{ st.pk }}" class=" btn btn-info ">
+                                            <span class=" glyphicon glyphicon-ok "></span>
+                                            <span> </span>
+                                        </label>
+                                        <label for="checkbox-status-edit{{ st.pk }}" class=" btn btn-default active ">
+                                            {{ st.name }}
+                                        </label>
+                                    </div>
+                                </div>
+                             </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="row">
+                {% if status %}
+                    <div class = " col-xs-12 col-sm-12 col-md-12 col-lg-12" id = "status-set">
+                        <div class="col-md-12">
+                            <h4>{% trans "Status Set" %}</h4>
+                        </div>
+                        <hr>
+                        {% for st in status %}
+                            <div class=" col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <div class=" form-group ">
+                                    <input type="checkbox" name="checkbox-status-set{{ st.pk }}" id="checkbox-status-set{{ st.pk }}" autocomplete="off" />
+                                    <div class=" btn-group ">
+                                        <label for="checkbox-status-set{{ st.pk }}" class=" btn btn-info ">
+                                            <span class=" glyphicon glyphicon-ok "></span>
+                                            <span> </span>
+                                        </label>
+                                        <label for="checkbox-status-set{{ st.pk }}" class=" btn btn-default active ">
+                                            {{ st.name }}
+                                        </label>
+                                    </div>
+                                </div>
+                             </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="row">
+                {% if files %}
+                    <div class = " col-xs-12 col-sm-12 col-md-12 col-lg-12" id = "files-see">
+                        <div class="col-md-12">
+                            <h4>{% trans "Files See" %}</h4>
+                        </div>
+                        <hr>
+                        {% for file in files %}
+                            <div class=" col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class=" form-group ">
+                                    <input type="checkbox" name="checkbox-files-see{{ file.pk }}" id="checkbox-files-see{{ file.pk }}" autocomplete="off" />
+                                    <div class=" btn-group ">
+                                        <label for="checkbox-files-see{{ file.pk }}" class=" btn btn-info ">
+                                            <span class=" glyphicon glyphicon-ok "></span>
+                                            <span class=" glyphicon glyphicon-file "></span>
+                                            <span> </span>
+                                        </label>
+                                        <label for="checkbox-files-see{{ file.pk }}" class=" btn btn-default active ">
+                                            {{ file.name }}
+                                        </label>
+                                    </div>
+                                </div>
+                             </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="row">
+                {% if files %}
+                    <div class = " col-xs-12 col-sm-12 col-md-12 col-lg-12" id = "files-download">
+                        <div class="col-md-12">
+                            <h4>{% trans "Files Download" %}</h4>
+                        </div>
+                        <hr>
+                        {% for file in files %}
+                            <div class=" col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class=" form-group ">
+                                    <input type="checkbox" name="checkbox-files-download{{ file.pk }}" id="checkbox-files-download{{ file.pk }}" autocomplete="off" />
+                                    <div class=" btn-group ">
+                                        <label for="checkbox-files-download{{ file.pk }}" class=" btn btn-info ">
+                                            <span class=" glyphicon glyphicon-ok "></span>
+                                            <span class=" glyphicon glyphicon-file "></span>
+                                            <span> </span>
+                                        </label>
+                                        <label for="checkbox-files-download{{ file.pk }}" class=" btn btn-default active ">
+                                            {{ file.name }}
+                                        </label>
+                                    </div>
+                                </div>
+                             </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="row">
+                {% if files %}
+                    <div class = " col-xs-12 col-sm-12 col-md-12 col-lg-12" id = "profiles-see">
+                        <div class="col-md-12">
+                            <h4>{% trans "The user can see the production in those profiles" %}</h4>
+                        </div>
+                        <hr>
+                        {% for file in files %}
+                            <div class=" col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class=" form-group ">
+                                    <input type="checkbox" name="profiles-see{{ file.pk }}" id="profiles-see{{ file.pk }}" autocomplete="off" />
+                                    <div class=" btn-group ">
+                                        <label for="profiles-see{{ file.pk }}" class=" btn btn-warning ">
+                                            <span class=" glyphicon glyphicon-ok "></span>
+                                            <span class=" glyphicon glyphicon-user "></span>
+                                            <span> </span>
+                                        </label>
+                                        <label for="profiles-see{{ file.pk }}" class=" btn btn-default active ">
+                                            {{ file.name }}
+                                        </label>
+                                    </div>
+                                </div>
+                             </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+{#            </div>#}
+{##}
+{##}
+{##}
+{##}
+{#                                <div class=" col-xs-12 col-sm-6 ">#}
+{#                                    <h3>Standard Checkboxes</h3><hr />#}
+{#                                    <div class=" form-group ">#}
+{#                                        <input type="checkbox" name="fancy-checkbox-default" id="fancy-checkbox-default" autocomplete="off" />#}
+{#                                        <div class=" btn-group ">#}
+{#                                            <label for="fancy-checkbox-default" class=" btn btn-default ">#}
+{#                                                <span class=" glyphicon glyphicon-ok "></span>#}
+{#                                                <span> </span>#}
+{#                                            </label>#}
+{#                                            <label for="fancy-checkbox-default" class=" btn btn-default active ">#}
+{#                                                Default Checkbox#}
+{#                                            </label>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class=" form-group ">#}
+{#                                        <input type="checkbox" name="" id="" autocomplete="off" />#}
+{#                                        <div class=" btn-group ">#}
+{#                                            <label for="" class=" btn btn-primary ">#}
+{#                                                <span class=" glyphicon glyphicon-ok "></span>#}
+{#                                                <span> </span>#}
+{#                                            </label>#}
+{#                                            <label for="" class=" btn btn-default active ">#}
+{#                                                Primary Checkbox#}
+{#                                            </label>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class=" form-group ">#}
+{#                                        <input type="checkbox" name="fancy-checkbox-success" id="fancy-checkbox-success" autocomplete="off" />#}
+{#                                        <div class=" btn-group ">#}
+{#                                            <label for="fancy-checkbox-success" class=" btn btn-success ">#}
+{#                                                <span class=" glyphicon glyphicon-ok "></span>#}
+{#                                                <span> </span>#}
+{#                                            </label>#}
+{#                                            <label for="fancy-checkbox-success" class=" btn btn-default active ">#}
+{#                                                Success Checkbox#}
+{#                                            </label>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class=" form-group ">#}
+{#                                        <input type="checkbox" name="fancy-checkbox-info" id="fancy-checkbox-info" autocomplete="off" />#}
+{#                                        <div class=" btn-group ">#}
+{#                                            <label for="fancy-checkbox-info" class=" btn btn-info ">#}
+{#                                                <span class=" glyphicon glyphicon-ok "></span>#}
+{#                                                <span> </span>#}
+{#                                            </label>#}
+{#                                            <label for="fancy-checkbox-info" class=" btn btn-default active ">#}
+{#                                                Info Checkbox#}
+{#                                            </label>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class=" form-group ">#}
+{#                                        <input type="checkbox" name="fancy-checkbox-warning" id="fancy-checkbox-warning" autocomplete="off" />#}
+{#                                        <div class=" btn-group ">#}
+{#                                            <label for="fancy-checkbox-warning" class=" btn btn-warning ">#}
+{#                                                <span class=" glyphicon glyphicon-ok "></span>#}
+{#                                                <span> </span>#}
+{#                                            </label>#}
+{#                                            <label for="fancy-checkbox-warning" class=" btn btn-default active ">#}
+{#                                                Warning Checkbox#}
+{#                                            </label>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class=" form-group ">#}
+{#                                        <input type="checkbox" name="fancy-checkbox-danger" id="fancy-checkbox-danger" autocomplete="off" />#}
+{#                                        <div class=" btn-group ">#}
+{#                                            <label for="fancy-checkbox-danger" class=" btn btn-danger ">#}
+{#                                                <span class=" glyphicon glyphicon-ok "></span>#}
+{#                                                <span> </span>#}
+{#                                            </label>#}
+{#                                            <label for="fancy-checkbox-danger" class=" btn btn-default active ">#}
+{#                                                Danger Checkbox#}
+{#                                            </label>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class=" col-xs-12 col-sm-6 ">#}
+{#                                    <h3>Custom Icons Checkboxes</h3><hr />#}
+{#                                    <div class=" form-group ">#}
+{#                                        <input type="checkbox" name="fancy-checkbox-default-custom-icons" id="fancy-checkbox-default-custom-icons" autocomplete="off" />#}
+{#                                        <div class=" btn-group ">#}
+{#                                            <label for="fancy-checkbox-default-custom-icons" class=" btn btn-default ">#}
+{#                                                <span class=" glyphicon glyphicon-plus "></span>#}
+{#                                                <span class=" glyphicon glyphicon-minus "></span>#}
+{#                                            </label>#}
+{#                                            <label for="fancy-checkbox-default-custom-icons" class=" btn btn-default active ">#}
+{#                                                Default Checkbox#}
+{#                                            </label>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class=" form-group ">#}
+{#                                        <input type="checkbox" name="fancy-checkbox-primary-custom-icons" id="fancy-checkbox-primary-custom-icons" autocomplete="off" />#}
+{#                                        <div class=" btn-group ">#}
+{#                                            <label for="fancy-checkbox-primary-custom-icons" class=" btn btn-primary ">#}
+{#                                                <span class=" glyphicon glyphicon-plus "></span>#}
+{#                                                <span class=" glyphicon glyphicon-minus "></span>#}
+{#                                            </label>#}
+{#                                            <label for="fancy-checkbox-primary-custom-icons" class=" btn btn-default active ">#}
+{#                                                Primary Checkbox#}
+{#                                            </label>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class=" form-group ">#}
+{#                                        <input type="checkbox" name="fancy-checkbox-success-custom-icons" id="fancy-checkbox-success-custom-icons" autocomplete="off" />#}
+{#                                        <div class=" btn-group ">#}
+{#                                            <label for="fancy-checkbox-success-custom-icons" class=" btn btn-success ">#}
+{#                                                <span class=" glyphicon glyphicon-plus "></span>#}
+{#                                                <span class=" glyphicon glyphicon-minus "></span>#}
+{#                                            </label>#}
+{#                                            <label for="fancy-checkbox-success-custom-icons" class=" btn btn-default active ">#}
+{#                                                Success Checkbox#}
+{#                                            </label>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class=" form-group ">#}
+{#                                        <input type="checkbox" name="fancy-checkbox-info-custom-icons" id="fancy-checkbox-info-custom-icons" autocomplete="off" />#}
+{#                                        <div class=" btn-group ">#}
+{#                                            <label for="fancy-checkbox-info-custom-icons" class=" btn btn-info ">#}
+{#                                                <span class=" glyphicon glyphicon-plus "></span>#}
+{#                                                <span class=" glyphicon glyphicon-minus "></span>#}
+{#                                            </label>#}
+{#                                            <label for="fancy-checkbox-info-custom-icons" class=" btn btn-default active ">#}
+{#                                                Info Checkbox#}
+{#                                            </label>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class=" form-group ">#}
+{#                                        <input type="checkbox" name="fancy-checkbox-warning-custom-icons" id="fancy-checkbox-warning-custom-icons" autocomplete="off" />#}
+{#                                        <div class=" btn-group ">#}
+{#                                            <label for="fancy-checkbox-warning-custom-icons" class=" btn btn-warning ">#}
+{#                                                <span class=" glyphicon glyphicon-plus "></span>#}
+{#                                                <span class=" glyphicon glyphicon-minus "></span>#}
+{#                                            </label>#}
+{#                                            <label for="fancy-checkbox-warning-custom-icons" class=" btn btn-default active ">#}
+{#                                                Warning Checkbox#}
+{#                                            </label>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class=" form-group ">#}
+{#                                        <input type="checkbox" name="fancy-checkbox-danger-custom-icons" id="fancy-checkbox-danger-custom-icons" autocomplete="off" />#}
+{#                                        <div class=" btn-group ">#}
+{#                                            <label for="fancy-checkbox-danger-custom-icons" class=" btn btn-danger ">#}
+{#                                                <span class=" glyphicon glyphicon-plus "></span>#}
+{#                                                <span class=" glyphicon glyphicon-minus "></span>#}
+{#                                            </label>#}
+{#                                            <label for="fancy-checkbox-danger-custom-icons" class=" btn btn-default active ">#}
+{#                                                Danger Checkbox#}
+{#                                            </label>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
         </div>
+
+
+
+{#        <div class="container">#}
+{#            <h3>{% trans 'Entries' %}</h3>#}
+{#            <hr>#}
+{#            <div class="row" style="margin: auto; max-width: 600px">#}
+{#                <div class="col-md-4">#}
+{#                    {% trans 'Page Name' %}#}
+{#                </div>#}
+{#                <div class="col-md-4">#}
+{#                    {% trans 'Can View' %}#}
+{#                </div>#}
+{#                <div class="col-md-4">#}
+{#                    {% trans 'Can Edit' %}#}
+{#                </div>#}
+{#            </div>#}
+{#            {% for page in entries_pages %}#}
+{#                <div class="row" style="margin: auto; max-width: 600px">#}
+{#                    <div class="col-md-4">#}
+{#                        {{ page.name }}#}
+{#                    </div>#}
+{#                    <div class="col-md-4">#}
+{#                        <input name='{{ page.can_view }}' type="checkbox">#}
+{#                    </div>#}
+{#                    <div class="col-md-4">#}
+{#                        <input name='{{ page.can_view }}' type="checkbox">#}
+{#                    </div>#}
+{#                </div>#}
+{#            {% endfor %}#}
+{#        </div>#}
+{##}
+{#        <div class="section">#}
+{#            <h3>{% trans 'Product Sale' %}</h3>#}
+{#            <div>#}
+{##}
+{#            </div>#}
+{#        </div>#}
 
         {% comment %}
             <select data-placeholder="{{ form.permissions.label }}" class="hidden chosen-select" multiple

@@ -27,7 +27,7 @@ class AbstractMassificadoUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(_('Staff status'), default=False)
     is_active = models.BooleanField(_('Active'), default=True)
     date_joined = models.DateTimeField(_('Date joined'), default=timezone.now)
-    partner = models.ForeignKey(Partner)
+    partner = models.ForeignKey(Partner, null=True)
 
     class Meta:
         verbose_name = _('user')
