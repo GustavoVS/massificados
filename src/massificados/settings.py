@@ -122,6 +122,8 @@ else:
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'massificados',
+            'USER': 'massificados',
+            'PASSWORD': 'minhapicapreta',
         }
     }
 
