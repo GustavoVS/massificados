@@ -1,14 +1,20 @@
 # -*- coding: utf-8 -*-
-from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
-from partner.models import Partner
 from django.contrib.sites.models import Site
-from product.models import Status
+from django.core.management.base import BaseCommand
+from src.partner.models import Partner
+from src.product.models import Status, FileType
 
 User = get_user_model()
 
-DEFAUNTI_STATUS = ('A', 'B', 'C')
+DEFAULT_STATUS = ('Apólice Gerada', 'Repasse pago', 'Pago Pela Seguradora', 'Cotação de Garantia Negada',
+                   'Cotação de Garantia Aprovada', 'Cotação de Garantia Gerada', 'Solicitação de Cotação de Garantia',
+                   'Lead de Garantia Gerado', 'Cotação de Benefícios Negada', 'Cotação de Benefícios Aprovada',
+                   'Cotação de Benefícios Gerada', 'Solicitação de Cotação de Benefícios', 'Aberto',
+                   'Lead de benefícios Gerado', 'Boleto Gerado', 'Proposta Gerada')
 
+DEFAULT_FILES = ('Proposta de Endosso', 'Proposta de Apólice', 'Endosso', 'Apólice', 'Boleto de Apólice',
+                 'Boleto de Endosso')
 
 class Command(BaseCommand):
     help = 'Cria usuários default para o início da aplicação'
@@ -39,3 +45,8 @@ class Command(BaseCommand):
             for status_name in DEFAUNTI_STATUS:
                 st = Status(name=status_name)
                 st.save()
+
+        if not FileType.objects.filter(id=1).exists:
+            for file_name in DEFAULT_FILES:
+                fl = FileType(name=file_name)
+                fl.save()
