@@ -2,8 +2,8 @@
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 from django.core.management.base import BaseCommand
-from src.partner.models import Partner
-from src.product.models import Status, FileType
+from partner.models import Partner
+from product.models import Status, FileType
 
 User = get_user_model()
 
