@@ -2,29 +2,25 @@
 
 <div id="{% block section-id %}{% endblock %}" class="section">
     <div class="row">
-            <div class="section-title">
-                <div class="container">
-                    <div>
-{#                        <h1 class="notice notice-info">{% block section-title %}{% endblock %}</h1>#}
-{#                        <hr class="hr-primary" />#}
-                        <div class="col-md-12">
-                            <ol class="breadcrumb bread-hr-primary">
-                            {# todo:deixar dinâmico inicio#}
-                            <button href="#" class="btn btn-primary"><span class="fa fa-map-marker"></span></button>
-                                <li>
-                                    <a href="#">Principal</a>
-                                </li>
-                                <li class="active">Produtos</li>
-                             {# todo:deixar dinâmico fim#}
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
+        <div class="section-title">
+            <div class="container">
+                <ol class="breadcrumb bread-hr-primary">
+                {# todo:deixar dinâmico inicio#}
+                <button href="#" class="btn btn-primary"><span class="fa fa-map-marker"></span></button>
+                    <li>
+                        <a href="#">Principal</a>
+                    </li>
+                    <li class="active">Produtos</li>
+                 {# todo:deixar dinâmico fim#}
+                </ol>
             </div>
-            {% block section-desc %}{% endblock %}
+            <div class="clearfix"></div>
         </div>
-        {% block section-content %}
-        {% endblock %}
+        {% block section-desc %}{% endblock %}
+
+    {% block section-content %}
+        <div class="background">
+        </div>
+    {% endblock %}
     </div>
 </div>

@@ -3,7 +3,7 @@
 
 
 {% block section-id %}sec-products{% endblock %}
-{% block section-title %}{% trans 'Produtos' %}{% endblock %}
+{% block section-title %}{% trans 'Products' %}{% endblock %}
 {#{% block section-desc %}#}
 {#     <p>{ % trans "O banco Sofisa oferece Produtos e Serviços para clientes Pessoa Física e Jurídica de forma online, segura e sem burocracia. Conheça mais abaixo" % }</p> #}
 {#{% endblock %}#}
@@ -14,7 +14,7 @@
         <div id="products-show">
             {% for product in products %}
                 <div id= "sec-product{{ product.id }}" class = "row hidden product-show">
-                    <div class="col-md-12 col-sm-12 col-sm-12 col-xs-12 service wow fadeInUp" data-wow-delay="200ms">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 service wow fadeInUp" data-wow-delay="200ms">
                         <div class="panel panel-primary">
                             <div id='panel-product' class="panel-heading">
                                 <h4>{{ product.name }}</h4>
@@ -30,15 +30,15 @@
             <div class="menu-products col-lg-3 col-md-3 hidden-sm hidden-xs">
                <div class="list-group">
                 <a class="list-group-item text-center active" data-remote="true"  id="categoria_todos">
-                  Todos os Produtos
+                  {% trans ' All Products' %}
                 </a>
                 {% if products_j %}
-                    <a class="list-group-item" data-remote="true" href="#sub_produtos_pj" id="categoria_pj" data-toggle="collapse" data-parent="#categoria_pj" >
+                    <a class="list-group-item" data-remote="true" href="#sub_products_pj" id="categoria_pj" data-toggle="collapse" data-parent="#categoria_pj" >
                       <span class="fa fa-briefcase"></span>
-                      <span>Para Empresas</span>
+                      <span>{% trans ' For Company' %}</span>
                       <span class="menu-ico-collapse"><i class="fa fa-chevron-down"></i></span>
                     </a>
-                    <div class="collapse list-group-submenu" id="sub_produtos_pj">
+                    <div class="collapse in list-group-submenu" id="sub_products_pj">
                         {% for product in products_j %}
                             <div class="list-group-item sub-item" data-parent="#sub_categoria_pj" >
                                 <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info" role="button">
@@ -55,12 +55,12 @@
                     </div>
                 {% endif %}
                 {% if products_f %}
-                    <a class="list-group-item" data-remote="true" href="#sub_produtos_pf" id="categoria_pf" data-toggle="collapse" data-parent="#categoria_pf" >
+                    <a class="list-group-item" data-remote="true" href="#sub_products_pf" id="categoria_pf" data-toggle="collapse" data-parent="#categoria_pf" >
                       <span class="fa fa-user"></span>
-                      <span>Para Pessoas</span>
+                      <span>{% trans ' For People' %}</span>
                       <span class="menu-ico-collapse"><i class="fa fa-chevron-down"></i></span>
                     </a>
-                    <div class="collapse list-group-submenu" id="sub_produtos_pf">
+                    <div class="collapse in list-group-submenu" id="sub_products_pf">
                         {% for product in products_f %}
                             <div class="list-group-item sub-item" data-parent="#sub_categoria_pf" >
                                 <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info" role="button">
@@ -78,14 +78,14 @@
                 {% endif %}
                 </div>
             </div>
-            <div class=" col-lg-9 col-md-9 col-sm-12 col-xs-12"> {# colunas de produtos #}
+            <div class="products col-lg-9 col-md-9 col-sm-12 col-xs-12 "> {# colunas de produtos #}
                 {% if products_j %}
                     {% if products_f %}
                         <div class = "products-pj col-lg-6 col-md-6 col-sm-6" id = "products-pj">
                     {% else %}
                         <div class = "products-pj col-lg-12 col-md-12 col-sm-12 col-xs-12" id = "products-pj">
                     {% endif %}
-                            <h2>Para Empresas</h2>
+                            <h2>{% trans ' For Company' %}</h2>
                             <hr>
                             {% for product in products_j %}
                                 <div class = "product-pj">
@@ -106,11 +106,11 @@
                                                 <div class="panel-body">
                                                     <div class="product-pj-panel-button" >
                                                         <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info col-lg-12 col-md-12 col-sm-6 col-xs-6 role="button">
-                                                            <span class="fa fa-plus"> Saiba mais</span>
+                                                            <span class="fa fa-plus"> </span>{% trans ' Know more' %}
                                                         </a>
                                                         {% if user.is_authenticated %}
                                                             <a href="{% url 'product-new-buyer' product.pk %}" class="page-scroll btn btn-primary col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
-                                                                <span class="fa fa-cart-plus"> Contratar</span>
+                                                                <span class="fa fa-cart-plus"></span>{% trans ' Contract' %}
                                                             </a>
                                                         {% endif %}
                                                     </div>
@@ -127,7 +127,7 @@
                     {% else %}
                         <div class = "products-pf col-lg-12 col-md-12 col-sm-12 col-xs-12" id = "products-pf">
                     {% endif %}
-                            <h2>Para Pessoas</h2>
+                            <h2>{% trans ' For People' %}</h2>
                             <hr>
                             {% for product in products_f %}
                                 <div class = "product-pf">
@@ -148,11 +148,11 @@
                                                 <div class="panel-body">
                                                     <div class="product-pf-panel-button" >
                                                         <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
-                                                            <span class="fa fa-plus"> Saiba mais</span>
+                                                            <span class="fa fa-plus"></span>{% trans ' Know more' %}
                                                         </a>
                                                         {% if user.is_authenticated %}
-                                                            <a href="{% url 'product-new-buyer' product.pk %}" class="page-scroll btn btn-primary col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
-                                                                <span class="fa fa-cart-plus"> Contratar</span>
+                                                            <a href="{% url 'product-new-buyer' product.pk %}" class="page-scroll btn btn-primary col-lg-12 col-md-6 col-sm-6 col-xs-6" role="button">
+                                                                <span class="fa fa-cart-plus"></span>{% trans ' Contract' %}
                                                             </a>
                                                         {% endif %}
                                                     </div>

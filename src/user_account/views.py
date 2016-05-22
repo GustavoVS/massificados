@@ -6,6 +6,7 @@ from product.models import Product, Status, FileType
 from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView, UpdateView
+from django.db.models import  Q
 from core.views import MassificadoPageListView
 from .models import MassificadoUser
 from .forms import EntrieUserForm, EntrieProfileEditForm
@@ -28,7 +29,16 @@ class EntriesUsersView(LoginRequiredMixin, MassificadoPageListView):
     template_name = 'page-entries-users.html'
 
     def get_queryset(self):
-        return MassificadoUser.objects.all()
+
+        if self.request.method == "GET":
+            search = self.request.GET.get('search-input')
+            if search:
+                result = MassificadoUser.objects.filter(Q(email__contains=search) | Q(first_name__contains=search) | Q(last_name__contains=search))
+            else:
+                result = MassificadoUser.objects.all()
+        else:
+            result = MassificadoUser.objects.all()
+        return result
 
 
 class EntrieUserNewView(LoginRequiredMixin, CreateView):

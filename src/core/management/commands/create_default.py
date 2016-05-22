@@ -42,7 +42,7 @@ class Command(BaseCommand):
             u.save()
 
         if not Status.objects.filter(id=1).exists:
-            for status_name in DEFAUNTI_STATUS:
+            for status_name in DEFAULT_FILES:
                 st = Status(name=status_name)
                 st.save()
 

@@ -3,10 +3,28 @@ body, html {
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
     color: #1c424d;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    /*background-image: url("/static/img/partner-sofisa/fundo.png") !important;*/
 }
+.backgroundimg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/static/img/light/background-image.jpg") ;
+    background-repeat:repeat;
+    background-attachment: fixed;
+    background-size: 100%;
+    opacity: 0.5;
+    filter:alpha(opacity=50);
+	z-index: -1;
+}
+.backgroundcolor {
+	background-color: #F8FAFA; !important;
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
+
 h1 {
 	padding: 0px 0px 0px 0px;
     -webkit-margin-before: 0.67em;
@@ -15,6 +33,9 @@ h1 {
     -webkit-margin-end: 0px;
     color: #00314b;
     zoom: 1;
+}
+h2 {
+	padding-left: 15px;
 }
 
 a {
@@ -587,33 +608,36 @@ label {
 }
 
 .menu-products {
+	padding-left: 45px;
 }
 
 .menu-panel-button span {
 	width: 15px;
 }
-#sub_produtos_pj .btn {
+#sub_products_pj .btn {
     text-align: left;
     padding: 2px 6px;
 }
-#sub_produtos_pj img {
+#sub_products_pj img {
     padding: 0px 0px 0px 0px;
     height: 20px;
     width: 20px;
 }
-#sub_produtos_pf .btn {
+#sub_products_pf .btn {
     text-align: left;
 	padding: 2px 6px;
+}
+#sub_products_pf img {
+    padding: 0px 0px 0px 0px;
+    height: 20px;
+    width: 20px;
 }
 .menu-product-pj .panel-primary {
 }
 .menu-product-pj .panel-heading {
-    /*padding: 1px 1px 1px 1px;*/
 }
 .menu-product-pj .panel-body {
-    /*padding: 1px 1px 1px 1px;*/
 }
-
 
 .products-pj i.fa {
 	font-size: 40px;
@@ -696,7 +720,9 @@ label {
 .product-pf {
 	text-align: left;
 }
-#products {
+.products {
+	padding-right: 30px;
+	padding-left: 30px;
 }
 .product-pf-panel-button span {
 }
@@ -816,3 +842,21 @@ ul.navbar-nav > li > a {
     line-height: 1.1;
     color: inherit;
 }
+
+#nav-header {
+    position: inherit;
+}
+.entries-box-lg {
+	/*padding-right: 30px;*/
+	/*padding-left: 30px;*/
+	height: 250px;
+}
+.entries-box-lg span{
+	padding-left: 15px;
+	padding-top: 15px;
+}
+.entries-box-md {
+	height: 180px;
+}
+
+

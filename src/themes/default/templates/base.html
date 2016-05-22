@@ -48,22 +48,22 @@
     {% endblock %}
 </head>
 <body>
+   <div class="backgroundimg"></div>
     {% block header %}
         {% include "header.html" %}
     {% endblock %}
 
-        <div class="container">
-
+    <div class="container backgroundcolor">
 
             {% block content %}
 
             {% endblock %}
 
-            {% block footer %}
-                {% include "footer.html" %}
-            {% endblock %}
+        {% block footer %}
+            {% include "footer.html" %}
+        {% endblock %}
 
-        </div>
+    </div>
 
     <!-- jQuery -->
         <script src="{% static 'js/jquery.isotope.js' %}"></script>
