@@ -6,7 +6,7 @@ function main() {
 
    /* ==============================================
   	Testimonial Slider
-  	=============================================== */ 
+  	=============================================== */
 
   	$('a.page-scroll').click(function() {
         if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
@@ -24,16 +24,16 @@ function main() {
     /*====================================
     Preloader
     ======================================*/
-	
+
   	$(window).load(function() {
 
-   	// will first fade out the loading animation 
-    	$("#status").fadeOut("slow"); 
+   	// will first fade out the loading animation
+    	$("#status").fadeOut("slow");
 
-    	// will fade out the whole DIV that covers the website. 
-    	$("#preloader").delay(500).fadeOut("slow").remove();      
+    	// will fade out the whole DIV that covers the website.
+    	$("#preloader").delay(500).fadeOut("slow").remove();
 
-  	}) 
+  	})
     /*====================================
     Show Menu on Book
     ======================================*/
@@ -46,14 +46,14 @@ function main() {
         }
     });
 
-    $('body').scrollspy({ 
+    $('body').scrollspy({
         target: '.navbar-default',
         offset: 80
     })
 
   	$(document).ready(function() {
   	  $("#team").owlCarousel({
-  	 
+
   	      navigation : false, // Show next and prev buttons
   	      slideSpeed : 300,
   	      paginationSpeed : 400,
@@ -71,7 +71,7 @@ function main() {
   	  });
 
   	  $("#clients").owlCarousel({
-  	 
+
   	      navigation : false, // Show next and prev buttons
   	      slideSpeed : 300,
   	      paginationSpeed : 400,
@@ -127,16 +127,16 @@ function main() {
 
     });
 
-  	/*====================================
-    WOW JS
-    ======================================*/	
+ //  	====================================
+ //    WOW JS
+ //    ======================================
 
-	new WOW().init();
-	//smoothScroll
-	smoothScroll.init();
+	// new WOW().init();
+	// //smoothScroll
+	// smoothScroll.init();
 
 
-	
+
 }());
 
 

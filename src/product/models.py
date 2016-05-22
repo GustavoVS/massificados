@@ -68,7 +68,7 @@ class Product(models.Model):
     branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
     file_type = models.ManyToManyField(FileType)
     is_lead = models.BooleanField(default=False)
-    begin_status = models.ForeignKey(Status, null=True)
+    begin_status = models.ForeignKey(Status)
     profile = models.ForeignKey(Profile, null=True)
 
     def __unicode__(self):
@@ -128,8 +128,8 @@ class Question(models.Model):
     is_required = models.BooleanField(default=False)
     is_comment = models.BooleanField(default=False)
     default_value = models.CharField(max_length=100, blank=True)
-    order_number = models.IntegerField(null=True)
-    print_col_width = models.IntegerField(null=True)
+    order_number = models.IntegerField(null=True, blank=True)
+    col_width = models.IntegerField(null=True, blank=True)
     profile = models.ForeignKey(Profile)
 
     def __unicode__(self):

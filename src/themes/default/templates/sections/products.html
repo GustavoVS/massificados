@@ -99,18 +99,20 @@
                                                     <h5>{{ product.name }}</h5>
                                                     <p>{{ product.introduction }}</p>
                                                     {% if user.is_authenticated %}
-                                                        <i class="fa"><img src="{{ product.icon1.url }}" class="img-responsive"></i>
-                                                        <i class="fa"><img src="{{ product.icon2.url }}" class="img-responsive"></i>
+                                                        <i class="fa"><img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" class="img-responsive"></i>
+                                                        <i class="fa"><img src="{% if product.icon2 %}{{ product.icon2.url }}{% endif %}" class="img-responsive"></i>
                                                     {% endif %}
                                                 </div>
                                                 <div class="panel-body">
                                                     <div class="product-pj-panel-button" >
-                                                        <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info col-lg-12 col-md-12 col-sm-6 col-xs-6 role="button">
-                                                            <span class="fa fa-plus"> Saiba mais</span>
+                                                        <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
+                                                            <span class="fa fa-plus"></span>
+                                                            Saiba mais
                                                         </a>
                                                         {% if user.is_authenticated %}
                                                             <a href="{% url 'product-new-buyer' product.pk %}" class="page-scroll btn btn-primary col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
-                                                                <span class="fa fa-cart-plus"> Contratar</span>
+                                                                <span class="fa fa-cart-plus"></span>
+                                                                Contratar
                                                             </a>
                                                         {% endif %}
                                                     </div>
@@ -141,18 +143,20 @@
                                                     <h5>{{ product.name }}</h5>
                                                     <p>{{ product.introduction }}</p>
                                                     {% if user.is_authenticated %}
-                                                        <i class="fa"><img src="{{ product.icon1.url }}" class="img-responsive"></i>
-                                                        <i class="fa"><img src="{{ product.icon2.url }}" class="img-responsive"></i>
+                                                        <i class="fa"><img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" class="img-responsive"></i>
+                                                        <i class="fa"><img src="{% if product.icon2 %}{{ product.icon2.url }}{% endif %}" class="img-responsive"></i>
                                                     {% endif %}
                                                 </div>
                                                 <div class="panel-body">
                                                     <div class="product-pf-panel-button" >
                                                         <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
-                                                            <span class="fa fa-plus"> Saiba mais</span>
+                                                            <span class="fa fa-plus"></span>
+                                                             Saiba mais
                                                         </a>
                                                         {% if user.is_authenticated %}
                                                             <a href="{% url 'product-new-buyer' product.pk %}" class="page-scroll btn btn-primary col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
-                                                                <span class="fa fa-cart-plus"> Contratar</span>
+                                                                <span class="fa fa-cart-plus"></span>
+                                                                Contratar
                                                             </a>
                                                         {% endif %}
                                                     </div>
