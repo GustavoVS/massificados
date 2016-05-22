@@ -14,6 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from django.views.defaults import page_not_found
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -24,9 +25,9 @@ from sale.views import ProductionView, CreateBuyerView, EditBuyerView
 from user_account.views import (EntriesProfilesView, EntriesUsersView, EntrieUserNewView, EntrieUserEditView,
                                 EntrieProfileNewView, EntrieProfileEditView)
 
-
 from partner.views import SacsListView
 from user_account.views import EntriesProfilesView, EntriesUsersView, EntrieUserEditView
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -55,6 +56,9 @@ urlpatterns = [
     # url(r'^sale/(?P<pk>[0-9]+)/$', FullSaleView.as_view(), name='sale-full'),
 
     url(r'^production/$', ProductionView.as_view(), name='production'),
+
+    url(r'^404/$', page_not_found, ),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
