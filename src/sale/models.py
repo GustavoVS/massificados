@@ -28,7 +28,7 @@ class BuyerAddress(models.Model):
     buyer = models.ForeignKey(Buyer)
     street = models.CharField(_('Street'), max_length=100)
     district = models.CharField(_('District'), max_length=20)
-    complement = models.CharField(_('Complement'), max_length=20, null=True)
+    complement = models.CharField(_('Complement'), max_length=20, null=True, blank=True)
     number = models.CharField(_('Number'), max_length=6)
     city = models.CharField(_("City"), max_length=20)
     state = models.CharField(_("State"), max_length=20)
@@ -55,7 +55,6 @@ class Deadline(models.Model):
     end = models.DateField(_('End'))
     status = models.ForeignKey(Status)
     payment = models.FloatField(_('Payment'))
-    detail_count = models.IntegerField(_('Detail Count'))
     proposal = models.CharField(_('Proposal'), max_length=100)
     policy = models.CharField(_('Policy'), max_length=100)
     sale = models.ForeignKey(
@@ -65,6 +64,12 @@ class Deadline(models.Model):
 
     def get_questions(self):
         return self.sale.product.profile.questions_set.get(type_profile='pdl')
+
+    def save(self):
+        if not self.status_id:
+            self.status = self.sale.product.begin_status
+
+        return super(Deadline, self).save()
 
 
 class File(models.Model):
@@ -109,7 +114,7 @@ class Detail(models.Model):
     )
 
     def __unicode__(self):
-        return name
+        return self.name
 
 
 class Response(models.Model):

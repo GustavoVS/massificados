@@ -15,6 +15,7 @@ django-mako-plus==3.3.4
 django-model-utils==2.5
 django-notifications-hq==1.1
 django-rosetta==0.7.11
+django-template-repl==0.3.0
 docker-py==1.7.2
 dockerpty==0.4.1
 docopt==0.6.2
@@ -36,6 +37,7 @@ Pillow==3.2.0
 polib==1.0.7
 psycopg2==2.6.1
 ptyprocess==0.5.1
+pycpfcnpj==1.0.2
 python-dateutil==2.5.3
 python-openid==2.2.5
 pytz==2016.4

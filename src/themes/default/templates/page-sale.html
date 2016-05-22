@@ -9,11 +9,13 @@
 {% block footer_scripts %}
     {# <script src="{% static 'js/modal-formset.js' %}"></script> #}
     <script src="{% static 'js/jquery.formset.js' %}"></script>
+    <script src="{% static 'js/jquery.mask.js' %}"></script>
+    <script src="{% static 'js/custom-masks.js' %}"></script>
     <script type="text/javascript">
 
         $(function() {
             $('#detail_deadline > div.row').formset({
-                prefix: '{{ detail_deadline.perfix }}',
+                prefix: '{{ detail_deadline.prefix }}',
                 formCssClass: 'detail_deadline_formset',
                 addText: '<button type="button" class="btn btn-success pull-right"><span class="fa fa-plus"></span></button>',
                 added: function(el){
@@ -21,13 +23,10 @@
                         $(this).attr('data-target','#' + $(el).find('.collapse').attr('id'));
                     });
                 },
-                removed: function(el){
-
-                },
                 formTemplate: '#detail_empty_form',
                 deleteText: '<button type="button" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button>',
                 deleteCssClass: 'pull-right col-md-2',
-                extraClasses: ['ro1', 'row2'],
+                extraClasses: ['row1', 'row2'],
                 attrUpdate: ['id', 'name', 'for', 'data-target', 'updatelabel'],
                 childElementSelector: 'input,select,textarea,label,div,button',
             })
@@ -40,15 +39,59 @@
                 );
                 $($(this).attr('data-target')).collapse();
             });
-        });
+            ctrlKindPerson = function(){
+                kind_person = $('.control-kind_person select').val();
+                if (kind_person == ''){
+                    $('.kind_person-F, .kind_person-J').hide(500);
+                }
 
+                $('.kind_person-' + (kind_person == 'F' ? 'J' : 'F') )
+                    .hide(500)
+                    .find('input')
+                    .attr('name', '')
+                    .attr('id', '')
+                    .attr('required', false);
+
+                $('.kind_person-' + kind_person)
+                    .removeClass('hidden')
+                    .show(500)
+                    .find('input')
+                    .attr('name', 'cpf_cnpj')
+                    .attr('id', 'id_cpf_cnpj')
+                    .attr('required', true);
+            };
+            ctrlKindPerson();
+            $('.control-kind_person select').change(ctrlKindPerson);
+            $('.cep-auto input').blur(function(){
+                $.ajax({
+                  dataType: "json",
+                  url: '//viacep.com.br/ws/' + $(this).val() + '/json/',
+                  success: function(data){
+                    $('#id_buyeraddress_set-0-street').val(data.logradouro);
+                    $('#id_buyeraddress_set-0-district').val(data.bairro);
+                    $('#id_buyeraddress_set-0-city').val(data.localidade);
+                    $('#id_buyeraddress_set-0-state').val(data.uf);
+                    $('#id_buyeraddress_set-0-number').focus();
+                  }
+                });
+            });
+        });
         $(function() {
-            $('#filedeadline_formset > .thumbnail').formset({
+            $('#filedeadline_formset  .thumbnail').formset({
                 prefix: '{{ filedeadline.prefix }}',
                 formCssClass: 'file_deadline_formset',
                 formTemplate: '#file_empty_form',
                 attrUpdate: ['id', 'name', 'for', 'data-target', 'updatelabel'],
+                addText: '<button type="button" class="btn btn-success"><span class="fa fa-plus"></span></button>',
+                deleteText: '<button type="button" class="btn btn-danger"><span class="fa fa-trash"></span></button>',
             })
         });
+        // setTimeout(
+        //   function() {
+        //         $('form > h3, form .form-group').each(function(){
+        //             a = Array('faa-ring animated', 'fa-spin', 'faa-ring animated faa-slow', 'faa-ring animated faa-fast')
+        //             $(this).addClass(a[Math.floor(Math.random()*a.length)]);
+        //         });
+        //     }, 10000);
     </script>
 {% endblock %}

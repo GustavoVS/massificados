@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+from django.utils.translation import ugettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,7 +30,9 @@ SECRET_KEY = 'rjy@i6@99qth)#8o!)z!hjk^mi@l7d6$#gfa_pu!91@i&2jtbf'
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = ['*',]
+ALLOWED_HOSTS = [
+    '*',
+]
 
 AUTH_USER_MODEL = 'user_account.MassificadoUser'
 
@@ -45,14 +48,14 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #Massificados
+    # Massificados
     'user_account',
     'partner',
     'product',
     'sale',
     'core',
     'address',
-    #3rd
+    # 3rd
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -61,6 +64,7 @@ INSTALLED_APPS = [
     'notifications',
     'bootstrap3',
     'django_bootstrap_dynamic_formsets',  # https://pypi.python.org/pypi/django-bootstrap-dynamic-formsets/0.4.5
+    'template_repl',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -149,8 +153,6 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-from django.utils.translation import ugettext_lazy as _
-
 LANGUAGE_CODE = 'pt-br'
 
 LANGUAGES = (
@@ -212,6 +214,10 @@ if DEBUG:
     INTERNAL_IPS = ('127.0.0.1', )
 
 GRAPH_MODELS = {
-  'all_applications': True,
-  'group_models': True,
+    'all_applications': True,
+    'group_models': True,
+}
+
+BOOTSTRAP3 = {
+    'required_css_class': 'form-required',
 }

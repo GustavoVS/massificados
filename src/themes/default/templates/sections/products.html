@@ -99,13 +99,13 @@
                                                     <h5>{{ product.name }}</h5>
                                                     <p>{{ product.introduction }}</p>
                                                     {% if user.is_authenticated %}
-                                                        <i class="fa"><img src="{{ product.icon1.url }}" class="img-responsive"></i>
-                                                        <i class="fa"><img src="{{ product.icon2.url }}" class="img-responsive"></i>
+                                                        <i class="fa"><img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" class="img-responsive"></i>
+                                                        <i class="fa"><img src="{% if product.icon2 %}{{ product.icon2.url }}{% endif %}" class="img-responsive"></i>
                                                     {% endif %}
                                                 </div>
                                                 <div class="panel-body">
                                                     <div class="product-pj-panel-button" >
-                                                        <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info col-lg-12 col-md-12 col-sm-6 col-xs-6 role="button">
+                                                        <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
                                                             <span class="fa fa-plus"> </span>{% trans ' Know more' %}
                                                         </a>
                                                         {% if user.is_authenticated %}
@@ -141,8 +141,8 @@
                                                     <h5>{{ product.name }}</h5>
                                                     <p>{{ product.introduction }}</p>
                                                     {% if user.is_authenticated %}
-                                                        <i class="fa"><img src="{{ product.icon1.url }}" class="img-responsive"></i>
-                                                        <i class="fa"><img src="{{ product.icon2.url }}" class="img-responsive"></i>
+                                                        <i class="fa"><img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" class="img-responsive"></i>
+                                                        <i class="fa"><img src="{% if product.icon2 %}{{ product.icon2.url }}{% endif %}" class="img-responsive"></i>
                                                     {% endif %}
                                                 </div>
                                                 <div class="panel-body">

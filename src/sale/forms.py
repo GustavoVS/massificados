@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from django import forms
 from django.forms.models import inlineformset_factory
-
-# from product.models import Question
+from django.utils.translation import ugettext_lazy as _
+from pycpfcnpj import cpfcnpj
 from sale.models import Sale, Buyer, BuyerAddress, Deadline, File, Detail
 
 
@@ -10,6 +10,11 @@ class BuyerForm(forms.ModelForm):
     class Meta:
         model = Buyer
         fields = ['name', 'phone', 'email', 'kind_person', 'cpf_cnpj', ]
+
+    def clean_cpf_cnpj(self):
+        if not cpfcnpj.validate(self.cleaned_data.get('cpf_cnpj').replace('.', '').replace('/', '').replace('-', '')):
+            raise forms.ValidationError(_('Invalid value for this Field'))
+        return self.cleaned_data.get('cpf_cnpj')
 
 
 class BuyerAddressForm(forms.ModelForm):
@@ -25,7 +30,12 @@ AddressBuyerFormset = inlineformset_factory(Buyer, BuyerAddress, form=BuyerAddre
 class DeadlineSaleForm(forms.ModelForm):
     class Meta:
         model = Deadline
-        fields = ['begin', 'end', 'status', 'payment', 'proposal', 'policy', ]
+        fields = ['begin', 'end', 'payment', 'proposal', 'policy', 'status']
+
+    def clean_status(self):
+        # todo:
+        return self.cleaned_data.get('status')
+
 
 DeadlineSaleFormset = inlineformset_factory(
     Sale, Deadline, form=DeadlineSaleForm, extra=0, min_num=1, can_delete=False)
@@ -38,7 +48,7 @@ class FileDeadlineForm(forms.ModelForm):
         fields = ['document', 'file_type']
 
 FileDeadlineFormset = inlineformset_factory(
-    Deadline, File, form=FileDeadlineForm, extra=1, min_num=0, can_delete=False)
+    Deadline, File, form=FileDeadlineForm, extra=0, min_num=0, max_num=8, can_delete=False)
 
 
 class DetailDeadlineForm(forms.ModelForm):

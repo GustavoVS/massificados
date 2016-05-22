@@ -843,6 +843,13 @@ ul.navbar-nav > li > a {
     color: inherit;
 }
 
+.form-required label:after{
+	content: '*';
+	margin-left: 3px;
+	color: #9d120f;
+
+}
+
 #nav-header {
     position: inherit;
 }

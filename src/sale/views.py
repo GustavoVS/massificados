@@ -82,7 +82,7 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
                     if detail_form.is_valid():
                         detail_form.save()
 
-                files = FileDeadlineFormset(self.request.POST, instance=form.instace)
+                files = FileDeadlineFormset(self.request.POST, instance=form.instance)
                 for file_form in files.forms:
                     if file_form.is_valid():
                         file_form.save()
@@ -133,7 +133,6 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
                 form.save()
         sale = self.object.sale_set.all()[0]
         deadline = DeadlineSaleFormset(self.request.POST, instance=sale)
-
         for form in deadline.forms:
             if form.is_valid():
                 form.save()
@@ -152,8 +151,7 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
                     if detail_form.is_valid():
                         detail_form.save()
 
-                files = FileDeadlineFormset(
-                    self.request.POST, instance=form.instance)
+                files = FileDeadlineFormset(self.request.POST, self.request.FILES, instance=form.instance)
                 for file_form in files.forms:
                     if file_form.is_valid():
                         file_form.save()

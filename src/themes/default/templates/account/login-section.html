@@ -1,0 +1,17 @@
+{% extends "base-sec.html" %}
+{% load i18n %}
+
+{% block section-title %}Login{% endblock %}
+{% block section-id %}login{% endblock %}
+{% block section-content %}
+{#    <div class="section-title text-center" #}
+{#    style="visibility: visible; animation-name: fadeInDown;"> #}
+{#        <h2>{% trans 'Entrar' %}</h2> #}
+{#    </div> #}
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            {% include '_login.html' %}
+        </div>
+    </div>
+
+{% endblock %}

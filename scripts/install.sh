@@ -6,7 +6,8 @@ echo ''
 echo "Massificados: Installing System Dependencies."
 echo ''
 
-sudo apt-get install -y curl postgresql libpq-dev libjpeg-dev libpng12-dev build-essential python-dev gettext python-virtualenv
+sudo apt-get install -y curl postgresql libpq-dev libjpeg-dev libpng12-dev build-essential python-dev gettext
+# python-virtualenv
 
 
 # Instalando referências para a última versão do node
@@ -21,12 +22,12 @@ sudo gem install sass --no-ri --no-rdoc
 echo 'Massificados: Installing Virtualenv'
 echo ''
 
-virtualenv env
+mkvirtualenv massificados
 
 echo 'Massificados: Installing App Dependencies'
 echo ''
 
-env/bin/pip install -r src/requirements.txt
+workon massificados & pip install -r src/requirements.txt
 
 echo 'Massificados: Configuring Database'
 echo ''
