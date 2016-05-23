@@ -125,9 +125,10 @@ class Product(models.Model):
     insurance_company = models.ForeignKey(InsuranceCompany, on_delete=models.CASCADE)
     branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
     file_type = models.ManyToManyField(FileType)
-    status_permission = models.ManyToManyField(Status)
+    # status_permission = models.ManyToManyField(Status)
     is_lead = models.BooleanField(default=False)
-    begin_status = models.ForeignKey(StatusInitial)
+    # begin_status = models.ForeignKey(StatusInitial)
+    begin_status = models.ForeignKey(Status)
     profile = models.ForeignKey(Profile, null=True)
 
     def __unicode__(self):

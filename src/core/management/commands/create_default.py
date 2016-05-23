@@ -183,7 +183,7 @@ class Command(BaseCommand):
                     kind_person=kind,
                     insurance_company=InsuranceCompany.objects.get(name=insurance),
                     branch=Branch.objects.get(name=branch),
-                    begin_status=StatusInitial.objects.get(name=begin),
+                    begin_status=Status.objects.get(name=begin),
                     profile=Profile.objects.get(name=profile)
                 )
 
@@ -191,8 +191,8 @@ class Command(BaseCommand):
                 for file in files:
                     product.file_type.add(FileType.objects.get(name=file))
 
-                for status in status_active:
-                    product.status_permission.add(Status.objects.get(name=status))
+                # for status in status_active:
+                #     product.status_permission.add(Status.objects.get(name=status))
 
         for permission in DEFAULT_PROFILE_NAME:
             if not Permissions.objects.filter(name=permission).exists():

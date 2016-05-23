@@ -30,11 +30,11 @@ AddressBuyerFormset = inlineformset_factory(Buyer, BuyerAddress, form=BuyerAddre
 class DeadlineSaleForm(forms.ModelForm):
     class Meta:
         model = Deadline
-        fields = ['begin', 'end', 'payment', 'proposal', 'policy', 'status']
+        fields = ['begin', 'end', 'payment', 'proposal', 'policy']
 
-    def clean_status(self):
-        # todo:
-        return self.cleaned_data.get('status')
+    # def clean_status(self):
+    #     # todo:
+    #     return self.cleaned_data.get('status')
 
 
 DeadlineSaleFormset = inlineformset_factory(

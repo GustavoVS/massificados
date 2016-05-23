@@ -17,6 +17,9 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 service wow fadeInUp" data-wow-delay="200ms">
                         <div class="panel panel-primary">
                             <div id='panel-product' class="panel-heading">
+                                <a href="#" role="button" class="close-product pull-right">
+                                    <span class="fa fa-close"></span>
+                                </a>
                                 <h4>{{ product.name }}</h4>
                                 <p>{{ product.description }}</p>
                                 <i class="fa"><img src="{% if product.image %}{{ product.image.url }}{% endif %}" class="img-responsive"></i>
@@ -41,7 +44,7 @@
                     <div class="collapse in list-group-submenu" id="sub_products_pj">
                         {% for product in products_j %}
                             <div class="list-group-item sub-item" data-parent="#sub_categoria_pj" >
-                                <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info" role="button">
+                                <a data-href="sec-product{{ product.id }}" href="#sec-products" class="product-href page-scroll btn btn-info" role="button">
                                     <span class="fa fa-plus"></span>
                                 </a>
                                 {% if user.is_authenticated %}
@@ -63,7 +66,7 @@
                     <div class="collapse in list-group-submenu" id="sub_products_pf">
                         {% for product in products_f %}
                             <div class="list-group-item sub-item" data-parent="#sub_categoria_pf" >
-                                <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info" role="button">
+                                <a data-href="sec-product{{ product.id }}" href="#sec-products" class="product-href page-scroll btn btn-info" role="button">
                                     <span class="fa fa-plus"></span>
                                 </a>
                                 {% if user.is_authenticated %}
@@ -90,7 +93,7 @@
                             {% for product in products_j %}
                                 <div class = "product-pj">
                                     {% if products_f %}
-                                        <div class="col-lg-6 col-md-6">
+                                        <div class="col-lg-12 col-md-12">
                                     {% else %}
                                         <div class="col-lg-4 col-md-4">
                                     {% endif %}
@@ -105,7 +108,7 @@
                                                 </div>
                                                 <div class="panel-body">
                                                     <div class="product-pj-panel-button" >
-                                                        <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
+                                                        <a data-href="sec-product{{ product.id }}" href="#sec-products" class="product-href page-scroll btn btn-info col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
                                                             <span class="fa fa-plus"> </span>{% trans ' Know more' %}
                                                         </a>
                                                         {% if user.is_authenticated %}
@@ -132,7 +135,7 @@
                             {% for product in products_f %}
                                 <div class = "product-pf">
                                     {% if products_j %}
-                                        <div class="col-lg-6 col-md-6">
+                                        <div class="col-lg-12 col-md-12">
                                     {% else %}
                                         <div class="col-lg-4 col-md-4">
                                     {% endif %}
@@ -147,7 +150,7 @@
                                                 </div>
                                                 <div class="panel-body">
                                                     <div class="product-pf-panel-button" >
-                                                        <a data-href="sec-product{{ product.id }}" href="#products-show" class="product-href page-scroll btn btn-info col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
+                                                        <a data-href="sec-product{{ product.id }}" href="#sec-products" class="product-href page-scroll btn btn-info col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
                                                             <span class="fa fa-plus"></span>{% trans ' Know more' %}
                                                         </a>
                                                         {% if user.is_authenticated %}

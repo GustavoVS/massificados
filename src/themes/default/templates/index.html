@@ -12,12 +12,15 @@
 
 {% block footer_scripts %}
     <script>
-        $('.product-href').click(function(){
+        ctrlCloseProduct = function(){
             $('.product-show').hide(400);
+        }
+        $('.product-href').click(function(){
+            ctrlCloseProduct();
             $('#' + $(this).attr('data-href') )
                  // .removeClass('hidden')
                  .show(400);
         });
-        // $(".button-collapse").sideNav();
+        $('.close-product').click(ctrlCloseProduct);
     </script>
 {%  endblock %}
