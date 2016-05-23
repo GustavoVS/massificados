@@ -108,18 +108,27 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
             data['show_all'] = True
             sale = self.object.sale_set.all()[0]
             data['deadlinesale'] = DeadlineSaleFormset(instance=sale)
-            data['filedeadline'] = FileDeadlineFormset(
-                instance=sale.deadline_set.all()[0])
-            data['detail_deadline'] = DetailDeadlineFormset(
-                instance=sale.deadline_set.all()[0])
+            if sale.deadline_set.all():
+                data['filedeadline'] = FileDeadlineFormset(instance=sale.deadline_set.all()[0])
+            else:
+                data['filedeadline'] = FileDeadlineFormset()
+
+            if sale.deadline_set.all():
+                data['detail_deadline'] = DetailDeadlineFormset(instance=sale.deadline_set.all()[0])
+            else:
+                data['detail_deadline'] = DetailDeadlineFormset()
+
             questions_deadlines = sale.product.profile.question_set.filter(
                 type_profile='pdl').order_by('order_number')
-            deadline = sale.deadline_set.all()[0]
-            data['responsequestiondeadline'] = {}
-            for quest in questions_deadlines:
-                if quest.responsedeadline_set.filter(deadline=deadline).exists():
-                    quest.value = quest.responsedeadline_set.get(
-                        deadline=deadline).value
+
+            if sale.deadline_set.all():
+                deadline = sale.deadline_set.all()[0]
+                data['responsequestiondeadline'] = {}
+                for quest in questions_deadlines:
+                    if quest.responsedeadline_set.filter(deadline=deadline).exists():
+                        quest.value = quest.responsedeadline_set.get(
+                            deadline=deadline).value
+
             data['questiondeadline'] = questions_deadlines
         return data
 
