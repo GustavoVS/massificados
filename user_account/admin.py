@@ -6,6 +6,7 @@ from .models import *
 
 User = get_user_model()
 
+
 class UserAdmin(UserAdmin):
     model = User
 
