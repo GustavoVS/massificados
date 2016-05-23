@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     'product',
     'sale',
     'core',
-    'address',
     # 3rd
     'allauth',
     'allauth.account',

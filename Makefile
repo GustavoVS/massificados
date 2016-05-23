@@ -10,7 +10,7 @@ update:
 
 graph:
 	rm -f massificados.png
-	../env/bin/python2.7 manage.py graph_models -a -g -o  massificados.png
+	workon massificados & python src/manage.py graph_models -a -g -o  massificados.png
 
 
 
