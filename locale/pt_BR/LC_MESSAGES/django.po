@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 16:23-0300\n"
-"PO-Revision-Date: 2016-05-15 16:47+0000\n"
-"Last-Translator:   <r.cabral.n@gmail.com>\n"
+"PO-Revision-Date: 2016-05-23 15:35+0000\n"
+"Last-Translator:   <admin@admin.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Translated-Using: django-rosetta 0.7.11\n"
@@ -64,11 +64,11 @@ msgstr "Declaração"
 
 #: .\product\models.py:88
 msgid "Hint"
-msgstr ""
+msgstr "Dica"
 
 #: .\product\models.py:91
 msgid "Header"
-msgstr ""
+msgstr "Cabeçalho"
 
 #: .\product\models.py:92
 msgid "Broker"
@@ -148,11 +148,11 @@ msgstr ""
 
 #: .\product\models.py:114
 msgid "Float"
-msgstr ""
+msgstr "Moeda"
 
 #: .\product\models.py:115
 msgid "Link"
-msgstr ""
+msgstr "Link"
 
 #: .\product\models.py:116
 msgid "Select"
@@ -211,11 +211,11 @@ msgstr "GalCorr - Administrador"
 
 #: .\sale\models.py:19
 msgid "E-mail"
-msgstr ""
+msgstr "E-mail"
 
 #: .\sale\models.py:20
 msgid "Phone"
-msgstr ""
+msgstr "Telefone"
 
 #: .\sale\models.py:21
 #, fuzzy
@@ -225,7 +225,7 @@ msgstr "Pessoa Juridica"
 
 #: .\sale\models.py:22
 msgid "CPF/CNPJ"
-msgstr ""
+msgstr "CPF/CNPJ"
 
 #: .\sale\models.py:30
 msgid "Street"
@@ -233,7 +233,7 @@ msgstr "Rua"
 
 #: .\sale\models.py:31
 msgid "District"
-msgstr ""
+msgstr "Bairro"
 
 #: .\sale\models.py:32
 msgid "Complement"
@@ -265,27 +265,27 @@ msgstr "Data de Criação"
 
 #: .\sale\models.py:55
 msgid "Begin"
-msgstr ""
+msgstr "Começo"
 
 #: .\sale\models.py:56
 msgid "End"
-msgstr ""
+msgstr "Fim"
 
 #: .\sale\models.py:58
 msgid "Payment"
-msgstr ""
+msgstr "Pagamento"
 
 #: .\sale\models.py:59
 msgid "Detail Count"
-msgstr ""
+msgstr "Detalhes da Compra"
 
 #: .\sale\models.py:60
 msgid "Proposal"
-msgstr ""
+msgstr "Proposta"
 
 #: .\sale\models.py:61
 msgid "Policy"
-msgstr ""
+msgstr "Apólice"
 
 #: .\sale\models.py:74
 msgid "File"
@@ -523,11 +523,11 @@ msgstr ""
 
 #: .\themes\default\templates\page-sale-section.html:316
 msgid "Attachements"
-msgstr ""
+msgstr "Anexos"
 
 #: .\themes\default\templates\page-sale-section.html:332
 msgid "No attachaments"
-msgstr ""
+msgstr "Sem Anexos"
 
 #: .\themes\default\templates\sections\about.html:4
 msgid "Sobre o Banco Sofisa"
