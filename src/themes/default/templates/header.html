@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load static %}
 {% load account %}
+{% load notifications_tags %}
 
 
 <nav id="menu" class="navbar navbar-default navbar-fixed-top on">
@@ -45,8 +46,16 @@
                     {% trans "Entries" %}
                     </a>
                 </li>
-                <li><a href="#notifications" class="page-scroll">
-                        <span class="fa fa-bell faa-ring animated faa-slow alert-bell fa-2x hidden-sm"></span>
+                <li><a href="{% url 'notifications' %}">
+                        {% register_notify_callbacks callbacks='fill_notification_list,fill_notification_badge' as X %}
+                        {{ X|safe }}
+                        {% notifications_unread as unread_count %}
+                        {% if unread_count %}
+                            <span  class="fa fa-bell faa-ring animated faa-slow alert-bell fa-2x hidden-sm"></span>
+                            <span id="live_notify_badge" class="badge">{{unread_count}}</span>
+                        {% else %}
+                          <span class="fa fa-bell alert-bell"></span>
+                        {% endif %}
 {#                      <span class="fa fa-bell fa-2x"></span>#}
                         {% trans "Notifications" %}
                     </a>

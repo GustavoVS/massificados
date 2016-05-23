@@ -6,11 +6,13 @@ from product.models import Product, Status, FileType
 from user_account.models import Permissions
 from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
+from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView
 from django.db.models import  Q
 from core.views import MassificadoPageListView
 from .models import MassificadoUser
 from .forms import EntrieUserForm, EntrieProfileEditForm
+from notifications.models import Notification
 
 
 ENTRIES_PAGES = [
@@ -97,3 +99,11 @@ class EntrieProfileEditView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('entries-profiles')
+
+
+class NotificationsView(LoginRequiredMixin, ListView):
+    template_name = 'page-notifications.html'
+    context_object_name = 'notifications'
+
+    def get_queryset(self):
+        return self.request.user.notifications.all()

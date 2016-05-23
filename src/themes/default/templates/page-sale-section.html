@@ -225,6 +225,10 @@
                 </div>
             </div>
         </div>
+        <div class="well">
+            <div class="col-md-6">{% trans "Status" %}:{{ status_deadline }}</div>
+            <div class="col-md-6">{% trans "New Status" %}:</div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 {% trans 'Save' as save_text %}
@@ -234,6 +238,5 @@
                 {% bootstrap_button cancel_text href=href_cancel_btn button_class="btn-danger pull-left" icon="remove" %}
             </div>
         </div>
-
     </form>
 {% endblock %}
