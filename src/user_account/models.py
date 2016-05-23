@@ -7,6 +7,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserM
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from partner.models import Partner
+from product.models import Product, StatusSee, StatusEdit, StatusSet, FileTypeSee, FileTypeDownload
 
 
 class AbstractMassificadoUser(AbstractBaseUser, PermissionsMixin):
@@ -33,6 +34,7 @@ class AbstractMassificadoUser(AbstractBaseUser, PermissionsMixin):
         verbose_name = _('user')
         verbose_name_plural = _('users')
         abstract = True
+        permissions = ()
 
     def __unicode__(self):
         return self.first_name or self.email
@@ -45,11 +47,38 @@ class AbstractMassificadoUser(AbstractBaseUser, PermissionsMixin):
         return self.first_name
 
 
+class Permissions(models.Model):
+    name = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name_plural = 'Permissions'
+
+    def __unicode__(self):
+        return self.name
+
+
+class MassificadoGroups(models.Model):
+    name = models.CharField(max_length=100)
+    menu_products = models.BooleanField(_('Products'), default=False)
+    menu_dashboard = models.BooleanField(_('Dashboard'), default=False)
+    menu_production = models.BooleanField(_('Production'), default=False)
+    menu_entries = models.BooleanField(_('Entries'), default=False)
+    menu_notification = models.BooleanField(_('Notification'), default=False)
+    menu_profile = models.BooleanField(_('Profile'), default=False)
+    product = models.ManyToManyField(Product, null=True, blank=True)
+    status_see = models.ManyToManyField(StatusSee, null=True, blank=True)
+    status_edit = models.ManyToManyField(StatusEdit, null=True, blank=True)
+    status_set = models.ManyToManyField(StatusSet, null=True, blank=True)
+    permissions = models.ManyToManyField(Permissions, null=True, blank=True)
+    filetype_see = models.ManyToManyField(FileTypeSee, null=True, blank=True)
+    filetype_download = models.ManyToManyField(FileTypeDownload, null=True, blank=True)
+
+    class Meta:
+        verbose_name_plural = 'Groups'
+
+    def __unicode__(self):
+        return self.name
 
 
 class MassificadoUser(AbstractMassificadoUser):
-    pass
-
-
-class MassificadoGroups(Group):
-    username = models.ForeignKey(MassificadoUser)
+    group_permissions = models.ForeignKey(MassificadoGroups, null=True)

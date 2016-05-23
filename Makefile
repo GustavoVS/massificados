@@ -29,6 +29,7 @@ resetdb:
 	dropdb -U massificados massificados
 	createdb -U massificados --owner massificados --encoding "UTF-8" massificados
 	rm -rf src/*/migrations/000*
+	rm -rf src/*/migrations/001*
 	workon massificados & python src/manage.py makemigrations
 	workon massificados & python src/manage.py migrate
 	workon massificados & python src/manage.py create_default

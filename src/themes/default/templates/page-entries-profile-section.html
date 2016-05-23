@@ -117,11 +117,11 @@
                                         <div class=" form-group ">
                                             <input type="checkbox" name="checkbox-products-pj{{ product.pk }}" id="checkbox-products-pj{{ product.pk }}" autocomplete="off" />
                                             <div class=" btn-group ">
-                                                <label for="checkbox-products-pj{{ product.pk }}m" class=" btn btn-primary " >
+                                                <label for="checkbox-products-pj{{ product.pk }}" class=" btn btn-primary " >
                                                     <span class=" glyphicon glyphicon-ok "></span>
                                                     <span> </span>
                                                 </label>
-                                                <label for="checkbox-products-pj{{ product.pk }}z" class=" btn btn-default active ">
+                                                <label for="checkbox-products-pj{{ product.pk }}" class=" btn btn-default active ">
                                                     {{ product.name }}
                                                 </label>
                                             </div>
@@ -243,18 +243,18 @@
                             <h4>{% trans "The user can see the production in those profiles" %}</h4>
                         </div>
                         <hr>
-                        {% for file in files %}
+                        {% for permission in permissions %}
                             <div class=" col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                 <div class=" form-group ">
-                                    <input type="checkbox" name="checkbox-profiles-see{{ file.pk }}" id="checkbox-profiles-see{{ file.pk }}" autocomplete="off" />
+                                    <input type="checkbox" name="checkbox-profiles-see{{ permission.pk }}" id="checkbox-profiles-see{{ permission.pk }}" autocomplete="off" />
                                     <div class=" btn-group ">
-                                        <label for="checkbox-profiles-see{{ file.pk }}" class=" btn btn-warning ">
+                                        <label for="checkbox-profiles-see{{ permission.pk }}" class=" btn btn-warning ">
                                             <span class=" glyphicon glyphicon-ok "></span>
                                             <span class=" glyphicon glyphicon-user "></span>
                                             <span> </span>
                                         </label>
-                                        <label for="checkbox-profiles-see{{ file.pk }}" class=" btn btn-default active ">
-                                            {{ file.name }}
+                                        <label for="checkbox-profiles-see{{ permission.pk }}" class=" btn btn-default active ">
+                                            {{ permission.name }}
                                         </label>
                                     </div>
                                 </div>
