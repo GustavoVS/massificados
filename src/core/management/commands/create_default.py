@@ -111,7 +111,7 @@ class Command(BaseCommand):
             p.save()
 
         if not User.objects.filter(username="admin").exists():
-            User.objects.create_superuser("admin", "admin@admin.com", "boasenha2016#", partner=p)
+            User.objects.create_superuser("admin", "admin@admin.com", "admin", partner=p)
 
         if not User.objects.filter(username="demo").exists():
             u = User(username="demo", email="demo@demo.com", password="massificadodemo", partner=p)
