@@ -9,22 +9,65 @@ from user_account.models import Permissions, MassificadoGroups
 User = get_user_model()
 
 DEFAULT_STATUS = (
-    'Aberto',
-    'Apólice Gerada', 'Proposta Gerada', 'Proposta Cancelada',
-    'Cotação de Garantia Negada', 'Cotação de Garantia Aprovada', 'Cotação de Garantia Gerada', 'Solicitação de Cotação de Garantia',
-    'Lead de Garantia Gerado',
-    'Cotação de Benefícios Negada', 'Cotação de Benefícios Aprovada', 'Cotação de Benefícios Gerada', 'Solicitação de Cotação de Benefícios',
-    'Lead de Benefícios Gerado',
-    'Repasse Pago', 'Repasse Pendente', 'Pago Pela Seguradora',
-    'Boleto Gerado',
+    ('Aberto', 1),
+
+    ('Lead de Garantia Gerado', 2), ('Lead de Garantia Cancelado', 2), ('Solicitação de Cotação de Garantia', 3), ('Cotação de Garantia Gerada', 4),
+    ('Cotação de Garantia não Gerada - Faltam documentos', 4),
+    ('Cotação de Garantia Negada', 5), ('Cotação de Garantia Aprovada', 6),
+
+    ('Lead de Benefícios Gerado', 2), ('Lead de Benefícios Cancelado', 2), ('Solicitação de Cotação de Benefícios', 3), ('Cotação de Benefícios Gerada', 4),
+    ('Cotação de Benefícios não Gerada - Faltam documentos', 4),
+    ('Cotação de Benefícios Negada', 5), ('Cotação de Benefícios Aprovada', 6),
+
+    ('Proposta Gerada', 1), ('Proposta Cancelada', 2), ('Boleto Gerado', 2), ('Apólice Gerada', 3), ('Apólice Cancelada', 4), ('Repasse Pago', 4),
 )
 
-DEFAULT_STATUS_PRODUCT_TOKIO = ('Aberto', 'Proposta Gerada', 'Proposta Cancelada', 'Boleto Gerado', 'Apólice Gerada', 'Repasse Pendente', 'Repasse Pago', 'Pago Pela Seguradora')
+DEFAULT_STATUS_PRODUCT_TOKIO = (('Aberto', 1), ('Proposta Gerada', 1), ('Proposta Cancelada', 2), ('Boleto Gerado', 2), ('Apólice Gerada', 3), ('Apólice Cancelada', 4), ('Repasse Pago', 4),)
+DEFAULT_STATUS_PRODUCT_TOKIO_EMAIL = (('Aberto', 1, ('r.cabral.n@gmail.com', ), ),
+                                      ('Proposta Gerada', 1, ('{Gerente}', '{Seguradora}', 'flavio.saraiva@galcorr.com.br' , 'fabiano.costa@galcorr.com.br', ), ),
+                                      ('Proposta Cancelada', 2, ('{Gerente}', '{Seguradora}', 'flavio.saraiva@galcorr.com.br' , 'fabiano.costa@galcorr.com.br', ), ),
+                                      ('Boleto Gerado', 2, ('{Gerente}', '{Seguradora}', 'flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br', ), ),
+                                      ('Apólice Gerada', 3, ('{Gerente}', '{Seguradora}', 'flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br', 'lucia.moraes@galcorr.com.br', ), ),
+                                      ('Apólice Cancelada', 4, ('{Gerente}', '{Seguradora}', 'flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br', 'lucia.moraes@galcorr.com.br', ), ),
+                                      ('Repasse Pago', 4, ('{Gerente}', 'flavio.saraiva@galcorr.com.br', ), ), )
 
 DEFAULT_STATUS_PRODUCT_GARANTIA = (
-    'Aberto', 'Boleto Gerado',
-    'Lead de Garantia Gerado', 'Cotação de Garantia Negada', 'Cotação de Garantia Aprovada', 'Cotação de Garantia Gerada', 'Solicitação de Cotação de Garantia',
-    'Apólice Gerada', 'Repasse Pendente', 'Repasse Pago', 'Pago Pela Seguradora'
+    ('Aberto', 1),
+    ('Lead de Garantia Gerado', 2), ('Solicitação de Cotação de Garantia', 3), ('Cotação de Garantia Gerada', 4),
+    ('Cotação de Garantia não Gerada - Faltam documentos', 4),
+    ('Cotação de Garantia Negada', 5), ('Cotação de Garantia Aprovada', 6),
+)
+
+DEFAULT_STATUS_PRODUCT_GARANTIA_EMAIL = (
+    ('Aberto', 1, ('r.cabral.n@gmail.com', ), ),
+    ('Lead de Garantia Gerado', 2, ('{Gerente}', 'flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br', ), ),
+    ('Lead de Garantia Cancelado', 2, ('{Gerente}', 'flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br', ), ),
+    ('Solicitação de Cotação de Garantia', 3, ('flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br', 'rafael.nunes@comercialseguros.com.br', ), ),
+    ('Cotação de Garantia Gerada', 4, ('flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br', 'rafael.nunes@comercialseguros.com.br', ), ),
+    ('Cotação de Garantia não Gerada - Faltam documentos', 4, ('flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br', 'rafael.nunes@comercialseguros.com.br', ), ),
+    ('Cotação de Garantia Negada', 5, ('flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br', 'rafael.nunes@comercialseguros.com.br', '{Gerente}', ), ),
+    ('Cotação de Garantia Aprovada', 6, ('flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br', 'rafael.nunes@comercialseguros.com.br', '{Gerente}', ), ),
+)
+
+DEFAULT_STATUS_PRODUCT_BENEFICIOS = (
+    ('Aberto', 1),
+    ('Lead de Benefícios Gerado', 2),
+    ('Solicitação de Cotação de Benefícios', 3),
+    ('Cotação de Benefícios Gerada', 4),
+    ('Cotação de Benefícios não Gerada - Faltam documentos', 4),
+    ('Cotação de Benefícios Negada', 5),
+    ('Cotação de Benefícios Aprovada', 6),
+)
+
+DEFAULT_STATUS_PRODUCT_BENEFICIOS_EMAIL = (
+    ('Aberto', 1, ('r.cabral.n@gmail.com', ), ),
+    ('Lead de Benefícios Gerado', 2, ('{Gerente}', 'flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br', ), ),
+    ('Lead de Benefícios Cancelado', 2, ('{Gerente}', 'flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br', ), ),
+    ('Solicitação de Cotação de Benefícios', 3, ('flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br', 'adriano.telles@galcorr.com.br', ), ),
+    ('Cotação de Benefícios Gerada', 4, ('flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br', 'adriano.telles@galcorr.com.br', ), ),
+    ('Cotação de Benefícios não Gerada - Faltam documentos', 4, ('flavio.saraiva@galcorr.com.br', 'adriano.telles@galcorr.com.br', 'rafael.nunes@galcorr.com.br', ), ),
+    ('Cotação de Benefícios Negada', 5, ('flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br', 'adriano.telles@galcorr.com.br', '{Gerente}', ), ),
+    ('Cotação de Benefícios Aprovada', 6, ('flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br', 'adriano.telles@galcorr.com.br', '{Gerente}', ), ),
 )
 
 DEFAULT_FILES = ('Proposta de Endosso', 'Proposta de Apólice', 'Endosso', 'Apólice', 'Boleto de Apólice',
@@ -66,29 +109,29 @@ DEFAULT_PROFILE_NAME = (
     'Perfil Tokio'
 )
 
-DEFAULT_PROFILE_PERMISSION = (('Perfil Parceiro Diretor', '1', '1', '1', '1', '1', '1',
+DEFAULT_PROFILE_PERMISSION = (('Perfil Parceiro Diretor', '1', '1', '1', ('0', '0', '0', '0'), '1', '1',
                                DEFAULT_PRODUCT_NAME_PARTNER, DEFAULT_STATUS, DEFAULT_STATUS, DEFAULT_STATUS, DEFAULT_FILES, DEFAULT_FILES, DEFAULT_PROFILE_NAME, ),
-                              ('Perfil Parceiro Supervisor', '1', '1', '1', '1', '1', '1',
+                              ('Perfil Parceiro Supervisor', '1', '1', '1', ('0', '0', '0', '0'), '1', '1',
                                DEFAULT_PRODUCT_NAME_PARTNER, DEFAULT_STATUS, DEFAULT_STATUS, DEFAULT_STATUS, DEFAULT_FILES, DEFAULT_FILES, DEFAULT_PROFILE_NAME, ),
-                              ('Perfil Parceiro Gerente', '1', '1', '1', '1', '1', '1',
+                              ('Perfil Parceiro Gerente', '1', '1', '1', ('0', '0', '0', '0'), '1', '1',
                                DEFAULT_PRODUCT_NAME_PARTNER, DEFAULT_STATUS, DEFAULT_STATUS, DEFAULT_STATUS, DEFAULT_FILES, DEFAULT_FILES, DEFAULT_PROFILE_NAME, ),
-                              ('Perfil Parceiro Administrador', '1', '1', '1', '1', '1', '1',
+                              ('Perfil Parceiro Administrador', '1', '1', '1', ('1', '0', '0', '0'), '1', '1',
                                DEFAULT_PRODUCT_NAME_PARTNER, DEFAULT_STATUS, DEFAULT_STATUS, DEFAULT_STATUS, DEFAULT_FILES, DEFAULT_FILES, DEFAULT_PROFILE_NAME, ),
-                              ('Perfil GalCorr Administrador', '1', '1', '1', '1', '1', '1',
+                              ('Perfil GalCorr Administrador', '1', '1', '1', ('1', '1', '1', '1'), '1', '1',
                                DEFAULT_PRODUCT_NAME_INSURANCE, DEFAULT_STATUS, DEFAULT_STATUS, DEFAULT_STATUS, DEFAULT_FILES, DEFAULT_FILES, DEFAULT_PROFILE_NAME, ),
-                              ('Perfil GalCorr Gerencial', '1', '1', '1', '1', '1', '1',
+                              ('Perfil GalCorr Gerencial', '0', '0', '1', ('0', '0', '0', '0'), '0', '1',
                                DEFAULT_PRODUCT_NAME_INSURANCE, DEFAULT_STATUS, DEFAULT_STATUS, DEFAULT_STATUS, DEFAULT_FILES, DEFAULT_FILES, DEFAULT_PROFILE_NAME, ),
-                              ('Perfil GalCorr Comercial', '1', '1', '1', '1', '1', '1',
+                              ('Perfil GalCorr Comercial', '1', '0', '1', ('0', '0', '0', '0'), '1', '1',
                                DEFAULT_PRODUCT_NAME_INSURANCE, DEFAULT_STATUS, DEFAULT_STATUS, DEFAULT_STATUS, DEFAULT_FILES, DEFAULT_FILES, DEFAULT_PROFILE_NAME, ),
-                              ('Perfil GalCorr Operacional', '1', '1', '1', '1', '1', '1',
+                              ('Perfil GalCorr Operacional', '1', '0', '1', ('0', '0', '0', '0'), '1', '1',
                                DEFAULT_PRODUCT_NAME_INSURANCE, DEFAULT_STATUS, DEFAULT_STATUS, DEFAULT_STATUS, DEFAULT_FILES, DEFAULT_FILES, DEFAULT_PROFILE_NAME, ),
-                              ('Perfil GalCorr Técnico Benefícios', '1', '1', '1', '1', '1', '1',
+                              ('Perfil GalCorr Técnico Benefícios', '1', '0', '1', ('0', '0', '0', '0'), '1', '1',
                                DEFAULT_PRODUCT_NAME_INSURANCE, DEFAULT_STATUS, DEFAULT_STATUS, DEFAULT_STATUS, DEFAULT_FILES, DEFAULT_FILES, DEFAULT_PROFILE_NAME, ),
-                              ('Perfil GalCorr Técnico Garantia', '1', '1', '1', '1', '1', '1',
+                              ('Perfil GalCorr Técnico Garantia', '1', '0', '1', ('0', '0', '0', '0'), '1', '1',
                                DEFAULT_PRODUCT_NAME_INSURANCE, DEFAULT_STATUS, DEFAULT_STATUS, DEFAULT_STATUS, DEFAULT_FILES, DEFAULT_FILES, DEFAULT_PROFILE_NAME, ),
-                              ('Perfil GalCorr Financeiro', '1', '1', '1', '1', '1', '1',
+                              ('Perfil GalCorr Financeiro', '1', '0', '1', ('0', '0', '0', '0'), '1', '1',
                                DEFAULT_PRODUCT_NAME_INSURANCE, DEFAULT_STATUS, DEFAULT_STATUS, DEFAULT_STATUS, DEFAULT_FILES, DEFAULT_FILES, DEFAULT_PROFILE_NAME, ),
-                              ('Perfil Tokio', '1', '1', '1', '1', '1', '1',
+                              ('Perfil Tokio', '1', '1', '1', ('0', '0', '0', '0'), '1', '1',
                                DEFAULT_PRODUCT_NAME_INSURANCE, DEFAULT_STATUS_PRODUCT_TOKIO, DEFAULT_STATUS_PRODUCT_TOKIO, DEFAULT_STATUS_PRODUCT_TOKIO, DEFAULT_FILES, DEFAULT_FILES, DEFAULT_PROFILE_NAME, ), )
 
 
