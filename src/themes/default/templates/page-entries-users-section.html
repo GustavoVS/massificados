@@ -32,7 +32,11 @@
                         <div class="thumbnail entries-box-md">
                             <div class="caption">
                             <h3>{{ user }}</h3>
-                            <p>{{ user.username }} | {{ user.email }} | Último Login: {{ user.last_login }}</p>
+                            {% if user.last_login %}
+                                <p>{{ user.username }} | {{ user.email }} | {% trans "Last " %} Login: {{ user.last_login }}</p>
+                            {% else %}
+                                <p>{{ user.username }} | {{ user.email }} | {% trans "Last " %} Login: {% trans "This user do not login" %}</p>
+                            {% endif %}
                             <p><a href="{% url 'entries-users-edit' user.pk %}" class="btn btn-primary" role="button">{% trans 'Edit User' %}</a></p>
                             </div>
                         </div>

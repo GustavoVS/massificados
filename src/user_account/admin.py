@@ -11,4 +11,4 @@ class UserAdmin(UserAdmin):
 
 admin.site.register(User, UserAdmin)
 admin.site.register(MassificadoGroups)
-admin.site.register(Permissions)
+admin.site.register(Profiles)

@@ -34,6 +34,8 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
         data['show_all'] = False
         product = Product.objects.get(pk=self.kwargs['productpk'])
         data['status_deadline'] = product.begin_status
+        # todo: filter user permissions
+        data['possible_new_status'] = Status.objects.filter(level__gte=product.begin_status.level).order_by('level')
         if not product.is_lead:
             data['show_all'] = True
             data['deadlinesale'] = DeadlineSaleFormset()
@@ -109,6 +111,9 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
             data['show_all'] = True
             sale = self.object.sale_set.all()[0]
             data['deadlinesale'] = DeadlineSaleFormset(instance=sale)
+            data['status_deadline'] = sale.deadline_set.all()[0].status
+            # todo: filter user permissions
+            data['possible_new_status'] = Status.objects.filter(level__gte=sale.deadline_set.all()[0].status.level).order_by('level')
             if sale.deadline_set.all():
                 data['filedeadline'] = FileDeadlineFormset(instance=sale.deadline_set.all()[0])
             else:
@@ -145,7 +150,10 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
         deadline = DeadlineSaleFormset(self.request.POST, instance=sale)
         for form in deadline.forms:
             if form.is_valid():
-                form.save()
+                # form.object.status_id = self.request.POST.get('new-status', '')
+                dl = form.save()
+                dl.status_id = self.request.POST.get('new-status', '')
+                dl.save()
 
                 for k, v in self.request.POST.iteritems():
                     if k.split('-')[0] == 'q_resp':

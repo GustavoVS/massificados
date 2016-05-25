@@ -27,11 +27,11 @@ class EntrieUserForm(forms.ModelForm):
     password1 = forms.CharField(widget=forms.PasswordInput, label=_("Password"), required=False)
     password2 = forms.CharField(widget=forms.PasswordInput, label=_("Password (again)"), required=False)
 
-    groups = forms.ModelChoiceField(queryset=Group.objects.all())
+    # groups = forms.ModelChoiceField(queryset=Group.objects.all())
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'partner')
+        fields = ('username', 'first_name', 'last_name', 'email', 'partner', 'group_permissions')
 
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
@@ -45,8 +45,8 @@ class EntrieUserForm(forms.ModelForm):
         if self.cleaned_data['password1']:
             self.instance.set_password(self.cleaned_data['password1'])
         r = super(EntrieUserForm, self).save(commit=commit)
-        self.instance.groups.clear()
-        self.instance.groups.add(self.cleaned_data['groups'])
+        # self.instance.groups.clear()
+        # self.instance.groups.add(self.cleaned_data['groups'])
         return r
 
 

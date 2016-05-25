@@ -866,4 +866,6 @@ ul.navbar-nav > li > a {
 	height: 180px;
 }
 
-
+.entries-box-sm {
+	height: 120px;
+}

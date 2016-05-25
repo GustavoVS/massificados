@@ -47,37 +47,46 @@ class AbstractMassificadoUser(AbstractBaseUser, PermissionsMixin):
         return self.first_name
 
 
-class Permissions(models.Model):
+class Profiles(models.Model):
     name = models.CharField(max_length=100)
 
     class Meta:
-        verbose_name_plural = 'Permissions'
+        verbose_name_plural = 'Profiles'
 
     def __unicode__(self):
         return self.name
 
 
-class MassificadoGroups(models.Model):
-    name = models.CharField(max_length=100)
+class AbstractMassificadoGroups(models.Model):
+    name = models.CharField(_('First name'), max_length=100, blank=True)
     menu_products = models.BooleanField(_('Products'), default=False)
     menu_dashboard = models.BooleanField(_('Dashboard'), default=False)
     menu_production = models.BooleanField(_('Production'), default=False)
     menu_entries = models.BooleanField(_('Entries'), default=False)
+    menu_entries_users = models.BooleanField(_('Users'), default=False)
+    menu_entries_profiles = models.BooleanField(_('Profiles'), default=False)
+    menu_entries_partners = models.BooleanField(_('Partners'), default=False)
+    menu_entries_products = models.BooleanField(_('Products'), default=False)
     menu_notification = models.BooleanField(_('Notification'), default=False)
     menu_profile = models.BooleanField(_('Profile'), default=False)
     product = models.ManyToManyField(Product, null=True, blank=True)
     status_see = models.ManyToManyField(StatusSee, null=True, blank=True)
     status_edit = models.ManyToManyField(StatusEdit, null=True, blank=True)
     status_set = models.ManyToManyField(StatusSet, null=True, blank=True)
-    permissions = models.ManyToManyField(Permissions, null=True, blank=True)
+    profiles = models.ManyToManyField(Profiles, null=True, blank=True)
     filetype_see = models.ManyToManyField(FileTypeSee, null=True, blank=True)
     filetype_download = models.ManyToManyField(FileTypeDownload, null=True, blank=True)
 
     class Meta:
-        verbose_name_plural = 'Groups'
+        verbose_name_plural = 'Permissions'
+        abstract = True
 
     def __unicode__(self):
         return self.name
+
+
+class MassificadoGroups(AbstractMassificadoGroups):
+    pass
 
 
 class MassificadoUser(AbstractMassificadoUser):

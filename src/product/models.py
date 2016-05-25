@@ -57,6 +57,7 @@ class FileTypeDownload(models.Model):
 
 class Status(models.Model):
     name = models.CharField(max_length=100)
+    level = models.IntegerField(default=1)
 
     class Meta:
         verbose_name_plural = 'Status'
@@ -69,8 +70,9 @@ class Status(models.Model):
     #     return super(Status, self).save()
 
 
-class StatusInitial(models.Model):
+class StatusPermission(models.Model):
     name = models.CharField(max_length=100)
+    level = models.IntegerField(default=1)
 
     class Meta:
         verbose_name_plural = 'Status'
@@ -81,6 +83,7 @@ class StatusInitial(models.Model):
 
 class StatusSee(models.Model):
     name = models.CharField(max_length=100)
+    level = models.IntegerField(default=1)
 
     class Meta:
         verbose_name_plural = 'Status'
@@ -91,6 +94,7 @@ class StatusSee(models.Model):
 
 class StatusEdit(models.Model):
     name = models.CharField(max_length=100)
+    level = models.IntegerField(default=1)
 
     class Meta:
         verbose_name_plural = 'Status'
@@ -101,6 +105,7 @@ class StatusEdit(models.Model):
 
 class StatusSet(models.Model):
     name = models.CharField(max_length=100)
+    level = models.IntegerField(default=1)
 
     class Meta:
         verbose_name_plural = 'Status'
@@ -125,9 +130,8 @@ class Product(models.Model):
     insurance_company = models.ForeignKey(InsuranceCompany, on_delete=models.CASCADE)
     branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
     file_type = models.ManyToManyField(FileType)
-    # status_permission = models.ManyToManyField(Status)
+    status_permission = models.ManyToManyField(StatusPermission)
     is_lead = models.BooleanField(default=False)
-    # begin_status = models.ForeignKey(StatusInitial)
     begin_status = models.ForeignKey(Status)
     profile = models.ForeignKey(Profile, null=True)
 
