@@ -10,7 +10,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.db.models import  Q
 from core.views import MassificadoPageListView
 from .models import MassificadoUser, MassificadoGroups
-from .forms import EntrieUserForm, EntrieProfileEditForm
+from .forms import EntrieUserForm
 # from notifications.models import Notification
 
 
@@ -97,26 +97,6 @@ class EntrieProfileNewView(LoginRequiredMixin, CreateView):
         context['profiles'] = Profiles.objects.all()
             # context['group'] = MassificadoGroups.objects.filter(pk=sale.deadline_set.all()[0].status.level).order_by('level')
             # sale = self.object.sale_set.all()[0]
-        return context
-
-
-class EntrieProfileEditView(LoginRequiredMixin, UpdateView):
-    model = MassificadoGroups
-    form_class = EntrieProfileEditForm
-    context_object_name = 'profile'
-    template_name = 'page-entries-profile.html'
-
-    def get_success_url(self):
-        return reverse_lazy('entries-profiles')
-
-    def get_context_data(self, **kwargs):
-        context = super(EntrieProfileEditView, self).get_context_data(**kwargs)
-        context['products_f'] = list(Product.objects.filter(kind_person='J'))
-        context['products_j'] = list(Product.objects.filter(kind_person='F'))
-        context['products'] = list(Product.objects.all())
-        context['status'] = Status.objects.all()
-        context['files'] = FileType.objects.all()
-        context['profiles'] = Profiles.objects.all()
         return context
 
 

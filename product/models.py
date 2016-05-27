@@ -47,7 +47,7 @@ class FileTypeSee(models.Model):
     name = models.CharField(max_length=100)
 
     def __unicode__(self):
-        return self.namema
+        return self.name
 
 
 class FileTypeDownload(models.Model):

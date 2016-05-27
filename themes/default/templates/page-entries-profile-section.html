@@ -12,144 +12,166 @@
 {% endblock %}
 {% block section-content %}
     <form action="" method="post" xmlns="http://www.w3.org/1999/html">{% csrf_token %}
-        <div class="space"></div>
-        <div class="container">
+        {# <div class="container"> #}
                 {% bootstrap_field form.name %}
             <div class="row">
                 <div class="col-md-12">
                     <h4>{% trans "Permissions of Menu" %}</h4><hr />
                 </div>
-                <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                    <div class=" form-group ">
-                        <input type="checkbox" name="checkbox-products" id="checkbox-products" autocomplete="off" />
-                        <div class=" btn-group ">
-                            <label for="checkbox-products" class=" btn btn-primary ">
-                                <span class=" glyphicon glyphicon-ok "></span>
-                                <span> </span>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class="form-group">
+                        <input
+                            type="checkbox"
+                            name="{{ form.menu_products.html_name }}"
+                            id="{{ form.menu_products.html_name }}"
+                            autocomplete="off"
+                            {% if form.menu_products.value %}checked{% endif %} />
+                        <div class="btn-group ">
+                            <label for="{{ form.menu_products.html_name }}" class="btn btn-primary ">
+                                <span class="glyphicon glyphicon-ok "></span>
+                                <span></span>
                             </label>
-                            <label for="checkbox-products" class=" btn btn-primary active ">
-                                {% trans "Products" %}
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                    <div class=" form-group ">
-                        <input type="checkbox" name="checkbox-dashboard" id="checkbox-dashboard" autocomplete="off" />
-                        <div class=" btn-group ">
-                            <label for="checkbox-dashboard" class=" btn btn-primary ">
-                                <span class=" glyphicon glyphicon-ok "></span>
-                                <span> </span>
-                            </label>
-                            <label for="checkbox-dashboard" class=" btn btn-primary active ">
-                                {% trans "Dashboard" %}
+                            <label for="{{ form.menu_products.html_name }}" class="btn btn-primary active ">
+                                {{ form.menu_products.label }}
                             </label>
                         </div>
                     </div>
                 </div>
-                <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                    <div class=" form-group ">
-                        <input type="checkbox" name="checkbox-production" id="checkbox-production" autocomplete="off" />
-                        <div class=" btn-group ">
-                            <label for="checkbox-production" class=" btn btn-primary ">
-                                <span class=" glyphicon glyphicon-ok "></span>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class="form-group">
+                        <input
+                            type="checkbox"
+                            name="{{ form.menu_dashboard.html_name }}"
+                            id="{{ form.menu_dashboard.html_name }}"
+                            autocomplete="off"
+                            {% if form.menu_dashboard.value %}checked{% endif %}/>
+                        <div class="btn-group ">
+                            <label for="{{ form.menu_dashboard.html_name }}" class="btn btn-primary ">
+                                <span class="glyphicon glyphicon-ok "></span>
                                 <span> </span>
                             </label>
-                            <label for="checkbox-production" class=" btn btn-primary active ">
-                                {% trans "Production" %}
+                            <label for="{{ form.menu_dashboard.html_name }}" class="btn btn-primary active ">
+                                {{ form.menu_dashboard.label }}
                             </label>
                         </div>
                     </div>
                 </div>
-                <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                    <div class=" form-group ">
-                        <input type="checkbox" name="checkbox-entries" id="checkbox-entries" autocomplete="off" />
-                        <div class=" btn-group ">
-                            <label for="checkbox-entries" class=" btn btn-primary ">
-                                <span class=" glyphicon glyphicon-ok "></span>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class="form-group ">
+                        <input type="checkbox" name="{{ form.menu_production.html_name }}" id="{{ form.menu_production.html_name }}" autocomplete="off"
+                        {% if form.menu_production.value %}checked{% endif %}/>
+                        <div class="btn-group ">
+                            <label for="{{ form.menu_production.html_name }}" class="btn btn-primary ">
+                                <span class="glyphicon glyphicon-ok "></span>
                                 <span> </span>
                             </label>
-                            <label for="checkbox-entries" class=" btn btn-primary active ">
-                                {% trans "Entries" %}
+                            <label for="{{ form.menu_production.html_name }}" class="btn btn-primary active ">
+                                {{form.menu_production.label }}
                             </label>
                         </div>
                     </div>
-                    <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class=" form-group ">
-                            <input type="checkbox" name="checkbox-entries-users" id="checkbox-entries-users" autocomplete="off" />
-                            <div class=" btn-group ">
-                                <label for="checkbox-entries-users" class=" btn btn-primary active ">
-                                    <span class=" glyphicon glyphicon-ok "></span>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class="form-group ">
+                        <input type="checkbox" name="{{ form.menu_entries.html_name }}" id="{{ form.menu_entries.html_name }}" autocomplete="off" {% if form.menu_entries.value %}checked{% endif %}/>
+                        <div class="btn-group ">
+                            <label for="{{ form.menu_entries.html_name }}" class="btn btn-primary ">
+                                <span class="glyphicon glyphicon-ok "></span>
+                                <span> </span>
+                            </label>
+                            <label for="{{ form.menu_entries.html_name }}" class="btn btn-primary active ">
+                                {{ form.menu_entries.label }}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group ">
+                            <input type="checkbox" name="{{ form.menu_entries_users.html_name }}" id="{{ form.menu_entries_users.html_name }}" autocomplete="off"
+                            {% if form.menu_entries_users.value %}checked{% endif %}/>
+                            <div class="btn-group ">
+                                <label for="{{ form.menu_entries_users.html_name }}" class="btn btn-primary active ">
+                                    <span class="glyphicon glyphicon-ok "></span>
                                     <span> </span>
                                 </label>
-                                <label for="checkbox-entries-users" class=" btn btn-default active ">
-                                    {% trans "Users" %}
+                                <label for="{{ form.menu_entries_users.html_name }}" class="btn btn-default active ">
+                                    {{ form.menu_entries_users.label }}
                                 </label>
                             </div>
                         </div>
-                        <div class=" form-group ">
-                            <input type="checkbox" name="checkbox-entries-profile" id="checkbox-entries-profile" autocomplete="off" />
-                            <div class=" btn-group ">
-                                <label for="checkbox-entries-profile" class=" btn btn-primary active ">
-                                    <span class=" glyphicon glyphicon-ok "></span>
+                        <div class="form-group ">
+                            <input
+                                type="checkbox"
+                                name="{{ form.menu_entries_profiles.html_name }}"
+                                id="{{ form.menu_entries_profiles.html_name }}"
+                                autocomplete="off"
+                                {% if form.menu_entries_profiles.value %}checked{% endif %} />
+                            <div class="btn-group ">
+                                <label for="{{ form.menu_entries_profiles.html_name }}" class="btn btn-primary active ">
+                                    <span class="glyphicon glyphicon-ok "></span>
                                     <span> </span>
                                 </label>
-                                <label for="checkbox-entries-users" class=" btn btn-default active ">
-                                    {% trans "Profiles" %}
+                                <label for="{{ form.menu_entries_profiles.html_name }}" class="btn btn-default active ">
+                                    {{ form.menu_entries_profiles.label }}
                                 </label>
                             </div>
                         </div>
-                        <div class=" form-group ">
-                            <input type="checkbox" name="checkbox-entries-partners" id="checkbox-entries-partners" autocomplete="off" />
-                            <div class=" btn-group ">
-                                <label for="checkbox-entries-partners" class=" btn btn-primary active ">
-                                    <span class=" glyphicon glyphicon-ok "></span>
+                        <div class="form-group ">
+                            <input type="checkbox"
+                                name="{{ form.menu_entries_partners.html_name }}"
+                                id="{{ form.menu_entries_partners.html_name }}"
+                                autocomplete="off"
+                            {% if form.menu_entries_partners.value %}checked{% endif %}/>
+                            <div class="btn-group ">
+                                <label for="{{ form.menu_entries_partners.html_name }}" class="btn btn-primary active ">
+                                    <span class="glyphicon glyphicon-ok "></span>
                                     <span> </span>
                                 </label>
-                                <label for="checkbox-entries-partners" class=" btn btn-default active ">
-                                    {% trans "Partners" %}
+                                <label for="{{ form.menu_entries_partners.html_name }}" class="btn btn-default active ">
+                                    {{form.menu_entries_partners.label}}
                                 </label>
                             </div>
                         </div>
-                        <div class=" form-group ">
-                            <input type="checkbox" name="checkbox-entries-products" id="checkbox-entries-products" autocomplete="off" />
-                            <div class=" btn-group ">
-                                <label for="checkbox-entries-products" class=" btn btn-primary active ">
-                                    <span class=" glyphicon glyphicon-ok "></span>
+                        <div class="form-group ">
+                            <input type="checkbox" name="{{ form.menu_entries_products.html_name }}" id="{{ form.menu_entries_products.html_name }}" autocomplete="off"
+                            {% if form.menu_entries_products.value %}checked{% endif %}/>
+                            <div class="btn-group ">
+                                <label for="{{ form.menu_entries_products.html_name }}" class="btn btn-primary active ">
+                                    <span class="glyphicon glyphicon-ok "></span>
                                     <span> </span>
                                 </label>
-                                <label for="checkbox-entries-products" class=" btn btn-default active ">
-                                    {% trans "Products" %}
+                                <label for="{{ form.menu_entries_products.html_name }}" class="btn btn-default active ">
+                                    {{ form.menu_entries_products.html_name }}
                                 </label>
                             </div>
                         </div>
                     </div>
 
                 </div>
-                <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                    <div class=" form-group ">
-                        <input type="checkbox" name="checkbox-notifications" id="checkbox-notifications" autocomplete="off" />
-                        <div class=" btn-group ">
-                            <label for="checkbox-notifications" class=" btn btn-primary ">
-                                <span class=" glyphicon glyphicon-ok "></span>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class="form-group ">
+                        <input type="checkbox" name="{{ form.menu_notification.html_name }}" id="{{ form.menu_notification.html_name }}" autocomplete="off" {% if form.menu_notification.value %}checked{% endif %}/>
+                        <div class="btn-group ">
+                            <label for="{{ form.menu_notification.html_name }}" class="btn btn-primary ">
+                                <span class="glyphicon glyphicon-ok "></span>
                                 <span> </span>
                             </label>
-                            <label for="checkbox-notifications" class=" btn btn-primary active ">
-                                {% trans "Notifications" %}
+                            <label for="{{ form.menu_notification.html_name }}" class="btn btn-primary active ">
+                                {{ form.menu_notification.label }}
                             </label>
                         </div>
                     </div>
                 </div>
-                <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                    <div class=" form-group ">
-                        <input type="checkbox" name="checkbox-profile" id="checkbox-profile" autocomplete="off" />
-                        <div class=" btn-group ">
-                            <label for="checkbox-profile" class=" btn btn-primary ">
-                                <span class=" glyphicon glyphicon-ok "></span>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class="form-group ">
+                        <input type="checkbox" name="{{form.menu_profile.html_name}}" id="{{form.menu_profile.html_name}}" autocomplete="off" {% if form.menu_profile.value %}checked
+                        {% endif %} />
+                        <div class="btn-group ">
+                            <label for="{{form.menu_profile.html_name}}" class="btn btn-primary ">
+                                <span class="glyphicon glyphicon-ok "></span>
                                 <span> </span>
                             </label>
-                            <label for="checkbox-profile" class=" btn btn-primary active ">
-                                {% trans "My Profile" %}
+                            <label for="{{form.menu_profile.html_name}}" class="btn btn-primary active ">
+                                {{ form.menu_profile.label }}
                             </label>
                         </div>
                     </div>
@@ -164,15 +186,15 @@
                             <hr>
                             {% for product in products_j %}
                                 <div class = "product-pj">
-                                    <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                                        <div class=" form-group ">
+                                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                                        <div class="form-group ">
                                             <input type="checkbox" name="checkbox-products-pj{{ product.pk }}" id="checkbox-products-pj{{ product.pk }}" autocomplete="off" />
-                                            <div class=" btn-group ">
-                                                <label for="checkbox-products-pj{{ product.pk }}" class=" btn btn-primary " >
-                                                    <span class=" glyphicon glyphicon-ok "></span>
+                                            <div class="btn-group ">
+                                                <label for="checkbox-products-pj{{ product.pk }}" class="btn btn-primary " >
+                                                    <span class="glyphicon glyphicon-ok "></span>
                                                     <span> </span>
                                                 </label>
-                                                <label for="checkbox-products-pj{{ product.pk }}" class=" btn btn-default active ">
+                                                <label for="checkbox-products-pj{{ product.pk }}" class="btn btn-default active ">
                                                     {{ product.name }}
                                                 </label>
                                             </div>
@@ -190,15 +212,15 @@
                             <hr>
                             {% for product in products_f %}
                                 <div class = "product-pf">
-                                    <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                                        <div class=" form-group ">
+                                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                                        <div class="form-group ">
                                             <input type="checkbox" name="checkbox-products-pf{{ product.pk }}" id="checkbox-products-pf{{ product.pk }}" autocomplete="off" />
-                                            <div class=" btn-group ">
-                                                <label for="checkbox-products-pf{{ product.pk }}" class=" btn btn-primary ">
-                                                    <span class=" glyphicon glyphicon-ok "></span>
+                                            <div class="btn-group ">
+                                                <label for="checkbox-products-pf{{ product.pk }}" class="btn btn-primary ">
+                                                    <span class="glyphicon glyphicon-ok "></span>
                                                     <span> </span>
                                                 </label>
-                                                <label for="checkbox-products-pf{{ product.pk }}" class=" btn btn-default active ">
+                                                <label for="checkbox-products-pf{{ product.pk }}" class="btn btn-default active ">
                                                     {{ product.name }}
                                                 </label>
                                             </div>
@@ -217,15 +239,15 @@
                         </div>
                         <hr>
                         {% for st in status %}
-                            <div class=" col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <div class=" form-group ">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <div class="form-group ">
                                     <input type="checkbox" name="checkbox-status-see{{ st.pk }}" id="checkbox-status-see{{ st.pk }}" autocomplete="off" />
-                                    <div class=" btn-group ">
-                                        <label for="checkbox-status-see{{ st.pk }}" class=" btn btn-info ">
-                                            <span class=" glyphicon glyphicon-ok "></span>
+                                    <div class="btn-group ">
+                                        <label for="checkbox-status-see{{ st.pk }}" class="btn btn-info ">
+                                            <span class="glyphicon glyphicon-ok "></span>
                                             <span> </span>
                                         </label>
-                                        <label for="checkbox-status-see{{ st.pk }}" class=" btn btn-default active ">
+                                        <label for="checkbox-status-see{{ st.pk }}" class="btn btn-default active ">
                                             {{ st.name }}
                                         </label>
                                     </div>
@@ -243,15 +265,15 @@
                         </div>
                         <hr>
                         {% for st in status %}
-                            <div class=" col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <div class=" form-group ">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <div class="form-group ">
                                     <input type="checkbox" name="checkbox-status-edit{{ st.pk }}" id="checkbox-status-edit{{ st.pk }}" autocomplete="off" />
-                                    <div class=" btn-group ">
-                                        <label for="checkbox-status-edit{{ st.pk }}" class=" btn btn-info ">
-                                            <span class=" glyphicon glyphicon-ok "></span>
+                                    <div class="btn-group ">
+                                        <label for="checkbox-status-edit{{ st.pk }}" class="btn btn-info ">
+                                            <span class="glyphicon glyphicon-ok "></span>
                                             <span> </span>
                                         </label>
-                                        <label for="checkbox-status-edit{{ st.pk }}" class=" btn btn-default active ">
+                                        <label for="checkbox-status-edit{{ st.pk }}" class="btn btn-default active ">
                                             {{ st.name }}
                                         </label>
                                     </div>
@@ -269,15 +291,15 @@
                         </div>
                         <hr>
                         {% for st in status %}
-                            <div class=" col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <div class=" form-group ">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <div class="form-group ">
                                     <input type="checkbox" name="checkbox-status-set{{ st.pk }}" id="checkbox-status-set{{ st.pk }}" autocomplete="off" />
-                                    <div class=" btn-group ">
-                                        <label for="checkbox-status-set{{ st.pk }}" class=" btn btn-info ">
-                                            <span class=" glyphicon glyphicon-ok "></span>
+                                    <div class="btn-group ">
+                                        <label for="checkbox-status-set{{ st.pk }}" class="btn btn-info ">
+                                            <span class="glyphicon glyphicon-ok "></span>
                                             <span> </span>
                                         </label>
-                                        <label for="checkbox-status-set{{ st.pk }}" class=" btn btn-default active ">
+                                        <label for="checkbox-status-set{{ st.pk }}" class="btn btn-default active ">
                                             {{ st.name }}
                                         </label>
                                     </div>
@@ -295,16 +317,16 @@
                         </div>
                         <hr>
                         {% for profile in profiles %}
-                            <div class=" col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <div class=" form-group ">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <div class="form-group ">
                                     <input type="checkbox" name="checkbox-profiles-see{{ profile.pk }}" id="checkbox-profiles-see{{ profile.pk }}" autocomplete="off" />
-                                    <div class=" btn-group ">
-                                        <label for="checkbox-profiles-see{{ profile.pk }}" class=" btn btn-warning ">
-                                            <span class=" glyphicon glyphicon-ok "></span>
-                                            <span class=" glyphicon glyphicon-user "></span>
+                                    <div class="btn-group ">
+                                        <label for="checkbox-profiles-see{{ profile.pk }}" class="btn btn-warning ">
+                                            <span class="glyphicon glyphicon-ok "></span>
+                                            <span class="glyphicon glyphicon-user "></span>
                                             <span> </span>
                                         </label>
-                                        <label for="checkbox-profiles-see{{ profile.pk }}" class=" btn btn-default active ">
+                                        <label for="checkbox-profiles-see{{ profile.pk }}" class="btn btn-default active ">
                                             {{ profile.name }}
                                         </label>
                                     </div>
@@ -322,16 +344,16 @@
                         </div>
                         <hr>
                         {% for file in files %}
-                            <div class=" col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <div class=" form-group ">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <div class="form-group ">
                                     <input type="checkbox" name="checkbox-files-see{{ file.pk }}" id="checkbox-files-see{{ file.pk }}" autocomplete="off" />
-                                    <div class=" btn-group ">
-                                        <label for="checkbox-files-see{{ file.pk }}" class=" btn btn-info ">
-                                            <span class=" glyphicon glyphicon-ok "></span>
-                                            <span class=" glyphicon glyphicon-file "></span>
+                                    <div class="btn-group ">
+                                        <label for="checkbox-files-see{{ file.pk }}" class="btn btn-info ">
+                                            <span class="glyphicon glyphicon-ok "></span>
+                                            <span class="glyphicon glyphicon-file "></span>
                                             <span> </span>
                                         </label>
-                                        <label for="checkbox-files-see{{ file.pk }}" class=" btn btn-default active ">
+                                        <label for="checkbox-files-see{{ file.pk }}" class="btn btn-default active ">
                                             {{ file.name }}
                                         </label>
                                     </div>
@@ -349,16 +371,16 @@
                         </div>
                         <hr>
                         {% for file in files %}
-                            <div class=" col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                                <div class=" form-group ">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <div class="form-group ">
                                     <input type="checkbox" name="checkbox-files-download{{ file.pk }}" id="checkbox-files-download{{ file.pk }}" autocomplete="off" />
-                                    <div class=" btn-group ">
-                                        <label for="checkbox-files-download{{ file.pk }}" class=" btn btn-info ">
-                                            <span class=" glyphicon glyphicon-ok "></span>
-                                            <span class=" glyphicon glyphicon-file "></span>
+                                    <div class="btn-group ">
+                                        <label for="checkbox-files-download{{ file.pk }}" class="btn btn-info ">
+                                            <span class="glyphicon glyphicon-ok "></span>
+                                            <span class="glyphicon glyphicon-file "></span>
                                             <span> </span>
                                         </label>
-                                        <label for="checkbox-files-download{{ file.pk }}" class=" btn btn-default active ">
+                                        <label for="checkbox-files-download{{ file.pk }}" class="btn btn-default active ">
                                             {{ file.name }}
                                         </label>
                                     </div>
@@ -368,12 +390,9 @@
                     </div>
                 {% endif %}
             </div>
-            <div class = " col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                <button type="submit" class="btn btn-success">{% trans 'Save Role' %}</button>
-                <a href="{% url 'entries-users' %}" role="button" class="btn btn-default">
-                    {% trans 'Cancel' %}
-                </a>
-                <div class="space"></div>
-            </div>
+
+            {% trans "Save Role" as text_submit %}
+            {% url 'entries-users' as url %}
+            {% include 'parts/submit-form.html' with save_text=text_submit url_cancel=url %}
     </form>
 {% endblock %}

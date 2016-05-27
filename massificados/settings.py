@@ -223,11 +223,11 @@ BOOTSTRAP3 = {
     'required_css_class': 'form-required',
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'gustavo.silva.vs'
-EMAIL_HOST_PASSWORD = 'XXXX'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = 'gustavo.silva.vs'
+# EMAIL_HOST_PASSWORD = 'XXXX'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
 
 NOTIFICATION_FROM_EMAIL = 'noreply@lightstudios.com.br'

@@ -48,32 +48,3 @@ class EntrieUserForm(forms.ModelForm):
         # self.instance.groups.clear()
         # self.instance.groups.add(self.cleaned_data['groups'])
         return r
-
-
-class EntrieProfileEditForm(forms.ModelForm):
-    entries = []
-    status = []
-
-    # entries = forms.MultipleChoiceField(
-    #             label='Entries',
-    #             choices=[(c.id, c.name)
-    #                 for c in Permission.objects.filter(
-    #                     name__icontains='sac'
-    #                 )
-    #             ]
-    # )
-
-    # status = forms.MultipleChoiceField(label='Status', choices=[(m.id, m.name)
-    #                       for m in Permission.objects.filter(name__icontains='status')
-    #                   ])
-
-    class Meta:
-        model = Group
-        fields = ['name', 'permissions']
-
-    def save(self, commit=True):
-        # for v in self.cleaned_data['entries']:
-
-        # self.Group.permissions = self.cleaned_data['permissions_entries']
-
-        return super(EntrieProfileEditForm, self).save(commit=commit)

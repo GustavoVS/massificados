@@ -90,7 +90,8 @@ ul, ol {
 }
 
 .section{
-    padding: 80px 0 100px 0;
+    /*padding: 80px 0 100px 0;*/
+    margin-top: 80px
 }
 
 .section-title {
@@ -607,9 +608,9 @@ label {
 	text-align: center;
 }
 
-.menu-products {
+/*.menu-products {
 	padding-left: 45px;
-}
+}*/
 
 .menu-panel-button span {
 	width: 15px;
@@ -870,3 +871,7 @@ ul.navbar-nav > li > a {
 	height: 120px;
 }
 
+.container.section .row{
+	margin-right: 0;
+	margin-left: 0
+}

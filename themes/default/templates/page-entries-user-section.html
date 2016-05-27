@@ -14,12 +14,7 @@
     <form action="" method="post" class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-2 col-md-offset-2">
         {% csrf_token %}
         {% bootstrap_form form %}
-        <div class = "form-group">
-            <button type="submit" class="btn btn-success ">{% trans 'Save User' %}</button>
-            <a href="{% url 'entries-users' %}" role="button" class="btn btn-default">
-                {% trans 'Cancel' %}
-            </a>
-        </div>
+        {% url 'entries-users' as url %}
+        {% include 'parts/submit-form.html' with url_cancel=url save_text="Save User" %}
     </form>
-
 {% endblock %}

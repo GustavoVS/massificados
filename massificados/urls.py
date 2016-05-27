@@ -23,7 +23,8 @@ from django.conf import settings
 from core.views import IndexView, EntriesView
 from sale.views import ProductionView, CreateBuyerView, EditBuyerView
 from user_account.views import (EntriesProfilesView, EntriesUsersView, EntrieUserNewView, EntrieUserEditView,
-                                EntrieProfileNewView, EntrieProfileEditView, NotificationsView)
+                                NotificationsView)
+from user_groups.views import EntrieProfileNewView, EntrieProfileEditView
 
 from partner.views import SacsListView
 

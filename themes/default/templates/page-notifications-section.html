@@ -5,17 +5,22 @@
 {% block section-title %}{% endblock %}
 {% block section-id %}{% endblock %}
 {% block section-content %}
-    <h3>{% trans "Notifications" %}</h3>
-    <div class="well">
-        {% for notification in notifications %}
-            <div class="panel row">
+
+        <h3>{% trans "Notifications" %}</h3>
+        <div class="well">
+            <div class="row">
+            {% for notification in notifications %}
                 <div class="col-md-8">
                     <a href="{% url 'product-edit-buyer' notification.actor.sale.product.pk notification.actor.sale.buyer.pk %}">
                         {{ notification.verb }}
                     </a>
                 </div>
+            {% empty %}
+                <div class="col-md-12 text-center">
+                    {% trans "There's no notifications" %}
+                </div>
+            {% endfor %}
             </div>
-            {# <div class="row">{{ notification }} #}
-        {% endfor %}
-    </div>
+        </div>
+
 {% endblock %}

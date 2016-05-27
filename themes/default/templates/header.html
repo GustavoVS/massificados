@@ -30,25 +30,31 @@
 {#        <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-contact" class="page-scroll">{% trans "Contact Us" %}</a></li>#}
 {#        <li><a href="{% url 'sac' %}" class="page-scroll">{% trans "SAC" %}</a></li>#}
         {% if user.is_authenticated %}
+            {% if user.group_permissions.menu_dashboard or user.is_superuser %}
             <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#dashBoard" class="page-scroll">
                     <span class="fa fa-area-chart fa-lg hidden-sm"></span>
                     {% trans "Dashboard" %}
                 </a>
             </li>
+            {% endif %}
+            {% if user.group_permissions.menu_production or user.is_superuser %}
             <li><a href="{% url 'production' %}" class="page-scroll">
                 <span class="fa fa-list fa-lg hidden-sm"></span>
                 {% trans "Production" %}
                 </a>
             </li>
+            {% endif %}
+            {% if user.group_permissions.menu_entries or user.group_permissions.menu_entries_users or user.group_permissions.menu_entries_profiles or user.group_permissions.menu_entries_partners or user.group_permissions.menu_entries_products or user.is_superuser %}
             <li><a href="{% url 'entries' %}" class="page-scroll">
                 <span class="fa fa-edit fa-lg hidden-sm"></span>
                 {% trans "Entries" %}
                 </a>
             </li>
+            {% endif %}
             <li>
                 <a href="{% url 'notifications' %}">
-                    {% register_notify_callbacks callbacks='fill_notification_list,fill_notification_badge' as X %}
-                    {{ X|safe }}
+                    {# {% register_notify_callbacks callbacks='fill_notification_list,fill_notification_badge' as X %} #}
+                    {# {{ X|safe }} #}
                     {% notifications_unread as unread_count %}
                     {% if unread_count %}
                         <span  class="fa fa-bell faa-ring animated faa-slow alert-bell fa-2x hidden-sm"></span>

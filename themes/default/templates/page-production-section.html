@@ -15,6 +15,7 @@
           </span>
         </div>
     </form>
+    <div class="space"></div>
     <div class="row">
         <div class="col-md-4"><strong>{% trans 'Buyer' %}</strong></div>
         <div class="col-md-4"><strong>{% trans 'Product' %}</strong></div>
@@ -27,6 +28,15 @@
                 <div class="col-md-4">{{ sale.product }}</div>
                 <div class="col-md-4">{{ sale.status }}</div>
             </a>
+        </div>
+    {% empty %}
+        <div class="space"></div>
+        <div class="well">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                {% trans "There's no Sales" %}
+            </div>
+        </div>
         </div>
     {% endfor %}
 {% endblock %}

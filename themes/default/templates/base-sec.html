@@ -1,9 +1,9 @@
 {% load i18n %}
 
-<div id="{% block section-id %}{% endblock %}" class="section">
+<div id="{% block section-id %}{% endblock %}" class="container section">
     <div class="row">
         <div class="section-title">
-            <div class="container">
+            {# <div class="container"> #}
                 <ol class="breadcrumb bread-hr-primary">
                 {# todo:deixar dinâmico inicio#}
                 <button href="#" class="btn btn-primary"><span class="fa fa-map-marker"></span></button>
@@ -13,11 +13,11 @@
                     <li class="active">Produtos</li>
                  {# todo:deixar dinâmico fim#}
                 </ol>
-            </div>
+            {# </div> #}
             <div class="clearfix"></div>
         </div>
         {% block section-desc %}{% endblock %}
-
+    <div class="space"></div>
     {% block section-content %}
         <div class="background">
         </div>

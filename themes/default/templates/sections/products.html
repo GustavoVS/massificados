@@ -9,7 +9,6 @@
 {#{% endblock %}#}
 
 {% block section-content %}
-    <div class="space"></div>
     {% if products %}
         <div id="products-show">
             {% for product in products %}
@@ -30,7 +29,7 @@
             {% endfor %}
         </div>
         <div class="row">
-            <div class="menu-products col-lg-3 col-md-3 hidden-sm hidden-xs">
+            <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
                <div class="list-group">
                 <a class="list-group-item text-center active" data-remote="true"  id="categoria_todos">
                   {% trans ' All Products' %}
