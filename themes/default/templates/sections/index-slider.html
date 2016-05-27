@@ -1,5 +1,50 @@
-{% extends "base-sec.html" %}
+    {#{% extends "base-sec.html" %#}
+    {% load i18n %}
 
-{% block section_content %}
 
-{% endblock %}
+    {% block section-id %}sec-index-slider{% endblock %}
+    {% block section-title %}{% trans 'Massificados' %}{% endblock %}
+    {#{% block section-desc %}#}
+    {#     <p>{ % trans "O banco Sofisa oferece Produtos e Serviços para clientes Pessoa Física e Jurídica de forma online, segura e sem burocracia. Conheça mais abaixo" % }</p> #}
+    {#{% endblock %}#}
+
+    <div id="{% block section-content %}" class="section">
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <img src="static/img/partner-sofisa/slide1.jpg" alt="Chania">
+      <div class="carousel-caption">
+        <h3>O Banco Sofisa oferece produtos e serviços para clientes pessoas físicas de forma 100% online, segura e sem burocracia.</h3>
+      </div>
+    </div>
+
+    <div class="item">
+      <img src="static/img/partner-sofisa/slide2.jpg" alt="Flower">
+      <div class="carousel-caption">
+        <h3>Seguros</h3>
+        <p>Seguro Viagem, Vida Individual, Automóvel, Perda e Roubo de Equipamentos </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+    {% endblock %}
+    </div>

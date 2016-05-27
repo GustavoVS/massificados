@@ -1,14 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-{#    {% if user.is_authenticated %}#}
-{#        {% include "sections/about.html" %}#}
-{#    {% endif %}#}
-    {% include "sections/products.html" %}
-{#    {% if user.is_authenticated %}#}
-{#        {% include "sections/contact.html" %}#}
-{#    {% endif %}#}
+    {% if user.is_authenticated %}}
+         {% include "sections/products.html" %}
+    {% else %}}
+        {% include "sections/index-slider.html" %}
+    {% endif %}
 {% endblock %}
+
 
 {% block footer_scripts %}
     <script>
