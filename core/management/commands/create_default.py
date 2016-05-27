@@ -605,18 +605,18 @@ DEFAULT_PROFILE_PERMISSION = (
 
 
 USERS = (
-    ('Perfil Parceiro Diretor', 'abc1234$', 'Sofisa', 'DiretorSofisa@mail.com', 'DiretorSofisa',),
-    ('Perfil Parceiro Supervisor', 'abc1234$', 'Sofisa', 'SupervisorSofisa@mail.com', 'SupervisorSofisa',),
-    ('Perfil Parceiro Gerente', 'abc1234$', 'Sofisa', 'GerenteSofisa@mail.com', 'GerenteSofisa',),
-    ('Perfil Parceiro Administrador', 'abc1234$', 'Sofisa', 'AdministradorSofisa@mail.com', 'AdministradorSofisa',),
-    ('Perfil GalCorr Administrador', 'abc1234$', 'GalCorr', 'fabiano.costa@galcorr.com.br', 'AdministradorGalCorr',),
-    ('Perfil GalCorr Gerencial', 'abc1234$', 'GalCorr', 'GerenteGalCorr@mail.com', 'GerenteGalCorr',),
-    ('Perfil GalCorr Comercial', 'abc1234$', 'GalCorr', 'flavio.saraiva@galcorr.com.br', 'ComercialGalCorr',),
-    ('Perfil GalCorr Operacional', 'abc1234$', 'GalCorr', 'lucia.moraes@galcorr.com.br', 'OperacionalGalCorr',),
-    ('Perfil GalCorr Técnico Benefícios', 'abc1234$', 'GalCorr', 'adriano.telles@galcorr.com.br', 'TecnicoBeneficiosGalCorr',),
-    ('Perfil GalCorr Técnico Garantia', 'abc1234$', 'GalCorr', 'rafael.nunes@comercialseguros.com.br', 'TecnicoGarantiaGalCorr',),
-    ('Perfil GalCorr Financeiro', 'abc1234$', 'GalCorr', 'FinanceiroGalCorr@mail.com', 'FinanceiroGalCorr',),
-    ('Perfil Tokio', 'abc1234$', 'GalCorr', 'r.cabral.n@gmail.com', 'TokioMarine',),
+    ('Perfil Parceiro Diretor', '123', 'Sofisa', 'DiretorSofisa@mail.com', 'DiretorSofisa',),
+    ('Perfil Parceiro Supervisor', '123', 'Sofisa', 'SupervisorSofisa@mail.com', 'SupervisorSofisa',),
+    ('Perfil Parceiro Gerente', '123', 'Sofisa', 'GerenteSofisa@mail.com', 'GerenteSofisa',),
+    ('Perfil Parceiro Administrador', '123', 'Sofisa', 'AdministradorSofisa@mail.com', 'AdministradorSofisa',),
+    ('Perfil GalCorr Administrador', '123', 'GalCorr', 'fabiano.costa@galcorr.com.br', 'AdministradorGalCorr',),
+    ('Perfil GalCorr Gerencial', '123', 'GalCorr', 'GerenteGalCorr@mail.com', 'GerenteGalCorr',),
+    ('Perfil GalCorr Comercial', '123', 'GalCorr', 'flavio.saraiva@galcorr.com.br', 'ComercialGalCorr',),
+    ('Perfil GalCorr Operacional', '123', 'GalCorr', 'lucia.moraes@galcorr.com.br', 'OperacionalGalCorr',),
+    ('Perfil GalCorr Técnico Benefícios', '123', 'GalCorr', 'adriano.telles@galcorr.com.br', 'TecnicoBeneficiosGalCorr',),
+    ('Perfil GalCorr Técnico Garantia', '123', 'GalCorr', 'rafael.nunes@comercialseguros.com.br', 'TecnicoGarantiaGalCorr',),
+    ('Perfil GalCorr Financeiro', '123', 'GalCorr', 'FinanceiroGalCorr@mail.com', 'FinanceiroGalCorr',),
+    ('Perfil Tokio', '123', 'GalCorr', 'r.cabral.n@gmail.com', 'TokioMarine',),
 )
 
 
@@ -853,6 +853,6 @@ class Command(BaseCommand):
                         group.profiles.add(Profiles.objects.get(name=profile_names_p))
 
         for user_profile, user_password, user_partner, user_email, user_name in USERS:
-                user = MassificadoUser.objects.get(username=user_name)
+                user = MassificadoUser.objects.get(email=user_email)
                 user.group_permissions = MassificadoGroups.objects.get(name=user_profile)
                 user.save()

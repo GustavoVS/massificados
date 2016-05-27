@@ -83,12 +83,12 @@ class Deadline(models.Model):
                         for status_email in status_emails:
                             if status_email.action_email == 'own':
                                 recipients += (self.sale.product.owner, )
-                            elif status_email.action_emali == 'buy':
+                            elif status_email.action_email == 'buy':
                                 recipients += (self.sale.buyer.email, )
-                            elif status_email.action_emali == 'inc':
+                            elif status_email.action_email == 'inc':
                                 recipients += (self.sale.product.insurance_company.email, )
-                            elif status_email.action_emali == 'usr':
-                                for user in status_email.action_status_emails_users_set:
+                            elif status_email.action_email == 'usr':
+                                for user in status_email.actionstatusemailsusers_set:
                                     recipients += (user, )
 
                         notification = Notification(actor=self, recipient=recipients)
