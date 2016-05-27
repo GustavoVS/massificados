@@ -4,8 +4,9 @@ from django.contrib.sites.models import Site
 from django.core.management.base import BaseCommand
 from partner.models import Partner
 from product.models import Status, StatusSee, StatusEdit, StatusSet, StatusPermission, FileType, FileTypeSee,\
-    FileTypeDownload, InsuranceCompany, Branch, Product, Profile, ActionStatus, ActionStatusEmails
-from user_account.models import Profiles, MassificadoGroups
+    FileTypeDownload, InsuranceCompany, Branch, Product, Profile, ActionStatus
+from user_account.models import Profiles, MassificadoUser, MassificadoGroups
+from status_emails.models import ActionStatusEmails, ActionStatusEmailsUsers
 
 User = get_user_model()
 
@@ -289,55 +290,57 @@ DEFAULT_STATUS_PRODUCT_BENEFICIOS = (
 
 DEFAULT_STATUS_PRODUCT_TOKIO_EMAIL = (
     ('Proposta Gerada', DEFAULT_PRODUCT_NAME_TOKIO,
-     ('{Gerente}', '{Seguradora}', 'flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br',),),
+     (('{Gerente}', 'own'), ('{Seguradora}', 'inc'), ('flavio.saraiva@galcorr.com.br', 'usr',), ('fabiano.costa@galcorr.com.br', 'usr',),),),
     ('Proposta Cancelada', DEFAULT_PRODUCT_NAME_TOKIO,
-     ('{Gerente}', '{Seguradora}', 'flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br',),),
+     (('{Gerente}', 'own'), ('{Seguradora}', 'inc'), ('flavio.saraiva@galcorr.com.br', 'usr',), ('fabiano.costa@galcorr.com.br', 'usr',),),),
     ('Boleto Gerado', DEFAULT_PRODUCT_NAME_TOKIO,
-     ('{Gerente}', '{Seguradora}', 'flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br',),),
+     (('{Gerente}', 'own'), ('{Seguradora}', 'inc'), ('flavio.saraiva@galcorr.com.br', 'usr',), ('fabiano.costa@galcorr.com.br', 'usr',),),),
     ('Apólice Gerada', DEFAULT_PRODUCT_NAME_TOKIO,
-     ('{Gerente}', '{Seguradora}', 'flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br',
-      'lucia.moraes@galcorr.com.br',),),
+     (('{Gerente}', 'own'), ('{Seguradora}', 'inc'), ('flavio.saraiva@galcorr.com.br', 'usr',), ('fabiano.costa@galcorr.com.br', 'usr',),
+      ('lucia.moraes@galcorr.com.br', 'usr'),),),
     ('Apólice Cancelada', DEFAULT_PRODUCT_NAME_TOKIO,
-     ('{Gerente}', '{Seguradora}', 'flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br',
-      'lucia.moraes@galcorr.com.br',),),
+     (('{Gerente}', 'own'), ('{Seguradora}', 'inc'), ('flavio.saraiva@galcorr.com.br', 'usr',), ('fabiano.costa@galcorr.com.br', 'usr',),
+      ('lucia.moraes@galcorr.com.br', 'usr'),),),
     ('Repasse Pago', DEFAULT_PRODUCT_NAME_TOKIO,
-     ('{Gerente}', 'flavio.saraiva@galcorr.com.br',),),)
+     (('{Gerente}', 'own'), ('flavio.saraiva@galcorr.com.br', 'usr',),),),)
 
 
 DEFAULT_STATUS_PRODUCT_GARANTIA_EMAIL = (
     ('Lead de Garantia Gerado', DEFAULT_PRODUCT_NAME_GALCORR_GARANTIA,
-     ('{Gerente}', 'flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br',),),
+     (('{Gerente}', 'own'), ('flavio.saraiva@galcorr.com.br', 'usr',), ('fabiano.costa@galcorr.com.br', 'usr',),),),
     ('Lead de Garantia Cancelado', DEFAULT_PRODUCT_NAME_GALCORR_GARANTIA,
-     ('{Gerente}', 'flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br',),),
+     (('{Gerente}', 'own'), ('flavio.saraiva@galcorr.com.br', 'usr',), ('fabiano.costa@galcorr.com.br', 'usr',),),),
     ('Solicitação de Cotação de Garantia', DEFAULT_PRODUCT_NAME_GALCORR_GARANTIA,
-     ('flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br', 'rafael.nunes@comercialseguros.com.br',),),
+     (('flavio.saraiva@galcorr.com.br', 'usr',), ('fabiano.costa@galcorr.com.br', 'usr',), ('rafael.nunes@comercialseguros.com.br', 'usr'),),),
     ('Cotação de Garantia Gerada', DEFAULT_PRODUCT_NAME_GALCORR_GARANTIA,
-     ('flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br', 'rafael.nunes@comercialseguros.com.br',),),
+     (('flavio.saraiva@galcorr.com.br', 'usr',), ('fabiano.costa@galcorr.com.br', 'usr',), ('rafael.nunes@comercialseguros.com.br', 'usr'),),),
     ('Cotação de Garantia não Gerada - Faltam documentos', DEFAULT_PRODUCT_NAME_GALCORR_GARANTIA,
-     ('flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br', 'rafael.nunes@comercialseguros.com.br',),),
+     (('flavio.saraiva@galcorr.com.br', 'usr',), ('fabiano.costa@galcorr.com.br', 'usr',), ('rafael.nunes@comercialseguros.com.br', 'usr'),),),
     ('Cotação de Garantia Negada', DEFAULT_PRODUCT_NAME_GALCORR_GARANTIA,
-     ('flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br',
-      'rafael.nunes@comercialseguros.com.br', '{Gerente}',),),
+     (('flavio.saraiva@galcorr.com.br', 'usr',), ('fabiano.costa@galcorr.com.br', 'usr',),
+      ('rafael.nunes@comercialseguros.com.br', 'usr'), ('{Gerente}', 'own'),),),
     ('Cotação de Garantia Aprovada', DEFAULT_PRODUCT_NAME_GALCORR_GARANTIA,
-     ('flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br',
-      'rafael.nunes@comercialseguros.com.br', '{Gerente}',),),
+     (('flavio.saraiva@galcorr.com.br', 'usr',), ('fabiano.costa@galcorr.com.br', 'usr',),
+      ('rafael.nunes@comercialseguros.com.br', 'usr'), ('{Gerente}', 'own'),),),
 )
 
 DEFAULT_STATUS_PRODUCT_BENEFICIOS_EMAIL = (
     ('Lead de Benefícios Gerado', DEFAULT_PRODUCT_NAME_GALCORR_BENEFICIOS,
-     ('{Gerente}', 'flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br',),) ,
+     (('{Gerente}', 'own'), ('flavio.saraiva@galcorr.com.br', 'usr',), ('fabiano.costa@galcorr.com.br', 'usr',),),),
     ('Lead de Benefícios Cancelado', DEFAULT_PRODUCT_NAME_GALCORR_BENEFICIOS,
-     ('{Gerente}', 'flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br',) ,),
+     (('{Gerente}', 'own'), ('flavio.saraiva@galcorr.com.br', 'usr',), ('fabiano.costa@galcorr.com.br', 'usr',),),),
     ('Solicitação de Cotação de Benefícios', DEFAULT_PRODUCT_NAME_GALCORR_BENEFICIOS,
-     ('flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br', 'adriano.telles@galcorr.com.br',),),
+     (('flavio.saraiva@galcorr.com.br', 'usr',), ('fabiano.costa@galcorr.com.br', 'usr',), ('adriano.telles@galcorr.com.br', 'usr'),),),
     ('Cotação de Benefícios Gerada', DEFAULT_PRODUCT_NAME_GALCORR_BENEFICIOS,
-     ('flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br', 'adriano.telles@galcorr.com.br',),),
+     (('flavio.saraiva@galcorr.com.br', 'usr',), ('fabiano.costa@galcorr.com.br', 'usr',), ('adriano.telles@galcorr.com.br', 'usr'),),),
     ('Cotação de Benefícios não Gerada - Faltam documentos', DEFAULT_PRODUCT_NAME_GALCORR_BENEFICIOS,
-     ('flavio.saraiva@galcorr.com.br', 'adriano.telles@galcorr.com.br', 'rafael.nunes@galcorr.com.br',),),
+     (('flavio.saraiva@galcorr.com.br', 'usr',), ('adriano.telles@galcorr.com.br', 'usr'), ('rafael.nunes@comercialseguros.com.br', 'usr'),),),
     ('Cotação de Benefícios Negada', DEFAULT_PRODUCT_NAME_GALCORR_BENEFICIOS,
-     ('flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br', 'adriano.telles@galcorr.com.br', '{Gerente}',),),
+     (('flavio.saraiva@galcorr.com.br', 'usr',), ('fabiano.costa@galcorr.com.br', 'usr',),
+      ('adriano.telles@galcorr.com.br', 'usr'), ('{Gerente}', 'own'),),),
     ('Cotação de Benefícios Aprovada', DEFAULT_PRODUCT_NAME_GALCORR_BENEFICIOS,
-     ('flavio.saraiva@galcorr.com.br', 'fabiano.costa@galcorr.com.br', 'adriano.telles@galcorr.com.br', '{Gerente}',),),
+     (('flavio.saraiva@galcorr.com.br', 'usr',), ('fabiano.costa@galcorr.com.br', 'usr',),
+      ('adriano.telles@galcorr.com.br', 'usr'), ('{Gerente}', 'own'),),),
 )
 
 # Arquivos
@@ -390,7 +393,7 @@ DEFAULT_FILES_BENEFICIOS = (
     'Apresentação Institucional',
 )
 
-DEFAULT_CIA = (('Tokio', '123456'), ('GalCorr', '000000'),)
+DEFAULT_INSURANCE = (('Tokio', '123456', 'r.cabral.n@gmail.com',), ('GalCorr', '000000', 'r.cabral.n@gmail.com',),)
 
 DEFAULT_BRANCH = ('Vida', 'Acidentes Pessoais',
     'Garantia Tradicional', 'Garantia Judicial', 'Fiança Locatícia', 'Saúde',)
@@ -600,8 +603,24 @@ DEFAULT_PROFILE_PERMISSION = (
      DEFAULT_STATUS_PROFILE_TOKIO_SET, DEFAULT_FILES_TOKIO, DEFAULT_FILES_TOKIO, PROFILE_NAME_TOKIO,),)
 
 
+USERS = (
+    ('Perfil Parceiro Diretor', 'abc1234$', 'Sofisa', 'DiretorSofisa@mail.com', 'DiretorSofisa',),
+    ('Perfil Parceiro Supervisor', 'abc1234$', 'Sofisa', 'SupervisorSofisa@mail.com', 'SupervisorSofisa',),
+    ('Perfil Parceiro Gerente', 'abc1234$', 'Sofisa', 'GerenteSofisa@mail.com', 'GerenteSofisa',),
+    ('Perfil Parceiro Administrador', 'abc1234$', 'Sofisa', 'AdministradorSofisa@mail.com', 'AdministradorSofisa',),
+    ('Perfil GalCorr Administrador', 'abc1234$', 'GalCorr', 'fabiano.costa@galcorr.com.br', 'AdministradorGalCorr',),
+    ('Perfil GalCorr Gerencial', 'abc1234$', 'GalCorr', 'GerenteGalCorr@mail.com', 'GerenteGalCorr',),
+    ('Perfil GalCorr Comercial', 'abc1234$', 'GalCorr', 'flavio.saraiva@galcorr.com.br', 'ComercialGalCorr',),
+    ('Perfil GalCorr Operacional', 'abc1234$', 'GalCorr', 'lucia.moraes@galcorr.com.br', 'OperacionalGalCorr',),
+    ('Perfil GalCorr Técnico Benefícios', 'abc1234$', 'GalCorr', 'adriano.telles@galcorr.com.br', 'TecnicoBeneficiosGalCorr',),
+    ('Perfil GalCorr Técnico Garantia', 'abc1234$', 'GalCorr', 'rafael.nunes@comercialseguros.com.br', 'TecnicoGarantiaGalCorr',),
+    ('Perfil GalCorr Financeiro', 'abc1234$', 'GalCorr', 'FinanceiroGalCorr@mail.com', 'FinanceiroGalCorr',),
+    ('Perfil Tokio', 'abc1234$', 'GalCorr', 'r.cabral.n@gmail.com', 'TokioMarine',),
+)
+
+
 class Command(BaseCommand):
-    help = 'Cria usuários default para o início da aplicação'
+    help = 'Cria dados padrões para o início da aplicação'
 
     def handle(self, *args, **options):
 
@@ -631,6 +650,19 @@ class Command(BaseCommand):
             )
             p.save()
 
+        if Partner.objects.filter(id=3).exists():
+            p = Partner.objects.get(id=3)
+        else:
+            s = Site(domain='tokio', name='Tokio')
+            s.save()
+            p = Partner(
+                name='Tokio',
+                email='Tokio@mail.com',
+                cnpj='00.000.000.0000-00',
+                site=s,
+            )
+            p.save()
+
 
         if not User.objects.filter(username="admin").exists():
             User.objects.create_superuser("admin", "admin@admin.com", "admin", partner=p)
@@ -638,6 +670,14 @@ class Command(BaseCommand):
         if not User.objects.filter(username="demo").exists():
             u = User(username="demo", email="demo@demo.com", password="massificadodemo", partner=p)
             u.save()
+
+        for user_profile, user_password, user_partner, user_email, user_name in USERS:
+            if not MassificadoUser.objects.filter(email=user_email).exists():
+                user = MassificadoUser(username=user_name,
+                                       email=user_email,
+                                       password=user_password,
+                                       partner=Partner.objects.get(name=user_partner))
+                user.save()
 
         for status_name, level in DEFAULT_STATUS:
             if not Status.objects.filter(name=status_name).exists():
@@ -679,9 +719,9 @@ class Command(BaseCommand):
                 fl = FileTypeDownload(name=file_name)
                 fl.save()
 
-        for cia, susep in DEFAULT_CIA:
+        for cia, susep, email in DEFAULT_INSURANCE:
             if not InsuranceCompany.objects.filter(name=cia).exists():
-                insurance_company = InsuranceCompany(name=cia, susep=susep)
+                insurance_company = InsuranceCompany(name=cia, susep=susep, email=email)
                 insurance_company.save()
 
         for branch_name in DEFAULT_BRANCH:
@@ -693,6 +733,11 @@ class Command(BaseCommand):
             if not Profile.objects.filter(name=profile_name).exists():
                 pe = Profile(name=profile_name)
                 pe.save()
+
+        for profile in DEFAULT_PROFILE_NAME:
+            if not Profiles.objects.filter(name=profile).exists():
+                per = Profiles(name=profile)
+                per.save()
 
         for product_name, introduction, description, declaration, kind, insurance, branch, files,\
         begin, profile, status_permitted in DEFAULT_PRODUCT:
@@ -713,21 +758,55 @@ class Command(BaseCommand):
                 for file in files:
                     product.file_type.add(FileType.objects.get(name=file))
 
-                for status_p in status_permitted:
-                    product.status_permission.add(Status.objects.get(name=status_p))
+                for status_p, level in status_permitted:
+                    product.status_permission.add(StatusPermission.objects.get(name=status_p))
 
-                for status_p in status_permitted:
+                for status_p, lever in status_permitted:
                     action_st = ActionStatus(
-                             Product=Product.objects.get(name=product_name),
-                             Status=Status.objects.get(name=status_p))
+                             product=product,
+                             status=Status.objects.get(name=status_p))
                     action_st.save()
-                    # for st, products_email, emails in DEFAULT_STATUS_PRODUCT_TOKIO_EMAIL:
-                    #     action_st_email
+                    for st, products_emails, emails in DEFAULT_STATUS_PRODUCT_TOKIO_EMAIL:
+                        if st == status_p:
+                            for product_emails in products_emails:
+                                if product_emails == product_name:
+                                    for email, type in emails:
+                                        action_st_email = ActionStatusEmails(action_status=action_st, action_email=type)
+                                        action_st_email.save()
+                                        if type == 'usr':
+                                            if User.objects.filter(email=email).exists():
+                                                action_st_email_user = ActionStatusEmailsUsers(
+                                                    action_status_email=action_st_email,
+                                                    user=User.objects.get(email=email))
+                                                action_st_email_user.save()
 
-        for profile in DEFAULT_PROFILE_NAME:
-            if not Profiles.objects.filter(name=profile).exists():
-                per = Profiles(name=profile)
-                per.save()
+                    for st, products_emails, emails in DEFAULT_STATUS_PRODUCT_BENEFICIOS_EMAIL:
+                        if st == status_p:
+                            for product_emails in products_emails:
+                                if product_emails == product_name:
+                                    for email, type in emails:
+                                        action_st_email = ActionStatusEmails(action_status=action_st, action_email=type)
+                                        action_st_email.save()
+                                        if type == 'usr':
+                                            if User.objects.filter(email=email).exists():
+                                                action_st_email_user = ActionStatusEmailsUsers(
+                                                    action_status_email=action_st_email,
+                                                    user=User.objects.get(email=email))
+                                                action_st_email_user.save()
+
+                    for st, products_emails, emails in DEFAULT_STATUS_PRODUCT_GARANTIA_EMAIL:
+                        if st == status_p:
+                            for product_emails in products_emails:
+                                if product_emails == product_name:
+                                    for email, type in emails:
+                                        action_st_email = ActionStatusEmails(action_status=action_st, action_email=type)
+                                        action_st_email.save()
+                                        if type == 'usr':
+                                            if User.objects.filter(email=email).exists():
+                                                action_st_email_user = ActionStatusEmailsUsers(
+                                                    action_status_email=action_st_email,
+                                                    user=User.objects.get(email=email))
+                                                action_st_email_user.save()
 
         for permission_name, menu_active_product, menu_active_dashboard, menu_active_production, menu_active_entries,\
             menu_active_entries_detail, menu_active_notification, menu_active_profile, products_permission,\
@@ -771,3 +850,8 @@ class Command(BaseCommand):
 
                     for profile_names_p in profile_names_permission:
                         group.profiles.add(Profiles.objects.get(name=profile_names_p))
+
+        for user_profile, user_password, user_partner, user_email, user_name in USERS:
+                user = MassificadoUser.objects.get(username=user_name)
+                user.group_permissions = MassificadoGroups.objects.get(name=user_profile)
+                user.save()

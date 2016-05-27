@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 class InsuranceCompany(models.Model):
     name = models.CharField(max_length=30)
     susep = models.CharField(max_length=12)
+    email = models.EmailField(_('Email address'), blank=True)
 
     def __unicode__(self):
         return self.name
@@ -216,3 +217,6 @@ class Domain(models.Model):
 class ActionStatus(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
+
+    def __unicode__(self):
+        return 'Product "%s", Status "%s"' % (self.product, self.status)
