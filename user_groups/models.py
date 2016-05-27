@@ -1,0 +1,46 @@
+from __future__ import unicode_literals
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
+from product.models import Product, StatusSee, StatusEdit, StatusSet, FileTypeSee, FileTypeDownload
+
+
+class Profiles(models.Model):
+    name = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name_plural = _('Profiles')
+
+    def __unicode__(self):
+        return self.name
+
+
+class AbstractMassificadoGroups(models.Model):
+    name = models.CharField(_('First name'), max_length=100, blank=True)
+    menu_products = models.BooleanField(_('Products'), default=False)
+    menu_dashboard = models.BooleanField(_('Dashboard'), default=False)
+    menu_production = models.BooleanField(_('Production'), default=False)
+    menu_entries = models.BooleanField(_('Entries'), default=False)
+    menu_entries_users = models.BooleanField(_('Users'), default=False)
+    menu_entries_profiles = models.BooleanField(_('Profiles'), default=False)
+    menu_entries_partners = models.BooleanField(_('Partners'), default=False)
+    menu_entries_products = models.BooleanField(_('Products'), default=False)
+    menu_notification = models.BooleanField(_('Notification'), default=False)
+    menu_profile = models.BooleanField(_('Profile'), default=False)
+    product = models.ManyToManyField(Product,)
+    status_see = models.ManyToManyField(StatusSee,)
+    status_edit = models.ManyToManyField(StatusEdit,)
+    status_set = models.ManyToManyField(StatusSet,)
+    profiles = models.ManyToManyField(Profiles,)
+    filetype_see = models.ManyToManyField(FileTypeSee,)
+    filetype_download = models.ManyToManyField(FileTypeDownload,)
+
+    class Meta:
+        verbose_name_plural = _('Permissions')
+        abstract = True
+
+    def __unicode__(self):
+        return self.name
+
+
+class MassificadoGroups(AbstractMassificadoGroups):
+    pass

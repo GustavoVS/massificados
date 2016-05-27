@@ -29,13 +29,21 @@ class Notification(object):
 
         if self.recipient is MassificadoUser:
             mail_recipient = self.recipient.email
+            notify_recipient = self.recipient
         elif self.recipient is Group:
+            notify_recipient = Group
             mail_recipient = ()
             for user in Group:
                 mail_recipient += (user.email,)
-
-        else:
-            mail_recipient = self.recipient
+        elif self.recipient is list:
+            for recipient in self.recipient:
+                if recipient is MassificadoUser:
+                    mail_recipient += (recipient.email, )
+                    notify_recipient += (recipient,)
+                else:
+                    mail_recipient += (recipient, )
 
         self.mail_notify(subject, message, NOTIFICATION_FROM_EMAIL, mail_recipient)
-        self.system_notification(self.actor, self.recipient, message)
+
+        if notify_recipient:
+            self.system_notification(self.actor, notify_recipient, message)

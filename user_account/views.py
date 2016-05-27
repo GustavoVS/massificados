@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-from django.contrib.auth.models import Group
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from product.models import Product, Status, FileType
-from user_account.models import Profiles
+from user_groups.models import Profiles
 from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView
@@ -12,7 +11,7 @@ from django.db.models import  Q
 from core.views import MassificadoPageListView
 from .models import MassificadoUser, MassificadoGroups
 from .forms import EntrieUserForm, EntrieProfileEditForm
-from notifications.models import Notification
+# from notifications.models import Notification
 
 
 ENTRIES_PAGES = [

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Massificados
     'user_account',
+    'user_groups',
     'partner',
     'product',
     'sale',

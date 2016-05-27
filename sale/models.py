@@ -75,7 +75,19 @@ class Deadline(models.Model):
 
             if old.status != self.status:
 
-                recipients = self.status.action_status_set.objects.get(product=self.product).action_status_emails_set
+                status_emails = self.status.action_status_set.objects.get(product=self.product).action_status_emails_set
+                recipients = ()
+
+                for status_email in status_emails:
+                    if status_email.action_email == 'own':
+                        recipients += (self.deadline.sale.product.owner, )
+                    elif status_email.action_emali == 'buy':
+                        recipients += (self.sale.buyer.email, )
+                    elif status_email.action_emali == 'inc':
+                        recipients += (self.sale.product.insurance_company.email, )
+                    elif status_email.action_emali == 'usr':
+                        for user in status_email.action_status_emails_users_set:
+                            recipients += (user, )
 
                 notification = Notification(actor=self, recipient=recipients)
                 notification.send(

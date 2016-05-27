@@ -11,5 +11,3 @@ class UserAdmin(UserAdmin):
     model = User
 
 admin.site.register(User, UserAdmin)
-admin.site.register(MassificadoGroups)
-admin.site.register(Profiles)
