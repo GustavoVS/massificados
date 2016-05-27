@@ -5,7 +5,8 @@ from django.core.management.base import BaseCommand
 from partner.models import Partner
 from product.models import Status, StatusSee, StatusEdit, StatusSet, StatusPermission, FileType, FileTypeSee,\
     FileTypeDownload, InsuranceCompany, Branch, Product, Profile, ActionStatus
-from user_account.models import Profiles, MassificadoUser, MassificadoGroups
+from user_account.models import MassificadoUser
+from user_groups.models import Profiles, MassificadoGroups
 from status_emails.models import ActionStatusEmails, ActionStatusEmailsUsers
 
 User = get_user_model()
