@@ -13,7 +13,7 @@ class InsuranceCompany(models.Model):
 
 
 class Bank(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=80)
     code = models.IntegerField()
 
     def __unicode__(self):
@@ -35,21 +35,21 @@ class Profile(models.Model):
 
 
 class FileType(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=100)
 
     def __unicode__(self):
         return self.name
 
 
 class FileTypeSee(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=100)
 
     def __unicode__(self):
-        return self.name
+        return self.namema
 
 
 class FileTypeDownload(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=100)
 
     def __unicode__(self):
         return self.name
@@ -75,7 +75,7 @@ class StatusPermission(models.Model):
     level = models.IntegerField(default=1)
 
     class Meta:
-        verbose_name_plural = 'Status'
+        verbose_name_plural = 'StatusPermissions'
 
     def __unicode__(self):
         return self.name
@@ -86,7 +86,7 @@ class StatusSee(models.Model):
     level = models.IntegerField(default=1)
 
     class Meta:
-        verbose_name_plural = 'Status'
+        verbose_name_plural = 'StatusSee'
 
     def __unicode__(self):
         return self.name
@@ -97,7 +97,7 @@ class StatusEdit(models.Model):
     level = models.IntegerField(default=1)
 
     class Meta:
-        verbose_name_plural = 'Status'
+        verbose_name_plural = 'StatusEdit'
 
     def __unicode__(self):
         return self.name
@@ -108,7 +108,7 @@ class StatusSet(models.Model):
     level = models.IntegerField(default=1)
 
     class Meta:
-        verbose_name_plural = 'Status'
+        verbose_name_plural = 'StatusSet'
 
     def __unicode__(self):
         return self.name
