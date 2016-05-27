@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
-from product.models import Product
+# from product.models import Product
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.sites.models import Site
@@ -33,10 +33,10 @@ class Campaign(models.Model):
         Partner,
         on_delete=models.CASCADE
     )
-    product = models.ForeignKey(
-        Product,
-        on_delete=models.CASCADE
-    )
+    # product = models.ForeignKey(
+    #     Product,
+    #     on_delete=models.CASCADE
+    # )
 
     def __unicode__(self):
         return self.name

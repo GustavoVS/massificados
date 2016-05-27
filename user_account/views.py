@@ -125,4 +125,5 @@ class NotificationsView(LoginRequiredMixin, ListView):
     context_object_name = 'notifications'
 
     def get_queryset(self):
+        self.request.user.notifications.mark_all_as_read()
         return self.request.user.notifications.all()

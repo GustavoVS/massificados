@@ -24,6 +24,9 @@ class ActionStatusEmails(models.Model):
 
         return super(ActionStatusEmails, self).save()
 
+    def __unicode__(self):
+        return '%s - %s' % (self.action_status, self.action_email)
+
 
 class ActionStatusEmailsUsers(models.Model):
     action_status_email = models.ForeignKey(ActionStatusEmails, on_delete=models.CASCADE)

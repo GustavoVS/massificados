@@ -30,37 +30,36 @@
 {#        <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-contact" class="page-scroll">{% trans "Contact Us" %}</a></li>#}
 {#        <li><a href="{% url 'sac' %}" class="page-scroll">{% trans "SAC" %}</a></li>#}
         {% if user.is_authenticated %}
-            {% if user.is_admin or user.is_superuser %}
-                <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#dashBoard" class="page-scroll">
-                        <span class="fa fa-area-chart fa-lg hidden-sm"></span>
-                        {% trans "Dashboard" %}
-                    </a>
-                </li>
-                <li><a href="{% url 'production' %}" class="page-scroll">
-                    <span class="fa fa-list fa-lg hidden-sm"></span>
-                    {% trans "Production" %}
-                    </a>
-                </li>
-                <li><a href="{% url 'entries' %}" class="page-scroll">
-                    <span class="fa fa-edit fa-lg hidden-sm"></span>
-                    {% trans "Entries" %}
-                    </a>
-                </li>
-                <li><a href="{% url 'notifications' %}">
-                        {% register_notify_callbacks callbacks='fill_notification_list,fill_notification_badge' as X %}
-                        {{ X|safe }}
-                        {% notifications_unread as unread_count %}
-                        {% if unread_count %}
-                            <span  class="fa fa-bell faa-ring animated faa-slow alert-bell fa-2x hidden-sm"></span>
-                            <span id="live_notify_badge" class="badge">{{unread_count}}</span>
-                        {% else %}
-                          <span class="fa fa-bell alert-bell"></span>
-                        {% endif %}
+            <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#dashBoard" class="page-scroll">
+                    <span class="fa fa-area-chart fa-lg hidden-sm"></span>
+                    {% trans "Dashboard" %}
+                </a>
+            </li>
+            <li><a href="{% url 'production' %}" class="page-scroll">
+                <span class="fa fa-list fa-lg hidden-sm"></span>
+                {% trans "Production" %}
+                </a>
+            </li>
+            <li><a href="{% url 'entries' %}" class="page-scroll">
+                <span class="fa fa-edit fa-lg hidden-sm"></span>
+                {% trans "Entries" %}
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'notifications' %}">
+                    {% register_notify_callbacks callbacks='fill_notification_list,fill_notification_badge' as X %}
+                    {{ X|safe }}
+                    {% notifications_unread as unread_count %}
+                    {% if unread_count %}
+                        <span  class="fa fa-bell faa-ring animated faa-slow alert-bell fa-2x hidden-sm"></span>
+                        <span id="live_notify_badge" class="badge">{{unread_count}}</span>
+                    {% else %}
+                      <span class="fa fa-bell alert-bell"></span>
+                    {% endif %}
 {#                      <span class="fa fa-bell fa-2x"></span>#}
-                        {% trans "Notifications" %}
-                    </a>
-                </li>
-            {% endif %}
+                    {% trans "Notifications" %}
+                </a>
+            </li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <span class="glyphicon glyphicon-user"></span>

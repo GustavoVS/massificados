@@ -66,40 +66,40 @@ class Deadline(models.Model):
     def get_questions(self):
         return self.sale.product.profile.questions_set.get(type_profile='pdl')
 
-    def save(self):
+    def save(self, *a, **kw):
         if not self.status_id:
             self.status = self.sale.product.begin_status
 
+        resp = super(Deadline, self).save(*a, **kw)
+
         if self.pk is not None:
-            old = Deadline.object.get(pk=self.pk)
+            new = Deadline.objects.get(pk=self.pk)
+            if new.status != self.status:
+                if new.status.actionstatus_set.filter(product=self.sale.product).exists():
+                    status_emails = new.status.actionstatus_set.get(
+                        product=self.sale.product).actionstatusemails_set.all()
+                    if status_emails:
+                        recipients = ()
+                        for status_email in status_emails:
+                            if status_email.action_email == 'own':
+                                recipients += (self.sale.product.owner, )
+                            elif status_email.action_emali == 'buy':
+                                recipients += (self.sale.buyer.email, )
+                            elif status_email.action_emali == 'inc':
+                                recipients += (self.sale.product.insurance_company.email, )
+                            elif status_email.action_emali == 'usr':
+                                for user in status_email.action_status_emails_users_set:
+                                    recipients += (user, )
 
-            if old.status != self.status:
+                        notification = Notification(actor=self, recipient=recipients)
+                        notification.send(
+                            _('Sale [%d] has status changed') % (self.pk),
+                            _('The Sale [%d] has status changed from %s to %s') % (
+                                self.pk, self.status, new.status
+                            )
+                        )
 
-                status_emails = self.status.action_status_set.objects.get(product=self.product).action_status_emails_set
-                recipients = ()
-
-                for status_email in status_emails:
-                    if status_email.action_email == 'own':
-                        recipients += (self.deadline.sale.product.owner, )
-                    elif status_email.action_emali == 'buy':
-                        recipients += (self.sale.buyer.email, )
-                    elif status_email.action_emali == 'inc':
-                        recipients += (self.sale.product.insurance_company.email, )
-                    elif status_email.action_emali == 'usr':
-                        for user in status_email.action_status_emails_users_set:
-                            recipients += (user, )
-
-                notification = Notification(actor=self, recipient=recipients)
-                notification.send(
-                    _('Sale [%d] has status changed') % (self.pk),
-                    _('The Sale [%d] has status changed from %s to %s') % (
-                        '[' + self.pk + ']', '<b>',
-                        '<b>' + old.status + '</b>',
-                        '<b>' + self.status + '</b>',
-                    )
-                )
-
-        return super(Deadline, self).save()
+        return resp
 
 
 class File(models.Model):

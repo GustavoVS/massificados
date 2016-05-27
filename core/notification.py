@@ -26,20 +26,21 @@ class Notification(object):
 
         if not self.recipient:
             raise Exception(_('No recipients found to send the notification'))
-
-        if self.recipient is MassificadoUser:
+        # import ipdb; ipdb.set_trace()
+        mail_recipient = notify_recipient = ()
+        if isinstance(self.recipient, MassificadoUser):
             mail_recipient = self.recipient.email
             notify_recipient = self.recipient
-        elif self.recipient is Group:
+        elif isinstance(self.recipient, Group):
             notify_recipient = Group
             mail_recipient = ()
             for user in Group:
                 mail_recipient += (user.email,)
-        elif self.recipient is list:
+        elif isinstance(self.recipient, tuple) or isinstance(self.recipient, list):
             for recipient in self.recipient:
-                if recipient is MassificadoUser:
+                if isinstance(recipient, MassificadoUser):
                     mail_recipient += (recipient.email, )
-                    notify_recipient += (recipient,)
+                    self.system_notification(self.actor, recipient, message)
                 else:
                     mail_recipient += (recipient, )
 

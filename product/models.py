@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-# from user_account.models import MassificadoUser
 
 
 class InsuranceCompany(models.Model):
@@ -132,7 +131,7 @@ class Product(models.Model):
     is_lead = models.BooleanField(default=False)
     begin_status = models.ForeignKey(Status)
     profile = models.ForeignKey(Profile, null=True)
-    # owner = models.ForeignKey(MassificadoUser)
+    owner = models.ForeignKey('user_account.MassificadoUser', null=True)
 
     def __unicode__(self):
         return self.name
@@ -215,3 +214,6 @@ class Domain(models.Model):
 class ActionStatus(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
+
+    def __unicode__(self):
+        return '%s (%s)' % (self.product, self.status)

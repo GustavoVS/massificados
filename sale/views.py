@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 # from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView
-from .models import Sale, Partner, Buyer, Status, ResponseDetail, ResponseDeadline
+from .models import Sale, Partner, Buyer, Status, ResponseDeadline
 from .forms import BuyerForm, AddressBuyerFormset, FileDeadlineFormset, DeadlineSaleFormset, DetailDeadlineFormset
 from product.models import Product, Question
 
@@ -29,10 +29,10 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         data = super(CreateBuyerView, self).get_context_data(**kwargs)
-        data['productpk'] = self.kwargs['productpk']
+        product = Product.objects.get(pk=self.kwargs['productpk'])
+        data['product'] = product
         data['addressbuyer'] = AddressBuyerFormset()
         data['show_all'] = False
-        product = Product.objects.get(pk=self.kwargs['productpk'])
         data['status_deadline'] = product.begin_status
         # todo: filter user permissions
         data['possible_new_status'] = Status.objects.filter(level__gte=product.begin_status.level).order_by('level')
@@ -54,13 +54,12 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
 
         for form in addresses.forms:
             if form.is_valid():
-                form.instance.buyer = self.object
+                form.instance   .buyer = self.object
                 form.save()
 
         sale = Sale()
         sale.product = Product.objects.get(pk=self.request.POST['productpk'])
         sale.buyer = self.object
-        # todo: Tirar esse hardcode do pértinêr
         sale.partner = Partner.objects.get(id=1)
         sale.save()
 
@@ -107,13 +106,15 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
         data = super(EditBuyerView, self).get_context_data(**kwargs)
         data['addressbuyer'] = AddressBuyerFormset(instance=self.object)
         data['show_all'] = False
+        data['product'] = Product.objects.get(pk=self.kwargs['productpk'])
         if not Product.objects.get(pk=self.kwargs['productpk']).is_lead:
             data['show_all'] = True
             sale = self.object.sale_set.all()[0]
             data['deadlinesale'] = DeadlineSaleFormset(instance=sale)
             data['status_deadline'] = sale.deadline_set.all()[0].status
             # todo: filter user permissions
-            data['possible_new_status'] = Status.objects.filter(level__gte=sale.deadline_set.all()[0].status.level).order_by('level')
+            data['possible_new_status'] = Status.objects.filter(
+                level__gte=sale.deadline_set.all()[0].status.level).order_by('level')
             if sale.deadline_set.all():
                 data['filedeadline'] = FileDeadlineFormset(instance=sale.deadline_set.all()[0])
             else:
@@ -152,8 +153,9 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
             if form.is_valid():
                 # form.object.status_id = self.request.POST.get('new-status', '')
                 dl = form.save()
-                dl.status_id = self.request.POST.get('new-status', '')
-                dl.save()
+                if self.request.POST.get('new-status', ''):
+                    dl.status_id = self.request.POST.get('new-status', '')
+                    dl.save()
 
                 for k, v in self.request.POST.iteritems():
                     if k.split('-')[0] == 'q_resp':
