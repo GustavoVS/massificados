@@ -2,12 +2,13 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+# from user_account.models import MassificadoUser
 
 
 class InsuranceCompany(models.Model):
     name = models.CharField(max_length=30)
     susep = models.CharField(max_length=12)
-    email = models.CharField(max_length=50)
+    email = models.EmailField(_('Email address'), blank=True)
 
     def __unicode__(self):
         return self.name
@@ -65,6 +66,10 @@ class Status(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    # def save(self):
+    #
+    #     return super(Status, self).save()
 
 
 class StatusPermission(models.Model):

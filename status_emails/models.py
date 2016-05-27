@@ -16,6 +16,9 @@ class ActionStatusEmails(models.Model):
     )
     action_email = models.CharField(max_length=3, choices=ACTION_EMAIL_CHOICES)
 
+    def __unicode__(self):
+        return 'Type "%s", Status "%s"' % (self.action_email, self.action_status)
+
     def save(self):
         if self.pk is not None:
             old = ActionStatusEmails.objects.get(pk=self.pk)
@@ -31,3 +34,6 @@ class ActionStatusEmails(models.Model):
 class ActionStatusEmailsUsers(models.Model):
     action_status_email = models.ForeignKey(ActionStatusEmails, on_delete=models.CASCADE)
     user = models.ForeignKey(MassificadoUser, on_delete=models.CASCADE)
+
+    def __unicode__(self):
+        return 'Action Status Email "%s", User "%s"' % (self.action_status_email, self.user)
