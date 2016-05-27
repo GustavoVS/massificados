@@ -136,7 +136,6 @@ class Product(models.Model):
     is_lead = models.BooleanField(default=False)
     begin_status = models.ForeignKey(Status)
     profile = models.ForeignKey(Profile, null=True)
-    owner = models.ForeignKey('user_account.MassificadoUser', null=True)
 
     def __unicode__(self):
         return self.name

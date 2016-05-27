@@ -3,6 +3,7 @@
 {% load i18n %}
 {# formset 1 #}
 {% load bootstrap3 %}
+{% load account %}
 
 {% block section-id %}page-sake-sec{% endblock %}
 
@@ -28,7 +29,7 @@
                         {% trans "Product" %}:{{ product }}
                     </div>
                     <div class="col-md-3">
-                        {% trans "Owner" %}:{{ product.owner }}
+                        {% trans "Sale Owner" %}:{{ sale.owner|default:user }}
                     </div>
                     <div class="col-md-3">
                         {% trans "Status" %}:{{ status_deadline }}

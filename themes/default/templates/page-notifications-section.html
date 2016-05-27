@@ -8,17 +8,14 @@
     <h3>{% trans "Notifications" %}</h3>
     <div class="well">
         {% for notification in notifications %}
-            {# <div class="well row"> #}
-                {# <div class="col-md-8"> #}
-                    {# actor_content_type: <p>{{ notification.actor_content_type }}</p> #}
-                    {# verb: <p>{{ notification.verb }}</p> #}
-                    {# timestamp: <p>{{ notification.timestamp }}</p> #}
-                    {# description: <p>{{ notification.description }}</p> #}
-                    {# emailed: <p>{{ notification.emailed }}</p> #}
-                    {# level: <p>{{ notification.level }}</p> #}
-                {# </div> #}
-            {# </div> #}
-            {{ notification }}
+            <div class="panel row">
+                <div class="col-md-8">
+                    <a href="{% url 'product-edit-buyer' notification.actor.sale.product.pk notification.actor.sale.buyer.pk %}">
+                        {{ notification.verb }}
+                    </a>
+                </div>
+            </div>
+            {# <div class="row">{{ notification }} #}
         {% endfor %}
     </div>
 {% endblock %}

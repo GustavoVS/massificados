@@ -60,6 +60,7 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
         sale = Sale()
         sale.product = Product.objects.get(pk=self.request.POST['productpk'])
         sale.buyer = self.object
+        sale.owner = self.request.user
         sale.partner = Partner.objects.get(id=1)
         sale.save()
 
@@ -107,9 +108,9 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
         data['addressbuyer'] = AddressBuyerFormset(instance=self.object)
         data['show_all'] = False
         data['product'] = Product.objects.get(pk=self.kwargs['productpk'])
+        data['sale'] = sale = self.object.sale_set.all()[0]
         if not Product.objects.get(pk=self.kwargs['productpk']).is_lead:
             data['show_all'] = True
-            sale = self.object.sale_set.all()[0]
             data['deadlinesale'] = DeadlineSaleFormset(instance=sale)
             data['status_deadline'] = sale.deadline_set.all()[0].status
             # todo: filter user permissions

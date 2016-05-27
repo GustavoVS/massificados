@@ -45,6 +45,7 @@ class Sale(models.Model):
     product = models.ForeignKey(Product)
     partner = models.ForeignKey(Partner)
     buyer = models.ForeignKey(Buyer)
+    owner = models.ForeignKey(MassificadoUser)
 
     def __unicode__(self):
         return '%s (%s)' % (self.product, self.buyer)
@@ -82,14 +83,15 @@ class Deadline(models.Model):
                         recipients = ()
                         for status_email in status_emails:
                             if status_email.action_email == 'own':
-                                recipients += (self.sale.product.owner, )
+                                # recipients += (self.sale.product.owner, )
+                                recipients += (self.sale.owner, )
                             elif status_email.action_email == 'buy':
                                 recipients += (self.sale.buyer.email, )
                             elif status_email.action_email == 'inc':
                                 recipients += (self.sale.product.insurance_company.email, )
                             elif status_email.action_email == 'usr':
-                                for user in status_email.actionstatusemailsusers_set:
-                                    recipients += (user, )
+                                for email_user in status_email.actionstatusemailsusers_set.all():
+                                    recipients += (email_user.user, )
 
                         notification = Notification(actor=self, recipient=recipients)
                         notification.send(
