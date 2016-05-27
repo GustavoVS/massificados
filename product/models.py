@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+# from user_account.models import MassificadoUser
 
 
 class InsuranceCompany(models.Model):
@@ -141,8 +142,8 @@ class Product(models.Model):
 
 class MethodPayment(models.Model):
     name = models.CharField(_('Name'), max_length=15)
-    product = models.ForeignKey(Product)
-    bank = models.ForeignKey(Bank)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    bank = models.ForeignKey(Bank, on_delete=models.CASCADE)
 
     def __unicode__(self):
         return self.name
@@ -207,27 +208,11 @@ class Question(models.Model):
 
 class Domain(models.Model):
     name = models.CharField(max_length=100)
-    question = models.ForeignKey(Question)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
 
     def __unicode__(self):
         return self.name
 
-
 class ActionStatus(models.Model):
-    product = models.ForeignKey(Product)
-    status = models.ForeignKey(Status)
-
-
-class ActionStatusEmails(models.Model):
-    ACTION_EMAIL_CHOICES = (
-        ('buy', _('Buyer')),
-        ('inc', _('Insurance Company')),
-        ('psi', _('Partner - Superintendent')),
-        ('pad', _('Partner - Administrator')),
-        ('gop', _('GalCorr - Operational')),
-        ('gco', _('GalCorr - Commercial')),
-        ('gma', _('GalCorr - Manager')),
-        ('gad', _('GalCorr - Administrator')),
-    )
-    action_email = models.CharField(max_length=3, choices=ACTION_EMAIL_CHOICES)
-    action_status = models.ForeignKey(ActionStatus)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    status = models.ForeignKey(Status, on_delete=models.CASCADE)

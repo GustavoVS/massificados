@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'product',
     'sale',
     'core',
+    'status_emails',
     # 3rd
     'allauth',
     'allauth.account',
@@ -220,3 +221,11 @@ GRAPH_MODELS = {
 BOOTSTRAP3 = {
     'required_css_class': 'form-required',
 }
+
+# EMAIL_HOST = 'smtp.gmail.net'
+# EMAIL_HOST_USER = 'sendgrid_username'
+# EMAIL_HOST_PASSWORD = 'sendgrid_password'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+
+NOTIFICATION_FROM_EMAIL = 'noreply@lightstudios.com.br'

@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.views.generic import ListView
 from product.models import Product
-from user_account.models import MassificadoUser
-from django.contrib.auth.models import Group
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 

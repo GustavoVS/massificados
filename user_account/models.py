@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 import re
 from django.db import models
 from django.core import validators
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager, Group
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from partner.models import Partner
@@ -69,13 +69,13 @@ class AbstractMassificadoGroups(models.Model):
     menu_entries_products = models.BooleanField(_('Products'), default=False)
     menu_notification = models.BooleanField(_('Notification'), default=False)
     menu_profile = models.BooleanField(_('Profile'), default=False)
-    product = models.ManyToManyField(Product, null=True, blank=True)
-    status_see = models.ManyToManyField(StatusSee, null=True, blank=True)
-    status_edit = models.ManyToManyField(StatusEdit, null=True, blank=True)
-    status_set = models.ManyToManyField(StatusSet, null=True, blank=True)
-    profiles = models.ManyToManyField(Profiles, null=True, blank=True)
-    filetype_see = models.ManyToManyField(FileTypeSee, null=True, blank=True)
-    filetype_download = models.ManyToManyField(FileTypeDownload, null=True, blank=True)
+    product = models.ManyToManyField(Product,)
+    status_see = models.ManyToManyField(StatusSee,)
+    status_edit = models.ManyToManyField(StatusEdit,)
+    status_set = models.ManyToManyField(StatusSet,)
+    profiles = models.ManyToManyField(Profiles,)
+    filetype_see = models.ManyToManyField(FileTypeSee,)
+    filetype_download = models.ManyToManyField(FileTypeDownload,)
 
     class Meta:
         verbose_name_plural = 'Permissions'

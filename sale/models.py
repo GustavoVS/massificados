@@ -6,6 +6,7 @@ from partner.models import Partner
 from user_account.models import MassificadoUser
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from core.notification import Notification
 
 
 class Buyer(models.Model):
@@ -68,6 +69,23 @@ class Deadline(models.Model):
     def save(self):
         if not self.status_id:
             self.status = self.sale.product.begin_status
+
+        if self.pk is not None:
+            old = Deadline.object.get(pk=self.pk)
+
+            if old.status != self.status:
+
+                recipients = self.status.action_status_set.objects.get(product=self.product).action_status_emails_set
+
+                notification = Notification(actor=self, recipient=recipients)
+                notification.send(
+                    _('Sale [%d] has status changed') % (self.pk),
+                    _('The Sale [%d] has status changed from %s to %s') % (
+                        '[' + self.pk + ']', '<b>',
+                        '<b>' + old.status + '</b>',
+                        '<b>' + self.status + '</b>',
+                    )
+                )
 
         return super(Deadline, self).save()
 
@@ -132,10 +150,8 @@ class ResponseDeadline(Response):
     deadline = models.ForeignKey(Deadline)
 
     def __unicode__(self):
-        return '%s (%s - %s)' %(self.value, self.question, self.deadline)
+        return '%s (%s - %s)' % (self.value, self.question, self.deadline)
+
 
 class ResponseDetail(Response):
     detail = models.ForeignKey(Detail)
-
-
-
