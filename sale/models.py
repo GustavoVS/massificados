@@ -41,7 +41,7 @@ class BuyerAddress(models.Model):
 
 
 class Sale(models.Model):
-    create_timestamp = models.DateField(_('Date Created'), default=timezone.now())
+    create_timestamp = models.DateField(_('Date Created'), default=timezone.now)
     product = models.ForeignKey(Product)
     partner = models.ForeignKey(Partner)
     buyer = models.ForeignKey(Buyer)
