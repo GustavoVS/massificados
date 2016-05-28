@@ -3,10 +3,10 @@ from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 from django.core.management.base import BaseCommand
 from partner.models import Partner
-from product.models import Status, StatusSee, StatusEdit, StatusSet, StatusPermission, FileType, FileTypeSee,\
+from product.models import Status, Status, FileType, FileTypeSee,\
     FileTypeDownload, InsuranceCompany, Branch, Product, Profile, ActionStatus
 from user_account.models import MassificadoUser
-from user_groups.models import Profiles, MassificadoGroups
+from user_groups.models import MassificadoGroups
 from status_emails.models import ActionStatusEmails, ActionStatusEmailsUsers
 
 User = get_user_model()
@@ -345,7 +345,8 @@ DEFAULT_STATUS_PRODUCT_BENEFICIOS_EMAIL = (
 )
 
 # Arquivos
-DEFAULT_FILES = ('Proposta de Endosso', 'Proposta de Apólice', 'Endosso', 'Apólice',
+DEFAULT_FILES = (
+    'Proposta de Endosso', 'Proposta de Apólice', 'Endosso', 'Apólice',
     'Boleto de Apólice', 'Boleto de Endosso', 'Boleto de Apólice 2ª via', 'Boleto de Endosso 2ª via',
     'Demonstrações financeiras de 2013 (assinadas e/ou auditadas)',
     'Demonstrações financeiras de 2014 (assinadas e/ou auditadas)',
@@ -355,7 +356,8 @@ DEFAULT_FILES = ('Proposta de Endosso', 'Proposta de Apólice', 'Endosso', 'Apó
     'Apresentação Institucional',
 )
 
-DEFAULT_FILES_GALCORR = ('Proposta de Endosso', 'Proposta de Apólice', 'Endosso', 'Apólice',
+DEFAULT_FILES_GALCORR = (
+    'Proposta de Endosso', 'Proposta de Apólice', 'Endosso', 'Apólice',
     'Demonstrações financeiras de 2013 (assinadas e/ou auditadas)',
     'Demonstrações financeiras de 2014 (assinadas e/ou auditadas)',
     'Demonstrações financeiras de 2015 (assinadas e/ou auditadas)',
@@ -364,7 +366,8 @@ DEFAULT_FILES_GALCORR = ('Proposta de Endosso', 'Proposta de Apólice', 'Endosso
     'Apresentação Institucional',
 )
 
-DEFAULT_FILES_PARTNER = ('Demonstrações financeiras de 2013 (assinadas e/ou auditadas)',
+DEFAULT_FILES_PARTNER = (
+    'Demonstrações financeiras de 2013 (assinadas e/ou auditadas)',
     'Demonstrações financeiras de 2014 (assinadas e/ou auditadas)',
     'Demonstrações financeiras de 2015 (assinadas e/ou auditadas)',
     'Contrato/Estatuto Social e ata de eleição da última diretoria',
@@ -372,7 +375,8 @@ DEFAULT_FILES_PARTNER = ('Demonstrações financeiras de 2013 (assinadas e/ou au
     'Apresentação Institucional',
 )
 
-DEFAULT_FILES_TOKIO = ('Proposta de Endosso', 'Proposta de Apólice', 'Endosso', 'Apólice',
+DEFAULT_FILES_TOKIO = (
+    'Proposta de Endosso', 'Proposta de Apólice', 'Endosso', 'Apólice',
     'Boleto de Apólice', 'Boleto de Endosso', 'Boleto de Apólice 2ª via', 'Boleto de Endosso 2ª via',
 )
 
@@ -396,34 +400,36 @@ DEFAULT_FILES_BENEFICIOS = (
 
 DEFAULT_INSURANCE = (('Tokio', '123456', 'r.cabral.n@gmail.com',), ('GalCorr', '000000', 'r.cabral.n@gmail.com',),)
 
-DEFAULT_BRANCH = ('Vida', 'Acidentes Pessoais',
+DEFAULT_BRANCH = (
+    'Vida', 'Acidentes Pessoais',
     'Garantia Tradicional', 'Garantia Judicial', 'Fiança Locatícia', 'Saúde',)
 
-DEFAULT_PROFILE = ('Perfil Vida', 'Perfil Vida Global', 'Perfil Acidentes Pessoais', 'Perfil Garantia Tradicional',
+DEFAULT_PROFILE = (
+    'Perfil Vida', 'Perfil Vida Global', 'Perfil Acidentes Pessoais', 'Perfil Garantia Tradicional',
     'Perfil Garantia Judicial', 'Perfil Fiança Locatícia', 'Perfil Saúde',)
 
 # Produtos para serem incluídos
 DEFAULT_PRODUCT = (
     ('Vida', 'Introdução', 'Descrição', ' Declaração', 'J', 'Tokio', 'Vida',
-     DEFAULT_FILES,
-    'Proposta Gerada', 'Perfil Vida', DEFAULT_STATUS_PRODUCT_TOKIO,),
+        DEFAULT_FILES_TOKIO,
+        'Proposta Gerada', 'Perfil Vida', DEFAULT_STATUS_PRODUCT_TOKIO,),
     ('Vida Global', 'Introdução', 'Descrição', ' Declaração', 'J', 'Tokio', 'Vida',
-     DEFAULT_FILES,
-    'Proposta Gerada', 'Perfil Vida Global', DEFAULT_STATUS_PRODUCT_TOKIO,),
+         DEFAULT_FILES_TOKIO,
+        'Proposta Gerada', 'Perfil Vida Global', DEFAULT_STATUS_PRODUCT_TOKIO,),
     ('Acidentes Pessoais', 'Introdução', 'Descrição', ' Declaração', 'J', 'Tokio', 'Acidentes Pessoais',
-     DEFAULT_FILES,
-    'Proposta Gerada', 'Perfil Acidentes Pessoais', DEFAULT_STATUS_PRODUCT_TOKIO,),
+        DEFAULT_FILES_TOKIO,
+        'Proposta Gerada', 'Perfil Acidentes Pessoais', DEFAULT_STATUS_PRODUCT_TOKIO,),
     ('Garantia Tradicional', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Garantia Tradicional',
-     DEFAULT_FILES,
-    'Lead de Garantia Gerado', 'Perfil Garantia Tradicional', DEFAULT_STATUS_PRODUCT_GARANTIA,),
+        DEFAULT_FILES_GARANTIA,
+        'Lead de Garantia Gerado', 'Perfil Garantia Tradicional', DEFAULT_STATUS_PRODUCT_GARANTIA,),
     ('Garantia Judicial', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Garantia Judicial',
-     DEFAULT_FILES,
-    'Lead de Garantia Gerado', 'Perfil Garantia Judicial', DEFAULT_STATUS_PRODUCT_GARANTIA,),
+         DEFAULT_FILES_GARANTIA,
+        'Lead de Garantia Gerado', 'Perfil Garantia Judicial', DEFAULT_STATUS_PRODUCT_GARANTIA,),
     ('Fiança Locatícia', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Fiança Locatícia',
-     DEFAULT_FILES,
+     DEFAULT_FILES_GARANTIA,
     'Lead de Garantia Gerado', 'Perfil Fiança Locatícia', DEFAULT_STATUS_PRODUCT_GARANTIA,),
     ('Saúde', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Saúde',
-     DEFAULT_FILES,
+     DEFAULT_FILES_BENEFICIOS,
     'Lead de Benefícios Gerado', 'Perfil Saúde', DEFAULT_STATUS_PRODUCT_BENEFICIOS,),
     )
 
@@ -664,7 +670,6 @@ class Command(BaseCommand):
             )
             p.save()
 
-
         if not User.objects.filter(username="admin").exists():
             User.objects.create_superuser("admin", "admin@admin.com", "admin", partner=p)
 
@@ -683,26 +688,6 @@ class Command(BaseCommand):
         for status_name, level in DEFAULT_STATUS:
             if not Status.objects.filter(name=status_name).exists():
                 st = Status(name=status_name, level=level)
-                st.save()
-
-        for status_name, level in DEFAULT_STATUS:
-            if not StatusSee.objects.filter(name=status_name).exists():
-                st = StatusSee(name=status_name, level=level)
-                st.save()
-
-        for status_name, level in DEFAULT_STATUS:
-            if not StatusEdit.objects.filter(name=status_name).exists():
-                st = StatusEdit(name=status_name, level=level)
-                st.save()
-
-        for status_name, level in DEFAULT_STATUS:
-            if not StatusSet.objects.filter(name=status_name).exists():
-                st = StatusSet(name=status_name, level=level)
-                st.save()
-
-        for status_name, level in DEFAULT_STATUS:
-            if not StatusPermission.objects.filter(name=status_name).exists():
-                st = StatusPermission(name=status_name, level=level)
                 st.save()
 
         for file_name in DEFAULT_FILES:
@@ -735,10 +720,10 @@ class Command(BaseCommand):
                 pe = Profile(name=profile_name)
                 pe.save()
 
-        for profile in DEFAULT_PROFILE_NAME:
-            if not Profiles.objects.filter(name=profile).exists():
-                per = Profiles(name=profile)
-                per.save()
+        # for profile in DEFAULT_PROFILE_NAME:
+        #     if not MassificadoGroups.objects.filter(name=profile).exists():
+        #         per = MassificadoGroups(name=profile)
+        #         per.save()
 
         for product_name, introduction, description, declaration, kind, insurance, branch, files,\
         begin, profile, status_permitted in DEFAULT_PRODUCT:
@@ -760,7 +745,7 @@ class Command(BaseCommand):
                     product.file_type.add(FileType.objects.get(name=file))
 
                 for status_p, level in status_permitted:
-                    product.status_permission.add(StatusPermission.objects.get(name=status_p))
+                    product.status_permission.add(Status.objects.get(name=status_p))
 
                 for status_p, lever in status_permitted:
                     action_st = ActionStatus(
@@ -812,36 +797,45 @@ class Command(BaseCommand):
         for permission_name, menu_active_product, menu_active_dashboard, menu_active_production, menu_active_entries,\
             menu_active_entries_detail, menu_active_notification, menu_active_profile, products_permission,\
             status_see_permission, status_edit_permission, status_set_permission, filetype_see_permission,\
-            filetype_download_permission, profile_names_permission \
-            in DEFAULT_PROFILE_PERMISSION:
-                if not MassificadoGroups.objects.filter(name=permission_name).exists():
-                    group = MassificadoGroups(
-                        name=permission_name,
-                        menu_products=menu_active_product,
-                        menu_dashboard=menu_active_dashboard,
-                        menu_production=menu_active_production,
-                        menu_entries=menu_active_entries,
-                        menu_notification=menu_active_notification,
-                        menu_profile=menu_active_profile
+            filetype_download_permission, profile_names_permission in DEFAULT_PROFILE_PERMISSION:
 
-                    )
-                    group.menu_entries_users = menu_active_entries_detail[0]
-                    group.menu_entries_profiles = menu_active_entries_detail[1]
-                    group.menu_entries_partners = menu_active_entries_detail[2]
-                    group.menu_entries_products = menu_active_entries_detail[3]
+            if not MassificadoGroups.objects.filter(name=permission_name).exists():
+                group = MassificadoGroups(
+                    name=permission_name,
+                    menu_products=menu_active_product,
+                    menu_dashboard=menu_active_dashboard,
+                    menu_production=menu_active_production,
+                    menu_entries=menu_active_entries,
+                    menu_notification=menu_active_notification,
+                    menu_profile=menu_active_profile
 
-                    group.save()
+                )
+                group.menu_entries_users = menu_active_entries_detail[0]
+                group.menu_entries_profiles = menu_active_entries_detail[1]
+                group.menu_entries_partners = menu_active_entries_detail[2]
+                group.menu_entries_products = menu_active_entries_detail[3]
+
+                group.save()
+
+        for permission_name, menu_active_product, menu_active_dashboard, menu_active_production, menu_active_entries,\
+            menu_active_entries_detail, menu_active_notification, menu_active_profile, products_permission,\
+            status_see_permission, status_edit_permission, status_set_permission, filetype_see_permission,\
+            filetype_download_permission, profile_names_permission in DEFAULT_PROFILE_PERMISSION:
+
+                if  MassificadoGroups.objects.filter(name=permission_name).exists():
+                    group = MassificadoGroups.objects.get(name=permission_name)
+
                     for products_p in products_permission:
                         group.product.add(Product.objects.get(name=products_p))
 
                     for status_see_p_name, level in status_see_permission:
-                         group.status_see.add(StatusSee.objects.get(name=status_see_p_name))
+                         group.status_see.add(Status.objects.get(name=status_see_p_name))
 
                     for status_edit_p_name, level in status_edit_permission:
-                        group.status_edit.add(StatusEdit.objects.get(name=status_edit_p_name))
+                        group.status_edit.add(Status.objects.get(name=status_edit_p_name))
 
                     for status_set_p_name, level in status_set_permission:
-                        group.status_set.add(StatusSet.objects.get(name=status_set_p_name))
+                        group.status_set.add(Status.objects.get(name=status_set_p_name))
 
                     for filetype_see_p in filetype_see_permission:
                         group.filetype_see.add(FileTypeSee.objects.get(name=filetype_see_p))
@@ -850,7 +844,7 @@ class Command(BaseCommand):
                         group.filetype_download.add(FileTypeDownload.objects.get(name=filetype_download_p))
 
                     for profile_names_p in profile_names_permission:
-                        group.profiles.add(Profiles.objects.get(name=profile_names_p))
+                        group.profiles.add(MassificadoGroups.objects.get(name=profile_names_p))
 
         for user_profile, user_password, user_partner, user_email, user_name in USERS:
                 user = MassificadoUser.objects.get(email=user_email)

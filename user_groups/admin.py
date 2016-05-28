@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import MassificadoGroups, Profiles
+from .models import *
 
 admin.site.register(MassificadoGroups)
-admin.site.register(Profiles)
+# admin.site.register(Profiles)
