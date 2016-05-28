@@ -6,8 +6,19 @@ from .forms import MassificadoGroupsEditForm
 from product.models import Product
 
 
-class EntrieProfileNewView(CreateView):
-    pass
+class EntrieProfileNewView(LoginRequiredMixin, CreateView):
+    model = MassificadoGroups
+    form_class = MassificadoGroupsEditForm
+    template_name = 'page-entries-profile.html'
+
+    def get_success_url(self):
+        return reverse_lazy('entries-profiles')
+
+    def get_context_data(self, **kwargs):
+        context = super(EntrieProfileNewView, self).get_context_data(**kwargs)
+        context['products_f'] = Product.objects.filter(kind_person='F')
+        context['products_j'] = Product.objects.filter(kind_person='J')
+        return context
 
 
 class EntrieProfileEditView(LoginRequiredMixin, UpdateView):

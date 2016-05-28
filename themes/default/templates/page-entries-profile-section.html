@@ -419,7 +419,7 @@
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                 {% trans "Save Role" as text_submit %}
-                {% url 'entries-users' as url %}
+                {% url 'entries-profiles' as url %}
                 {% include 'parts/submit-form.html' with save_text=text_submit url_cancel=url %}
             </div>
     </form>

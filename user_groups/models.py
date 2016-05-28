@@ -5,7 +5,7 @@ from product.models import Product, Status, FileType
 
 
 class AbstractMassificadoGroups(models.Model):
-    name = models.CharField(_('First name'), max_length=100, blank=True)
+    name = models.CharField(_('Name'), max_length=100, blank=True)
     menu_products = models.BooleanField(_('Products'), default=False, blank=True)
     menu_dashboard = models.BooleanField(_('Dashboard'), default=False, blank=True)
     menu_production = models.BooleanField(_('Production'), default=False, blank=True)

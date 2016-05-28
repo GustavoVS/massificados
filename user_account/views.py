@@ -79,26 +79,6 @@ class EntriesProfilesView(LoginRequiredMixin, MassificadoPageListView):
         return result
 
 
-class EntrieProfileNewView(LoginRequiredMixin, CreateView):
-    model = MassificadoGroups
-    template_name = 'page-entries-profile.html'
-    fields = ['name', 'permissions']
-
-    def get_success_url(self):
-        return reverse_lazy('entries-profiles')
-
-    def get_context_data(self, **kwargs):
-        context = super(EntrieProfileNewView, self).get_context_data(**kwargs)
-        context['products_f'] = Product.objects.filter(kind_person='J')
-        context['products_j'] = Product.objects.filter(kind_person='F')
-        context['status'] = Status.objects.all()
-        context['files'] = FileType.objects.all()
-        context['profiles'] = MassificadoGroups.objects.all()
-        # context['group'] = MassificadoGroups.objects.filter(pk=sale.deadline_set.all()[0].status.level).order_by('level')
-        # sale = self.object.sale_set.all()[0]
-        return context
-
-
 class NotificationsView(LoginRequiredMixin, ListView):
     template_name = 'page-notifications.html'
     context_object_name = 'notifications'
