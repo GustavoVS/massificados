@@ -8,7 +8,6 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.db.models import  Q
 from core.views import MassificadoPageListView
 from user_groups.models import MassificadoGroups
-from product.models import Product, Status, FileType
 from .models import MassificadoUser
 from .forms import EntrieUserForm
 # from notifications.models import Notification
@@ -81,8 +80,13 @@ class EntriesProfilesView(LoginRequiredMixin, MassificadoPageListView):
 
 class NotificationsView(LoginRequiredMixin, ListView):
     template_name = 'page-notifications.html'
-    context_object_name = 'notifications'
+    context_object_name = 'notifications_old'
+
+    def get_context_data(self, **kwargs):
+        context = super(NotificationsView, self).get_context_data(**kwargs)
+        context['notification_new'] = self.request.user.notifications.unread()
+        self.request.user.notifications.mark_all_as_read()
+        return context
 
     def get_queryset(self):
-        self.request.user.notifications.mark_all_as_read()
-        return self.request.user.notifications.all()
+        return self.request.user.notifications.read()

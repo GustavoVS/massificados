@@ -5,21 +5,81 @@
 {% block section-title %}{% endblock %}
 {% block section-id %}{% endblock %}
 {% block section-content %}
-
-        <h3>{% trans "Notifications" %}</h3>
-        <div class="well">
-            <div class="row">
-            {% for notification in notifications %}
-                <div class="col-md-8">
-                    <a href="{% url 'product-edit-buyer' notification.actor.sale.product.pk notification.actor.sale.buyer.pk %}">
-                        {{ notification.verb }}
-                    </a>
+        <div class="table-default">
+            <div class="container">
+                <div class="row">
+                    <section class="content">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="pull-right">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-success btn-filter" data-target="new">{% trans "New" %}</button>
+{#                                            <button type="button" class="btn btn-warning btn-filter" data-target="pending">{% trans "Pending" %}</button>#}
+{#                                            <button type="button" class="btn btn-danger btn-filter" data-target="canceled">{% trans "Canceled" %}</button>#}
+                                            <button type="button" class="btn btn-default btn-filter" data-target="all">{% trans "All" %}</button>
+                                        </div>
+                                    </div>
+                                    <div class="table-container">
+                                        <table class="table table-filter">
+                                            <tbody>
+                                                {% for notification in notifications_new %}
+                                                    <tr data-status="new">
+    {#                                                    <tr data-status="new">#}
+    {#                                                    <tr data-status="pending">#}
+    {#                                                    <tr data-status="canceled">#}
+                                                        <td>
+                                                            <div class="media">
+                                                                <div class="media-body">
+                                                                    <span class="media-meta pull-right">{{ notification.timestamp }}</span>
+                                                                    <h4 class="title">
+                                                                        {% trans "Notification" %}
+                                                                        <span class="pull-right new">{% trans "(New)" %}</span>
+                                                                    </h4>
+                                                                    <a href="{% url 'product-edit-buyer' notification.actor.sale.product.pk notification.actor.sale.buyer.pk %}">
+                                                                        {{ notification.verb }}
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                {% for notification in notifications_old %}
+                                                    <tr data-status="all">
+    {#                                                    <tr data-status="new">#}
+    {#                                                    <tr data-status="pending">#}
+    {#                                                    <tr data-status="canceled">#}
+                                                        <td>
+                                                            <div class="media">
+                                                                <div class="media-body">
+                                                                    <span class="media-meta pull-right">{{ notification.timestamp }}</span>
+                                                                    <h4 class="title">
+                                                                        {% trans "Notification" %}
+    {#                                                                    <span class="pull-right new">{% trans "(New)" %}</span>#}
+    {#                                                                    <span class="pull-right pending">{% trans "(Pending)" %}</span>#}
+    {#                                                                    <span class="pull-right canceled">{% trans "(Canceled)" %}</span>#}
+                                                                    </h4>
+                                                                    <a href="{% url 'product-edit-buyer' notification.actor.sale.product.pk notification.actor.sale.buyer.pk %}">
+                                                                        {{ notification.verb }}
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                {% if not notifications_old and not notifications_new %}
+                                                    <div class="col-md-12 text-center">
+                                                        {% trans "There's no notifications" %}
+                                                    </div>
+                                                {% endif %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-            {% empty %}
-                <div class="col-md-12 text-center">
-                    {% trans "There's no notifications" %}
-                </div>
-            {% endfor %}
             </div>
         </div>
 

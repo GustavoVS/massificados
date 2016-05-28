@@ -34,7 +34,7 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
         data['addressbuyer'] = AddressBuyerFormset()
         data['show_all'] = False
         data['status_deadline'] = product.begin_status
-        data['possible_new_status'] = Status.objects.filter(level__gte=product.begin_status.level).select_related()
+        data['possible_new_status'] = product.status_permission.filter(level__gte=product.begin_status.level)
         if not product.is_lead:
             data['show_all'] = True
             data['deadlinesale'] = DeadlineSaleFormset()
