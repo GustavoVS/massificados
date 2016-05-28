@@ -854,5 +854,6 @@ class Command(BaseCommand):
 
         for user_profile, user_password, user_partner, user_email, user_name in USERS:
                 user = MassificadoUser.objects.get(email=user_email)
+                user.set_password('galcorr')
                 user.group_permissions = MassificadoGroups.objects.get(name=user_profile)
                 user.save()

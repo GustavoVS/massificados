@@ -34,8 +34,7 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
         data['addressbuyer'] = AddressBuyerFormset()
         data['show_all'] = False
         data['status_deadline'] = product.begin_status
-        # todo: filter user permissions
-        data['possible_new_status'] = Status.objects.filter(level__gte=product.begin_status.level).order_by('level')
+        data['possible_new_status'] = Status.objects.filter(level__gte=product.begin_status.level).select_related()
         if not product.is_lead:
             data['show_all'] = True
             data['deadlinesale'] = DeadlineSaleFormset()
@@ -69,6 +68,10 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
             if form.is_valid():
                 form.instance.sale = sale
                 form.save()
+
+                # if self.request.POST.get('new-status', ''):
+                #     dl.status_id = self.request.POST.get('new-status', '')
+                #     dl.save()
 
                 for k, v in self.request.POST.iteritems():
                     if k.split('-')[0] == 'q_resp':

@@ -73,7 +73,30 @@ class Deadline(models.Model):
 
         resp = super(Deadline, self).save(*a, **kw)
 
-        if self.pk is not None:
+        if self.pk is None:
+            status_emails = self.status.actionstatus_set.get(
+                product=self.sale.product).actionstatusemails_set.all()
+            if status_emails:
+                recipients = ()
+                for status_email in status_emails:
+                    if status_email.action_email == 'own':
+                        recipients += (self.sale.owner,)
+                    elif status_email.action_email == 'buy':
+                        recipients += (self.sale.buyer.email,)
+                    elif status_email.action_email == 'inc':
+                        recipients += (self.sale.product.insurance_company.email,)
+                    elif status_email.action_email == 'usr':
+                        for email_user in status_email.actionstatusemailsusers_set.all():
+                            recipients += (email_user.user,)
+
+                notification = Notification(actor=self, recipient=recipients)
+                notification.send(
+                    _('New Sale [%d] created') % (self.pk),
+                    _('The Sale [%d] has status changed to %s . Buyer %s, CPF/CNPJ %s ') % (
+                        self.pk, self.status, self.sale.buyer.name, self.sale.buyer.cpf_cnpj
+                    )
+                )
+        else:
             new = Deadline.objects.get(pk=self.pk)
             if new.status != self.status:
                 if new.status.actionstatus_set.filter(product=self.sale.product).exists():
@@ -96,8 +119,8 @@ class Deadline(models.Model):
                         notification = Notification(actor=self, recipient=recipients)
                         notification.send(
                             _('Sale [%d] has status changed') % (self.pk),
-                            _('The Sale [%d] has status changed from %s to %s') % (
-                                self.pk, self.status, new.status
+                            _('The Sale [%d] has status changed from %s to %s . Buyer %s, CPF/CNPJ %s ') % (
+                                self.pk, self.status, new.status, new.sale.buyer.name, new.sale.buyer.cpf_cnpj
                             )
                         )
 
