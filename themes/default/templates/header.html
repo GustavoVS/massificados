@@ -19,16 +19,16 @@
         <div class="collapse navbar-collapse" id="nav-header">
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
-                    {% if user.group_permissions.menu_dashboard or user.is_superuser %}
-                    <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#dashBoard" class="page-scroll">
-                            <span class="fa fa-area-chart fa-lg hidden-sm"></span>
-                            {% trans "Dashboard" %}
-                        </a>
-                    </li>
                     <li>
                         <a href="{% if request.get_full_path != '/' %}/{% endif %}" class="page-scroll">
                         <span class="fa fa-shopping-cart fa-lg hidden-sm"></span>
                         {% trans "Products" %}
+                        </a>
+                    </li>
+                    {% if user.group_permissions.menu_dashboard or user.is_superuser %}
+                    <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#dashBoard" class="page-scroll">
+                            <span class="fa fa-area-chart fa-lg hidden-sm"></span>
+                            {% trans "Dashboard" %}
                         </a>
                     </li>
                     {% endif %}

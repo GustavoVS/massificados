@@ -232,15 +232,9 @@
                         {% for f in filedeadline %}
                             <div class="thumbnail col-md-3" id="{{ f.prefix }}-row">
                                 <div class="caption">
-                                    {# {% if f.file_type %} #}
-                                        {# <h3>{{ f.file_type.value }}</h3> #}
-                                    {# {% else %} #}
-                                        {% bootstrap_field f.file_type %}
-                                    {# {% endif %} #}
-
+                                    {% bootstrap_field f.file_type %}
                                     {% if f.document %}
                                         {{ f.document }}
-                                        {# <a href="{{ f.document.url }}" target="_blank"><span class="fa fa-file-o"></span></a> #}
                                     {% else %}
                                         {% bootstrap_field filedeadline.empty_form.document layout="inline" %}
                                     {% endif %}
@@ -252,8 +246,10 @@
                     </div>
                 </div>
             </div>
-            {% url 'index_view' as url %}
-            {% include 'parts/submit-form.html' with url_cancel=url %}
+            {% if sale.deadline_set.all.0.status in  user.group_permissions.status_edit.all %}
+                {% url 'index_view' as url %}
+                {% include 'parts/submit-form.html' with url_cancel=url %}
+            {% endif %}
         </form>
     </div>
 {% endblock %}

@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-# from user_account.models import MassificadoUser
 
 
 class InsuranceCompany(models.Model):
@@ -52,54 +51,6 @@ class Status(models.Model):
 
     def __unicode__(self):
         return self.name
-
-    # def save(self):
-    #
-    #     return super(Status, self).save()
-
-
-# class StatusPermission(models.Model):
-#     name = models.CharField(max_length=100)
-#     level = models.IntegerField(default=1)
-
-#     class Meta:
-#         verbose_name_plural = 'StatusPermissions'
-
-#     def __unicode__(self):
-#         return self.name
-
-
-# class StatusSee(models.Model):
-#     name = models.CharField(max_length=100)
-#     level = models.IntegerField(default=1)
-
-#     class Meta:
-#         verbose_name_plural = 'StatusSee'
-
-#     def __unicode__(self):
-#         return self.name
-
-
-# class StatusEdit(models.Model):
-#     name = models.CharField(max_length=100)
-#     level = models.IntegerField(default=1)
-
-#     class Meta:
-#         verbose_name_plural = 'StatusEdit'
-
-#     def __unicode__(self):
-#         return self.name
-
-
-# class StatusSet(models.Model):
-#     name = models.CharField(max_length=100)
-#     level = models.IntegerField(default=1)
-
-#     class Meta:
-#         verbose_name_plural = 'StatusSet'
-
-#     def __unicode__(self):
-#         return self.name
 
 
 class Product(models.Model):

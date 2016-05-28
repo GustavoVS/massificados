@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
-# from django.db import transaction
+from django.db.models import Q
 from django.core.paginator import Paginator
 # from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
@@ -17,7 +17,14 @@ class ProductionView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         # todo: filter sales by the user and his permissions
-        sales = Sale.objects.all()
+        if not self.request.user.group_permissions:
+            sales = Sale.objects.all()
+        else:
+            sales = Sale.objects.filter(
+                product__in=self.request.user.group_permissions.product.all(),
+                deadline__status__in=self.request.user.group_permissions.status_see.all(),
+                owner__group_permissions__in=self.request.user.group_permissions.profiles.all()
+            )
         return Paginator(sales, 1000).page(1)
 
 
@@ -34,7 +41,9 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
         data['addressbuyer'] = AddressBuyerFormset()
         data['show_all'] = False
         data['status_deadline'] = product.begin_status
-        data['possible_new_status'] = product.status_permission.filter(level__gte=product.begin_status.level)
+        # data['possible_new_status'] = Status.objects.filter(level__gte=product.begin_status.level).select_related()
+        data['possible_new_status'] = self.request.user.group_permissions.status_set.filter(
+            level__gte=product.begin_status.level).select_related()
         if not product.is_lead:
             data['show_all'] = True
             data['deadlinesale'] = DeadlineSaleFormset()

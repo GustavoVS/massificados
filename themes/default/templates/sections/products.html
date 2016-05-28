@@ -46,7 +46,7 @@
                                 <a data-href="sec-product{{ product.id }}" href="#sec-products" class="product-href page-scroll btn btn-info" role="button">
                                     <span class="fa fa-plus"></span>
                                 </a>
-                                {% if user.is_authenticated %}
+                                {% if product in user.group_permissions.product.all or user.is_superuser %}
                                     <a  class="page-scroll btn btn-primary" role="button">
                                         <span class="fa fa-cart-plus"></span>
                                     </a>
@@ -68,7 +68,7 @@
                                 <a data-href="sec-product{{ product.id }}" href="#sec-products" class="product-href page-scroll btn btn-info" role="button">
                                     <span class="fa fa-plus"></span>
                                 </a>
-                                {% if user.is_authenticated %}
+                                {% if product in user.group_permissions.product.all or user.is_superuser %}
                                     <a  class="page-scroll btn btn-primary" role="button">
                                         <span class="fa fa-cart-plus"></span>
                                     </a>
@@ -100,7 +100,7 @@
                                                 <div class="panel-heading">
                                                     <h5>{{ product.name }}</h5>
                                                     <p>{{ product.introduction }}</p>
-                                                    {% if user.is_authenticated %}
+                                                    {% if product in user.group_permissions.product.all or user.is_superuser %}
                                                         <i class="fa"><img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" class="img-responsive"></i>
                                                         <i class="fa"><img src="{% if product.icon2 %}{{ product.icon2.url }}{% endif %}" class="img-responsive"></i>
                                                     {% endif %}
@@ -110,7 +110,7 @@
                                                         <a data-href="sec-product{{ product.id }}" href="#sec-products" class="product-href page-scroll btn btn-info col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
                                                             <span class="fa fa-plus"> </span>{% trans ' Know more' %}
                                                         </a>
-                                                        {% if user.is_authenticated %}
+                                                        {% if product in user.group_permissions.product.all or user.is_superuser %}
                                                             <a href="{% url 'product-new-buyer' product.pk %}" class="page-scroll btn btn-primary col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
                                                                 <span class="fa fa-cart-plus"></span>{% trans ' Contract' %}
                                                             </a>
@@ -142,7 +142,7 @@
                                                 <div class="panel-heading">
                                                     <h5>{{ product.name }}</h5>
                                                     <p>{{ product.introduction }}</p>
-                                                    {% if user.is_authenticated %}
+                                                    {% if product in user.group_permissions.product.all or user.is_superuser %}
                                                         <i class="fa"><img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" class="img-responsive"></i>
                                                         <i class="fa"><img src="{% if product.icon2 %}{{ product.icon2.url }}{% endif %}" class="img-responsive"></i>
                                                     {% endif %}
@@ -152,7 +152,7 @@
                                                         <a data-href="sec-product{{ product.id }}" href="#sec-products" class="product-href page-scroll btn btn-info col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
                                                             <span class="fa fa-plus"></span>{% trans ' Know more' %}
                                                         </a>
-                                                        {% if user.is_authenticated %}
+                                                        {% if product in user.group_permissions.product.all or user.is_superuser %}
                                                             <a href="{% url 'product-new-buyer' product.pk %}" class="page-scroll btn btn-primary col-lg-12 col-md-6 col-sm-6 col-xs-6" role="button">
                                                                 <span class="fa fa-cart-plus"></span>{% trans ' Contract' %}
                                                             </a>
