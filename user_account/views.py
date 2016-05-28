@@ -89,14 +89,13 @@ class EntrieProfileNewView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(EntrieProfileNewView, self).get_context_data(**kwargs)
-        context['products_f'] = list(Product.objects.filter(kind_person='J'))
-        context['products_j'] = list(Product.objects.filter(kind_person='F'))
-        context['products'] = list(Product.objects.all())
+        context['products_f'] = Product.objects.filter(kind_person='J')
+        context['products_j'] = Product.objects.filter(kind_person='F')
         context['status'] = Status.objects.all()
         context['files'] = FileType.objects.all()
-        context['profiles'] = Profiles.objects.all()
-            # context['group'] = MassificadoGroups.objects.filter(pk=sale.deadline_set.all()[0].status.level).order_by('level')
-            # sale = self.object.sale_set.all()[0]
+        context['profiles'] = MassificadoGroups.objects.all()
+        # context['group'] = MassificadoGroups.objects.filter(pk=sale.deadline_set.all()[0].status.level).order_by('level')
+        # sale = self.object.sale_set.all()[0]
         return context
 
 

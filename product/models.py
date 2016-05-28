@@ -43,20 +43,6 @@ class FileType(models.Model):
         return self.name
 
 
-class FileTypeSee(models.Model):
-    name = models.CharField(max_length=100)
-
-    def __unicode__(self):
-        return self.name
-
-
-class FileTypeDownload(models.Model):
-    name = models.CharField(max_length=100)
-
-    def __unicode__(self):
-        return self.name
-
-
 class Status(models.Model):
     name = models.CharField(max_length=100)
     level = models.IntegerField(default=1)

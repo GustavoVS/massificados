@@ -1,8 +1,13 @@
 from django import forms
+from product.models import Product
 from .models import MassificadoGroups
 
 
 class MassificadoGroupsEditForm(forms.ModelForm):
+
+    product_j = forms.ModelMultipleChoiceField(Product.objects.filter(kind_person='J'), required=False)
+    product_f = forms.ModelMultipleChoiceField(Product.objects.filter(kind_person='F'), required=False)
+
     class Meta:
         model = MassificadoGroups
         fields = (
@@ -17,4 +22,11 @@ class MassificadoGroupsEditForm(forms.ModelForm):
             'menu_entries_products',
             'menu_notification',
             'menu_profile',
+            'product',
+            'status_see',
+            'status_edit',
+            'status_set',
+            'profiles',
+            'filetype_see',
+            'filetype_download',
         )

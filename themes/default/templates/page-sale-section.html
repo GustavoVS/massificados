@@ -254,15 +254,6 @@
             </div>
             {% url 'index_view' as url %}
             {% include 'parts/submit-form.html' with url_cancel=url %}
-            {# <div class="row"> #}
-                {# <div class="col-md-12"> #}
-                    {# {% trans 'Save' as save_text %} #}
-                    {# {% bootstrap_button save_text button_type="submit" button_class="btn-success pull-right" icon="ok" %} #}
-                    {# {% url 'index_view' as href_cancel_btn %} #}
-                    {# {% trans 'Cancel' as cancel_text %} #}
-                    {# {% bootstrap_button cancel_text href=href_cancel_btn button_class="btn-danger pull-left" icon="remove" %} #}
-                {# </div> #}
-            {# </div> #}
         </form>
     </div>
 {% endblock %}

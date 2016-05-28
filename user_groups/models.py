@@ -1,17 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from product.models import Product, Status, FileTypeSee, FileTypeDownload
-
-
-# class Profiles(models.Model):
-#     name = models.CharField(max_length=100)
-
-#     class Meta:
-#         verbose_name_plural = _('Profiles')
-
-#     def __unicode__(self):
-#         return self.name
+from product.models import Product, Status, FileType
 
 
 class AbstractMassificadoGroups(models.Model):
@@ -26,15 +16,15 @@ class AbstractMassificadoGroups(models.Model):
     menu_entries_products = models.BooleanField(_('Products'), default=False, blank=True)
     menu_notification = models.BooleanField(_('Notification'), default=False, blank=True)
     menu_profile = models.BooleanField(_('Profile'), default=False, blank=True)
-    product = models.ManyToManyField(Product,)
+    product = models.ManyToManyField(Product, blank=True)
 
-    status_see = models.ManyToManyField(Status, related_name='user_status_see')
-    status_edit = models.ManyToManyField(Status, related_name='user_status_edit')
-    status_set = models.ManyToManyField(Status, related_name='user_status_set')
+    status_see = models.ManyToManyField(Status, related_name='user_status_see', blank=True)
+    status_edit = models.ManyToManyField(Status, related_name='user_status_edit', blank=True)
+    status_set = models.ManyToManyField(Status, related_name='user_status_set', blank=True)
 
-    profiles = models.ManyToManyField('self')
-    filetype_see = models.ManyToManyField(FileTypeSee)
-    filetype_download = models.ManyToManyField(FileTypeDownload)
+    profiles = models.ManyToManyField('self', blank=True)
+    filetype_see = models.ManyToManyField(FileType, related_name='user_filetype_see', blank=True)
+    filetype_download = models.ManyToManyField(FileType, related_name='user_filetype_download', blank=True)
 
     class Meta:
         verbose_name_plural = _('Permissions')

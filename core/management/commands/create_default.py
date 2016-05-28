@@ -3,8 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 from django.core.management.base import BaseCommand
 from partner.models import Partner
-from product.models import Status, Status, FileType, FileTypeSee,\
-    FileTypeDownload, InsuranceCompany, Branch, Product, Profile, ActionStatus
+from product.models import Status, FileType, InsuranceCompany, Branch, Product, Profile, ActionStatus
 from user_account.models import MassificadoUser
 from user_groups.models import MassificadoGroups
 from status_emails.models import ActionStatusEmails, ActionStatusEmailsUsers
@@ -25,9 +24,11 @@ DEFAULT_STATUS = (
 )
 
 # Produtos permitidos no perfil de acesso
-DEFAULT_PRODUCT_NAME_GALCORR = ('Vida', 'Vida Global', 'Acidentes Pessoais', 'Garantia Tradicional',
+DEFAULT_PRODUCT_NAME_GALCORR = (
+    'Vida', 'Vida Global', 'Acidentes Pessoais', 'Garantia Tradicional',
     'Garantia Judicial', 'Fiança Locatícia', 'Saúde',)
-DEFAULT_PRODUCT_NAME_PARTNER = ('Vida', 'Vida Global', 'Acidentes Pessoais', 'Garantia Tradicional',
+DEFAULT_PRODUCT_NAME_PARTNER = (
+    'Vida', 'Vida Global', 'Acidentes Pessoais', 'Garantia Tradicional',
     'Garantia Judicial', 'Fiança Locatícia', 'Saúde',)
 DEFAULT_PRODUCT_NAME_TOKIO = ('Vida', 'Vida Global', 'Acidentes Pessoais',)
 DEFAULT_PRODUCT_NAME_GALCORR_BENEFICIOS = ('Saúde',)
@@ -696,13 +697,13 @@ class Command(BaseCommand):
                 fl.save()
 
         for file_name in DEFAULT_FILES:
-            if not FileTypeSee.objects.filter(name=file_name).exists():
-                fl = FileTypeSee(name=file_name)
+            if not FileType.objects.filter(name=file_name).exists():
+                fl = FileType(name=file_name)
                 fl.save()
 
         for file_name in DEFAULT_FILES:
-            if not FileTypeDownload.objects.filter(name=file_name).exists():
-                fl = FileTypeDownload(name=file_name)
+            if not FileType.objects.filter(name=file_name).exists():
+                fl = FileType(name=file_name)
                 fl.save()
 
         for cia, susep, email in DEFAULT_INSURANCE:
@@ -838,10 +839,10 @@ class Command(BaseCommand):
                         group.status_set.add(Status.objects.get(name=status_set_p_name))
 
                     for filetype_see_p in filetype_see_permission:
-                        group.filetype_see.add(FileTypeSee.objects.get(name=filetype_see_p))
+                        group.filetype_see.add(FileType.objects.get(name=filetype_see_p))
 
                     for filetype_download_p in filetype_download_permission:
-                        group.filetype_download.add(FileTypeDownload.objects.get(name=filetype_download_p))
+                        group.filetype_download.add(FileType.objects.get(name=filetype_download_p))
 
                     for profile_names_p in profile_names_permission:
                         group.profiles.add(MassificadoGroups.objects.get(name=profile_names_p))

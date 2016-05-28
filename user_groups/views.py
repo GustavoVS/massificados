@@ -3,7 +3,7 @@ from django.views.generic import CreateView, UpdateView
 from django.core.urlresolvers import reverse_lazy
 from .models import MassificadoGroups
 from .forms import MassificadoGroupsEditForm
-from product.models import Product, Status, FileType
+from product.models import Product
 
 
 class EntrieProfileNewView(CreateView):
@@ -21,10 +21,6 @@ class EntrieProfileEditView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(EntrieProfileEditView, self).get_context_data(**kwargs)
-        context['products_f'] = list(Product.objects.filter(kind_person='J'))
-        context['products_j'] = list(Product.objects.filter(kind_person='F'))
-        context['products'] = list(Product.objects.all())
-        context['status'] = Status.objects.all()
-        context['files'] = FileType.objects.all()
-        # context['profiles'] = Profiles.objects.all()
+        context['products_f'] = Product.objects.filter(kind_person='F')
+        context['products_j'] = Product.objects.filter(kind_person='J')
         return context

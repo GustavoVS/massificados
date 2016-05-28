@@ -4,20 +4,3 @@
 {% block content %}
     {% include 'page-entries-profile-section.html' %}
 {% endblock %}
-
-
-
-{% block extra_head %}
-    <link href="{% static 'css/bootstrap-chosen.css' %}" rel="stylesheet">
-
-{% endblock %}
-
-{% block footer_scripts %}
-    <script src="http://harvesthq.github.io/chosen/chosen.jquery.js"></script>
-    <script>
-      $(function() {
-        $('.chosen-select').removeClass('hidden').chosen();
-        $('.chosen-select-deselect').chosen({ allow_single_deselect: true });
-      });
-    </script>
-{% endblock %}
