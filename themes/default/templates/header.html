@@ -5,107 +5,101 @@
 
 
 <nav id="menu" class="navbar navbar-default navbar-fixed-top on">
-  <div class="container">
+    <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-header">
-          <span class="sr-only">Menu</span>
-        </button>
-        <a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-products" class="page-scroll logo-header navbar-brand">
-                <img  src="{% static 'img/partner-sofisa/sofisa50x142.png' %}" alt="" class="img-responsive">
-        </a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="nav-header">
-      <ul class="nav navbar-nav navbar-right">
-{#        <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-about" class="page-scroll">{% trans "About us" %}</a></li>#}
-        <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-products" class="page-scroll">
-            <span class="fa fa-shopping-cart fa-lg hidden-sm"></span>
-            {% trans "Products" %}
-{#                {% if user.is_authenticated %}#}
-{#                {% endif %}#}
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-header">
+              <span class="sr-only">Menu</span>
+            </button>
+            <a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-products" class="page-scroll logo-header navbar-brand">
+                    <img  src="{% static 'img/partner-sofisa/sofisa50x142.png' %}" alt="" class="img-responsive">
             </a>
-        </li>
-{#        <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-contact" class="page-scroll">{% trans "Contact Us" %}</a></li>#}
-{#        <li><a href="{% url 'sac' %}" class="page-scroll">{% trans "SAC" %}</a></li>#}
-        {% if user.is_authenticated %}
-            {% if user.group_permissions.menu_dashboard or user.is_superuser %}
-            <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#dashBoard" class="page-scroll">
-                    <span class="fa fa-area-chart fa-lg hidden-sm"></span>
-                    {% trans "Dashboard" %}
-                </a>
-            </li>
-            {% endif %}
-            {% if user.group_permissions.menu_production or user.is_superuser %}
-            <li><a href="{% url 'production' %}" class="page-scroll">
-                <span class="fa fa-list fa-lg hidden-sm"></span>
-                {% trans "Production" %}
-                </a>
-            </li>
-            {% endif %}
-            {% if user.group_permissions.menu_entries or user.group_permissions.menu_entries_users or user.group_permissions.menu_entries_profiles or user.group_permissions.menu_entries_partners or user.group_permissions.menu_entries_products or user.is_superuser %}
-            <li><a href="{% url 'entries' %}" class="page-scroll">
-                <span class="fa fa-edit fa-lg hidden-sm"></span>
-                {% trans "Entries" %}
-                </a>
-            </li>
-            {% endif %}
-            <li>
-                <a href="{% url 'notifications' %}">
-                    {# {% register_notify_callbacks callbacks='fill_notification_list,fill_notification_badge' as X %} #}
-                    {# {{ X|safe }} #}
-                    {% notifications_unread as unread_count %}
-                    {% if unread_count %}
-                        <span  class="fa fa-bell faa-ring animated faa-slow alert-bell fa-2x hidden-sm"></span>
-                        <span id="live_notify_badge" class="badge">{{unread_count}}</span>
-                    {% else %}
-                      <span class="fa fa-bell alert-bell"></span>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="nav-header">
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                    {% if user.group_permissions.menu_dashboard or user.is_superuser %}
+                    <li><a href="{% if request.get_full_path != '/' %}/{% endif %}#dashBoard" class="page-scroll">
+                            <span class="fa fa-area-chart fa-lg hidden-sm"></span>
+                            {% trans "Dashboard" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% if request.get_full_path != '/' %}/{% endif %}#sec-products" class="page-scroll">
+                        <span class="fa fa-shopping-cart fa-lg hidden-sm"></span>
+                        {% trans "Products" %}
+                        </a>
+                    </li>
                     {% endif %}
-{#                      <span class="fa fa-bell fa-2x"></span>#}
-                    {% trans "Notifications" %}
-                </a>
-            </li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <span class="glyphicon glyphicon-user"></span>
-                    <b>{% user_display user %}</b>
-                    <span class="caret"></span>
-                </a>
-              <ul class="dropdown-menu">
-                <li><a href="#">
-                    <span class="fa fa-folder-open fa-lg "></span>
-                    {% trans "My Profile" %}
+                    {% if user.group_permissions.menu_production or user.is_superuser %}
+                    <li><a href="{% url 'production' %}" class="page-scroll">
+                        <span class="fa fa-list fa-lg hidden-sm"></span>
+                        {% trans "Production" %}
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if user.group_permissions.menu_entries or user.group_permissions.menu_entries_users or user.group_permissions.menu_entries_profiles or user.group_permissions.menu_entries_partners or user.group_permissions.menu_entries_products or user.is_superuser %}
+                        <li><a href="{% url 'entries' %}" class="page-scroll">
+                            <span class="fa fa-edit fa-lg hidden-sm"></span>
+                            {% trans "Entries" %}
+                            </a>
+                        </li>
+                    {% endif %}
+                    <li>
+                        <a href="{% url 'notifications' %}">
+                            {# {% register_notify_callbacks callbacks='fill_notification_list,fill_notification_badge' as X %} #}
+                            {# {{ X|safe }} #}
+                            {% notifications_unread as unread_count %}
+                            {% if unread_count %}
+                                <span  class="fa fa-bell faa-ring animated faa-slow alert-bell fa-2x hidden-sm"></span>
+                                <span id="live_notify_badge" class="badge">{{unread_count}}</span>
+                            {% else %}
+                                <span class="fa fa-bell alert-bell"></span>
+                            {% endif %}
+                            {# <span class="fa fa-bell fa-2x"></span>#}
+                            {% trans "Notifications" %}
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <span class="glyphicon glyphicon-user"></span>
+                            <b>{% user_display user %}</b>
+                            <span class="caret"></span>
+                        </a>
+                      <ul class="dropdown-menu">
+                        <li>
+                            <a href="#">
+                                <span class="fa fa-folder-open fa-lg "></span>
+                                {% trans "My Profile" %}
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="{% url 'account_logout' %}">
+                            <span class="fa fa-sign-out fa-lg"></span>
+                            {% trans 'Logout' %}
+                            </a>
+                        </li>
+                      </ul>
+                    </li>
+                {% else %}
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="fa fa-lock fa-lg"></span>
+                        <b>{% trans "Login" %}</b>
                     </a>
-                </li>
-                <li class="divider"></li>
-                <li><a href="{% url 'account_logout' %}">
-                    <span class="fa fa-sign-out fa-lg"></span>
-                    {% trans 'Logout' %}
-                    </a>
-                </li>
-              </ul>
-            </li>
-        {% else %}
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <span class="fa fa-lock fa-lg"></span>
-                <b>{% trans "Login" %}</b>
-            </a>
-              <ul id="login-dp" class="dropdown-menu">
-                <li>
-                   <div class="row">
-                      <div class="col-md-12">
-                         {% include '_login.html' %}
-                      </div>
-                   </div>
-                </li>
-              </ul>
-          </li>
-        {% endif %}
-      </ul>
+                      <ul id="login-dp" class="dropdown-menu">
+                        <li>
+                           <div class="row">
+                              <div class="col-md-12">
+                                 {% include '_login.html' %}
+                              </div>
+                           </div>
+                        </li>
+                      </ul>
+                  </li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
-    <!-- /.navbar-collapse -->
-  </div>
-  <!-- /.container-fluid -->
 </nav>

@@ -72,48 +72,48 @@ class Status(models.Model):
     #     return super(Status, self).save()
 
 
-class StatusPermission(models.Model):
-    name = models.CharField(max_length=100)
-    level = models.IntegerField(default=1)
+# class StatusPermission(models.Model):
+#     name = models.CharField(max_length=100)
+#     level = models.IntegerField(default=1)
 
-    class Meta:
-        verbose_name_plural = 'StatusPermissions'
+#     class Meta:
+#         verbose_name_plural = 'StatusPermissions'
 
-    def __unicode__(self):
-        return self.name
-
-
-class StatusSee(models.Model):
-    name = models.CharField(max_length=100)
-    level = models.IntegerField(default=1)
-
-    class Meta:
-        verbose_name_plural = 'StatusSee'
-
-    def __unicode__(self):
-        return self.name
+#     def __unicode__(self):
+#         return self.name
 
 
-class StatusEdit(models.Model):
-    name = models.CharField(max_length=100)
-    level = models.IntegerField(default=1)
+# class StatusSee(models.Model):
+#     name = models.CharField(max_length=100)
+#     level = models.IntegerField(default=1)
 
-    class Meta:
-        verbose_name_plural = 'StatusEdit'
+#     class Meta:
+#         verbose_name_plural = 'StatusSee'
 
-    def __unicode__(self):
-        return self.name
+#     def __unicode__(self):
+#         return self.name
 
 
-class StatusSet(models.Model):
-    name = models.CharField(max_length=100)
-    level = models.IntegerField(default=1)
+# class StatusEdit(models.Model):
+#     name = models.CharField(max_length=100)
+#     level = models.IntegerField(default=1)
 
-    class Meta:
-        verbose_name_plural = 'StatusSet'
+#     class Meta:
+#         verbose_name_plural = 'StatusEdit'
 
-    def __unicode__(self):
-        return self.name
+#     def __unicode__(self):
+#         return self.name
+
+
+# class StatusSet(models.Model):
+#     name = models.CharField(max_length=100)
+#     level = models.IntegerField(default=1)
+
+#     class Meta:
+#         verbose_name_plural = 'StatusSet'
+
+#     def __unicode__(self):
+#         return self.name
 
 
 class Product(models.Model):
@@ -132,7 +132,7 @@ class Product(models.Model):
     insurance_company = models.ForeignKey(InsuranceCompany, on_delete=models.CASCADE)
     branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
     file_type = models.ManyToManyField(FileType)
-    status_permission = models.ManyToManyField(StatusPermission)
+    status_permission = models.ManyToManyField(Status, related_name='product_status_permission')
     is_lead = models.BooleanField(default=False)
     begin_status = models.ForeignKey(Status)
     profile = models.ForeignKey(Profile, null=True)

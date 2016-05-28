@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
-from product.models import Product, Status, FileType
-from user_groups.models import Profiles
 from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView
 from django.db.models import  Q
 from core.views import MassificadoPageListView
-from .models import MassificadoUser, MassificadoGroups
+from user_groups.models import MassificadoGroups
+from product.models import Product, Status, FileType
+from .models import MassificadoUser
 from .forms import EntrieUserForm
 # from notifications.models import Notification
 
