@@ -74,7 +74,7 @@ class EntriesProfilesView(LoginRequiredMixin, MassificadoPageListView):
             else:
                 result = MassificadoGroups.objects.all()
         else:
-            result = MassificadoUser.objects.all()
+            result = MassificadoGroups.objects.all()
         return result
 
 
@@ -82,11 +82,13 @@ class NotificationsView(LoginRequiredMixin, ListView):
     template_name = 'page-notifications.html'
     context_object_name = 'notifications_old'
 
+    def get_queryset(self):
+        return self.request.user.notifications.read()
+
     def get_context_data(self, **kwargs):
         context = super(NotificationsView, self).get_context_data(**kwargs)
-        context['notification_new'] = self.request.user.notifications.unread()
+        context['notifications_new'] = list(self.request.user.notifications.unread())
+        context['notifications_old'] = list(self.request.user.notifications.read())
         self.request.user.notifications.mark_all_as_read()
         return context
 
-    def get_queryset(self):
-        return self.request.user.notifications.read()

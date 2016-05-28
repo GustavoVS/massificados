@@ -368,6 +368,8 @@ DEFAULT_FILES_GALCORR = (
 )
 
 DEFAULT_FILES_PARTNER = (
+    'Proposta de Endosso', 'Proposta de Apólice', 'Endosso', 'Apólice',
+    'Boleto de Apólice', 'Boleto de Endosso', 'Boleto de Apólice 2ª via', 'Boleto de Endosso 2ª via',
     'Demonstrações financeiras de 2013 (assinadas e/ou auditadas)',
     'Demonstrações financeiras de 2014 (assinadas e/ou auditadas)',
     'Demonstrações financeiras de 2015 (assinadas e/ou auditadas)',
@@ -446,7 +448,7 @@ DEFAULT_PROFILE_NAME = (
     'Perfil GalCorr Técnico Benefícios',
     'Perfil GalCorr Técnico Garantia',
     'Perfil GalCorr Financeiro',
-    'Perfil Tokio'
+    'Perfil Tokio',
 )
 
 PROFILE_NAME_PARTNER_ADM = (
@@ -491,7 +493,7 @@ PROFILE_NAME_GALCORR_ADM = (
     'Perfil GalCorr Técnico Benefícios',
     'Perfil GalCorr Técnico Garantia',
     'Perfil GalCorr Financeiro',
-    'Perfil Tokio'
+    'Perfil Tokio',
 )
 
 PROFILE_NAME_GALCORR_GER = (
@@ -505,7 +507,7 @@ PROFILE_NAME_GALCORR_GER = (
     'Perfil GalCorr Técnico Benefícios',
     'Perfil GalCorr Técnico Garantia',
     'Perfil GalCorr Financeiro',
-    'Perfil Tokio'
+    'Perfil Tokio',
 )
 
 PROFILE_NAME_GALCORR_COM = (
@@ -518,7 +520,7 @@ PROFILE_NAME_GALCORR_COM = (
     'Perfil GalCorr Técnico Benefícios',
     'Perfil GalCorr Técnico Garantia',
     'Perfil GalCorr Financeiro',
-    'Perfil Tokio'
+    'Perfil Tokio',
 )
 
 PROFILE_NAME_GALCORR_OPE = (
@@ -565,7 +567,7 @@ PROFILE_NAME_GALCORR_FIN = (
     'Perfil GalCorr Técnico Benefícios',
     'Perfil GalCorr Técnico Garantia',
     'Perfil GalCorr Financeiro',
-    'Perfil Tokio'
+    'Perfil Tokio',
 )
 
 DEFAULT_PROFILE_PERMISSION = (
@@ -823,7 +825,7 @@ class Command(BaseCommand):
             status_see_permission, status_edit_permission, status_set_permission, filetype_see_permission,\
             filetype_download_permission, profile_names_permission in DEFAULT_PROFILE_PERMISSION:
 
-                if  MassificadoGroups.objects.filter(name=permission_name).exists():
+                 if MassificadoGroups.objects.filter(name=permission_name).exists():
                     group = MassificadoGroups.objects.get(name=permission_name)
 
                     for products_p in products_permission:
@@ -844,8 +846,13 @@ class Command(BaseCommand):
                     for filetype_download_p in filetype_download_permission:
                         group.filetype_download.add(FileType.objects.get(name=filetype_download_p))
 
+                    # print permission_name
+                    print profile_names_permission
+                    group.profiles.clear()
                     for profile_names_p in profile_names_permission:
                         group.profiles.add(MassificadoGroups.objects.get(name=profile_names_p))
+
+                    group.save()
 
         for user_profile, user_password, user_partner, user_email, user_name in USERS:
                 user = MassificadoUser.objects.get(email=user_email)
