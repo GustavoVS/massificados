@@ -31,13 +31,8 @@ class Buyer(models.Model):
     responsible = models.CharField(_('Responsible'), max_length=50, blank=True, null=True)
     activity_area = models.ForeignKey(ActivityArea, blank=True, null=True)
 
-    # @property
-    # def last_addres(self):
-    #     address = BuyerAddress.objects.get(buyer=self, is_main=True)
-    #     return address
-
-    # def __unicode__(self):
-    #     return self.name
+   def __unicode__(self):
+       return self.name
 
 
 class BuyerAddress(models.Model):
@@ -160,10 +155,11 @@ class File(models.Model):
 
 
 class Quote(models.Model):
-    number = models.IntegerField(_('Number'))
-    value = models.FloatField(_('Value'))
-    payment_date = models.DateField(_('Payment Date'))
-    maturity_date = models.DateField(_('Maturity Date'))
+    number = models.IntegerField(_('Number'), null=True, default=1)
+    value = models.FloatField(_('Value'), null=True, default=0)
+    payment_date = models.DateField(_('Payment Date'), null=True, blank=True)
+    maturity_date = models.DateField(_('Maturity Date'), default=timezone.now, null=True, blank=True)
+    percentage = models.FloatField(_('Percentage'), default=100, null=True, blank=True)
     deadline = models.ForeignKey(Deadline)
 
     def __unicode__(self):
@@ -171,12 +167,11 @@ class Quote(models.Model):
 
 
 class SubQuote(models.Model):
-    number = models.IntegerField(_('Number'))
-    value = models.FloatField(_('Value'))
-    percentage = models.FloatField(_('Percentage'))
-    payment_date = models.DateField(_('Payment Date'))
-    maturity_date = models.DateField(_('Maturity Date'))
-    deadline = models.ForeignKey(Deadline)
+    number = models.IntegerField(_('Number'), null=True, default=1)
+    value = models.FloatField(_('Value'), null=True, default=0)
+    percentage = models.FloatField(_('Percentage'), default=0, null=True, blank=True)
+    payment_date = models.DateField(_('Payment Date'), null=True, blank=True)
+    maturity_date = models.DateField(_('Maturity Date'), default=timezone.now, null=True, blank=True)
     quote = models.ForeignKey(Quote)
     user = models.ForeignKey(MassificadoUser)
 

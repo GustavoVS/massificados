@@ -71,6 +71,9 @@ class Product(models.Model):
     file_type = models.ManyToManyField(FileType)
     status_permission = models.ManyToManyField(Status, related_name='product_status_permission')
     is_lead = models.BooleanField(default=False)
+    partner_percentage = models.FloatField(null=True, default=0, blank=True)
+    owner_percentage = models.FloatField(null=True, default=0, blank=True)
+    master_percentage = models.FloatField(null=True, default=0, blank=True)
     begin_status = models.ForeignKey(Status)
     profile = models.ForeignKey(Profile, null=True)
 
