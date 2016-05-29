@@ -7,6 +7,14 @@ from user_account.models import MassificadoUser
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from core.notification import Notification
+from django.db.models import Q
+
+
+class ActivityArea(models.Model):
+    name = models.CharField(_('Name'), max_length=100)
+
+    def __unicode__(self):
+        return self.name
 
 
 class Buyer(models.Model):
@@ -20,9 +28,16 @@ class Buyer(models.Model):
     phone = models.CharField(_('Phone'), max_length=14)
     kind_person = models.CharField(_('Kind Person'), max_length=1, choices=KIND_PERSON_CHOICES)
     cpf_cnpj = models.CharField(_('CPF/CNPJ'), max_length=18)
+    responsible = models.CharField(_('Responsible'), max_length=50, blank=True, null=True)
+    activity_area = models.ForeignKey(ActivityArea, blank=True, null=True)
 
-    def __unicode__(self):
-        return self.name
+    # @property
+    # def last_addres(self):
+    #     address = BuyerAddress.objects.get(buyer=self, is_main=True)
+    #     return address
+
+    # def __unicode__(self):
+    #     return self.name
 
 
 class BuyerAddress(models.Model):
@@ -38,6 +53,14 @@ class BuyerAddress(models.Model):
 
     def __unicode__(self):
         return self.street
+
+    def save(self):
+        if self.is_main:
+            for address in BuyerAddress.objects.filter(Q(buyer=self.buyer), ~ Q(pk=self.pk)):
+                address.is_main = False
+                address.save()
+
+        return super(BuyerAddress, self).save()
 
 
 class Sale(models.Model):

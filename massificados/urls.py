@@ -21,12 +21,13 @@ from django.contrib import admin
 from django.conf import settings
 
 from core.views import IndexView, EntriesView
-from sale.views import ProductionView, CreateBuyerView, EditBuyerView
+from sale.views import ProductionView, CreateBuyerView, EditBuyerView, user_cnpj
 from user_account.views import (EntriesProfilesView, EntriesUsersView, EntrieUserNewView, EntrieUserEditView,
                                 NotificationsView)
 from user_groups.views import EntrieProfileNewView, EntrieProfileEditView
 
 from partner.views import SacsListView
+
 
 import notifications.urls
 
@@ -58,6 +59,9 @@ urlpatterns = [
 
     url('^inbox/notifications/', include(notifications.urls, namespace='notifications-api')),
 
+
+    # api
+    url('^api/user_cnpj', user_cnpj)
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

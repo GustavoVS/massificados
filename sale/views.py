@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
-from django.db.models import Q
 from django.core.paginator import Paginator
-# from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView
-from .models import Sale, Partner, Buyer, Status, ResponseDeadline
+from .models import Sale, Partner, Buyer, BuyerAddress, Status, ResponseDeadline
 from .forms import BuyerForm, AddressBuyerFormset, FileDeadlineFormset, DeadlineSaleFormset, DetailDeadlineFormset
 from product.models import Product, Question
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializers import BuyerSerializer, BuyerAddressSerializer
+
 
 
 class ProductionView(LoginRequiredMixin, ListView):
@@ -194,3 +197,21 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         # todo: if "permissions" to redirect to determineted url
         return reverse_lazy('index_view')
+
+
+@api_view(['GET', ])
+def user_cnpj(request):
+    if request.method == 'GET':
+        try:
+            buyer = Buyer.objects.get(cpf_cnpj=request.GET.get('cpf_cnpj'))
+            buyer_serialize = BuyerSerializer(buyer)
+
+            buyeraddress = BuyerAddress.objects.get(buyer=buyer)
+            buyeraddress_serialize = BuyerAddressSerializer(buyeraddress)
+
+            resp = dict(buyer_serialize.data)
+            for k, v in dict(buyeraddress_serialize.data).iteritems():
+                resp[k] = v
+            return Response(resp)
+        except Buyer.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)

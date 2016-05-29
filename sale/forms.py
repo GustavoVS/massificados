@@ -9,12 +9,26 @@ from sale.models import Sale, Buyer, BuyerAddress, Deadline, File, Detail
 class BuyerForm(forms.ModelForm):
     class Meta:
         model = Buyer
-        fields = ['name', 'phone', 'email', 'kind_person', 'cpf_cnpj', ]
+        fields = ['name', 'phone', 'email', 'kind_person', 'cpf_cnpj', 'responsible', 'activity_area']
 
     def clean_cpf_cnpj(self):
         if not cpfcnpj.validate(self.cleaned_data.get('cpf_cnpj').replace('.', '').replace('/', '').replace('-', '')):
             raise forms.ValidationError(_('Invalid value for this Field'))
         return self.cleaned_data.get('cpf_cnpj')
+
+    def clean_responsible(self):
+        if self.cleaned_data.get('kind_person') == 'J':
+            if not self.cleaned_data.get('responsible'):
+                raise forms.ValidationError(_('This field is required'))
+
+        return self.cleaned_data.get('responsible')
+
+    def clean_activity_area(self):
+        if self.cleaned_data.get('kind_person') == 'J':
+            if not self.cleaned_data.get('activity_area'):
+                raise forms.ValidationError(_('This field is required'))
+
+        return self.cleaned_data.get('activity_area')
 
 
 class BuyerAddressForm(forms.ModelForm):

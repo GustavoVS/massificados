@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
-from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView
-from django.db.models import  Q
+from django.db.models import Q
 from core.views import MassificadoPageListView
 from user_groups.models import MassificadoGroups
 from .models import MassificadoUser
 from .forms import EntrieUserForm
-# from notifications.models import Notification
 
 
 ENTRIES_PAGES = [
@@ -34,7 +32,8 @@ class EntriesUsersView(LoginRequiredMixin, MassificadoPageListView):
         if self.request.method == "GET":
             search = self.request.GET.get('search-input')
             if search:
-                result = MassificadoUser.objects.filter(Q(email__contains=search) | Q(first_name__contains=search) | Q(last_name__contains=search))
+                result = MassificadoUser.objects.filter(Q(email__contains=search) | Q(
+                    first_name__contains=search) | Q(last_name__contains=search))
             else:
                 result = MassificadoUser.objects.all()
         else:
@@ -91,4 +90,3 @@ class NotificationsView(LoginRequiredMixin, ListView):
         context['notifications_old'] = list(self.request.user.notifications.read())
         self.request.user.notifications.mark_all_as_read()
         return context
-

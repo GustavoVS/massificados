@@ -39,29 +39,6 @@
                 );
                 $($(this).attr('data-target')).collapse();
             });
-            ctrlKindPerson = function(){
-                kind_person = $('.control-kind_person select').val();
-                if (kind_person == ''){
-                    $('.kind_person-F, .kind_person-J').hide(500);
-                }
-
-                $('.kind_person-' + (kind_person == 'F' ? 'J' : 'F') )
-                    .hide(500)
-                    .find('input')
-                    .attr('name', '')
-                    .attr('id', '')
-                    .attr('required', false);
-
-                $('.kind_person-' + kind_person)
-                    .removeClass('hidden')
-                    .show(500)
-                    .find('input')
-                    .attr('name', 'cpf_cnpj')
-                    .attr('id', 'id_cpf_cnpj')
-                    .attr('required', true);
-            };
-            ctrlKindPerson();
-            $('.control-kind_person select').change(ctrlKindPerson);
             $('.cep-auto input').blur(function(){
                 $.ajax({
                   dataType: "json",
@@ -74,6 +51,27 @@
                     $('#id_buyeraddress_set-0-number').focus();
                   }
                 });
+            });
+            $('input.cpf_cnpj-auto').blur(function(){
+                $.ajax({
+                    url: '/api/user_cnpj/',
+                    dataType: 'json',
+                    data: {cpf_cnpj: $(this).val()},
+                })
+                .done(function(e) {
+
+                    for(var key in e){
+                        $('#id_'+key+', #id_buyeraddress_set-0-'+key).val(e[key])
+                        // console.log(key, e[key]);
+                    }
+                })
+                .fail(function(e) {
+                    console.log(e)
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+
             });
         });
         $(function() {
