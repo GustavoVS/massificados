@@ -14,6 +14,8 @@ class Partner(models.Model):
     email = models.EmailField()
     cnpj = models.CharField(max_length=18)
     site = models.OneToOneField(Site)
+    internal_code = models.CharField(max_length=100, null=True)
+    operational_code = models.CharField(max_length=100, null=True)
 
     def __unicode__(self):
         return self.name

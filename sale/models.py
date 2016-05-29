@@ -9,20 +9,29 @@ from django.utils.translation import ugettext_lazy as _
 from core.notification import Notification
 
 
-class Buyer(models.Model):
-    KIND_PERSON_CHOICES = (
-        ('F', _('Individual')),
-        ('J', _('Legal Person')),
-    )
-    name = models.CharField(_('Name'), max_length=100)
-    date_create = models.DateTimeField(_('Date created'), default=timezone.now)
-    email = models.EmailField(_('E-mail'))
-    phone = models.CharField(_('Phone'), max_length=14)
-    kind_person = models.CharField(_('Kind Person'), max_length=1, choices=KIND_PERSON_CHOICES)
-    cpf_cnpj = models.CharField(_('CPF/CNPJ'), max_length=18)
+class ActivityArea(models.Model):
+   name = models.CharField(_('Name'), max_length=100)
 
-    def __unicode__(self):
-        return self.name
+   def __unicode__(self):
+       return self.name
+
+
+class Buyer(models.Model):
+   KIND_PERSON_CHOICES = (
+       ('F', _('Individual')),
+       ('J', _('Legal Person')),
+   )
+   name = models.CharField(_('Name'), max_length=100)
+   date_create = models.DateTimeField(_('Date created'), default=timezone.now)
+   email = models.EmailField(_('E-mail'))
+   phone = models.CharField(_('Phone'), max_length=14)
+   kind_person = models.CharField(_('Kind Person'), max_length=1, choices=KIND_PERSON_CHOICES)
+   cpf_cnpj = models.CharField(_('CPF/CNPJ'), max_length=18)
+   responsible = models.CharField(_('Responsible'), max_length=50, blank=True, null=True)
+   activity_area = models.ForeignKey(ActivityArea, blank=True, null=True)
+
+   def __unicode__(self):
+       return self.name
 
 
 class BuyerAddress(models.Model):
@@ -137,10 +146,11 @@ class File(models.Model):
 
 
 class Quote(models.Model):
-    number = models.IntegerField(_('Number'))
-    value = models.FloatField(_('Value'))
-    payment_date = models.DateField(_('Payment Date'))
-    maturity_date = models.DateField(_('Maturity Date'))
+    number = models.IntegerField(_('Number'), null=True, default=1)
+    value = models.FloatField(_('Value'), null=True, default=0)
+    payment_date = models.DateField(_('Payment Date'), null=True, blank=True)
+    maturity_date = models.DateField(_('Maturity Date'), default=timezone.now, null=True, blank=True)
+    percentage = models.FloatField(_('Percentage'), default=100, null=True, blank=True)
     deadline = models.ForeignKey(Deadline)
 
     def __unicode__(self):
@@ -148,12 +158,11 @@ class Quote(models.Model):
 
 
 class SubQuote(models.Model):
-    number = models.IntegerField(_('Number'))
-    value = models.FloatField(_('Value'))
-    percentage = models.FloatField(_('Percentage'))
-    payment_date = models.DateField(_('Payment Date'))
-    maturity_date = models.DateField(_('Maturity Date'))
-    deadline = models.ForeignKey(Deadline)
+    number = models.IntegerField(_('Number'), null=True, default=1)
+    value = models.FloatField(_('Value'), null=True, default=0)
+    percentage = models.FloatField(_('Percentage'), default=0, null=True, blank=True)
+    payment_date = models.DateField(_('Payment Date'), null=True, blank=True)
+    maturity_date = models.DateField(_('Maturity Date'), default=timezone.now, null=True, blank=True)
     quote = models.ForeignKey(Quote)
     user = models.ForeignKey(MassificadoUser)
 

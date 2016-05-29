@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 # from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView
-from .models import Sale, Partner, Buyer, Status, ResponseDeadline
+from .models import Sale, Partner, Buyer, Status, ResponseDeadline, Quote, SubQuote
 from .forms import BuyerForm, AddressBuyerFormset, FileDeadlineFormset, DeadlineSaleFormset, DetailDeadlineFormset
 from product.models import Product, Question
 
@@ -44,15 +44,15 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
         # data['possible_new_status'] = Status.objects.filter(level__gte=product.begin_status.level).select_related()
         data['possible_new_status'] = self.request.user.group_permissions.status_set.filter(
             level__gte=product.begin_status.level).select_related()
-        if not product.is_lead:
-            data['show_all'] = True
-            data['deadlinesale'] = DeadlineSaleFormset()
-            data['filedeadline'] = FileDeadlineFormset()
-            data['questiondeadline'] = product.profile.question_set.filter(
-                type_profile='pdl').order_by('order_number')
-            data['detail_deadline'] = DetailDeadlineFormset()
-            data['question_detail'] = product.profile.question_set.filter(
-                type_profile='pdt').order_by('order_number')
+        # if not product.is_lead:
+        data['show_all'] = True
+        data['deadlinesale'] = DeadlineSaleFormset()
+        data['filedeadline'] = FileDeadlineFormset()
+        data['questiondeadline'] = product.profile.question_set.filter(
+            type_profile='pdl').order_by('order_number')
+        data['detail_deadline'] = DetailDeadlineFormset()
+        data['question_detail'] = product.profile.question_set.filter(
+            type_profile='pdt').order_by('order_number')
 
         return data
 
@@ -77,6 +77,34 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
             if form.is_valid():
                 form.instance.sale = sale
                 form.save()
+                dead = form.instance
+                # se isso for virar um modelo de negócio para nós, refatorar as comissões abaixo, WS
+                # comissão do partner
+                if Quote.objects.filter(deadline=dead).exists():
+                    quote = Quote.objects.get(deadline=dead)
+                else:
+                    quote = Quote(deadline=dead,)
+                    quote.value = dead.payment * (dead.sale.product.partner_percentage/100)
+                    quote.percentage = dead.sale.product.partner_percentage
+                    quote.save()
+
+                # repasse do owner
+                if SubQuote.objects.filter(quote=quote, user=dead.sale.owner).exists():
+                    subquote = SubQuote.objects.get(quote=quote, user=dead.sale.owner)
+                else:
+                    subquote = SubQuote(quote=quote, user=dead.sale.owner,)
+                    subquote.value = dead.payment * (dead.sale.product.owner_percentage/100)
+                    subquote.percentage = dead.sale.product.owner_percentage
+                    subquote.save()
+
+                # repasse do owner.master
+                if SubQuote.objects.filter(quote=quote, user=dead.sale.owner.master).exists():
+                    subquote = SubQuote.objects.get(quote=quote, user=dead.sale.owner.master)
+                else:
+                    subquote = SubQuote(quote=quote, user=dead.sale.owner.master)
+                    subquote.value = dead.payment * (dead.sale.product.master_percentage/100)
+                    subquote.percentage = dead.sale.product.master_percentage
+                    subquote.save()
 
                 # if self.request.POST.get('new-status', ''):
                 #     dl.status_id = self.request.POST.get('new-status', '')
@@ -121,35 +149,35 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
         data['show_all'] = False
         data['product'] = Product.objects.get(pk=self.kwargs['productpk'])
         data['sale'] = sale = self.object.sale_set.all()[0]
-        if not Product.objects.get(pk=self.kwargs['productpk']).is_lead:
-            data['show_all'] = True
-            data['deadlinesale'] = DeadlineSaleFormset(instance=sale)
-            data['status_deadline'] = sale.deadline_set.all()[0].status
-            # todo: filter user permissions
-            data['possible_new_status'] = Status.objects.filter(
-                level__gte=sale.deadline_set.all()[0].status.level).order_by('level')
-            if sale.deadline_set.all():
-                data['filedeadline'] = FileDeadlineFormset(instance=sale.deadline_set.all()[0])
-            else:
-                data['filedeadline'] = FileDeadlineFormset()
+        # if not Product.objects.get(pk=self.kwargs['productpk']).is_lead:
+        data['show_all'] = True
+        data['deadlinesale'] = DeadlineSaleFormset(instance=sale)
+        data['status_deadline'] = sale.deadline_set.all()[0].status
+        # todo: filter user permissions
+        data['possible_new_status'] = Status.objects.filter(
+            level__gte=sale.deadline_set.all()[0].status.level).order_by('level')
+        if sale.deadline_set.all():
+            data['filedeadline'] = FileDeadlineFormset(instance=sale.deadline_set.all()[0])
+        else:
+            data['filedeadline'] = FileDeadlineFormset()
 
-            if sale.deadline_set.all():
-                data['detail_deadline'] = DetailDeadlineFormset(instance=sale.deadline_set.all()[0])
-            else:
-                data['detail_deadline'] = DetailDeadlineFormset()
+        if sale.deadline_set.all():
+            data['detail_deadline'] = DetailDeadlineFormset(instance=sale.deadline_set.all()[0])
+        else:
+            data['detail_deadline'] = DetailDeadlineFormset()
 
-            questions_deadlines = sale.product.profile.question_set.filter(
-                type_profile='pdl').order_by('order_number')
+        questions_deadlines = sale.product.profile.question_set.filter(
+            type_profile='pdl').order_by('order_number')
 
-            if sale.deadline_set.all():
-                deadline = sale.deadline_set.all()[0]
-                data['responsequestiondeadline'] = {}
-                for quest in questions_deadlines:
-                    if quest.responsedeadline_set.filter(deadline=deadline).exists():
-                        quest.value = quest.responsedeadline_set.get(
-                            deadline=deadline).value
+        if sale.deadline_set.all():
+            deadline = sale.deadline_set.all()[0]
+            data['responsequestiondeadline'] = {}
+            for quest in questions_deadlines:
+                if quest.responsedeadline_set.filter(deadline=deadline).exists():
+                    quest.value = quest.responsedeadline_set.get(
+                        deadline=deadline).value
 
-            data['questiondeadline'] = questions_deadlines
+        data['questiondeadline'] = questions_deadlines
         return data
 
     def form_valid(self, form):

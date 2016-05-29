@@ -56,9 +56,9 @@
 
                 {% bootstrap_field form.cpf_cnpj form_group_class='form-group col-md-4 kind_person-F hidden mask-cpf' %}
                 {% bootstrap_field form.cpf_cnpj form_group_class='form-group col-md-4 kind_person-J hidden mask-cnpj' %}
-                {# {% for field in form %} #}
-                    {# {% bootstrap_field field form_group_class='form-group col-md-4' %} #}
-                {# {% endfor %} #}
+{#                 {% for field in form %}#}
+{#                     {% bootstrap_field field form_group_class='form-group col-md-4' %}#}
+{#                 {% endfor %}#}
             </div>
         </div>
         <h3>{% trans 'Address' %}</h3>
@@ -73,12 +73,12 @@
                 {% bootstrap_field addressbuyer.0.number form_group_class="form-group col-md-4 mask-number" %}
                 {% bootstrap_field addressbuyer.0.complement form_group_class="form-group col-md-4" %}
                 {{ addressbuyer.0.id }}
-                {{ addressbuyer.0.buyer }}
-                {# {% for form in addressbuyer.forms %} #}
-                    {# {% for field in form %} #}
-                        {# {% bootstrap_field field form_group_class='form-group col-md-4' %} #}
-                    {# {% endfor %} #}
-                {# {% endfor %} #}
+{#                {{ addressbuyer.0.buyer }}#}
+{#                 {% for form in addressbuyer.forms %}#}
+{#                     {% for field in form %}#}
+{#                         {% bootstrap_field field form_group_class='form-group col-md-4' %}#}
+{#                     {% endfor %}#}
+{#                 {% endfor %}#}
             </div>
         </div>
         {% if show_all %}
@@ -217,7 +217,6 @@
                     </div>
                 </div>
             {% endif %}
-
             <h3>{% trans 'Attachements' %}</h3>
             <div class="well">
                 <div class="thumbnail col-md-3" style="display: none" id="file_empty_form">

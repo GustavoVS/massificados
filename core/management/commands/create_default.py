@@ -4,9 +4,90 @@ from django.contrib.sites.models import Site
 from django.core.management.base import BaseCommand
 from partner.models import Partner
 from product.models import Status, FileType, InsuranceCompany, Branch, Product, Profile, ActionStatus
+from sale.models import ActivityArea
 from user_account.models import MassificadoUser
 from user_groups.models import MassificadoGroups
 from status_emails.models import ActionStatusEmails, ActionStatusEmailsUsers
+
+
+AREA = ("Academia de Esportes / Artes Marciais",
+"Açúcar e Álcool",
+"Administração e Participação",
+"Agências de Turismo / Viagem",
+"Agricultura / Pecuária / Silvicultura",
+"Alimentos",
+"Arquitetura / Paisagismo / Urbanismo",
+"Assessoria de Imprensa",
+"Automação",
+"Automotivo",
+"Bancário / Financeiro",
+"Bebidas",
+"Bens de Capital",
+"Bens de Consumo (Outros)",
+"Borracha",
+"Café",
+"Calçados",
+"Comércio Atacadista",
+"Comércio Varejista",
+"Comunicação",
+"Concessionárias / Auto Peças",
+"Construção Civil",
+"Consultoria Geral",
+"Contabilidade/ Auditoria",
+"Corretagem (Imóveis)",
+"Corretagem (Seguros)",
+"Corretagem de Títulos e Valores Imobiliários",
+"Cosméticos",
+"Diversão/ Entretenimento",
+"Educação/ Idiomas",
+"Eletrônica/ Eletroeletrônica/ Eletrodomésticos",
+"Embalagens",
+"Energia/ Eletricidade",
+"Engenharia",
+"Equipamentos industriais",
+"Equipamentos médicos / precisão",
+"Estética/ Academias",
+"Eventos",
+"Farmacêutica/ Veterinária",
+"Financeiras",
+"Gráfica/ Editoras",
+"Importação/ Exportação",
+"Incorporadora",
+"Indústrias",
+"Informática",
+"Internet/ Sites",
+"Jornais",
+"Jurídica",
+"Logística / Armazéns",
+"Madeiras",
+"Materiais de Construção",
+"Material de Escritório",
+"Mecânica/ Manutenção",
+"Metalúrgica / Siderúrgica",
+"Mineração",
+"Móveis e Artefatos de decoração",
+"Órgãos públicos",
+"Outros",
+"Papel e Derivados",
+"Petroquímico/ Petróleo",
+"Plásticos",
+"Prestadora de Serviços",
+"Publicidade / Propaganda",
+"Recursos Humanos",
+"Relações Públicas",
+"Representação Comercial",
+"Restaurante/ Industrial/ Fast Food",
+"Saúde",
+"Segurança Patrimonial",
+"Seguros/ Previdência Privada",
+"Sindicatos / Associações / ONGs",
+"Supermercado / Hipermercado",
+"Telecomunicações",
+"Telemarketing/ Call Center",
+"Têxtil/ Couro",
+"Transportes",
+"Turismo/ Hotelaria",)
+
 
 User = get_user_model()
 
@@ -415,25 +496,25 @@ DEFAULT_PROFILE = (
 DEFAULT_PRODUCT = (
     ('Vida', 'Introdução', 'Descrição', ' Declaração', 'J', 'Tokio', 'Vida',
         DEFAULT_FILES_TOKIO,
-        'Proposta Gerada', 'Perfil Vida', DEFAULT_STATUS_PRODUCT_TOKIO,),
+        'Proposta Gerada', 'Perfil Vida', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10 , 10, 0,),
     ('Vida Global', 'Introdução', 'Descrição', ' Declaração', 'J', 'Tokio', 'Vida',
          DEFAULT_FILES_TOKIO,
-        'Proposta Gerada', 'Perfil Vida Global', DEFAULT_STATUS_PRODUCT_TOKIO,),
+        'Proposta Gerada', 'Perfil Vida Global', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10 , 10, 0,),
     ('Acidentes Pessoais', 'Introdução', 'Descrição', ' Declaração', 'J', 'Tokio', 'Acidentes Pessoais',
         DEFAULT_FILES_TOKIO,
-        'Proposta Gerada', 'Perfil Acidentes Pessoais', DEFAULT_STATUS_PRODUCT_TOKIO,),
+        'Proposta Gerada', 'Perfil Acidentes Pessoais', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10, 10, 0,),
     ('Garantia Tradicional', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Garantia Tradicional',
         DEFAULT_FILES_GARANTIA,
-        'Lead de Garantia Gerado', 'Perfil Garantia Tradicional', DEFAULT_STATUS_PRODUCT_GARANTIA,),
+        'Lead de Garantia Gerado', 'Perfil Garantia Tradicional', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1,),
     ('Garantia Judicial', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Garantia Judicial',
          DEFAULT_FILES_GARANTIA,
-        'Lead de Garantia Gerado', 'Perfil Garantia Judicial', DEFAULT_STATUS_PRODUCT_GARANTIA,),
+        'Lead de Garantia Gerado', 'Perfil Garantia Judicial', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1,),
     ('Fiança Locatícia', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Fiança Locatícia',
      DEFAULT_FILES_GARANTIA,
-    'Lead de Garantia Gerado', 'Perfil Fiança Locatícia', DEFAULT_STATUS_PRODUCT_GARANTIA,),
+    'Lead de Garantia Gerado', 'Perfil Fiança Locatícia', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1,),
     ('Saúde', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Saúde',
      DEFAULT_FILES_BENEFICIOS,
-    'Lead de Benefícios Gerado', 'Perfil Saúde', DEFAULT_STATUS_PRODUCT_BENEFICIOS,),
+    'Lead de Benefícios Gerado', 'Perfil Saúde', DEFAULT_STATUS_PRODUCT_BENEFICIOS, 10, 10, 10, 1,),
     )
 
 DEFAULT_PROFILE_NAME = (
@@ -644,6 +725,8 @@ class Command(BaseCommand):
                 email='sofisa@mail.com',
                 cnpj='60.889.128.0001-80',
                 site=s,
+                internal_code='00000',
+                operational_code='00000',
             )
             p.save()
 
@@ -657,6 +740,8 @@ class Command(BaseCommand):
                 email='GalCorr@mail.com',
                 cnpj='00.000.000.0000-00',
                 site=s,
+                internal_code='00000',
+                operational_code='00000',
             )
             p.save()
 
@@ -670,6 +755,8 @@ class Command(BaseCommand):
                 email='Tokio@mail.com',
                 cnpj='00.000.000.0000-00',
                 site=s,
+                internal_code='00000',
+                operational_code='00000',
             )
             p.save()
 
@@ -687,6 +774,11 @@ class Command(BaseCommand):
                                        password=user_password,
                                        partner=Partner.objects.get(name=user_partner))
                 user.save()
+
+        for area_name in AREA:
+            if not ActivityArea.objects.filter(name=area_name).exists():
+                ar = ActivityArea(name=area_name)
+                ar.save()
 
         for status_name, level in DEFAULT_STATUS:
             if not Status.objects.filter(name=status_name).exists():
@@ -729,7 +821,7 @@ class Command(BaseCommand):
         #         per.save()
 
         for product_name, introduction, description, declaration, kind, insurance, branch, files,\
-        begin, profile, status_permitted in DEFAULT_PRODUCT:
+        begin, profile, status_permitted, partner_percentage, owner_percentage, master_percentage, is_lead in DEFAULT_PRODUCT:
             if not Product.objects.filter(name=product_name).exists():
                 product = Product(
                     name=product_name,
@@ -740,7 +832,11 @@ class Command(BaseCommand):
                     insurance_company=InsuranceCompany.objects.get(name=insurance),
                     branch=Branch.objects.get(name=branch),
                     begin_status=Status.objects.get(name=begin),
-                    profile=Profile.objects.get(name=profile)
+                    profile=Profile.objects.get(name=profile),
+                    partner_percentage=partner_percentage,
+                    owner_percentage=owner_percentage,
+                    master_percentage=master_percentage,
+                    is_lead=is_lead
                 )
 
                 product.save()
@@ -846,8 +942,6 @@ class Command(BaseCommand):
                     for filetype_download_p in filetype_download_permission:
                         group.filetype_download.add(FileType.objects.get(name=filetype_download_p))
 
-                    # print permission_name
-                    print profile_names_permission
                     group.profiles.clear()
                     for profile_names_p in profile_names_permission:
                         group.profiles.add(MassificadoGroups.objects.get(name=profile_names_p))
@@ -858,4 +952,6 @@ class Command(BaseCommand):
                 user = MassificadoUser.objects.get(email=user_email)
                 user.set_password('galcorr')
                 user.group_permissions = MassificadoGroups.objects.get(name=user_profile)
+                if "Parceiro" in user_profile:
+                    user.master = MassificadoUser.objects.get(username='SupervisorSofisa')
                 user.save()

@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView
-from django.db.models import  Q
+from django.db.models import Q
 from core.views import MassificadoPageListView
 from user_groups.models import MassificadoGroups
 from .models import MassificadoUser
