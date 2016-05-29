@@ -31,8 +31,8 @@ class Buyer(models.Model):
     responsible = models.CharField(_('Responsible'), max_length=50, blank=True, null=True)
     activity_area = models.ForeignKey(ActivityArea, blank=True, null=True)
 
-   def __unicode__(self):
-       return self.name
+    def __unicode__(self):
+        return self.name
 
 
 class BuyerAddress(models.Model):
