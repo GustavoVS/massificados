@@ -77,6 +77,10 @@ class Product(models.Model):
     master_percentage = models.FloatField(null=True, default=0, blank=True)
     begin_status = models.ForeignKey(Status)
     profile = models.ForeignKey(Profile, null=True)
+    other_documents_declaration = models.CharField(_('Other Documentos'), max_length=100, null=True)
+    rules_declaration = models.CharField(_('Rules'), max_length=100, null=True)
+
+
 
     def __unicode__(self):
         return self.name

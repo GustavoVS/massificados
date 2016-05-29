@@ -23,6 +23,9 @@
                 <p><b>{% trans "Product" %}</b>: {{ product }}</p>
                 <p><b>{% trans "Sale Owner" %}</b>: {{ sale.owner|default:user }}</p>
                 <p><b>{% trans "Status" %}</b>: {{ status_deadline }}<br></p>
+                {% if not product.is_lead %}
+                    <p><b>{% trans "Insurance" %}</b>: {{ product.insurance_company.name }}<br></p>
+                {% endif %}
             </div>
             {% if sale.pk %}
                 <div class="col-md-6">
@@ -235,6 +238,12 @@
                         {{ detail_deadline.management_form }}
                     </div>
                 </div>
+            {% if product.rules_declaration %}
+                <div class="disclaimer">
+                    <div class="space"></div>
+                    <p><span class="fa fa-warning"> </span><b> {{ product.rules_declaration }}</b></p>
+                </div>
+            {% endif %}
             </div>
         {% endif %}
 
@@ -265,6 +274,62 @@
                     {% endfor %}
                 </div>
             </div>
+            {% if product.other_documents_declaration %}
+                <div class="disclaimer">
+                    <div class="space"></div>
+                    <p><span class="fa fa-file-text"> </span><b> {{ product.other_documents_declaration }}</b></p>
+                </div>
+            {% endif %}
+        </div>
+        <div class="well">
+            {% if not product.is_lead and product.full_declaration %}
+                <div class="modal-default">
+                    <a href="#conditiosmodal"  data-toggle="modal">
+                        <span class="fa fa-plus"> </span>
+                        {% trans "Click to see more about the conditions of the product" %}
+                    </a>
+                    <div id="conditiosmodal" class="modal fade">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h1 class="modal-title">{% trans "Conditions" %}</h1>
+                                </div>
+                                <div class="modal-body">
+                                    {% autoescape off %}{{ product.full_declaration }}{% endautoescape %}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if not product.is_lead and product.declaration %}
+                <div class="modal-default">
+                    <a href="#declarationmodal"  data-toggle="modal">
+                        <span class="fa fa-plus"> </span>
+                        {% trans "Click to read the declaration" %}
+                    </a>
+                    <div id="declarationmodal" class="modal fade">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h1 class="modal-title">{% trans "Conditions" %}</h1>
+                                </div>
+                                <div class="modal-body">
+                                    {% autoescape off %}{{ product.declaration }}{% endautoescape %}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
         </div>
         {% if not sale.pk or sale.deadline_set.all.0.status in user.group_permissions.status_edit.all %}
             {% url 'index_view' as url %}

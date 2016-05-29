@@ -9,6 +9,10 @@ from user_account.models import MassificadoUser
 from user_groups.models import MassificadoGroups
 from status_emails.models import ActionStatusEmails, ActionStatusEmailsUsers
 
+
+
+RULES_DECLARATION_VIDA = "Em caso de morte acidental, as coberturas básicas e IEA serão somadas"
+
 FULL_DECLARATION_VIDA = '''<h1><strong>CONDI&Ccedil;&Otilde;ES RESUMIDAS DO PLANO</strong></h1>
 <h2><strong>Coberturas</strong></h2>
 <p><strong>CB - Cobertura B&aacute;sica (Morte) - garante aos benifici&aacute;rios o pagamento do capital segurado individual contratado para esta cobertura, em caso de morte do segurado, seja natural, seja acidental, devidamente coberta, exceto se decorrente de riscos exclu&iacute;dos, conforme Condi&ccedil;&otilde;es Gerais do Seguro.</strong></p>
@@ -63,7 +67,7 @@ DECLARATION_VIDA = '''<h1>DECLARA&Ccedil;&Atilde;O E AUTORIZA&Ccedil;&Atilde;O D
 <p>A empresa concorda que s&oacute; ter&atilde;o cobertura os segurados que ao ingressarem no seguro estiverem em plena atividade de trabalho, n&atilde;o tenham idade superior a 65 anos e estejam em perfeitas condi&ccedil;&otilde;es de sa&uacute;de, n&atilde;o apresentando doen&ccedil;as preexistentes ou sequelas delas provenientes, que impe&ccedil;am seu ingresso no seguro ou que agravem a taxa do pr&ecirc;mio, assumindo integralmente a responsabilidade pelas informa&ccedil;&otilde;es prestadas, ciente e de acordo com os artigos 765 e 766 do C&oacute;digo Civil Brasileiro, se tiver omitido circunst&acirc;ncias que possam influir na aceita&ccedil;&atilde;o ou validade da proposta, no valor do capital ou taxa do pr&ecirc;mio, perder&aacute; o direito ao capital segurado e consequentemente a quaisquer garantias ou pagamentos de benef&iacute;cios.</p>
 <p>A aceita&ccedil;&atilde;o do seguro estar&aacute; sujeita a analise do risco.</p>
 <p>O registro deste plano na SUSEP n&atilde;o implica, por parte da Autarquia, incentivo ou recomenda&ccedil;&atilde;o a sua comercializa&ccedil;&atilde;o</p>
-<p>O segurado poder&aacute; consultar a situa&ccedil;&atilde;o cadastral de seu corretor, no site www.susep.gov.br, por meio do n&uacute;mero de registro na SUSEP, nome completo, CNPJ ou CPF.</p>'''
+<p>O segurado poder&aacute; consultar a situa&ccedil;&atilde;o cadastral de seu corretor, no site <a href="http://www.susep.gov.br" target="_blank" >www.susep.gov.br</a>, por meio do n&uacute;mero de registro na SUSEP, nome completo, CNPJ ou CPF.</p>'''
 
 FULL_DECLARATION_VIDA_GLOGAL= '''<h1>CONDI&Ccedil;&Otilde;ES RESUMIDAS DO PLANO</h1>
 <h2><strong>Coberturas</strong></h2>
@@ -122,7 +126,7 @@ DECLARATION_VIDA_GLOGAL = '''<h1>DECLARA&Ccedil;&Atilde;O E AUTORIZA&Ccedil;&Ati
 <p>A empresa concorda que s&oacute; ter&atilde;o cobertura os segurados que ao ingressarem no seguro estiverem em plena atividade de trabalho, n&atilde;o tenham idade superior ao estabelecido e estejam em perfeitas condi&ccedil;&otilde;es de sa&uacute;de, n&atilde;o apresentando doen&ccedil;as preexistentes ou sequelas delas provenientes, que impe&ccedil;am seu ingresso no seguro ou que agravem a taxa do pr&ecirc;mio, assumindo integralmente a responsabilidade pelas informa&ccedil;&otilde;es prestadas, ciente e de acordo com os artigos 765 e 766 do C&oacute;digo Civil Brasileiro, se tiver omitido circunst&acirc;ncias que possam influir na aceita&ccedil;&atilde;o ou validade da proposta, no valor do capital ou taxa do pr&ecirc;mio, perder&aacute; o direito ao capital segurado e consequentemente a quaisquer garantias ou pagamentos de benef&iacute;cios.</p>
 <p>A aceita&ccedil;&atilde;o do seguro estar&aacute; sujeita a analise do risco.</p>
 <p>O registro deste plano na SUSEP n&atilde;o implica, por parte da Autarquia, incentivo ou recomenda&ccedil;&atilde;o a sua comercializa&ccedil;&atilde;o</p>
-<p>O segurado poder&aacute; consultar a situa&ccedil;&atilde;o cadastral de seu corretor, no site www.susep.gov.br, por meio do n&uacute;mero de registro na SUSEP, nome completo, CNPJ ou CPF.</p>'''
+<p>O segurado poder&aacute; consultar a situa&ccedil;&atilde;o cadastral de seu corretor, no site <a href="http://www.susep.gov.br" target="_blank" >www.susep.gov.br</a>, por meio do n&uacute;mero de registro na SUSEP, nome completo, CNPJ ou CPF.</p>'''
 
 FULL_DECLARATION_AP = '''<h1>CONDI&Ccedil;&Otilde;ES RESUMIDAS DO PLANO</h1>
 <h2><strong>Coberturas</strong></h2>
@@ -152,7 +156,7 @@ DECLARATION_AP = '''<h1>DECLARA&Ccedil;&Atilde;O E AUTORIZA&Ccedil;&Atilde;O DE 
 <p>A empresa concorda que s&oacute; ter&atilde;o cobertura os segurados que ao ingressarem no seguro estiverem em plena atividade de trabalho, n&atilde;o tenham idade superior ao estabelecido e estejam em perfeitas condi&ccedil;&otilde;es de sa&uacute;de, n&atilde;o apresentando doen&ccedil;as preexistentes ou sequelas delas provenientes, que impe&ccedil;am seu ingresso no seguro ou que agravem a taxa do pr&ecirc;mio, assumindo integralmente a responsabilidade pelas informa&ccedil;&otilde;es prestadas, ciente e de acordo com os artigos 765 e 766 do C&oacute;digo Civil Brasileiro, se tiver omitido circunst&acirc;ncias que possam influir na aceita&ccedil;&atilde;o ou validade da proposta, no valor do capital ou taxa do pr&ecirc;mio, perder&aacute; o direito ao capital segurado e consequentemente a quaisquer garantias ou pagamentos de benef&iacute;cios.</p>
 <p>A aceita&ccedil;&atilde;o do seguro estar&aacute; sujeita a analise do risco.</p>
 <p>O registro deste plano na SUSEP n&atilde;o implica, por parte da Autarquia, incentivo ou recomenda&ccedil;&atilde;o a sua comercializa&ccedil;&atilde;o</p>
-<p>O segurado poder&aacute; consultar a situa&ccedil;&atilde;o cadastral de seu corretor, no site www.susep.gov.br, por meio do n&uacute;mero de registro na SUSEP, nome completo, CNPJ ou CPF.</p>'''
+<p>O segurado poder&aacute; consultar a situa&ccedil;&atilde;o cadastral de seu corretor, no site <a href="http://www.susep.gov.br" target="_blank" >www.susep.gov.br</a>, por meio do n&uacute;mero de registro na SUSEP, nome completo, CNPJ ou CPF.</p>'''
 
 AREA = ("Academia de Esportes / Artes Marciais",
 "Açúcar e Álcool",
@@ -640,25 +644,25 @@ DEFAULT_PROFILE = (
 DEFAULT_PRODUCT = (
     ('Vida', 'Introdução', 'Descrição', ' Declaração', 'J', 'Tokio', 'Vida',
         DEFAULT_FILES_TOKIO,
-        'Proposta Gerada', 'Perfil Vida', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10 , 10, 0, FULL_DECLARATION_VIDA, DECLARATION_VIDA, ),
+        'Proposta Gerada', 'Perfil Vida', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10 , 10, 0, FULL_DECLARATION_VIDA, DECLARATION_VIDA, RULES_DECLARATION_VIDA,),
     ('Vida Global', 'Introdução', 'Descrição', ' Declaração', 'J', 'Tokio', 'Vida',
          DEFAULT_FILES_TOKIO,
-        'Proposta Gerada', 'Perfil Vida Global', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10 , 10, 0, FULL_DECLARATION_VIDA_GLOGAL, DECLARATION_VIDA_GLOGAL,),
+        'Proposta Gerada', 'Perfil Vida Global', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10 , 10, 0, FULL_DECLARATION_VIDA_GLOGAL, DECLARATION_VIDA_GLOGAL, RULES_DECLARATION_VIDA,),
     ('Acidentes Pessoais', 'Introdução', 'Descrição', ' Declaração', 'J', 'Tokio', 'Acidentes Pessoais',
         DEFAULT_FILES_TOKIO,
-        'Proposta Gerada', 'Perfil Acidentes Pessoais', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10, 10, 0, FULL_DECLARATION_AP, DECLARATION_AP,),
+        'Proposta Gerada', 'Perfil Acidentes Pessoais', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10, 10, 0, FULL_DECLARATION_AP, DECLARATION_AP, '',),
     ('Garantia Tradicional', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Garantia Tradicional',
         DEFAULT_FILES_GARANTIA,
-        'Lead de Garantia Gerado', 'Perfil Garantia Tradicional', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', ''),
+        'Lead de Garantia Gerado', 'Perfil Garantia Tradicional', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', '', '',),
     ('Garantia Judicial', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Garantia Judicial',
          DEFAULT_FILES_GARANTIA,
-        'Lead de Garantia Gerado', 'Perfil Garantia Judicial', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', ''),
+        'Lead de Garantia Gerado', 'Perfil Garantia Judicial', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', '', '',),
     ('Fiança Locatícia', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Fiança Locatícia',
      DEFAULT_FILES_GARANTIA,
-    'Lead de Garantia Gerado', 'Perfil Fiança Locatícia', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', ''),
+    'Lead de Garantia Gerado', 'Perfil Fiança Locatícia', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', '', '',),
     ('Saúde', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Saúde',
      DEFAULT_FILES_BENEFICIOS,
-    'Lead de Benefícios Gerado', 'Perfil Saúde', DEFAULT_STATUS_PRODUCT_BENEFICIOS, 10, 10, 10, 1, '', ''),
+    'Lead de Benefícios Gerado', 'Perfil Saúde', DEFAULT_STATUS_PRODUCT_BENEFICIOS, 10, 10, 10, 1, '', '', '',),
     )
 
 DEFAULT_PROFILE_NAME = (
@@ -965,8 +969,8 @@ class Command(BaseCommand):
         #         per.save()
 
         for product_name, introduction, description, declaration, kind, insurance, branch, files,\
-        begin, profile, status_permitted, partner_percentage, owner_percentage, master_percentage, is_lead, p_declaration_full,  p_declaration \
-        in DEFAULT_PRODUCT:
+        begin, profile, status_permitted, partner_percentage, owner_percentage, master_percentage, is_lead,\
+        p_declaration_full,  p_declaration, p_rules_declaration in DEFAULT_PRODUCT:
             if not Product.objects.filter(name=product_name).exists():
                 product = Product(
                     name=product_name,
@@ -982,9 +986,11 @@ class Command(BaseCommand):
                     owner_percentage=owner_percentage,
                     master_percentage=master_percentage,
                     is_lead=is_lead,
+                    rules_declaration=p_rules_declaration,
                 )
                 product.full_declaration = p_declaration_full
                 product.declaration = p_declaration
+                product.other_documents_declaration= "Outros documentos poderão ser solicitados durante o processo"
                 product.save()
                 for file in files:
                     product.file_type.add(FileType.objects.get(name=file))
