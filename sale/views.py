@@ -3,7 +3,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.db.models import Q
 from django.core.paginator import Paginator
-# from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView
 from .models import Sale, Partner, Buyer, BuyerAddress, Status, ResponseDeadline, Quote, SubQuote
@@ -15,13 +14,11 @@ from rest_framework.response import Response
 from .serializers import BuyerSerializer, BuyerAddressSerializer
 
 
-
 class ProductionView(LoginRequiredMixin, ListView):
     context_object_name = 'sales'
     template_name = 'page-production.html'
 
     def get_queryset(self):
-        # todo: filter sales by the user and his permissions
         if not self.request.user.group_permissions:
             sales = Sale.objects.all()
         else:
@@ -44,12 +41,10 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
         product = Product.objects.get(pk=self.kwargs['productpk'])
         data['product'] = product
         data['addressbuyer'] = AddressBuyerFormset()
-        data['show_all'] = False
         data['status_deadline'] = product.begin_status
         # data['possible_new_status'] = Status.objects.filter(level__gte=product.begin_status.level).select_related()
         data['possible_new_status'] = self.request.user.group_permissions.status_set.filter(
             level__gte=product.begin_status.level).select_related()
-        # if not product.is_lead:
         data['show_all'] = True
         data['deadlinesale'] = DeadlineSaleFormset()
         data['sample_file_type'] = product.sample_file_type.all()
@@ -202,7 +197,6 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
             if form.is_valid():
                 # form.object.status_id = self.request.POST.get('new-status', '')
                 dl = form.save()
-
                 if self.request.POST.get('new-status', ''):
                     dl.status_id = self.request.POST.get('new-status', '')
                     dl.save()
