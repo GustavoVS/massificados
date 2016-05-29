@@ -42,6 +42,17 @@ class FileType(models.Model):
         return self.name
 
 
+class SampleFile(models.Model):
+    file_type = models.ForeignKey(FileType)
+    short_desc = models.CharField(max_length=50, blank=True, null=True)
+    # product = models.ForeignKey('Product')
+    document = models.FileField()
+
+    def __unicode__(self):
+        # return '%s (%s)' % (self.file_type, self.short_desc)
+        return '%s' % self.file_type
+
+
 class Status(models.Model):
     name = models.CharField(max_length=100)
     level = models.IntegerField(default=1)
@@ -70,6 +81,7 @@ class Product(models.Model):
     insurance_company = models.ForeignKey(InsuranceCompany, on_delete=models.CASCADE)
     branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
     file_type = models.ManyToManyField(FileType)
+    sample_file_type = models.ManyToManyField(SampleFile)
     status_permission = models.ManyToManyField(Status, related_name='product_status_permission')
     is_lead = models.BooleanField(default=False)
     partner_percentage = models.FloatField(null=True, default=0, blank=True)

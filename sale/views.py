@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView
 from .models import Sale, Partner, Buyer, BuyerAddress, Status, ResponseDeadline, Quote, SubQuote
-from .forms import BuyerForm, AddressBuyerFormset, FileDeadlineFormset, DeadlineSaleFormset, DetailDeadlineFormset
+from .forms import BuyerForm, AddressBuyerFormset, FileDeadlineFormset, DeadlineSaleFormset
 from product.models import Product, Question
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -52,10 +52,11 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
         # if not product.is_lead:
         data['show_all'] = True
         data['deadlinesale'] = DeadlineSaleFormset()
-        data['filedeadline'] = FileDeadlineFormset()
+        data['sample_file_type'] = product.sample_file_type.all()
+        data['filedeadline'] = FileDeadlineFormset(product.file_type.all())
         data['questiondeadline'] = product.profile.question_set.filter(
             type_profile='pdl').order_by('order_number')
-        data['detail_deadline'] = DetailDeadlineFormset()
+        # data['detail_deadline'] = DetailDeadlineFormset()
         data['question_detail'] = product.profile.question_set.filter(
             type_profile='pdt').order_by('order_number')
 
@@ -126,10 +127,10 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
                         )
                         response_deadline.save()
 
-                details = DetailDeadlineFormset(self.request.POST, instance=form.instance)
-                for detail_form in details.forms:
-                    if detail_form.is_valid():
-                        detail_form.save()
+                # details = DetailDeadlineFormset(self.request.POST, instance=form.instance)
+                # for detail_form in details.forms:
+                #     if detail_form.is_valid():
+                #         detail_form.save()
 
                 files = FileDeadlineFormset(self.request.POST, instance=form.instance)
                 for file_form in files.forms:
@@ -159,18 +160,19 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
         data['show_all'] = True
         data['deadlinesale'] = DeadlineSaleFormset(instance=sale)
         data['status_deadline'] = sale.deadline_set.all()[0].status
-        # todo: filter user permissions
+        data['sample_file_type'] = sale.product.sample_file_type.all()
+        # data['uploaded_file_types'] = sale.deadline_set.all()[0]
         data['possible_new_status'] = Status.objects.filter(
             level__gte=sale.deadline_set.all()[0].status.level).order_by('level')
         if sale.deadline_set.all():
-            data['filedeadline'] = FileDeadlineFormset(instance=sale.deadline_set.all()[0])
+            data['filedeadline'] = FileDeadlineFormset(sale.product.file_type.all(), instance=sale.deadline_set.all()[0])
         else:
-            data['filedeadline'] = FileDeadlineFormset()
+            data['filedeadline'] = FileDeadlineFormset(sale.product.file_type.all())
 
-        if sale.deadline_set.all():
-            data['detail_deadline'] = DetailDeadlineFormset(instance=sale.deadline_set.all()[0])
-        else:
-            data['detail_deadline'] = DetailDeadlineFormset()
+        # if sale.deadline_set.all():
+        #     data['detail_deadline'] = DetailDeadlineFormset(instance=sale.deadline_set.all()[0])
+        # else:
+        #     data['detail_deadline'] = DetailDeadlineFormset()
 
         questions_deadlines = sale.product.profile.question_set.filter(
             type_profile='pdl').order_by('order_number')
@@ -243,10 +245,10 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
                             defaults={'value': v}
                         )
 
-                details = DetailDeadlineFormset(self.request.POST, instance=form.instance)
-                for detail_form in details.forms:
-                    if detail_form.is_valid():
-                        detail_form.save()
+                # details = DetailDeadlineFormset(self.request.POST, instance=form.instance)
+                # for detail_form in details.forms:
+                #     if detail_form.is_valid():
+                #         detail_form.save()
 
                 files = FileDeadlineFormset(self.request.POST, self.request.FILES, instance=form.instance)
                 for file_form in files.forms:
@@ -264,7 +266,7 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
 def user_cnpj(request):
     if request.method == 'GET':
         try:
-            buyer = Buyer.objects.get(cpf_cnpj=request.GET.get('cpf_cnpj'))
+            buyer = Buyer.objects.filter(cpf_cnpj=request.GET.get('cpf_cnpj')).latest('date_create')
             buyer_serialize = BuyerSerializer(buyer)
 
             buyeraddress = BuyerAddress.objects.get(buyer=buyer)
