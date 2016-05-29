@@ -85,7 +85,7 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
                     quote = Quote.objects.get(deadline=dl)
                 else:
                     quote = Quote(deadline=dl,)
-                    quote.value = dl.payment * (dl.sale.product.partner_percentage/100)
+                    quote.value = dl.payment * (dl.sale.product.partner_percentage / 100)
                     quote.percentage = dl.sale.product.partner_percentage
                     quote.save()
 
@@ -94,7 +94,7 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
                     subquote = SubQuote.objects.get(quote=quote, user=dl.sale.owner)
                 else:
                     subquote = SubQuote(quote=quote, user=dl.sale.owner,)
-                    subquote.value = dl.payment * (dl.sale.product.owner_percentage/100)
+                    subquote.value = dl.payment * (dl.sale.product.owner_percentage / 100)
                     subquote.percentage = dl.sale.product.owner_percentage
                     subquote.save()
 
@@ -104,7 +104,7 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
                         subquote = SubQuote.objects.get(quote=quote, user=dl.sale.owner.master)
                     else:
                         subquote = SubQuote(quote=quote, user=dl.sale.owner.master)
-                        subquote.value = dl.payment * (dl.sale.product.master_percentage/100)
+                        subquote.value = dl.payment * (dl.sale.product.master_percentage / 100)
                         subquote.percentage = dl.sale.product.master_percentage
                         subquote.save()
 
@@ -207,7 +207,7 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
                     quote = Quote.objects.get(deadline=dl)
                 else:
                     quote = Quote(deadline=dl,)
-                    quote.value = dl.payment * (dl.sale.product.partner_percentage/100)
+                    quote.value = dl.payment * (dl.sale.product.partner_percentage / 100)
                     quote.percentage = dl.sale.product.partner_percentage
                     quote.save()
 
@@ -216,7 +216,7 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
                     subquote = SubQuote.objects.get(quote=quote, user=dl.sale.owner)
                 else:
                     subquote = SubQuote(quote=quote, user=dl.sale.owner,)
-                    subquote.value = dl.payment * (dl.sale.product.owner_percentage/100)
+                    subquote.value = dl.payment * (dl.sale.product.owner_percentage / 100)
                     subquote.percentage = dl.sale.product.owner_percentage
                     subquote.save()
 
@@ -226,7 +226,7 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
                         subquote = SubQuote.objects.get(quote=quote, user=dl.sale.owner.master)
                     else:
                         subquote = SubQuote(quote=quote, user=dl.sale.owner.master)
-                        subquote.value = dl.payment * (dl.sale.product.master_percentage/100)
+                        subquote.value = dl.payment * (dl.sale.product.master_percentage / 100)
                         subquote.percentage = dl.sale.product.master_percentage
                         subquote.save()
 
