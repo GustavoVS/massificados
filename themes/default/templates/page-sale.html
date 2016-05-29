@@ -13,24 +13,24 @@
     <script src="{% static 'js/custom-masks.js' %}"></script>
     <script type="text/javascript">
 
-        $(function() {
-            $('#detail_deadline > div.row').formset({
-                prefix: '{{ detail_deadline.prefix }}',
-                formCssClass: 'detail_deadline_formset',
-                addText: '<button type="button" class="btn btn-success pull-right"><span class="fa fa-plus"></span></button>',
-                added: function(el){
-                    $(el).find('div.accordion-toggle').each(function(){
-                        $(this).attr('data-target','#' + $(el).find('.collapse').attr('id'));
-                    });
-                },
-                formTemplate: '#detail_empty_form',
-                deleteText: '<button type="button" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button>',
-                deleteCssClass: 'pull-right col-md-2',
-                extraClasses: ['row1', 'row2'],
-                attrUpdate: ['id', 'name', 'for', 'data-target', 'updatelabel'],
-                childElementSelector: 'input,select,textarea,label,div,button',
-            })
-        });
+        // $(function() {
+        //     $('#detail_deadline > div.row').formset({
+        //         prefix: '{{ detail_deadline.prefix }}',
+        //         formCssClass: 'detail_deadline_formset',
+        //         addText: '<button type="button" class="btn btn-success pull-right"><span class="fa fa-plus"></span></button>',
+        //         added: function(el){
+        //             $(el).find('div.accordion-toggle').each(function(){
+        //                 $(this).attr('data-target','#' + $(el).find('.collapse').attr('id'));
+        //             });
+        //         },
+        //         formTemplate: '#detail_empty_form',
+        //         deleteText: '<button type="button" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button>',
+        //         deleteCssClass: 'pull-right col-md-2',
+        //         extraClasses: ['row1', 'row2'],
+        //         attrUpdate: ['id', 'name', 'for', 'data-target', 'updatelabel'],
+        //         childElementSelector: 'input,select,textarea,label,div,button',
+        //     })
+        // });
 
         $(document).ready(function($) {
             $('.save-detail').click(function(){
@@ -78,7 +78,7 @@
             $('#filedeadline_formset  .thumbnail').formset({
                 prefix: '{{ filedeadline.prefix }}',
                 formCssClass: 'file_deadline_formset',
-                formTemplate: '#file_empty_form',
+                // formTemplate: '#file_empty_form',
                 attrUpdate: ['id', 'name', 'for', 'data-target', 'updatelabel'],
                 addText: '<button type="button" class="btn btn-success"><span class="fa fa-plus"></span></button>',
                 deleteText: '<button type="button" class="btn btn-danger"><span class="fa fa-trash"></span></button>',

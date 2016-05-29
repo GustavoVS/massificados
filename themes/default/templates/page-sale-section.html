@@ -175,79 +175,96 @@
                         {% endif %}
                     {% endfor %}
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4>
-                            {% trans 'Details' %}
-                        </h4>
-                    </div>
-                    <div class="col-md-12">
-                        <div id="detail_empty_form" style="display: none" class="row">
-                            <div data-toggle="collapse" data-target="#{{ detail_deadline.empty_form.prefix }}-f"
-                                 class="accordion-toggle col-md-10">
-                                <div id="{{detail_deadline.empty_form.name.html_name}}-label">
-                                    {% trans '(Empty)' as name_value %}
-                                    {{ detail_deadline.empty_form.name.value|default_if_none:name_value }}
-                                </div>
-                            </div>
-                            <div class="accordian-body collapse" id="{{ detail_deadline.empty_form.prefix }}-f">
-                                {% for field in detail_deadline.empty_form %}
-                                    <div class="col-md-4">
-                                        {% bootstrap_field field %}
-                                    </div>
-                                {% endfor %}
-                                <div class="col-md-12">
-                                    <button data-toggle="collapse" data-target="#{{ detail_deadline.empty_form.prefix }}-f"
-                                            type="button" class="btn btn-info accordion-toggle save-detail"
-                                            updatelabel="{{ detail_deadline.empty_form.name.html_name }}">
-                                        {% trans 'Save' %}
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="detail_deadline">
-                            {% for form in detail_deadline.forms %}
-                                <div class="row" id="{{ form.prefix }}-row">
-                                    <div data-toggle="collapse" data-target="#{{ form.prefix }}-f"
-                                         class="accordion-toggle col-md-10">
-                                        <div id="{{form.name.html_name}}-label">
-                                            {% trans '(Empty)' as name_value %}
-                                            {{ form.name.value|default_if_none:name_value }}
-                                        </div>
-                                    </div>
-                                    <div class="accordian-body collapse {% if not buyer.pk %} in {% endif %}" id="{{ form.prefix }}-f">
-                                        {% for field in form %}
-                                            <div class="col-md-4">
-                                                {% bootstrap_field field %}
-                                            </div>
-                                        {% endfor %}
-                                        <div class="col-md-12">
-                                            <button data-toggle="collapse" data-target="#{{ form.prefix }}-f"
-                                                    type="button" class="btn btn-info accordion-toggle save-detail"
-                                                    updatelabel="{{ form.name.html_name }}">
-                                                {% trans 'Save' %}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                        {{ detail_deadline.management_form }}
-                    </div>
-                </div>
+                {# <div class="row"> #}
+                    {# <div class="col-md-12"> #}
+                        {# <h4> #}
+                            {# {% trans 'Details' %} #}
+                        {# </h4> #}
+                    {# </div> #}
+                    {# <div class="col-md-12"> #}
+                        {# <div id="detail_empty_form" style="display: none" class="row"> #}
+                            {# <div data-toggle="collapse" data-target="#{{ detail_deadline.empty_form.prefix }}-f" #}
+                                 {# class="accordion-toggle col-md-10"> #}
+                                {# <div id="{{detail_deadline.empty_form.name.html_name}}-label"> #}
+                                    {# {% trans '(Empty)' as name_value %} #}
+                                    {# {{ detail_deadline.empty_form.name.value|default_if_none:name_value }} #}
+                                {# </div> #}
+                            {# </div> #}
+                            {# <div class="accordian-body collapse" id="{{ detail_deadline.empty_form.prefix }}-f"> #}
+                                {# {% for field in detail_deadline.empty_form %} #}
+                                    {# <div class="col-md-4"> #}
+                                        {# {% bootstrap_field field %} #}
+                                    {# </div> #}
+                                {# {% endfor %} #}
+                                {# <div class="col-md-12"> #}
+                                    {# <button data-toggle="collapse" data-target="#{{ detail_deadline.empty_form.prefix }}-f" #}
+                                            {# type="button" class="btn btn-info accordion-toggle save-detail" #}
+                                            {# updatelabel="{{ detail_deadline.empty_form.name.html_name }}"> #}
+                                        {# {% trans 'Save' %} #}
+                                    {# </button> #}
+                                {# </div> #}
+                            {# </div> #}
+                        {# </div> #}
+                        {# <div id="detail_deadline"> #}
+                            {# {% for form in detail_deadline.forms %} #}
+                                {# <div class="row" id="{{ form.prefix }}-row"> #}
+                                    {# <div data-toggle="collapse" data-target="#{{ form.prefix }}-f" #}
+                                         {# class="accordion-toggle col-md-10"> #}
+                                        {# <div id="{{form.name.html_name}}-label"> #}
+                                            {# {% trans '(Empty)' as name_value %} #}
+                                            {# {{ form.name.value|default_if_none:name_value }} #}
+                                        {# </div> #}
+                                    {# </div> #}
+                                    {# <div class="accordian-body collapse {% if not buyer.pk %} in {% endif %}" id="{{ form.prefix }}-f"> #}
+                                        {# {% for field in form %} #}
+                                            {# <div class="col-md-4"> #}
+                                                {# {% bootstrap_field field %} #}
+                                            {# </div> #}
+                                        {# {% endfor %} #}
+                                        {# <div class="col-md-12"> #}
+                                            {# <button data-toggle="collapse" data-target="#{{ form.prefix }}-f" #}
+                                                    {# type="button" class="btn btn-info accordion-toggle save-detail" #}
+                                                    {# updatelabel="{{ form.name.html_name }}"> #}
+                                                {# {% trans 'Save' %} #}
+                                            {# </button> #}
+                                        {# </div> #}
+                                    {# </div> #}
+                                {# </div> #}
+                            {# {% endfor %} #}
+                        {# </div> #}
+                        {# {{ detail_deadline.management_form }} #}
+                    {# </div> #}
+                {# </div> #}
             </div>
         {% endif %}
 
-        <h3>{% trans 'Attachements' %}</h3>
+        <h3>{% trans 'Files' %}</h3>
         <div class="well">
-            <div class="thumbnail col-md-3" style="display: none" id="file_empty_form">
-                <div class="caption">
-                    {% bootstrap_field filedeadline.empty_form.file_type %}
-                    {% bootstrap_field filedeadline.empty_form.document layout="inline"%}
+            {# <div class="thumbnail col-md-3" style="display: none" id="file_empty_form"> #}
+                {# <div class="caption"> #}
+                    {# {% bootstrap_field filedeadline.empty_form.file_type %} #}
+                    {# {% bootstrap_field filedeadline.empty_form.document layout="inline"%} #}
+                {# </div> #}
+            {# </div> #}
+            {% if sample_file_type %}
+                <h4>{% trans "Files to Download" %}</h4>
+                <div class="row">
+                    {% for file in sample_file_type %}
+                        <div class="thumbnail col-md-3" id="{{ f.prefix }}-row">
+                            <div class="caption text-center">
+                                <h4 class="text-center">{{ file }}</h4>
+                                <p>{{ file.short_desc }}</p>
+                                <a href="{{ file.document }}" role="button" class="btn btn-info" target="_blank">
+                                    <span class="fa fa-file-o"></span> {% trans "Download" %}
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
-            </div>
+            {% endif %}
             {{ filedeadline.management_form }}
             <div id="filedeadline_formset">
+                <h4>{% trans "Attachements Uploaded" %}</h4>
                 <div class="row">
                     {% for f in filedeadline %}
                         <div class="thumbnail col-md-3" id="{{ f.prefix }}-row">
@@ -262,6 +279,22 @@
                         </div>
                     {% empty %}
                         <div class="thumbnail" style="display:none"></div>
+                    {% endfor %}
+                </div>
+            </div>
+            <h4>{% trans "Uploaded files" %}</h4>
+            <div class="row">
+                <div class="col-md-12">
+                    {% for file_type in product.file_type.all %}
+                        <p> <span class="fa
+                                {% if file_type in sale.deadline_set.all.0.file_set.all %}
+                                    fa-check success
+                                {% else %}
+                                    fa-remove text-danger
+                                {% endif %}
+                            "></span>
+                            {{ file_type }}
+                        </p>
                     {% endfor %}
                 </div>
             </div>

@@ -71,8 +71,8 @@ class Sale(models.Model):
 
 class Deadline(models.Model):
     active = models.BooleanField(default=True)
-    begin = models.DateField(_('Begin'))
-    end = models.DateField(_('End'))
+    begin = models.DateField(_('Begin date'))
+    end = models.DateField(_('End date'))
     status = models.ForeignKey(Status)
     payment = models.FloatField(_('Payment'))
     proposal = models.CharField(_('Proposal'), max_length=100)
@@ -81,6 +81,9 @@ class Deadline(models.Model):
         Sale,
         on_delete=models.CASCADE
     )
+
+    def __unicode__(self):
+        return '#%d %s (%s)' % (self.pk, self.sale.buyer, self.sale.product)
 
     def get_questions(self):
         return self.sale.product.profile.questions_set.get(type_profile='pdl')
@@ -148,10 +151,10 @@ class Deadline(models.Model):
 class File(models.Model):
     file_type = models.ForeignKey(FileType)
     deadline = models.ForeignKey(Deadline)
-    document = models.FileField(_('Document'))
+    document = models.FileField()
 
     def __unicode__(self):
-        return self.file_type
+        return '%s' % self.file_type
 
 
 class Quote(models.Model):

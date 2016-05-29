@@ -3,11 +3,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.db.models import Q
 from django.core.paginator import Paginator
-# from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView
 from .models import Sale, Partner, Buyer, BuyerAddress, Status, ResponseDeadline, Quote, SubQuote
-from .forms import BuyerForm, AddressBuyerFormset, FileDeadlineFormset, DeadlineSaleFormset, DetailDeadlineFormset
+from .forms import BuyerForm, AddressBuyerFormset, FileDeadlineFormset, DeadlineSaleFormset
 from product.models import Product, Question
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -15,13 +14,11 @@ from rest_framework.response import Response
 from .serializers import BuyerSerializer, BuyerAddressSerializer
 
 
-
 class ProductionView(LoginRequiredMixin, ListView):
     context_object_name = 'sales'
     template_name = 'page-production.html'
 
     def get_queryset(self):
-        # todo: filter sales by the user and his permissions
         if not self.request.user.group_permissions:
             sales = Sale.objects.all()
         else:
@@ -44,18 +41,17 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
         product = Product.objects.get(pk=self.kwargs['productpk'])
         data['product'] = product
         data['addressbuyer'] = AddressBuyerFormset()
-        data['show_all'] = False
         data['status_deadline'] = product.begin_status
         # data['possible_new_status'] = Status.objects.filter(level__gte=product.begin_status.level).select_related()
         data['possible_new_status'] = self.request.user.group_permissions.status_set.filter(
             level__gte=product.begin_status.level).select_related()
-        # if not product.is_lead:
         data['show_all'] = True
         data['deadlinesale'] = DeadlineSaleFormset()
-        data['filedeadline'] = FileDeadlineFormset()
+        data['sample_file_type'] = product.sample_file_type.all()
+        data['filedeadline'] = FileDeadlineFormset(product.file_type.all())
         data['questiondeadline'] = product.profile.question_set.filter(
             type_profile='pdl').order_by('order_number')
-        data['detail_deadline'] = DetailDeadlineFormset()
+        # data['detail_deadline'] = DetailDeadlineFormset()
         data['question_detail'] = product.profile.question_set.filter(
             type_profile='pdt').order_by('order_number')
 
@@ -89,7 +85,7 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
                     quote = Quote.objects.get(deadline=dead)
                 else:
                     quote = Quote(deadline=dead,)
-                    quote.value = dead.payment * (dead.sale.product.partner_percentage/100)
+                    quote.value = dead.payment * (dead.sale.product.partner_percentage / 100)
                     quote.percentage = dead.sale.product.partner_percentage
                     quote.save()
 
@@ -98,7 +94,7 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
                     subquote = SubQuote.objects.get(quote=quote, user=dead.sale.owner)
                 else:
                     subquote = SubQuote(quote=quote, user=dead.sale.owner,)
-                    subquote.value = dead.payment * (dead.sale.product.owner_percentage/100)
+                    subquote.value = dead.payment * (dead.sale.product.owner_percentage / 100)
                     subquote.percentage = dead.sale.product.owner_percentage
                     subquote.save()
 
@@ -107,7 +103,7 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
                     subquote = SubQuote.objects.get(quote=quote, user=dead.sale.owner.master)
                 else:
                     subquote = SubQuote(quote=quote, user=dead.sale.owner.master)
-                    subquote.value = dead.payment * (dead.sale.product.master_percentage/100)
+                    subquote.value = dead.payment * (dead.sale.product.master_percentage / 100)
                     subquote.percentage = dead.sale.product.master_percentage
                     subquote.save()
 
@@ -125,10 +121,10 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
                         )
                         response_deadline.save()
 
-                details = DetailDeadlineFormset(self.request.POST, instance=form.instance)
-                for detail_form in details.forms:
-                    if detail_form.is_valid():
-                        detail_form.save()
+                # details = DetailDeadlineFormset(self.request.POST, instance=form.instance)
+                # for detail_form in details.forms:
+                #     if detail_form.is_valid():
+                #         detail_form.save()
 
                 files = FileDeadlineFormset(self.request.POST, instance=form.instance)
                 for file_form in files.forms:
@@ -158,18 +154,19 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
         data['show_all'] = True
         data['deadlinesale'] = DeadlineSaleFormset(instance=sale)
         data['status_deadline'] = sale.deadline_set.all()[0].status
-        # todo: filter user permissions
+        data['sample_file_type'] = sale.product.sample_file_type.all()
+        # data['uploaded_file_types'] = sale.deadline_set.all()[0]
         data['possible_new_status'] = Status.objects.filter(
             level__gte=sale.deadline_set.all()[0].status.level).order_by('level')
         if sale.deadline_set.all():
-            data['filedeadline'] = FileDeadlineFormset(instance=sale.deadline_set.all()[0])
+            data['filedeadline'] = FileDeadlineFormset(sale.product.file_type.all(), instance=sale.deadline_set.all()[0])
         else:
-            data['filedeadline'] = FileDeadlineFormset()
+            data['filedeadline'] = FileDeadlineFormset(sale.product.file_type.all())
 
-        if sale.deadline_set.all():
-            data['detail_deadline'] = DetailDeadlineFormset(instance=sale.deadline_set.all()[0])
-        else:
-            data['detail_deadline'] = DetailDeadlineFormset()
+        # if sale.deadline_set.all():
+        #     data['detail_deadline'] = DetailDeadlineFormset(instance=sale.deadline_set.all()[0])
+        # else:
+        #     data['detail_deadline'] = DetailDeadlineFormset()
 
         questions_deadlines = sale.product.profile.question_set.filter(
             type_profile='pdl').order_by('order_number')
@@ -212,10 +209,10 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
                             defaults={'value': v}
                         )
 
-                details = DetailDeadlineFormset(self.request.POST, instance=form.instance)
-                for detail_form in details.forms:
-                    if detail_form.is_valid():
-                        detail_form.save()
+                # details = DetailDeadlineFormset(self.request.POST, instance=form.instance)
+                # for detail_form in details.forms:
+                #     if detail_form.is_valid():
+                #         detail_form.save()
 
                 files = FileDeadlineFormset(self.request.POST, self.request.FILES, instance=form.instance)
                 for file_form in files.forms:
@@ -233,7 +230,7 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
 def user_cnpj(request):
     if request.method == 'GET':
         try:
-            buyer = Buyer.objects.get(cpf_cnpj=request.GET.get('cpf_cnpj'))
+            buyer = Buyer.objects.filter(cpf_cnpj=request.GET.get('cpf_cnpj')).latest('date_create')
             buyer_serialize = BuyerSerializer(buyer)
 
             buyeraddress = BuyerAddress.objects.get(buyer=buyer)
