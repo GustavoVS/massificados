@@ -82,34 +82,35 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
             if form.is_valid():
                 form.instance.sale = sale
                 form.save()
-                dead = form.instance
+                dl = form.instance
                 # se isso for virar um modelo de negócio para nós, refatorar as comissões abaixo, WS
                 # comissão do partner
-                if Quote.objects.filter(deadline=dead).exists():
-                    quote = Quote.objects.get(deadline=dead)
+                if Quote.objects.filter(deadline=dl).exists():
+                    quote = Quote.objects.get(deadline=dl)
                 else:
-                    quote = Quote(deadline=dead,)
-                    quote.value = dead.payment * (dead.sale.product.partner_percentage/100)
-                    quote.percentage = dead.sale.product.partner_percentage
+                    quote = Quote(deadline=dl,)
+                    quote.value = dl.payment * (dl.sale.product.partner_percentage/100)
+                    quote.percentage = dl.sale.product.partner_percentage
                     quote.save()
 
                 # repasse do owner
-                if SubQuote.objects.filter(quote=quote, user=dead.sale.owner).exists():
-                    subquote = SubQuote.objects.get(quote=quote, user=dead.sale.owner)
+                if SubQuote.objects.filter(quote=quote, user=dl.sale.owner).exists():
+                    subquote = SubQuote.objects.get(quote=quote, user=dl.sale.owner)
                 else:
-                    subquote = SubQuote(quote=quote, user=dead.sale.owner,)
-                    subquote.value = dead.payment * (dead.sale.product.owner_percentage/100)
-                    subquote.percentage = dead.sale.product.owner_percentage
+                    subquote = SubQuote(quote=quote, user=dl.sale.owner,)
+                    subquote.value = dl.payment * (dl.sale.product.owner_percentage/100)
+                    subquote.percentage = dl.sale.product.owner_percentage
                     subquote.save()
 
                 # repasse do owner.master
-                if SubQuote.objects.filter(quote=quote, user=dead.sale.owner.master).exists():
-                    subquote = SubQuote.objects.get(quote=quote, user=dead.sale.owner.master)
-                else:
-                    subquote = SubQuote(quote=quote, user=dead.sale.owner.master)
-                    subquote.value = dead.payment * (dead.sale.product.master_percentage/100)
-                    subquote.percentage = dead.sale.product.master_percentage
-                    subquote.save()
+                if dl.sale.owner.master:
+                    if SubQuote.objects.filter(quote=quote, user=dl.sale.owner.master).exists():
+                        subquote = SubQuote.objects.get(quote=quote, user=dl.sale.owner.master)
+                    else:
+                        subquote = SubQuote(quote=quote, user=dl.sale.owner.master)
+                        subquote.value = dl.payment * (dl.sale.product.master_percentage/100)
+                        subquote.percentage = dl.sale.product.master_percentage
+                        subquote.save()
 
                 # if self.request.POST.get('new-status', ''):
                 #     dl.status_id = self.request.POST.get('new-status', '')
@@ -199,9 +200,39 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
             if form.is_valid():
                 # form.object.status_id = self.request.POST.get('new-status', '')
                 dl = form.save()
+
                 if self.request.POST.get('new-status', ''):
                     dl.status_id = self.request.POST.get('new-status', '')
                     dl.save()
+
+                # se isso for virar um modelo de negócio para nós, refatorar as comissões abaixo, WS
+                # comissão do partner
+                if Quote.objects.filter(deadline=dl).exists():
+                    quote = Quote.objects.get(deadline=dl)
+                else:
+                    quote = Quote(deadline=dl,)
+                    quote.value = dl.payment * (dl.sale.product.partner_percentage/100)
+                    quote.percentage = dl.sale.product.partner_percentage
+                    quote.save()
+
+                # repasse do owner
+                if SubQuote.objects.filter(quote=quote, user=dl.sale.owner).exists():
+                    subquote = SubQuote.objects.get(quote=quote, user=dl.sale.owner)
+                else:
+                    subquote = SubQuote(quote=quote, user=dl.sale.owner,)
+                    subquote.value = dl.payment * (dl.sale.product.owner_percentage/100)
+                    subquote.percentage = dl.sale.product.owner_percentage
+                    subquote.save()
+
+                # repasse do owner.master
+                if dl.sale.owner.master:
+                    if SubQuote.objects.filter(quote=quote, user=dl.sale.owner.master).exists():
+                        subquote = SubQuote.objects.get(quote=quote, user=dl.sale.owner.master)
+                    else:
+                        subquote = SubQuote(quote=quote, user=dl.sale.owner.master)
+                        subquote.value = dl.payment * (dl.sale.product.master_percentage/100)
+                        subquote.percentage = dl.sale.product.master_percentage
+                        subquote.save()
 
                 for k, v in self.request.POST.iteritems():
                     if k.split('-')[0] == 'q_resp':

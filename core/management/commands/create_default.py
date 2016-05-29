@@ -9,6 +9,150 @@ from user_account.models import MassificadoUser
 from user_groups.models import MassificadoGroups
 from status_emails.models import ActionStatusEmails, ActionStatusEmailsUsers
 
+FULL_DECLARATION_VIDA = '''<h1><strong>CONDI&Ccedil;&Otilde;ES RESUMIDAS DO PLANO</strong></h1>
+<h2><strong>Coberturas</strong></h2>
+<p><strong>CB - Cobertura B&aacute;sica (Morte) - garante aos benifici&aacute;rios o pagamento do capital segurado individual contratado para esta cobertura, em caso de morte do segurado, seja natural, seja acidental, devidamente coberta, exceto se decorrente de riscos exclu&iacute;dos, conforme Condi&ccedil;&otilde;es Gerais do Seguro.</strong></p>
+<p><strong>IEA - Indeniza&ccedil;&atilde;o Especial por Acidente - garante aos benefici&aacute;rios o pagamento do capital segurado individual contratado para esta cobertura em caso de morte do segurado causada, exclusivamente, por acidente pessoal coberto pelo seguro, exceto se decorrente de riscos excluidos, conforme Condi&ccedil;&otilde;es Gerais do Seguro.</strong><strong><br /></strong></p>
+<p><strong>IPA - Invalidez Permanente Total ou Parcial por Acidente - garante ao pr&oacute;prio segurado o pagamento do capital segurado individual contratado proporcional &agrave; perda ou redu&ccedil;&atilde;o funcional de um membro ou &oacute;rg&atilde;o, sofrida em consequencia de acidente pessoal coberto, exceto se decorrente de riscos exclu&iacute;dos, conforme Condi&ccedil;&otilde;es Gerais do Seguro. O valor correspondente at&eacute; 100% (cem por cento) do capital da cobertura B&aacute;sica. Para c&aacute;lculo do capital segurado a ser pago ser&aacute; utilizado a tabela de c&aacute;lculo para Invalidez Parcial que faz parte das Condi&ccedil;&otilde;es Gerais do Seguro.</strong></p>
+<p><strong>&nbsp;IPD-F - Invalidez Funcional Permanente Total por Doen&ccedil;a - garante ao pr&oacute;prio Segurado o pagamento antecipado do Capital Segurado Individual contratado para a cobertura b&aacute;sica (morte), em caso de sua invalidez funcional permanente total por doen&ccedil;a, exceto se decorrente dos risco exclu&iacute;dos, conforme Condi&ccedil;&otilde;es Gerais do Seguro.</strong></p>
+<p>A aposentadoria por invalidez concedida por institui&ccedil;&otilde;es oficiais de previd&ecirc;ncia social, assim como por &Oacute;rg&atilde;os do Poder P&uacute;blico e por outras institui&ccedil;&otilde;es P&uacute;blico-Privadas, n&atilde;o caracteriza, por si s&oacute;, Quadro Cl&iacute;nico Incapacitante que comprove a Invalidez Funcional Permanente e Total por Doen&ccedil;a.</p>
+<p>A cobertura de Invalidez Funcional Permanente Total por Doen&ccedil;a n&atilde;o se acumula com as demais coberturas contratadas neste seguro.</p>
+<h2><strong>Servi&ccedil;o de Assist&ecirc;ncia Funeral "Titular"</strong></h2>
+<p>O Servi&ccedil;o de Assist&ecirc;ncia Funeral tem por objetivo propiciar aos benefici&aacute;rios em caso de falecimento do segurado Titular todo aux&iacute;lio e presta&ccedil;&atilde;o de servi&ccedil;os relativos ao funeral, disponibilizando um representante oficial da Seguradora que tomar&aacute; todas as provid&ecirc;ncias necess&aacute;rias para a realiza&ccedil;&atilde;o do mesmo.</p>
+<p>O conjunto dos servi&ccedil;os e itens garantidos pelo seguro estar&aacute; limitado ao valor m&aacute;ximo de despesas equivalente a R$ 3.000,00 (tr&ecirc;s mil reais).</p>
+<p>No caso da n&atilde;o utiliza&ccedil;&atilde;o dos servi&ccedil;os ser&aacute; reembolsado, mediante a apresenta&ccedil;&atilde;o de notas fiscais originais, o valor m&aacute;ximo de R$ 3.000,00 (tr&ecirc;s mil reais) referente aos gastos com os servi&ccedil;os garantidos.</p>
+<p>Os Servi&ccedil;os a seguir especificados ser&atilde;o prestados exclusivamente mediante o acionamento da Central de Atendimento de Servi&ccedil;os Assistenciais (Brasil: 0800 707 5050 &ndash; Exterior: 5511 4689 5628) pelos Familiares, Benefici&aacute;rios ou o Representante do Estipulante,</p>
+<p>O Servi&ccedil;o de Assist&ecirc;ncia Funeral garante, de acordo com o limite de despesa estabelecida acima, a presta&ccedil;&atilde;o dos servi&ccedil;os de sepultamento ou crema&ccedil;&atilde;o (onde existir esse servi&ccedil;o) que englobem os seguintes itens:</p>
+<p>Urna;</p>
+<p>Carro para enterro (no munic&iacute;pio de moradia habitual do Segurado);</p>
+<p>Carreto / caix&atilde;o (no munic&iacute;pio de moradia habitual do Segurado);</p>
+<p>Servi&ccedil;o Assistencial;</p>
+<p>Registro de &oacute;bito;</p>
+<p>Taxa de sepultamento ou crema&ccedil;&atilde;o;</p>
+<p>Remo&ccedil;&atilde;o do corpo (no munic&iacute;pio de moradia habitual);</p>
+<p>Paramentos;</p>
+<p>Aparelho de Ozona;</p>
+<p>Mesa de Condol&ecirc;ncias;</p>
+<p>Velas;</p>
+<p>Vel&oacute;rio;</p>
+<p>V&eacute;u;</p>
+<p>Enfeite Floral e Coroas; e</p>
+<p>Loca&ccedil;&atilde;o de jazigo.</p>
+<p><strong>Caso a segurado n&atilde;o possua jazigo ou sepultura, a Tokio Marine Seguradora S/A garantir&aacute; a seu crit&eacute;rio e de acordo com o plano contratado, cemit&eacute;rio e jazigo por um per&iacute;odo de at&eacute; 03 (Tr&ecirc;s) anos, tempo necess&aacute;rio para exuma&ccedil;&atilde;o. N&atilde;o sendo poss&iacute;vel sepultamento por motivos alheios &agrave; vontade da Seguradora na cidade indicada pela fam&iacute;lia, este ser&aacute; feito na cidade mais pr&oacute;xima.</strong></p>
+<h2><strong>Capitais Segurados</strong></h2>
+<p>O Capital Segurado do grupo ser&aacute; uniforme.</p>
+<h2><strong>Vig&ecirc;ncia do Seguro</strong></h2>
+<p>A ap&oacute;lice viger&aacute; pelo prazo de 12 (doze) meses, a contar da data de in&iacute;cio de vig&ecirc;ncia determinada pelo Estipulante, quando da aprova&ccedil;&atilde;o do seguro e assinatura da Proposta de Contrata&ccedil;&atilde;o, sendo admiss&iacute;vel uma &uacute;nica renova&ccedil;&atilde;o autom&aacute;tica, por igual per&iacute;odo, salvo se o Estipulante ou a Seguradora manifestar-se em sentido contr&aacute;rio, mediante aviso pr&eacute;vio, por escrito, com anteced&ecirc;ncia m&iacute;nima de 60 (sessenta) dias.</p>
+<p>Ao t&eacute;rmino do contrato, a ap&oacute;lice poder&aacute; ser renovada mediante confirma&ccedil;&atilde;o por escrito, por mais um per&iacute;odo e assim sucessivamente.</p>
+<p>No caso de n&atilde;o renova&ccedil;&atilde;o da ap&oacute;lice mestra, a cobertura de cada segurado cessa automaticamente no final de vig&ecirc;ncia da ap&oacute;lice, respeitando o per&iacute;odo correspondente ao pr&ecirc;mio pago.</p>
+<p>Este seguro &eacute; por prazo determinado, tendo a Seguradora a faculdade de n&atilde;o renovar a ap&oacute;lice na data de vencimento, sem devolu&ccedil;&atilde;o dos pr&ecirc;mios pagos nos termos da ap&oacute;lice.</p>
+<h2><strong>Condi&ccedil;&otilde;es de Aceita&ccedil;&atilde;o</strong></h2>
+<p>Estar&atilde;o incluidos no seguro, todos os funcion&aacute;rios do Estipulante e/ou S&oacute;cios/Diretores, desde que:</p>
+<p>a.) estejam em plena atividade profissional/laborativa;</p>
+<p>b.) em boas condi&ccedil;&otilde;es de sa&uacute;de;</p>
+<p>c.) tenham idade compreendida entre 14 a 65 anos.</p>
+<p>Aposentados por Tempo de Servi&ccedil;o e Idade poder&atilde;o participar do seguro desde que estejam em plena atividade de trabalho e constem da Guia de Recolhimento do Fundo de Garantia - GFIP.</p>
+<p>Aposentados por Invalidez n&atilde;o poder&atilde;o participar do seguro.</p>
+<p>Este seguro n&atilde;o contempla a inclus&atilde;o dos Funcion&aacute;rios e/ou S&oacute;cios/Diretores que estejam afastados de suas atividades laborativas.</p>
+<p>O(s) funcion&aacute;rio(s) afastado(s) por doen&ccedil;a ou acidente, antes do in&iacute;cio de vig&ecirc;ncia da ap&oacute;lice, somente ter&aacute;(&atilde;o) direito &agrave; cobertura a partir da data de seu retorno &agrave;s atividades normais de trabalho.</p>
+<p><strong>* As Condi&ccedil;&otilde;es Gerais se encontram em poder do Corretora, solicite-as.</strong></p>'''
+
+DECLARATION_VIDA = '''<h1>DECLARA&Ccedil;&Atilde;O E AUTORIZA&Ccedil;&Atilde;O DE DESCONTO</h1>
+<p>A empresa acima qualificada como Estipulante da ap&oacute;lice prop&otilde;e a Tokio Marine Seguradora S/A a inclus&atilde;o de seus empregados e/ou S&oacute;cios/Diretores no seguro, conforme rela&ccedil;&atilde;o fornecida e observadas as Condi&ccedil;&otilde;es Contratuais e Condi&ccedil;&otilde;es Gerais do Plano de Seguro de Pessoas - Vida em Grupo - taxa m&eacute;dia.</p>
+<p>Declara que recebeu, tomou ci&ecirc;ncia das Condi&ccedil;&otilde;es Contratuais deste Seguro e efetuou o pagamento do pr&ecirc;mio do seguro atrav&eacute;s de quita&ccedil;&atilde;o do boleto referenciado junto a rede banc&aacute;ria.</p>
+<p>A empresa concorda que s&oacute; ter&atilde;o cobertura os segurados que ao ingressarem no seguro estiverem em plena atividade de trabalho, n&atilde;o tenham idade superior a 65 anos e estejam em perfeitas condi&ccedil;&otilde;es de sa&uacute;de, n&atilde;o apresentando doen&ccedil;as preexistentes ou sequelas delas provenientes, que impe&ccedil;am seu ingresso no seguro ou que agravem a taxa do pr&ecirc;mio, assumindo integralmente a responsabilidade pelas informa&ccedil;&otilde;es prestadas, ciente e de acordo com os artigos 765 e 766 do C&oacute;digo Civil Brasileiro, se tiver omitido circunst&acirc;ncias que possam influir na aceita&ccedil;&atilde;o ou validade da proposta, no valor do capital ou taxa do pr&ecirc;mio, perder&aacute; o direito ao capital segurado e consequentemente a quaisquer garantias ou pagamentos de benef&iacute;cios.</p>
+<p>A aceita&ccedil;&atilde;o do seguro estar&aacute; sujeita a analise do risco.</p>
+<p>O registro deste plano na SUSEP n&atilde;o implica, por parte da Autarquia, incentivo ou recomenda&ccedil;&atilde;o a sua comercializa&ccedil;&atilde;o</p>
+<p>O segurado poder&aacute; consultar a situa&ccedil;&atilde;o cadastral de seu corretor, no site www.susep.gov.br, por meio do n&uacute;mero de registro na SUSEP, nome completo, CNPJ ou CPF.</p>'''
+
+FULL_DECLARATION_VIDA_GLOGAL= '''<h1>CONDI&Ccedil;&Otilde;ES RESUMIDAS DO PLANO</h1>
+<h2><strong>Coberturas</strong></h2>
+<p><strong>CB - Cobertura B&aacute;sica (Morte) - garante aos benifici&aacute;rios o pagamento do capital segurado individual contratado para esta cobertura, em caso de morte do segurado, seja natural, seja acidental, devidamente coberta, exceto se decorrente de riscos exclu&iacute;dos, conforme Condi&ccedil;&otilde;es Gerais do Seguro.</strong></p>
+<p><strong>IEA - Indeniza&ccedil;&atilde;o Especial por Acidente - garante aos benefici&aacute;rios o pagamento do capital segurado individual contratado para esta cobertura em caso de morte do segurado causada, exclusivamente, por acidente pessoal coberto pelo seguro, exceto se decorrente de riscos excluidos, conforme Condi&ccedil;&otilde;es Gerais do Seguro.</strong></p>
+<p><strong>IPA - Invalidez Permanente Total ou Parcial por Acidente - garante ao pr&oacute;prio segurado o pagamento do capital segurado individual contratado proporcional &agrave; perda ou redu&ccedil;&atilde;o funcional de um membro ou &oacute;rg&atilde;o, sofrida em consequencia de acidente pessoal coberto, exceto se decorrente de riscos exclu&iacute;dos, conforme Condi&ccedil;&otilde;es Gerais do Seguro. O valor correspondente at&eacute; 100% (cem por cento) do capital da cobertura B&aacute;sica. Para c&aacute;lculo do capital segurado a ser pago ser&aacute; utilizado a tabela de c&aacute;lculo para Invalidez Parcial que faz parte das Condi&ccedil;&otilde;es Gerais do Seguro.</strong></p>
+<p><strong>IPD-F - Invalidez Funcional Permanente Total por Doen&ccedil;a - garante ao pr&oacute;prio Segurado o pagamento antecipado do Capital Segurado Individual contratado para a cobertura b&aacute;sica (morte), em caso de sua invalidez funcional permanente total por doen&ccedil;a, exceto se decorrente dos risco exclu&iacute;dos, conforme Condi&ccedil;&otilde;es Gerais do Seguro.</strong></p>
+<p>A aposentadoria por invalidez concedida por institui&ccedil;&otilde;es oficiais de previd&ecirc;ncia social, assim como por &Oacute;rg&atilde;os do Poder P&uacute;blico e por outras institui&ccedil;&otilde;es P&uacute;blico-Privadas, n&atilde;o caracteriza, por si s&oacute;, Quadro Cl&iacute;nico Incapacitante que comprove a Invalidez Funcional Permanente e Total por Doen&ccedil;a.</p>
+<p>A cobertura de Invalidez Funcional Permanente Total por Doen&ccedil;a n&atilde;o se acumula com as demais coberturas contratadas neste seguro.</p>
+<h2><strong>Servi&ccedil;o de Assist&ecirc;ncia Funeral "Titular"</strong></h2>
+<p>O Servi&ccedil;o de Assist&ecirc;ncia Funeral tem por objetivo propiciar aos benefici&aacute;rios em caso de falecimento do segurado Titular todo aux&iacute;lio e presta&ccedil;&atilde;o de servi&ccedil;os relativos ao funeral, disponibilizando um representante oficial da Seguradora que tomar&aacute; todas as provid&ecirc;ncias necess&aacute;rias para a realiza&ccedil;&atilde;o do mesmo.</p>
+<p>O conjunto dos servi&ccedil;os e itens garantidos pelo seguro estar&aacute; limitado ao valor m&aacute;ximo de despesas equivalente a R$ 3.000,00 (tr&ecirc;s mil reais).</p>
+<p>No caso da n&atilde;o utiliza&ccedil;&atilde;o dos servi&ccedil;os ser&aacute; reembolsado, mediante a apresenta&ccedil;&atilde;o de notas fiscais originais, o valor m&aacute;ximo de R$ 3.000,00 (tr&ecirc;s mil reais) referente aos gastos com os servi&ccedil;os garantidos.</p>
+<p>Os Servi&ccedil;os a seguir especificados ser&atilde;o prestados exclusivamente mediante o acionamento da Central de Atendimento de Servi&ccedil;os Assistenciais (Brasil: 0800 707 5050 &ndash; Exterior: 5511 4689 5628) pelos Familiares, Benefici&aacute;rios ou o Representante do Estipulante,</p>
+<p>O Servi&ccedil;o de Assist&ecirc;ncia Funeral garante, de acordo com o limite de despesa estabelecida acima, a presta&ccedil;&atilde;o dos servi&ccedil;os de sepultamento ou crema&ccedil;&atilde;o (onde existir esse servi&ccedil;o) que englobem os seguintes itens:</p>
+<p>Urna;</p>
+<p>Carro para enterro (no munic&iacute;pio de moradia habitual do Segurado);</p>
+<p>Carreto / caix&atilde;o (no munic&iacute;pio de moradia habitual do Segurado);</p>
+<p>Servi&ccedil;o Assistencial;</p>
+<p>Registro de &oacute;bito;</p>
+<p>Taxa de sepultamento ou crema&ccedil;&atilde;o;</p>
+<p>Remo&ccedil;&atilde;o do corpo (no munic&iacute;pio de moradia habitual);</p>
+<p>Paramentos;</p>
+<p>Aparelho de Ozona;</p>
+<p>Mesa de Condol&ecirc;ncias;</p>
+<p>Velas;</p>
+<p>Vel&oacute;rio;</p>
+<p>V&eacute;u;</p>
+<p>Enfeite Floral e Coroas; e</p>
+<p>Loca&ccedil;&atilde;o de jazigo.</p>
+<p><strong>Caso a segurado n&atilde;o possua jazigo ou sepultura, a Tokio Marine Seguradora S/A garantir&aacute; a seu crit&eacute;rio e de acordo com o plano contratado, cemit&eacute;rio e jazigo por um per&iacute;odo de at&eacute; 03 (Tr&ecirc;s) anos, tempo necess&aacute;rio para exuma&ccedil;&atilde;o. N&atilde;o sendo poss&iacute;vel sepultamento por motivos alheios &agrave; vontade da Seguradora na cidade indicada pela fam&iacute;lia, este ser&aacute; feito na cidade mais pr&oacute;xima.</strong></p>
+<h2><strong>Capitais Segurados</strong></h2>
+<p>O Capital Segurado do grupo ser&aacute; uniforme para todos os funcion&aacute;rios que constarem na GFIP - Guia de Recolhimento de Fundo de Garantia, e para todos os S&oacute;cios/Diretores que constarem do Contrato Social da empresa.</p>
+<p>O Capital Segurado Individual ser&aacute; calculado atrav&eacute;s de rateio do Capital Segurado Global Contratado pelo Estipulante para o grupo de Funcion&aacute;rios/S&oacute;cios, pela quantidade de funcion&aacute;rios que constarem na GFIP e S&oacute;cios que constarem do Contrato Social da empresa, respeitando-se o limite m&aacute;ximo estabelecido na Proposta de Contrata&ccedil;&atilde;o.</p>
+<p>Se a quantidade de funcion&aacute;rios e/ou s&oacute;cios/diretores se alterar durante a vig&ecirc;ncia do seguro, seja pela ocorr&ecirc;ncia de sinistro ou pela movimenta&ccedil;&atilde;o de funcion&aacute;rios, o Capital Segurado Individual ser&aacute; automaticamente ajustado rateando-se o Capital Total Contratado de forma proporcional ao novo n&uacute;mero de Funcion&aacute;rios e Dirigentes, respeitando-se o limita m&aacute;ximo de Capital Individual estabelecido na Proposta de Contrata&ccedil;&atilde;o.</p>
+<h2><strong>Vig&ecirc;ncia do Seguro</strong></h2>
+<p>A ap&oacute;lice viger&aacute; pelo prazo de 12 (doze) meses, a contar da data de in&iacute;cio de vig&ecirc;ncia determinada pelo Estipulante, quando da aprova&ccedil;&atilde;o do seguro e assinatura da Proposta de Contrata&ccedil;&atilde;o, sendo admiss&iacute;vel uma &uacute;nica renova&ccedil;&atilde;o autom&aacute;tica, por igual per&iacute;odo, salvo se o Estipulante ou a Seguradora manifestar-se em sentido contr&aacute;rio, mediante aviso pr&eacute;vio, por escrito, com anteced&ecirc;ncia m&iacute;nima de 60 (sessenta) dias.</p>
+<p>Ao t&eacute;rmino do contrato, a ap&oacute;lice poder&aacute; ser renovada mediante confirma&ccedil;&atilde;o por escrito, por mais um per&iacute;odo e assim sucessivamente.</p>
+<p>No caso de n&atilde;o renova&ccedil;&atilde;o da ap&oacute;lice mestra, a cobertura de cada segurado cessa automaticamente no final de vig&ecirc;ncia da ap&oacute;lice, respeitando o per&iacute;odo correspondente ao pr&ecirc;mio pago.</p>
+<p>Este seguro &eacute; por prazo determinado, tendo a Seguradora a faculdade de n&atilde;o renovar a ap&oacute;lice na data de vencimento, sem devolu&ccedil;&atilde;o dos pr&ecirc;mios pagos nos termos da ap&oacute;lice.</p>
+<h2><strong>Condi&ccedil;&otilde;es de Aceita&ccedil;&atilde;o</strong></h2>
+<p>Estar&atilde;o incluidos no seguro, todos os funcion&aacute;rios do Estipulante que constem da GFIP - Guia de Recolhimento do Fundo de Garantia e Tempo de Servi&ccedil;o e Informa&ccedil;&otilde;es da Previd&ecirc;ncia Social e respectivos S&oacute;cios e/ou Diretores constantes do contrato social, desde que:</p>
+<p>a.) estejam em plena atividade profissional/laborativa;</p>
+<p>b.) em boas condi&ccedil;&otilde;es de sa&uacute;de;</p>
+<p>c.) tenham idade compreendida entre 14 a 65 anos.</p>
+<p>Aposentados por Tempo de Servi&ccedil;o e Idade poder&atilde;o participar do seguro desde que estejam em plena atividade de trabalho e constem da Guia de Recolhimento do Fundo de Garantia - GFIP.</p>
+<p>Aposentados por Invalidez n&atilde;o poder&atilde;o participar do seguro.</p>
+<p>Este seguro n&atilde;o contempla a inclus&atilde;o dos Funcion&aacute;rios e/ou S&oacute;cios/Diretores que estejam afastados de suas atividades laborativas.</p>
+<p>O(s) funcion&aacute;rio(s) afastado(s) por doen&ccedil;a ou acidente, antes do in&iacute;cio de vig&ecirc;ncia da ap&oacute;lice, somente ter&aacute;(&atilde;o) direito &agrave; cobertura a partir da data de seu retorno &agrave;s atividades normais de trabalho.</p>
+<p><strong>* As Condi&ccedil;&otilde;es Gerais se encontram em poder do Corretora, solicite-as.</strong></p>
+'''
+
+DECLARATION_VIDA_GLOGAL = '''<h1>DECLARA&Ccedil;&Atilde;O E AUTORIZA&Ccedil;&Atilde;O DE DESCONTO</h1>
+<p>A empresa acima qualificada como Estipulante da ap&oacute;lice prop&otilde;e a Tokio Marine Seguradora S/A a inclus&atilde;o de todos os seus empregados que constem da GFIP - Guia de Recolhimento do Fundo de Garantia e Tempo de Servi&ccedil;o e Informa&ccedil;&otilde;es da Previd&ecirc;ncia Social e respectivos S&oacute;cios e/ou Diretores constantes do Contrato Social, observadas as Condi&ccedil;&otilde;es Contratuais no Plano de Seguro de Pessoas - Capital Global.</p>
+<p>Declara que recebeu, tomou ci&ecirc;ncia das Condi&ccedil;&otilde;es Contratuais deste Seguro e efetuou o pagamento do pr&ecirc;mio do seguro atrav&eacute;s de quita&ccedil;&atilde;o do boleto referenciado junto a rede banc&aacute;ria.</p>
+<p>A empresa concorda que s&oacute; ter&atilde;o cobertura os segurados que ao ingressarem no seguro estiverem em plena atividade de trabalho, n&atilde;o tenham idade superior ao estabelecido e estejam em perfeitas condi&ccedil;&otilde;es de sa&uacute;de, n&atilde;o apresentando doen&ccedil;as preexistentes ou sequelas delas provenientes, que impe&ccedil;am seu ingresso no seguro ou que agravem a taxa do pr&ecirc;mio, assumindo integralmente a responsabilidade pelas informa&ccedil;&otilde;es prestadas, ciente e de acordo com os artigos 765 e 766 do C&oacute;digo Civil Brasileiro, se tiver omitido circunst&acirc;ncias que possam influir na aceita&ccedil;&atilde;o ou validade da proposta, no valor do capital ou taxa do pr&ecirc;mio, perder&aacute; o direito ao capital segurado e consequentemente a quaisquer garantias ou pagamentos de benef&iacute;cios.</p>
+<p>A aceita&ccedil;&atilde;o do seguro estar&aacute; sujeita a analise do risco.</p>
+<p>O registro deste plano na SUSEP n&atilde;o implica, por parte da Autarquia, incentivo ou recomenda&ccedil;&atilde;o a sua comercializa&ccedil;&atilde;o</p>
+<p>O segurado poder&aacute; consultar a situa&ccedil;&atilde;o cadastral de seu corretor, no site www.susep.gov.br, por meio do n&uacute;mero de registro na SUSEP, nome completo, CNPJ ou CPF.</p>'''
+
+FULL_DECLARATION_AP = '''<h1>CONDI&Ccedil;&Otilde;ES RESUMIDAS DO PLANO</h1>
+<h2><strong>Coberturas</strong></h2>
+<p><strong>MA - Morte Acidental - garante aos benefici&aacute;rios o pagamento do capital segurado individual contratado para esta cobertura em caso de morte do segurado causada, exclusivamente, por acidente pessoal coberto pelo seguro, exceto se decorrente de riscos excluidos, conforme Condi&ccedil;&otilde;es Gerais do Seguro.</strong></p>
+<p><strong>IPA - Invalidez Permanente Total ou Parcial por Acidente - garante ao pr&oacute;prio segurado o pagamento do capital segurado individual contratado proporcional &agrave; perda ou redu&ccedil;&atilde;o funcional de um membro ou &oacute;rg&atilde;o, sofrida em consequencia de acidente pessoal coberto, exceto se decorrente de riscos exclu&iacute;dos, conforme Condi&ccedil;&otilde;es Gerais do Seguro. O valor correspondente at&eacute; 100% (cem por cento) do capital da cobertura B&aacute;sica. Para c&aacute;lculo do capital segurado a ser pago ser&aacute; utilizado a tabela de c&aacute;lculo para Invalidez Parcial que faz parte das Condi&ccedil;&otilde;es Gerais do Seguro.</strong></p>
+<h2>Capitais Segurados</h2>
+<p>O Capital Segurado do grupo ser&aacute; uniforme.</p>
+<p><strong>Vig&ecirc;ncia do Seguro</strong></p>
+<p>A ap&oacute;lice viger&aacute; pelo prazo de 12 (doze) meses, a contar da data de in&iacute;cio de vig&ecirc;ncia determinada pelo Estipulante, quando da aprova&ccedil;&atilde;o do seguro e assinatura da Proposta de Contrata&ccedil;&atilde;o, sendo admiss&iacute;vel uma &uacute;nica renova&ccedil;&atilde;o autom&aacute;tica, por igual per&iacute;odo, salvo se o Estipulante ou a Seguradora manifestar-se em sentido contr&aacute;rio, mediante aviso pr&eacute;vio, por escrito, com anteced&ecirc;ncia m&iacute;nima de 60 (sessenta) dias.</p>
+<p>Ao t&eacute;rmino do contrato, a ap&oacute;lice poder&aacute; ser renovada mediante confirma&ccedil;&atilde;o por escrito, por mais um per&iacute;odo e assim sucessivamente.</p>
+<p>No caso de n&atilde;o renova&ccedil;&atilde;o da ap&oacute;lice mestra, a cobertura de cada segurado cessa automaticamente no final de vig&ecirc;ncia da ap&oacute;lice, respeitando o per&iacute;odo correspondente ao pr&ecirc;mio pago.</p>
+<p>Este seguro &eacute; por prazo determinado, tendo a Seguradora a faculdade de n&atilde;o renovar a ap&oacute;lice na data de vencimento, sem devolu&ccedil;&atilde;o dos pr&ecirc;mios pagos nos termos da ap&oacute;lice.</p>
+<h2>Condi&ccedil;&otilde;es de Aceita&ccedil;&atilde;o</h2>
+<p>Estar&atilde;o incluidos no seguro, todos os funcion&aacute;rios do Estipulante e/ou S&oacute;cios/Diretores, desde que:</p>
+<p>a.) estejam em plena atividade profissional/laborativa;</p>
+<p>b.) em boas condi&ccedil;&otilde;es de sa&uacute;de;</p>
+<p>c.) tenham idade compreendida entre 14 a 70 anos.</p>
+<p>Aposentados por Tempo de Servi&ccedil;o e Idade poder&atilde;o participar do seguro desde que estejam em plena atividade de trabalho e constem da Guia de Recolhimento do Fundo de Garantia - GFIP.</p>
+<p>Aposentados por Invalidez n&atilde;o poder&atilde;o participar do seguro.</p>
+<p>Este seguro n&atilde;o contempla a inclus&atilde;o dos Funcion&aacute;rios e/ou S&oacute;cios/Diretores que estejam afastados de suas atividades laborativas.</p>
+<p>O(s) funcion&aacute;rio(s) afastado(s) por doen&ccedil;a ou acidente, antes do in&iacute;cio de vig&ecirc;ncia da ap&oacute;lice, somente ter&aacute;(&atilde;o) direito &agrave; cobertura a partir da data de seu retorno &agrave;s atividades normais de trabalho.</p>
+<p><strong>* As Condi&ccedil;&otilde;es Gerais se encontram em poder do Corretora, solicite-as.</strong></p>'''
+
+DECLARATION_AP = '''<h1>DECLARA&Ccedil;&Atilde;O E AUTORIZA&Ccedil;&Atilde;O DE DESCONTO</h1>
+<p>A empresa acima qualificada como Estipulante da ap&oacute;lice prop&otilde;e a Tokio Marine Seguradora S/A a inclus&atilde;o de seus empregados e/ou S&oacute;cios/Diretores no seguro, conforme rela&ccedil;&atilde;o fornecida e observadas as Condi&ccedil;&otilde;es Contratuais e Condi&ccedil;&otilde;es Gerais do Plano de Seguro de Pessoas - Acidentes Pessoais Coletivo.</p>
+<p>Declara que recebeu, tomou ci&ecirc;ncia das Condi&ccedil;&otilde;es Contratuais deste Seguro e efetuou o pagamento do pr&ecirc;mio do seguro atrav&eacute;s de quita&ccedil;&atilde;o do boleto referenciado junto a rede banc&aacute;ria.</p>
+<p>A empresa concorda que s&oacute; ter&atilde;o cobertura os segurados que ao ingressarem no seguro estiverem em plena atividade de trabalho, n&atilde;o tenham idade superior ao estabelecido e estejam em perfeitas condi&ccedil;&otilde;es de sa&uacute;de, n&atilde;o apresentando doen&ccedil;as preexistentes ou sequelas delas provenientes, que impe&ccedil;am seu ingresso no seguro ou que agravem a taxa do pr&ecirc;mio, assumindo integralmente a responsabilidade pelas informa&ccedil;&otilde;es prestadas, ciente e de acordo com os artigos 765 e 766 do C&oacute;digo Civil Brasileiro, se tiver omitido circunst&acirc;ncias que possam influir na aceita&ccedil;&atilde;o ou validade da proposta, no valor do capital ou taxa do pr&ecirc;mio, perder&aacute; o direito ao capital segurado e consequentemente a quaisquer garantias ou pagamentos de benef&iacute;cios.</p>
+<p>A aceita&ccedil;&atilde;o do seguro estar&aacute; sujeita a analise do risco.</p>
+<p>O registro deste plano na SUSEP n&atilde;o implica, por parte da Autarquia, incentivo ou recomenda&ccedil;&atilde;o a sua comercializa&ccedil;&atilde;o</p>
+<p>O segurado poder&aacute; consultar a situa&ccedil;&atilde;o cadastral de seu corretor, no site www.susep.gov.br, por meio do n&uacute;mero de registro na SUSEP, nome completo, CNPJ ou CPF.</p>'''
 
 AREA = ("Academia de Esportes / Artes Marciais",
 "Açúcar e Álcool",
@@ -496,25 +640,25 @@ DEFAULT_PROFILE = (
 DEFAULT_PRODUCT = (
     ('Vida', 'Introdução', 'Descrição', ' Declaração', 'J', 'Tokio', 'Vida',
         DEFAULT_FILES_TOKIO,
-        'Proposta Gerada', 'Perfil Vida', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10 , 10, 0,),
+        'Proposta Gerada', 'Perfil Vida', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10 , 10, 0, FULL_DECLARATION_VIDA, DECLARATION_VIDA, ),
     ('Vida Global', 'Introdução', 'Descrição', ' Declaração', 'J', 'Tokio', 'Vida',
          DEFAULT_FILES_TOKIO,
-        'Proposta Gerada', 'Perfil Vida Global', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10 , 10, 0,),
+        'Proposta Gerada', 'Perfil Vida Global', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10 , 10, 0, FULL_DECLARATION_VIDA_GLOGAL, DECLARATION_VIDA_GLOGAL,),
     ('Acidentes Pessoais', 'Introdução', 'Descrição', ' Declaração', 'J', 'Tokio', 'Acidentes Pessoais',
         DEFAULT_FILES_TOKIO,
-        'Proposta Gerada', 'Perfil Acidentes Pessoais', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10, 10, 0,),
+        'Proposta Gerada', 'Perfil Acidentes Pessoais', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10, 10, 0, FULL_DECLARATION_AP, DECLARATION_AP,),
     ('Garantia Tradicional', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Garantia Tradicional',
         DEFAULT_FILES_GARANTIA,
-        'Lead de Garantia Gerado', 'Perfil Garantia Tradicional', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1,),
+        'Lead de Garantia Gerado', 'Perfil Garantia Tradicional', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', ''),
     ('Garantia Judicial', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Garantia Judicial',
          DEFAULT_FILES_GARANTIA,
-        'Lead de Garantia Gerado', 'Perfil Garantia Judicial', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1,),
+        'Lead de Garantia Gerado', 'Perfil Garantia Judicial', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', ''),
     ('Fiança Locatícia', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Fiança Locatícia',
      DEFAULT_FILES_GARANTIA,
-    'Lead de Garantia Gerado', 'Perfil Fiança Locatícia', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1,),
+    'Lead de Garantia Gerado', 'Perfil Fiança Locatícia', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', ''),
     ('Saúde', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Saúde',
      DEFAULT_FILES_BENEFICIOS,
-    'Lead de Benefícios Gerado', 'Perfil Saúde', DEFAULT_STATUS_PRODUCT_BENEFICIOS, 10, 10, 10, 1,),
+    'Lead de Benefícios Gerado', 'Perfil Saúde', DEFAULT_STATUS_PRODUCT_BENEFICIOS, 10, 10, 10, 1, '', ''),
     )
 
 DEFAULT_PROFILE_NAME = (
@@ -821,7 +965,8 @@ class Command(BaseCommand):
         #         per.save()
 
         for product_name, introduction, description, declaration, kind, insurance, branch, files,\
-        begin, profile, status_permitted, partner_percentage, owner_percentage, master_percentage, is_lead in DEFAULT_PRODUCT:
+        begin, profile, status_permitted, partner_percentage, owner_percentage, master_percentage, is_lead, p_declaration_full,  p_declaration \
+        in DEFAULT_PRODUCT:
             if not Product.objects.filter(name=product_name).exists():
                 product = Product(
                     name=product_name,
@@ -836,9 +981,10 @@ class Command(BaseCommand):
                     partner_percentage=partner_percentage,
                     owner_percentage=owner_percentage,
                     master_percentage=master_percentage,
-                    is_lead=is_lead
+                    is_lead=is_lead,
                 )
-
+                product.full_declaration = p_declaration_full
+                product.declaration = p_declaration
                 product.save()
                 for file in files:
                     product.file_type.add(FileType.objects.get(name=file))
@@ -955,3 +1101,5 @@ class Command(BaseCommand):
                 if "Parceiro" in user_profile:
                     user.master = MassificadoUser.objects.get(username='SupervisorSofisa')
                 user.save()
+
+
