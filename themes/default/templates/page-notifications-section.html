@@ -2,7 +2,10 @@
 {% load i18n %}
 {% load notifications_tags %}
 
-{% block section-title %}{% endblock %}
+{% block section-title %}
+    <li><a href="/">{% trans 'Home' %}</a></li>
+    <li class="active"><b>{% trans 'Notifications' %}</b></li>
+{% endblock %}
 {% block section-id %}{% endblock %}
 {% block section-content %}
         <div class="table-default">

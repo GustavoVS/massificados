@@ -1,6 +1,11 @@
 {% extends 'base-sec.html' %}
 {% load i18n %}
-{% block section-title %}{% trans 'Entries' %}{% endblock %}
+
+{% block section-title %}
+    <li><a href="/">{% trans 'Home' %}</a></li>
+    <li class="active"><b>{% trans 'Entries' %}</b></li>
+{% endblock %}
+
 {% block section-id %}sec-entries{% endblock %}
 {% block section-content %}
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >

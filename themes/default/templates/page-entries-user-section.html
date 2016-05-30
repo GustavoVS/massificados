@@ -3,11 +3,18 @@
 {% load bootstrap3 %}
 
 {% block section-title %}
-    {% if user_entrie %}
-        {{ user_entrie }}
-    {% else %}
-        {% trans 'Create User' %}
-    {% endif %}
+    <li><a href="/">{% trans 'Home' %}</a></li>
+    <li><a href="/entries">{% trans 'Entries' %}</a></li>
+    <li><a href="/entries/users">{% trans 'Users' %}</a></li>
+    <li class="active">
+        <b>
+            {% if user_entrie %}
+                {{ user_entrie }}
+            {% else %}
+                {% trans 'Create User' %}
+            {% endif %}
+        </b>
+    </li>
 {% endblock %}
 
 {% block section-content %}

@@ -2,7 +2,11 @@
 {% load i18n %}
 
 {% block section-id %}section-users{% endblock %}
-{% block section-title %}{%trans 'Users' %}{% endblock %}
+{% block section-title %}
+    <li><a href="/">{% trans 'Home' %}</a></li>
+    <li><a href="/entries">{% trans 'Entries' %}</a></li>
+    <li class="active"><b>{% trans 'Users' %}</b></li>
+{% endblock %}
 {% block section-content %}
     <div class="container">
         <div class="row">

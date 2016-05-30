@@ -3,10 +3,10 @@
 
 
 {% block section-id %}sec-products{% endblock %}
-{% block section-title %}{% trans 'Products' %}{% endblock %}
-{#{% block section-desc %}#}
-{#     <p>{ % trans "O banco Sofisa oferece Produtos e Serviços para clientes Pessoa Física e Jurídica de forma online, segura e sem burocracia. Conheça mais abaixo" % }</p> #}
-{#{% endblock %}#}
+{% block section-title %}
+    <li><a href="/">{% trans 'Home' %}</a></li>
+    <li class="active"><b>{% trans 'Products' %}</b></li>
+{% endblock %}
 
 {% block section-content %}
     {% if products %}
