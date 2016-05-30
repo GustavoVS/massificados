@@ -28,7 +28,7 @@ THEMES_DIR = os.path.join(BASE_DIR, 'themes')
 SECRET_KEY = 'rjy@i6@99qth)#8o!)z!hjk^mi@l7d6$#gfa_pu!91@i&2jtbf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '*',
@@ -111,7 +111,7 @@ WSGI_APPLICATION = 'massificados.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 if 'RDS_DB_NAME' in os.environ:
-    DEBUG = False
+    # DEBUG = False
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
