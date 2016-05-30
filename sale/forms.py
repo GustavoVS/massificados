@@ -47,7 +47,8 @@ class DeadlineSaleForm(forms.ModelForm):
 
     class Meta:
         model = Deadline
-        fields = ['begin', 'end', 'payment', 'proposal', 'policy', 'accept_declaration', 'method_payment']
+        fields = ['begin', 'end', 'payment', 'proposal', 'policy', 'accept_declaration', 'method_payment',
+                  'insured_capital', 'rate_per_thousand', 'insured_group', 'costing', 'revenues', 'lives', ]
 
     # def clean_status(self):
     #     # todo:

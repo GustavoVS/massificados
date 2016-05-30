@@ -4,11 +4,10 @@ from django.contrib.sites.models import Site
 from django.core.management.base import BaseCommand
 from partner.models import Partner
 from product.models import Status, FileType, InsuranceCompany, Branch, Product, Profile, ActionStatus, MethodPayment
-from sale.models import ActivityArea
+from sale.models import ActivityArea, NumberLives
 from user_account.models import MassificadoUser
 from user_groups.models import MassificadoGroups
 from status_emails.models import ActionStatusEmails, ActionStatusEmailsUsers
-
 
 FULL_DECLARATION_VIDA = '''<h1><strong>CONDI&Ccedil;&Otilde;ES RESUMIDAS DO PLANO</strong></h1>
 <h2><strong>Coberturas</strong></h2>
@@ -969,6 +968,11 @@ class Command(BaseCommand):
             if not Profile.objects.filter(name=profile_name).exists():
                 pe = Profile(name=profile_name)
                 pe.save()
+
+        for p_number in range(500):
+            if not NumberLives.objects.filter(number=p_number).exists():
+                p = NumberLives(number=p_number)
+                p.save()
 
         # for profile in DEFAULT_PROFILE_NAME:
         #     if not MassificadoGroups.objects.filter(name=profile).exists():

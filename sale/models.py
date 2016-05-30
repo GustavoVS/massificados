@@ -17,6 +17,13 @@ class ActivityArea(models.Model):
         return self.name
 
 
+class NumberLives(models.Model):
+    number = models.IntegerField(_('Number'), null=True)
+
+    def __unicode__(self):
+        return 'lives %s' % self.number
+
+
 class Buyer(models.Model):
     KIND_PERSON_CHOICES = (
         ('F', _('Individual')),
@@ -70,6 +77,15 @@ class Sale(models.Model):
 
 
 class Deadline(models.Model):
+    INSURED_GROUP_CHOICES = (
+        ('O', _('Officials and Partners/Directors')),
+    )
+    COSTING_CHOICES = (
+        ('N', _('Not Contributory')),
+    )
+    REVENUES_CHOICES = (
+        ('Y', _('Yearly')),
+    )
     active = models.BooleanField(default=True)
     begin = models.DateField(_('Begin date'), null=True)
     end = models.DateField(_('End date'), null=True)
@@ -78,6 +94,11 @@ class Deadline(models.Model):
     payment = models.FloatField(_('Payment'), null=True)
     proposal = models.CharField(_('Proposal'), max_length=100, null=True, blank=True)
     policy = models.CharField(_('Policy'), max_length=100, null=True, blank=True)
+    insured_capital = models.FloatField(_('Insured Capital'), null=True)
+    rate_per_thousand = models.FloatField(_('Rate per Thousand'), null=True)
+    insured_group = models.CharField(_('Insured Group'), max_length=1, choices=INSURED_GROUP_CHOICES, default='O', null=True)
+    costing = models.CharField(_('Costing'), max_length=1, choices=COSTING_CHOICES, default='N', null=True)
+    revenues = models.CharField(_('Revenues'), max_length=1, choices=REVENUES_CHOICES, default='Y', null=True)
     method_payment = models.ForeignKey(
         MethodPayment,
         null=True,
@@ -86,6 +107,10 @@ class Deadline(models.Model):
     sale = models.ForeignKey(
         Sale,
         on_delete=models.CASCADE
+    )
+    lives = models.ForeignKey(
+        NumberLives,
+        null=True,
     )
 
     def __unicode__(self):
