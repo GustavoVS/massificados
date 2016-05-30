@@ -1,14 +1,13 @@
-    {#{% extends "base-sec.html" %#}
-    {% load i18n %}
+{% load i18n %}
+{% load staticfiles %}
 
+{% block section-id %}sec-index-slider{% endblock %}
+{% block section-title %}{% trans 'Massificados' %}{% endblock %}
+{#{% block section-desc %}#}
+{#     <p>{ % trans "O banco Sofisa oferece Produtos e Serviços para clientes Pessoa Física e Jurídica de forma online, segura e sem burocracia. Conheça mais abaixo" % }</p> #}
+{#{% endblock %}#}
 
-    {% block section-id %}sec-index-slider{% endblock %}
-    {% block section-title %}{% trans 'Massificados' %}{% endblock %}
-    {#{% block section-desc %}#}
-    {#     <p>{ % trans "O banco Sofisa oferece Produtos e Serviços para clientes Pessoa Física e Jurídica de forma online, segura e sem burocracia. Conheça mais abaixo" % }</p> #}
-    {#{% endblock %}#}
-
-    <div id="{% block section-content %}" class="section">
+<div id="{% block section-content %}" class="section">
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
@@ -20,14 +19,14 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      <img src="static/img/partner-sofisa/slide1.jpg" alt="Chania">
+      <img src="{% static 'img/partner-sofisa/slide1.jpg' %}" alt="Chania">
       <div class="carousel-caption">
         <h3>O Banco Sofisa oferece produtos e serviços para clientes pessoas físicas de forma 100% online, segura e sem burocracia.</h3>
       </div>
     </div>
 
     <div class="item">
-      <img src="static/img/partner-sofisa/slide2.jpg" alt="Flower">
+      <img src="{% static 'img/partner-sofisa/slide2.jpg' %}" alt="Flower">
       <div class="carousel-caption">
         <h3>Seguros</h3>
         <p>Seguro Viagem, Vida Individual, Automóvel, Perda e Roubo de Equipamentos </p>
