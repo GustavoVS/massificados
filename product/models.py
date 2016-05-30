@@ -115,7 +115,7 @@ class Product(models.Model):
     insurance_company = models.ForeignKey(InsuranceCompany, on_delete=models.CASCADE)
     branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
     file_type = models.ManyToManyField(FileType)
-    sample_file_type = models.ManyToManyField(SampleFile)
+    sample_file_type = models.ManyToManyField(SampleFile, blank=True)
     status_permission = models.ManyToManyField(Status, related_name='product_status_permission')
     is_lead = models.BooleanField(default=False)
     partner_percentage = models.FloatField(null=True, default=0, blank=True)
