@@ -2,16 +2,18 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.db.models import Q
+from django.utils.translation import ugettext_lazy as _
 from django.core.paginator import Paginator
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView
-from .models import Sale, Partner, Buyer, BuyerAddress, Status, ResponseDeadline, Quote, SubQuote
-from .forms import BuyerForm, AddressBuyerFormset, FileDeadlineFormset, DeadlineSaleFormset
+from .models import Sale, Partner, Buyer, BuyerAddress, Status, ResponseDeadline, Quote, SubQuote, File
+from .forms import BuyerForm, AddressBuyerFormset, DeadlineSaleFormset
 from product.models import Product, Question
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import BuyerSerializer, BuyerAddressSerializer
+from django.utils.datastructures import MultiValueDictKeyError
 
 
 class ProductionView(LoginRequiredMixin, ListView):
@@ -42,18 +44,27 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
         data['product'] = product
         data['addressbuyer'] = AddressBuyerFormset()
         data['status_deadline'] = product.begin_status
-        # data['possible_new_status'] = Status.objects.filter(level__gte=product.begin_status.level).select_related()
         data['possible_new_status'] = self.request.user.group_permissions.status_set.filter(
             level__gte=product.begin_status.level).select_related()
         data['show_all'] = True
         data['deadlinesale'] = DeadlineSaleFormset()
         data['sample_file_type'] = product.sample_file_type.all()
-        data['filedeadline'] = FileDeadlineFormset(product.file_type.all())
+        # data['filedeadline'] = FileDeadlineFormset(product.file_type.all())
         data['questiondeadline'] = product.profile.question_set.filter(
             type_profile='pdl').order_by('order_number')
         # data['detail_deadline'] = DetailDeadlineFormset()
         data['question_detail'] = product.profile.question_set.filter(
             type_profile='pdt').order_by('order_number')
+
+        num_files = product.sample_file_type.all().count()
+        if num_files % 4 == 0:
+            data['sample_file_type_cols'] = 3
+        elif num_files % 3 == 0:
+            data['sample_file_type_cols'] = 4
+        elif num_files % 2 == 0:
+            data['sample_file_type_cols'] = 6
+        elif num_files == 1:
+            data['sample_file_type_cols'] = 12
 
         return data
 
@@ -127,10 +138,10 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
                 #     if detail_form.is_valid():
                 #         detail_form.save()
 
-                files = FileDeadlineFormset(self.request.POST, instance=form.instance)
-                for file_form in files.forms:
-                    if file_form.is_valid():
-                        file_form.save()
+                # files = FileDeadlineFormset(self.request.POST, instance=form.instance)
+                # for file_form in files.forms:
+                #     if file_form.is_valid():
+                #         file_form.save()
 
         return response
 
@@ -152,17 +163,29 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
         data['product'] = Product.objects.get(pk=self.kwargs['productpk'])
         data['sale'] = sale = self.object.sale_set.all()[0]
         # if not Product.objects.get(pk=self.kwargs['productpk']).is_lead:
+        data['deadline'] = sale.deadline_set.all()[0]
         data['show_all'] = True
         data['deadlinesale'] = DeadlineSaleFormset(instance=sale)
-        data['status_deadline'] = sale.deadline_set.all()[0].status
         data['sample_file_type'] = sale.product.sample_file_type.all()
-        # data['uploaded_file_types'] = sale.deadline_set.all()[0]
-        data['possible_new_status'] = Status.objects.filter(
+        num_files = sale.product.sample_file_type.all().count()
+        if num_files % 4 == 0:
+            data['sample_file_type_cols'] = 3
+        elif num_files % 3 == 0:
+            data['sample_file_type_cols'] = 4
+        elif num_files % 2 == 0:
+            data['sample_file_type_cols'] = 6
+        elif num_files == 1:
+            data['sample_file_type_cols'] = 12
+        data['uploaded_files'] = sale.deadline_set.all()[0].file_set.all()
+        data['uploaded_file_types'] = [file_up.file_type for file_up in sale.deadline_set.all()[0].file_set.all()]
+        data['possible_new_status'] = self.request.user.group_permissions.status_set.filter(
             level__gte=sale.deadline_set.all()[0].status.level).order_by('level')
-        if sale.deadline_set.all():
-            data['filedeadline'] = FileDeadlineFormset(sale.product.file_type.all(), instance=sale.deadline_set.all()[0])
-        else:
-            data['filedeadline'] = FileDeadlineFormset(sale.product.file_type.all())
+        # data['possible_new_status'] = Status.objects.filter(
+        #     level__gte=sale.deadline_set.all()[0].status.level).order_by('level')
+        # if sale.deadline_set.all():
+        #     data['filedeadline'] = FileDeadlineFormset(sale.product.file_type.all(), instance=sale.deadline_set.all()[0])
+        # else:
+        #     data['filedeadline'] = FileDeadlineFormset(sale.product.file_type.all())
 
         # if sale.deadline_set.all():
         #     data['detail_deadline'] = DetailDeadlineFormset(instance=sale.deadline_set.all()[0])
@@ -244,10 +267,10 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
                 #     if detail_form.is_valid():
                 #         detail_form.save()
 
-                files = FileDeadlineFormset(self.request.POST, self.request.FILES, instance=form.instance)
-                for file_form in files.forms:
-                    if file_form.is_valid():
-                        file_form.save()
+                # files = FileDeadlineFormset(self.request.POST, self.request.FILES, instance=form.instance)
+                # for file_form in files.forms:
+                #     if file_form.is_valid():
+                #         file_form.save()
 
         return response
 
@@ -272,3 +295,41 @@ def user_cnpj(request):
             return Response(resp)
         except Buyer.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST', ])
+def upload_media(request):
+    msg = url = txt = ''
+    deadline_id = request.POST.get('deadline-pk', '')
+    file_type_id = request.POST.get('file-type-pk', '')
+    try:
+        doc = request.FILES['input-file-type']
+    except MultiValueDictKeyError:
+        doc = False
+
+    if not deadline_id:
+        msg = _('An error has occurred')
+    elif not file_type_id:
+        msg = _('Select a File Type to upload')
+    elif not doc:
+        msg = _('Select a File')
+
+    if not msg:
+        doc.read()
+        sale_file = File(
+            deadline_id=deadline_id,
+            file_type_id=file_type_id,
+            document=doc,
+            uploaded_by=request.user
+        )
+        sale_file.save()
+        msg = _('Successfully file uploaded')
+        url = sale_file.document.url
+        txt = _("Uploaded by <b>%s</b> in <small>%s</small>" % (sale_file.uploaded_by, sale_file.upload_date))
+        error = False
+    else:
+        error = True
+    return Response(
+        {'error': error, 'msg': msg, 'url': url, 'txt': txt},
+        content_type="application/json"
+    )

@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block section-content %}
-    <form action="" method="post" class="form" enctype="multipart/form-data">
+    <form action="" method="post" class="form">
         {% csrf_token %}
         {% if product.pk %}
             <input type="hidden" name="productpk" value="{{ product.pk }}">
@@ -22,7 +22,7 @@
             <div class="col-md-6">
                 <p><b>{% trans "Product" %}</b>: {{ product }}</p>
                 <p><b>{% trans "Sale Owner" %}</b>: {{ sale.owner|default:user }}</p>
-                <p><b>{% trans "Status" %}</b>: {{ status_deadline }}<br></p>
+                <p><b>{% trans "Status" %}</b>: {{ deadline.status }}<br></p>
             </div>
             {% if sale.pk %}
                 <div class="col-md-6">
@@ -39,7 +39,7 @@
             {% endif %}
         </div>
         </div>
-        <h3>{% trans 'Buyer' %}</h3>
+        <h2>{% trans 'Buyer' %}</h2>
         <div class="well">
             <div class="row">
                 <input type="hidden" name="{{form.kind_person.html_name}}" value="{{product.kind_person}}">
@@ -74,7 +74,7 @@
                 {% endif %}
         </div>
     </div>
-    <h3>{% trans 'Address' %}</h3>
+    <h2>{% trans 'Address' %}</h2>
     <div class="well">
         <div class="row">
             {{ addressbuyer.management_form }}
@@ -96,13 +96,13 @@
         </div>
     </div>
     {% if show_all %}
-        <h3>{% if product.is_lead %}
+        <h2>{% if product.is_lead %}
                 {% trans "Lead of" %}
             {% else %}
                 {% trans "Quotation of" %}
             {% endif %}
             {{product}}
-        </h3>
+        </h2>
         <div class="well">
             <div class="row">
                 {{ deadlinesale.management_form }}
@@ -238,7 +238,7 @@
             </div>
         {% endif %}
 
-        <h3>{% trans 'Files' %}</h3>
+        <h2>{% trans 'Files' %}</h2>
         <div class="well">
             {# <div class="thumbnail col-md-3" style="display: none" id="file_empty_form"> #}
                 {# <div class="caption"> #}
@@ -248,13 +248,13 @@
             {# </div> #}
             {% if sample_file_type %}
                 <h4>{% trans "Files to Download" %}</h4>
-                <div class="row">
+                <div class="row-flex">
                     {% for file in sample_file_type %}
-                        <div class="thumbnail col-md-3" id="{{ f.prefix }}-row">
+                        <div class="thumbnail col-md-{{ sample_file_type_cols|default:'3' }}" id="{{ f.prefix }}-row">
                             <div class="caption text-center">
                                 <h4 class="text-center">{{ file }}</h4>
                                 <p>{{ file.short_desc }}</p>
-                                <a href="{{ file.document }}" role="button" class="btn btn-info" target="_blank">
+                                <a href="{{file.document.url}}" role="button" class="btn btn-info" target="_blank">
                                     <span class="fa fa-file-o"></span> {% trans "Download" %}
                                 </a>
                             </div>
@@ -262,33 +262,21 @@
                     {% endfor %}
                 </div>
             {% endif %}
-            {{ filedeadline.management_form }}
-            <div id="filedeadline_formset">
-                <h4>{% trans "Attachements Uploaded" %}</h4>
-                <div class="row">
-                    {% for f in filedeadline %}
-                        <div class="thumbnail col-md-3" id="{{ f.prefix }}-row">
-                            <div class="caption">
-                                {% bootstrap_field f.file_type %}
-                                {% if f.document %}
-                                    {{ f.document }}
-                                {% else %}
-                                    {% bootstrap_field filedeadline.empty_form.document layout="inline" %}
-                                {% endif %}
-                            </div>
-                        </div>
-                    {% empty %}
-                        <div class="thumbnail" style="display:none"></div>
-                    {% endfor %}
-                </div>
-            </div>
-            <h4>{% trans "Uploaded files" %}</h4>
+            <h4>{% trans "Uploaded files" %}
+                {% if sale.pk and sale.deadline_set.all.0.status in user.group_permissions.status_edit.all %}
+                    <button type="button" class="btn btn-success upload-file"
+                            data-toggle="modal" data-target="#file-sale-modal">
+                        <span class="fa fa-plus"></span>
+                    </button>
+                    <div class="clearfix"></div>
+                {% endif %}
+            </h4>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-3">
                     {% for file_type in product.file_type.all %}
-                        <p> <span class="fa
-                                {% if file_type in sale.deadline_set.all.0.file_set.all %}
-                                    fa-check success
+                        <p> <span id="file_type_uploaded-{{file_type.pk}}" class="fa
+                                {% if file_type in uploaded_file_types %}
+                                    fa-check text-success
                                 {% else %}
                                     fa-remove text-danger
                                 {% endif %}
@@ -297,6 +285,54 @@
                         </p>
                     {% endfor %}
                 </div>
+
+                <div class="col-md-9">
+                    {% if sale.pk %}
+                        <div class="row-flex" id="uploaded_files">
+                            <div class="hidden" id="empty_uploaded_file">
+                                <div class="col-md-4 thumbnail">
+                                    <div class="caption text-center">
+                                        <h4>__file-type__</h4>
+                                        <p>__file-type-txt__</p>
+                                        <a href="__file-type-url__" role="button" class="btn btn-info" target="_blank">
+                                            <span class="fa fa-file-o"></span> {% trans "Download" %}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% for file in deadline.file_set.all %}
+                                <div class="col-md-4 thumbnail">
+                                    <div class="caption text-center">
+                                        <h4>{{ file }}</h4>
+                                        <p>
+                                            {% trans "Uploaded by" %} <b>{{ file.uploaded_by }}</b>
+                                            <small>{% trans "in" %} {{ file.upload_date }}</small>
+                                        </p>
+                                        {% if file.file_type in user.group_permissions.filetype_download.all %}
+                                            <a href="{{file.document.url}}" role="button" class="btn btn-info" target="_blank">
+                                                <span class="fa fa-file-o"></span> {% trans "Download" %}
+                                            </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% empty %}
+                                <div class="space"></div>
+                                <div class="alert alert-info" role="alert">
+                                    <span class="fa fa-cloud-upload" aria-hidden="true"></span>
+                                    <span class="sr-only">Info:</span>
+                                    {% trans 'There is no Files in this Sale. Click on "+" button to upload files.' %}
+                                </div>
+                                {# <div class="download"> #}
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-info" role="alert">
+                            <span class="fa fa-cloud-upload" aria-hidden="true"></span>
+                            <span class="sr-only">Info:</span>
+                            {% trans "You need to save the Sale to upload Files" %}
+                        </div>
+                    {% endif %}
+                </div>
             </div>
         </div>
         {% if not sale.pk or sale.deadline_set.all.0.status in user.group_permissions.status_edit.all %}
@@ -304,4 +340,44 @@
             {% include 'parts/submit-form.html' with url_cancel=url %}
         {% endif %}
     </form>
+    {% if sale.pk %}
+        <div class="modal fade" id="file-sale-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">{% trans "Upload File" %}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form-file-type" enctype="multipart/form-data" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="deadline-pk" value="{{deadline.pk}}">
+                            <div id="file-type-modal-error" class="alert alert-danger" role="alert" style="display: none"></div>
+                            <div class="form-group">
+                                <label for="new-status">{% trans "Change the Filetype" %}:</label>
+                                <select name="file-type-pk" id="file-type-pk" class="form-control">
+                                    <option value="">---{% trans "Select a Filetype" %}---</option>
+                                    {% for filetype in product.file_type.all  %}
+                                        {% if filetype not in uploaded_file_types %}
+                                            <option value="{{ filetype.pk }}">{{ filetype }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="upload-file-form">
+                                <input id="input-file-type" name="input-file-type" type="file" class="file-loading">
+                                <div id="errorBlock" class="help-block"></div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+                        <button type="button" class="btn btn-primary file-type-save">{% trans "Upload File" %}</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    {% endif %}
 {% endblock %}

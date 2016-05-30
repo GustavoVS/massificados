@@ -21,7 +21,7 @@ from django.contrib import admin
 from django.conf import settings
 
 from core.views import IndexView, EntriesView
-from sale.views import ProductionView, CreateBuyerView, EditBuyerView, user_cnpj
+from sale.views import ProductionView, CreateBuyerView, EditBuyerView, user_cnpj, upload_media
 from user_account.views import (EntriesProfilesView, EntriesUsersView, EntrieUserNewView, EntrieUserEditView,
                                 NotificationsView)
 from user_groups.views import EntrieProfileNewView, EntrieProfileEditView
@@ -57,11 +57,12 @@ urlpatterns = [
 
     url(r'^notifications/$', NotificationsView.as_view(), name="notifications"),
 
-    url('^inbox/notifications/', include(notifications.urls, namespace='notifications-api')),
+    url(r'^inbox/notifications/', include(notifications.urls, namespace='notifications-api')),
 
 
     # api
-    url('^api/user_cnpj', user_cnpj)
+    url(r'^api/user_cnpj', user_cnpj),
+    url(r'^api/upload_media', upload_media)
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

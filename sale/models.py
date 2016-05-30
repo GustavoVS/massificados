@@ -92,9 +92,8 @@ class Deadline(models.Model):
         if not self.status_id:
             self.status = self.sale.product.begin_status
 
-        resp = super(Deadline, self).save(*a, **kw)
-
         if self.pk is None:
+            resp = super(Deadline, self).save(*a, **kw)
             status_emails = self.status.actionstatus_set.get(
                 product=self.sale.product).actionstatusemails_set.all()
             if status_emails:
@@ -112,12 +111,13 @@ class Deadline(models.Model):
 
                 notification = Notification(actor=self, recipient=recipients)
                 notification.send(
-                    _('New Sale [%d] created') % (self.pk),
-                    _('The Sale [%d] has status changed to %s . Buyer %s, CPF/CNPJ %s ') % (
+                    _('New Sale [#%d] created') % (self.pk),
+                    _('The new Sale [#%d] was created with status %s. Buyer %s, CPF/CNPJ %s ') % (
                         self.pk, self.status, self.sale.buyer.name, self.sale.buyer.cpf_cnpj
                     )
                 )
         else:
+            resp = super(Deadline, self).save(*a, **kw)
             new = Deadline.objects.get(pk=self.pk)
             if new.status != self.status:
                 if new.status.actionstatus_set.filter(product=self.sale.product).exists():
@@ -152,9 +152,39 @@ class File(models.Model):
     file_type = models.ForeignKey(FileType)
     deadline = models.ForeignKey(Deadline)
     document = models.FileField()
+    uploaded_by = models.ForeignKey(MassificadoUser)
+    upload_date = models.DateField(_('Data do Upload'), default=timezone.now)
 
     def __unicode__(self):
         return '%s' % self.file_type
+
+    def save(self):
+        resp = super(File, self).save()
+        status_emails = self.deadline.status.actionstatus_set.get(
+            product=self.deadline.sale.product).actionstatusemails_set.all()
+
+        if status_emails:
+            recipients = ()
+            for status_email in status_emails:
+                if status_email.action_email == 'own':
+                    recipients += (self.deadline.sale.owner,)
+                elif status_email.action_email == 'buy':
+                    recipients += (self.deadline.sale.buyer.email,)
+                elif status_email.action_email == 'inc':
+                    recipients += (self.deadline.sale.product.insurance_company.email,)
+                elif status_email.action_email == 'usr':
+                    for email_user in status_email.actionstatusemailsusers_set.all():
+                        recipients += (email_user.user,)
+
+            notification = Notification(actor=self.deadline, recipient=recipients)
+            notification.send(
+                _('New file uploaded to Sale [#%d]') % self.deadline.sale.pk,
+                _('New file uploaded to Sale [#%d] in status %s. Buyer %s, CPF/CNPJ %s') % (
+                    self.deadline.sale.pk, self.deadline.status,
+                    self.deadline.sale.buyer.name, self.deadline.sale.buyer.cpf_cnpj
+                )
+            )
+        return resp
 
 
 class Quote(models.Model):
