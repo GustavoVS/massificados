@@ -6,10 +6,12 @@
 {% load account %}
 
 {% block section-id %}page-sake-sec{% endblock %}
-
 {% block section-title %}
-    {{ product }}
+    <li><a href="/">{% trans 'Home' %}</a></li>
+    <li><a href="/">{% trans 'Products' %}</a></li>
+    <li class="active"><b>{% trans 'Contract' %}</b></li>
 {% endblock %}
+
 
 {% block section-content %}
     <form action="" method="post" class="form" enctype="multipart/form-data">

@@ -4,11 +4,18 @@
 
 {% block section-id %}{% endblock %}
 {% block section-title %}
-    {% if profile.pk %}
-        {% trans 'Edit Role' %}
-    {% else %}
-        {% trans 'Create Role' %}
-    {% endif %}
+    <li><a href="/">{% trans 'Home' %}</a></li>
+    <li><a href="/entries">{% trans 'Entries' %}</a></li>
+    <li><a href="/entries/profiles">{% trans 'Profiles' %}</a></li>
+    <li class="active">
+        <b>
+            {% if profile.pk %}
+                {{ profile }}
+            {% else %}
+                {% trans 'Create Role' %}
+            {% endif %}
+        </b>
+    </li>
 {% endblock %}
 {% block section-content %}
     <form action="" method="post" xmlns="http://www.w3.org/1999/html">{% csrf_token %}

@@ -2,7 +2,11 @@
 {% load bootstrap3 %}
 {% load i18n %}
 
-{% block section-title %}{% trans 'Production' %}{% endblock %}
+{% block section-title %}
+    <li><a href="/">{% trans 'Home' %}</a></li>
+    <li class="active"><b>{% trans 'Production' %}</b></li>
+{% endblock %}
+
 {% block section-id %}section-production{% endblock %}
 {% block section-content %}
     <form id="entries-search-form">

@@ -3,17 +3,12 @@
 <div id="{% block section-id %}{% endblock %}" class="container section">
     <div class="row">
         <div class="section-title">
-            {# <div class="container"> #}
-                <ol class="breadcrumb bread-hr-primary">
-                {# todo:deixar dinâmico inicio#}
-                <button href="#" class="btn btn-primary"><span class="fa fa-map-marker"></span></button>
-                    <li>
-                        <a href="#">Principal</a>
-                    </li>
-                    <li class="active">Produtos</li>
-                 {# todo:deixar dinâmico fim#}
-                </ol>
-            {# </div> #}
+            <ol class="breadcrumb bread-hr-primary">
+                <button href="#" class="btn btn-primary">
+                    <span class="fa fa-map-marker"></span>
+                </button>
+                {% autoescape off %}{% block section-title %}{% endblock %}{% endautoescape %}
+            </ol>
             <div class="clearfix"></div>
         </div>
         {% block section-desc %}{% endblock %}
