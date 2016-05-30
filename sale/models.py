@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
-from product.models import Question, Product, Status, FileType, MethodPayment
+from product.models import Question, Product, Status, FileType, MethodPayment, Rule
 from partner.models import Partner
 from user_account.models import MassificadoUser
 from django.utils import timezone
@@ -76,6 +76,10 @@ class Sale(models.Model):
         return '%s (%s)' % (self.product, self.buyer)
 
 
+class RuleDeadLine(Rule):
+    pass
+
+
 class Deadline(models.Model):
     INSURED_GROUP_CHOICES = (
         ('O', _('Officials and Partners/Directors')),
@@ -104,14 +108,9 @@ class Deadline(models.Model):
         null=True,
         # default=lambda: Sale.product.method_payment.objects.all()[:0])
     )
-    sale = models.ForeignKey(
-        Sale,
-        on_delete=models.CASCADE
-    )
-    lives = models.ForeignKey(
-        NumberLives,
-        null=True,
-    )
+    sale = models.ForeignKey(Sale, on_delete=models.CASCADE)
+    lives = models.ForeignKey(NumberLives, null=True,)
+    rules = models.ManyToManyField(RuleDeadLine)
 
     def __unicode__(self):
         return '#%d %s (%s)' % (self.pk, self.sale.buyer, self.sale.product)

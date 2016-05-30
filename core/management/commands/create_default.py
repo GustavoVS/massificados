@@ -9,6 +9,25 @@ from user_account.models import MassificadoUser
 from user_groups.models import MassificadoGroups
 from status_emails.models import ActionStatusEmails, ActionStatusEmailsUsers
 
+
+
+Rules_VIDA =(
+ ('Morte (Básica)', 100,	3, '', 'V', 0, 'p =  {id_deadline_set-0-payment}; v =  {id_deadline_set-0-lives}; tx=  0.03; ci= (p/12)/(v*tx); if (ci>500000) {value = 50000,00;} else {value = (p/12)/ci);}'),
+ ('IEA - Indenização Especial por Acidente', 100,	3, '', 'V', 0, 'p =  {id_deadline_set-0-payment}; v =  {id_deadline_set-0-lives}; tx=  0.03; ci= (p/12)/(v*tx); if (ci>500000) {value = 50000,00;} else {value = (p/12)/ci);}'),
+ ('IPA - Invalidez Permanente Total ou Parcial por Acidente', 100,	3, '', 'V', 0, 'p =  {id_deadline_set-0-payment}; v =  {id_deadline_set-0-lives}; tx=  0.03; ci= (p/12)/(v*tx); if (ci>500000) {value = 50000,00;} else {value = (p/12)/ci);}'),
+ ('IPD-F - Invalidez Funcional Permanente Total por Doença', 100,	3, '', 'V', 0, 'p =  {id_deadline_set-0-payment}; v =  {id_deadline_set-0-lives}; tx=  0.03; ci= (p/12)/(v*tx); if (ci>500000) {value = 50000,00;} else {value = (p/12)/ci);}'),
+ ('Assistência Funeral Individual', 0,	3, 'Serviço', 'F', 3000, 'value = value'),
+)
+
+Rules_VIDA =(
+ ('Morte (Básica)', 100,	3, '', 'V', 0, 'p =  {id_deadline_set-0-payment}; v =  {id_deadline_set-0-lives}; tx=  0.03; ci= (p/12)/(v*tx); if (ci>500000) {value = 50000,00;} else {value = (p/12)/ci);}'),
+ ('IEA - Indenização Especial por Acidente', 100,	3, '', 'V', 0, 'p =  {id_deadline_set-0-payment}; v =  {id_deadline_set-0-lives}; tx=  0.03; ci= (p/12)/(v*tx); if (ci>500000) {value = 50000,00;} else {value = (p/12)/ci);}'),
+ ('IPA - Invalidez Permanente Total ou Parcial por Acidente', 100,	3, '', 'V', 0, 'p =  {id_deadline_set-0-payment}; v =  {id_deadline_set-0-lives}; tx=  0.03; ci= (p/12)/(v*tx); if (ci>500000) {value = 50000,00;} else {value = (p/12)/ci);}'),
+ ('IPD-F - Invalidez Funcional Permanente Total por Doença', 100,	3, '', 'V', 0, 'p =  {id_deadline_set-0-payment}; v =  {id_deadline_set-0-lives}; tx=  0.03; ci= (p/12)/(v*tx); if (ci>500000) {value = 50000,00;} else {value = (p/12)/ci);}'),
+ ('Assistência Funeral Individual', 0,	3, 'Serviço', 'F', 3000, 'value = value'),
+)
+
+
 FULL_DECLARATION_VIDA = '''<h1><strong>CONDI&Ccedil;&Otilde;ES RESUMIDAS DO PLANO</strong></h1>
 <h2><strong>Coberturas</strong></h2>
 <p><strong>CB - Cobertura B&aacute;sica (Morte) - garante aos benifici&aacute;rios o pagamento do capital segurado individual contratado para esta cobertura, em caso de morte do segurado, seja natural, seja acidental, devidamente coberta, exceto se decorrente de riscos exclu&iacute;dos, conforme Condi&ccedil;&otilde;es Gerais do Seguro.</strong></p>
