@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
-from product.models import Question, Product, Status, FileType
+from product.models import Question, Product, Status, FileType, MethodPayment
 from partner.models import Partner
 from user_account.models import MassificadoUser
 from django.utils import timezone
@@ -71,12 +71,18 @@ class Sale(models.Model):
 
 class Deadline(models.Model):
     active = models.BooleanField(default=True)
-    begin = models.DateField(_('Begin'))
-    end = models.DateField(_('End'))
+    begin = models.DateField(_('Begin'), null=True)
+    end = models.DateField(_('End'), null=True)
+    accept_declaration = models.BooleanField(_('I accept that the GalCorr make contact my client, if necessary'), default=False)
     status = models.ForeignKey(Status)
-    payment = models.FloatField(_('Payment'))
-    proposal = models.CharField(_('Proposal'), max_length=100)
-    policy = models.CharField(_('Policy'), max_length=100)
+    payment = models.FloatField(_('Payment'), null=True)
+    proposal = models.CharField(_('Proposal'), max_length=100, null=True, blank=True)
+    policy = models.CharField(_('Policy'), max_length=100, null=True, blank=True)
+    method_payment = models.ForeignKey(
+        MethodPayment,
+        null=True,
+        # default=lambda: Sale.product.method_payment.objects.all()[:0])
+    )
     sale = models.ForeignKey(
         Sale,
         on_delete=models.CASCADE

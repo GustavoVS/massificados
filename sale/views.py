@@ -126,10 +126,10 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
                         )
                         response_deadline.save()
 
-                details = DetailDeadlineFormset(self.request.POST, instance=form.instance)
-                for detail_form in details.forms:
-                    if detail_form.is_valid():
-                        detail_form.save()
+                # details = DetailDeadlineFormset(self.request.POST, instance=form.instance)
+                # for detail_form in details.forms:
+                #     if detail_form.is_valid():
+                #         detail_form.save()
 
                 files = FileDeadlineFormset(self.request.POST, instance=form.instance)
                 for file_form in files.forms:
@@ -243,10 +243,10 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
                             defaults={'value': v}
                         )
 
-                details = DetailDeadlineFormset(self.request.POST, instance=form.instance)
-                for detail_form in details.forms:
-                    if detail_form.is_valid():
-                        detail_form.save()
+                # details = DetailDeadlineFormset(self.request.POST, instance=form.instance)
+                # for detail_form in details.forms:
+                #     if detail_form.is_valid():
+                #         detail_form.save()
 
                 files = FileDeadlineFormset(self.request.POST, self.request.FILES, instance=form.instance)
                 for file_form in files.forms:

@@ -3,15 +3,12 @@ from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 from django.core.management.base import BaseCommand
 from partner.models import Partner
-from product.models import Status, FileType, InsuranceCompany, Branch, Product, Profile, ActionStatus
+from product.models import Status, FileType, InsuranceCompany, Branch, Product, Profile, ActionStatus, MethodPayment
 from sale.models import ActivityArea
 from user_account.models import MassificadoUser
 from user_groups.models import MassificadoGroups
 from status_emails.models import ActionStatusEmails, ActionStatusEmailsUsers
 
-
-
-RULES_DECLARATION_VIDA = "Em caso de morte acidental, as coberturas básicas e IEA serão somadas"
 
 FULL_DECLARATION_VIDA = '''<h1><strong>CONDI&Ccedil;&Otilde;ES RESUMIDAS DO PLANO</strong></h1>
 <h2><strong>Coberturas</strong></h2>
@@ -644,25 +641,27 @@ DEFAULT_PROFILE = (
 DEFAULT_PRODUCT = (
     ('Vida', 'Introdução', 'Descrição', ' Declaração', 'J', 'Tokio', 'Vida',
         DEFAULT_FILES_TOKIO,
-        'Proposta Gerada', 'Perfil Vida', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10 , 10, 0, FULL_DECLARATION_VIDA, DECLARATION_VIDA, RULES_DECLARATION_VIDA,),
+        'Proposta Gerada', 'Perfil Vida', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10 , 10, 0, FULL_DECLARATION_VIDA, DECLARATION_VIDA,
+        'Em caso de morte acidental, as coberturas básicas e IEA serão somadas', ('Boleto',),),
     ('Vida Global', 'Introdução', 'Descrição', ' Declaração', 'J', 'Tokio', 'Vida',
          DEFAULT_FILES_TOKIO,
-        'Proposta Gerada', 'Perfil Vida Global', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10 , 10, 0, FULL_DECLARATION_VIDA_GLOGAL, DECLARATION_VIDA_GLOGAL, RULES_DECLARATION_VIDA,),
+        'Proposta Gerada', 'Perfil Vida Global', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10 , 10, 0, FULL_DECLARATION_VIDA_GLOGAL, DECLARATION_VIDA_GLOGAL,
+        'Em caso de morte acidental, as coberturas básicas e IEA serão somadas', ('Boleto',),),
     ('Acidentes Pessoais', 'Introdução', 'Descrição', ' Declaração', 'J', 'Tokio', 'Acidentes Pessoais',
         DEFAULT_FILES_TOKIO,
-        'Proposta Gerada', 'Perfil Acidentes Pessoais', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10, 10, 0, FULL_DECLARATION_AP, DECLARATION_AP, '',),
+        'Proposta Gerada', 'Perfil Acidentes Pessoais', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10, 10, 0, FULL_DECLARATION_AP, DECLARATION_AP, '', ('Boleto',),),
     ('Garantia Tradicional', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Garantia Tradicional',
         DEFAULT_FILES_GARANTIA,
-        'Lead de Garantia Gerado', 'Perfil Garantia Tradicional', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', '', '',),
+        'Lead de Garantia Gerado', 'Perfil Garantia Tradicional', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', '', '', ('Boleto',),),
     ('Garantia Judicial', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Garantia Judicial',
          DEFAULT_FILES_GARANTIA,
-        'Lead de Garantia Gerado', 'Perfil Garantia Judicial', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', '', '',),
+        'Lead de Garantia Gerado', 'Perfil Garantia Judicial', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', '', '', ('Boleto',),),
     ('Fiança Locatícia', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Fiança Locatícia',
      DEFAULT_FILES_GARANTIA,
-    'Lead de Garantia Gerado', 'Perfil Fiança Locatícia', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', '', '',),
+    'Lead de Garantia Gerado', 'Perfil Fiança Locatícia', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', '', '', ('Boleto',),),
     ('Saúde', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Saúde',
      DEFAULT_FILES_BENEFICIOS,
-    'Lead de Benefícios Gerado', 'Perfil Saúde', DEFAULT_STATUS_PRODUCT_BENEFICIOS, 10, 10, 10, 1, '', '', '',),
+    'Lead de Benefícios Gerado', 'Perfil Saúde', DEFAULT_STATUS_PRODUCT_BENEFICIOS, 10, 10, 10, 1, '', '', '', ('Boleto',),),
     )
 
 DEFAULT_PROFILE_NAME = (
@@ -799,6 +798,9 @@ PROFILE_NAME_GALCORR_FIN = (
     'Perfil Tokio',
 )
 
+DEFAULT_METHOD_PAYMENT = (
+    ('Boleto', 'Após o envio da proposta, a seguradora irá gerar e enviar o boleto para pagamento',),)
+
 DEFAULT_PROFILE_PERMISSION = (
     ('Perfil Parceiro Diretor', 1, 1, 1, 0, (0, 0, 0, 0), 1, 1,
      DEFAULT_PRODUCT_NAME_PARTNER, DEFAULT_STATUS_PROFILE_PARTNER_SEE, DEFAULT_STATUS_PROFILE_PARTNER_EDIT,
@@ -928,6 +930,11 @@ class Command(BaseCommand):
                 ar = ActivityArea(name=area_name)
                 ar.save()
 
+        for method, disclaimer in DEFAULT_METHOD_PAYMENT:
+            if not MethodPayment.objects.filter(name=method).exists():
+                mt = MethodPayment(name=method, disclaimer=disclaimer)
+                mt.save()
+
         for status_name, level in DEFAULT_STATUS:
             if not Status.objects.filter(name=status_name).exists():
                 st = Status(name=status_name, level=level)
@@ -970,7 +977,7 @@ class Command(BaseCommand):
 
         for product_name, introduction, description, declaration, kind, insurance, branch, files,\
         begin, profile, status_permitted, partner_percentage, owner_percentage, master_percentage, is_lead,\
-        p_declaration_full,  p_declaration, p_rules_declaration in DEFAULT_PRODUCT:
+        p_declaration_full,  p_declaration, p_rules_declaration, p_methods in DEFAULT_PRODUCT:
             if not Product.objects.filter(name=product_name).exists():
                 product = Product(
                     name=product_name,
@@ -990,8 +997,13 @@ class Command(BaseCommand):
                 )
                 product.full_declaration = p_declaration_full
                 product.declaration = p_declaration
-                product.other_documents_declaration= "Outros documentos poderão ser solicitados durante o processo"
+                product.other_documents_declaration ='Outros documentos poderão ser solicitados durante o processo'
+                product.disclaimer = 'Após o envio da proposta, a seguradora irá gerar e enviar o boleto para pagamento'
                 product.save()
+
+                for method in p_methods:
+                    product.method_payment.add(MethodPayment.objects.get(name=method))
+
                 for file in files:
                     product.file_type.add(FileType.objects.get(name=file))
 

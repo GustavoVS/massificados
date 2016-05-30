@@ -109,11 +109,27 @@
         <div class="well">
             <div class="row">
                 {{ deadlinesale.management_form }}
-                {% bootstrap_field deadlinesale.0.begin form_group_class='form-group col-md-4 mask-date' %}
-                {% bootstrap_field deadlinesale.0.end form_group_class='form-group col-md-4  mask-date' %}
-                {% bootstrap_field deadlinesale.0.payment form_group_class='form-group col-md-4' %}
-                {% bootstrap_field deadlinesale.0.proposal form_group_class='form-group col-md-4' %}
-                {% bootstrap_field deadlinesale.0.policy form_group_class='form-group col-md-4' %}
+                {% bootstrap_field deadlinesale.0.payment form_group_class='form-group col-md-6' %}
+                {% bootstrap_field deadlinesale.0.begin form_group_class='form-group col-md-3 mask-date' %}
+                {% bootstrap_field deadlinesale.0.end form_group_class='form-group col-md-3  mask-date' %}
+                {% if not product.is_lead %}
+                    {% bootstrap_field deadlinesale.0.method_payment form_group_class='form-group col-md-6' %}
+                    {% bootstrap_field deadlinesale.0.proposal form_group_class='form-group col-md-3' %}
+                    {% bootstrap_field deadlinesale.0.policy form_group_class='form-group col-md-3' %}
+                {% else %}
+                    {% bootstrap_field deadlinesale.0.proposal form_group_class='form-group col-md-6' %}
+                    {% bootstrap_field deadlinesale.0.policy form_group_class='form-group col-md-6' %}
+                {% endif %}
+                <div class="col-md-12">
+                    {% if not product.is_lead %}
+                        {% if product.disclaimer %}
+                            <div class="disclaimer">
+                                <div class="space"></div>
+                                <p><span class="fa fa-warning"> </span><b> {{ product.disclaimer }}</b></p>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
                 {{ deadlinesale.0.id }}
                 {{ deadlinesale.0.sale }}
 
@@ -176,74 +192,68 @@
                             <textarea class="form-control" rows="3" name="q_resp-{{ question.pk }}" id="q_resp-{{ question.pk }}" {% if question.is_required %}required{% endif %}></textarea>
                             </div>
                         {% endif %}
-                    {% endfor %}
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4>
-                            {% trans 'Details' %}
-                        </h4>
-                    </div>
-                    <div class="col-md-12">
-                        <div id="detail_empty_form" style="display: none" class="row">
-                            <div data-toggle="collapse" data-target="#{{ detail_deadline.empty_form.prefix }}-f"
-                                 class="accordion-toggle col-md-10">
-                                <div id="{{detail_deadline.empty_form.name.html_name}}-label">
-                                    {% trans '(Empty)' as name_value %}
-                                    {{ detail_deadline.empty_form.name.value|default_if_none:name_value }}
-                                </div>
-                            </div>
-                            <div class="accordian-body collapse" id="{{ detail_deadline.empty_form.prefix }}-f">
-                                {% for field in detail_deadline.empty_form %}
-                                    <div class="col-md-4">
-                                        {% bootstrap_field field %}
-                                    </div>
-                                {% endfor %}
-                                <div class="col-md-12">
-                                    <button data-toggle="collapse" data-target="#{{ detail_deadline.empty_form.prefix }}-f"
-                                            type="button" class="btn btn-info accordion-toggle save-detail"
-                                            updatelabel="{{ detail_deadline.empty_form.name.html_name }}">
-                                        {% trans 'Save' %}
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="detail_deadline">
-                            {% for form in detail_deadline.forms %}
-                                <div class="row" id="{{ form.prefix }}-row">
-                                    <div data-toggle="collapse" data-target="#{{ form.prefix }}-f"
-                                         class="accordion-toggle col-md-10">
-                                        <div id="{{form.name.html_name}}-label">
-                                            {% trans '(Empty)' as name_value %}
-                                            {{ form.name.value|default_if_none:name_value }}
-                                        </div>
-                                    </div>
-                                    <div class="accordian-body collapse {% if not buyer.pk %} in {% endif %}" id="{{ form.prefix }}-f">
-                                        {% for field in form %}
-                                            <div class="col-md-4">
-                                                {% bootstrap_field field %}
-                                            </div>
-                                        {% endfor %}
-                                        <div class="col-md-12">
-                                            <button data-toggle="collapse" data-target="#{{ form.prefix }}-f"
-                                                    type="button" class="btn btn-info accordion-toggle save-detail"
-                                                    updatelabel="{{ form.name.html_name }}">
-                                                {% trans 'Save' %}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                        {{ detail_deadline.management_form }}
-                    </div>
-                </div>
-            {% if product.rules_declaration %}
-                <div class="disclaimer">
-                    <div class="space"></div>
-                    <p><span class="fa fa-warning"> </span><b> {{ product.rules_declaration }}</b></p>
-                </div>
-            {% endif %}
+                {% endfor %}
+            </div>
+{#                <div class="row">#}
+{#                    <div class="col-md-12">#}
+{#                        <h4>#}
+{#                            {% trans 'Details' %}#}
+{#                        </h4>#}
+{#                    </div>#}
+{#                    <div class="col-md-12">#}
+{#                        <div id="detail_empty_form" style="display: none" class="row">#}
+{#                            <div data-toggle="collapse" data-target="#{{ detail_deadline.empty_form.prefix }}-f"#}
+{#                                 class="accordion-toggle col-md-10">#}
+{#                                <div id="{{detail_deadline.empty_form.name.html_name}}-label">#}
+{#                                    {% trans '(Empty)' as name_value %}#}
+{#                                    {{ detail_deadline.empty_form.name.value|default_if_none:name_value }}#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="accordian-body collapse" id="{{ detail_deadline.empty_form.prefix }}-f">#}
+{#                                {% for field in detail_deadline.empty_form %}#}
+{#                                    <div class="col-md-4">#}
+{#                                        {% bootstrap_field field %}#}
+{#                                    </div>#}
+{#                                {% endfor %}#}
+{#                                <div class="col-md-12">#}
+{#                                    <button data-toggle="collapse" data-target="#{{ detail_deadline.empty_form.prefix }}-f"#}
+{#                                            type="button" class="btn btn-info accordion-toggle save-detail"#}
+{#                                            updatelabel="{{ detail_deadline.empty_form.name.html_name }}">#}
+{#                                        {% trans 'Save' %}#}
+{#                                    </button>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div id="detail_deadline">#}
+{#                            {% for form in detail_deadline.forms %}#}
+{#                                <div class="row" id="{{ form.prefix }}-row">#}
+{#                                    <div data-toggle="collapse" data-target="#{{ form.prefix }}-f"#}
+{#                                         class="accordion-toggle col-md-10">#}
+{#                                        <div id="{{form.name.html_name}}-label">#}
+{#                                            {% trans '(Empty)' as name_value %}#}
+{#                                            {{ form.name.value|default_if_none:name_value }}#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="accordian-body collapse {% if not buyer.pk %} in {% endif %}" id="{{ form.prefix }}-f">#}
+{#                                        {% for field in form %}#}
+{#                                            <div class="col-md-4">#}
+{#                                                {% bootstrap_field field %}#}
+{#                                            </div>#}
+{#                                        {% endfor %}#}
+{#                                        <div class="col-md-12">#}
+{#                                            <button data-toggle="collapse" data-target="#{{ form.prefix }}-f"#}
+{#                                                    type="button" class="btn btn-info accordion-toggle save-detail"#}
+{#                                                    updatelabel="{{ form.name.html_name }}">#}
+{#                                                {% trans 'Save' %}#}
+{#                                            </button>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            {% endfor %}#}
+{#                        </div>#}
+{#                        {{ detail_deadline.management_form }}#}
+{#                    </div>#}
+{#                </div>#}
             </div>
         {% endif %}
 
@@ -282,54 +292,65 @@
             {% endif %}
         </div>
         <div class="well">
-            {% if not product.is_lead and product.full_declaration %}
-                <div class="modal-default">
-                    <a href="#conditiosmodal"  data-toggle="modal">
-                        <span class="fa fa-plus"> </span>
-                        {% trans "Click to see more about the conditions of the product" %}
-                    </a>
-                    <div id="conditiosmodal" class="modal fade">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h1 class="modal-title">{% trans "Conditions" %}</h1>
-                                </div>
-                                <div class="modal-body">
-                                    {% autoescape off %}{{ product.full_declaration }}{% endautoescape %}
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endif %}
-            {% if not product.is_lead and product.declaration %}
-                <div class="modal-default">
-                    <a href="#declarationmodal"  data-toggle="modal">
-                        <span class="fa fa-plus"> </span>
-                        {% trans "Click to read the declaration" %}
-                    </a>
-                    <div id="declarationmodal" class="modal fade">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h1 class="modal-title">{% trans "Conditions" %}</h1>
-                                </div>
-                                <div class="modal-body">
-                                    {% autoescape off %}{{ product.declaration }}{% endautoescape %}
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+            <div class="row">
+                {% if not product.is_lead and product.full_declaration %}
+                    <div class="modal-default">
+                        <a href="#conditiosmodal"  data-toggle="modal">
+                            <span class="fa fa-plus"> </span>
+                            {% trans "Click to see more about the conditions of the product" %}
+                        </a>
+                        <div id="conditiosmodal" class="modal fade">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h1 class="modal-title">{% trans "Conditions" %}</h1>
+                                    </div>
+                                    <div class="modal-body">
+                                        {% autoescape off %}{{ product.full_declaration }}{% endautoescape %}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                {% endif %}
+                {% if not product.is_lead and product.declaration %}
+                    <div class="modal-default">
+                        <a href="#declarationmodal"  data-toggle="modal">
+                            <span class="fa fa-plus"> </span>
+                            {% trans "Click to read the declaration" %}
+                        </a>
+                        <div id="declarationmodal" class="modal fade">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h1 class="modal-title">{% trans "Conditions" %}</h1>
+                                    </div>
+                                    <div class="modal-body">
+                                        {% autoescape off %}{{ product.declaration }}{% endautoescape %}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if product.rules_declaration %}
+                    <div class="disclaimer">
+                        <div class="space"></div>
+                        <p><b>* {{ product.rules_declaration }}</b></p>
+                    </div>
+                {% endif %}
+                <div class="disclaimer">
+                    {% bootstrap_field deadlinesale.0.accept_declaration form_group_class='' %}
                 </div>
-            {% endif %}
+            </div>
         </div>
         {% if not sale.pk or sale.deadline_set.all.0.status in user.group_permissions.status_edit.all %}
             {% url 'index_view' as url %}
