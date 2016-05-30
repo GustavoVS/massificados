@@ -1,5 +1,6 @@
 awsebcli==3.7.6
 blessed==1.9.5
+boto==2.40.0
 botocore==1.4.15
 cement==2.8.2
 colorama==0.3.7
@@ -15,6 +16,7 @@ django-mako-plus==3.3.4
 django-model-utils==2.5
 django-notifications-hq==1.1
 django-rosetta==0.7.11
+django-storages==1.4.1
 django-template-repl==0.3.0
 djangorestframework==3.3.3
 docker-py==1.7.2
