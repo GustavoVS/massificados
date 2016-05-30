@@ -2,35 +2,43 @@
 {% load staticfiles %}
 {% load i18n %}
 
+{% block extra_head %}
+    {% if sale.pk %}
+        <link href="{% static 'css/fileinput.css' %}" rel="stylesheet">
+    {% endif %}
+{% endblock %}
+
 {% block content %}
     {% include 'page-sale-section.html' %}
 {% endblock %}
 
 {% block footer_scripts %}
-    {# <script src="{% static 'js/modal-formset.js' %}"></script> #}
+    {% if sale.pk %}
+        <script src="{% static 'js/fileinput.js' %}"></script>
+    {% endif %}
     <script src="{% static 'js/jquery.formset.js' %}"></script>
     <script src="{% static 'js/jquery.mask.js' %}"></script>
     <script src="{% static 'js/custom-masks.js' %}"></script>
     <script type="text/javascript">
 
-        $(function() {
-            $('#detail_deadline > div.row').formset({
-                prefix: '{{ detail_deadline.prefix }}',
-                formCssClass: 'detail_deadline_formset',
-                addText: '<button type="button" class="btn btn-success pull-right"><span class="fa fa-plus"></span></button>',
-                added: function(el){
-                    $(el).find('div.accordion-toggle').each(function(){
-                        $(this).attr('data-target','#' + $(el).find('.collapse').attr('id'));
-                    });
-                },
-                formTemplate: '#detail_empty_form',
-                deleteText: '<button type="button" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button>',
-                deleteCssClass: 'pull-right col-md-2',
-                extraClasses: ['row1', 'row2'],
-                attrUpdate: ['id', 'name', 'for', 'data-target', 'updatelabel'],
-                childElementSelector: 'input,select,textarea,label,div,button',
-            })
-        });
+        // $(function() {
+        //     $('#detail_deadline > div.row').formset({
+        //         prefix: '{{ detail_deadline.prefix }}',
+        //         formCssClass: 'detail_deadline_formset',
+        //         addText: '<button type="button" class="btn btn-success pull-right"><span class="fa fa-plus"></span></button>',
+        //         added: function(el){
+        //             $(el).find('div.accordion-toggle').each(function(){
+        //                 $(this).attr('data-target','#' + $(el).find('.collapse').attr('id'));
+        //             });
+        //         },
+        //         formTemplate: '#detail_empty_form',
+        //         deleteText: '<button type="button" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button>',
+        //         deleteCssClass: 'pull-right col-md-2',
+        //         extraClasses: ['row1', 'row2'],
+        //         attrUpdate: ['id', 'name', 'for', 'data-target', 'updatelabel'],
+        //         childElementSelector: 'input,select,textarea,label,div,button',
+        //     })
+        // });
 
         $(document).ready(function($) {
             $('.save-detail').click(function(){
@@ -73,15 +81,65 @@
                 });
 
             });
+            {% if sale.pk %}
+                $("#input-file-type").fileinput({
+                    uploadUrl: '/api/upload_media',
+                    showUpload:false,
+                    browseLabel: '{% trans "Select File" %}',
+                    allowedFileExtensions: ["pdf", "docx", "doc", "xlsx", "xls", ,  "png", "jpeg", "jpg" ],
+                });
+                $('.file-type-save').click(function(){
+                    form_data = new FormData($('#form-file-type')[0]);
+                    $.ajax({
+                        type: 'POST',
+                        url:'/api/upload_media',
+                        data: form_data,
+                        async: false,
+                        success:function(data){
+                            if (data.error){
+                                $('#file-type-modal-error')
+                                    .html(data.msg)
+                                    .show(500);
+
+                                setTimeout(function(){$('#file-type-modal-error').hide(500)},6000)
+                            }
+                            else{
+                                $('#file_type_uploaded-' + $('#file-type-pk').val())
+                                    .removeClass('fa-remove text-danger')
+                                    .addClass('fa-check text-success');
+                                $('#uploaded_files').append(
+                                    $('#empty_uploaded_file')
+                                        .clone()
+                                        .removeClass('hidden')
+                                        .removeAttr('id')
+                                        .html()
+                                        .replace('__file-type__', $('#file-type-pk option:selected').text())
+                                        .replace('__file-type-txt__', data.txt)
+                                        .replace('__file-type-url__', data.url)
+                                );
+                                $('#file-sale-modal').modal('hide');
+                                $('#no-files-alert').hide();
+                            }
+                        },
+                        error:function(data){
+                            console.log(data)
+                        },
+                        cache: false,
+                        contentType: false,
+                        processData: false
+                    });
+                });
+            {% endif %}
         });
         $(function() {
             $('#filedeadline_formset  .thumbnail').formset({
                 prefix: '{{ filedeadline.prefix }}',
                 formCssClass: 'file_deadline_formset',
-                formTemplate: '#file_empty_form',
+                // formTemplate: '#file_empty_form',
                 attrUpdate: ['id', 'name', 'for', 'data-target', 'updatelabel'],
                 addText: '<button type="button" class="btn btn-success"><span class="fa fa-plus"></span></button>',
                 deleteText: '<button type="button" class="btn btn-danger"><span class="fa fa-trash"></span></button>',
+
             })
         });
         // setTimeout(

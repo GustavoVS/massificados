@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import forms
-from django.forms.models import inlineformset_factory
+from django.forms.models import inlineformset_factory, BaseInlineFormSet
 from django.utils.translation import ugettext_lazy as _
 from pycpfcnpj import cpfcnpj
 from sale.models import Sale, Buyer, BuyerAddress, Deadline, File, Detail
@@ -42,6 +42,9 @@ AddressBuyerFormset = inlineformset_factory(Buyer, BuyerAddress, form=BuyerAddre
 
 
 class DeadlineSaleForm(forms.ModelForm):
+    # accept_declaration = forms.BooleanField(_('I accept that the GalCorr make contact my client, if necessary'),
+    #     required=True)
+
     class Meta:
         model = Deadline
         fields = ['begin', 'end', 'payment', 'proposal', 'policy', 'accept_declaration', 'method_payment']
@@ -55,14 +58,23 @@ DeadlineSaleFormset = inlineformset_factory(
     Sale, Deadline, form=DeadlineSaleForm, extra=0, min_num=1, can_delete=False)
 
 
-class FileDeadlineForm(forms.ModelForm):
+class FileDeadlineInlineFormset(BaseInlineFormSet):
 
+    def __init__(self, file_type, *args, **kwargs):
+        super(FileDeadlineInlineFormset, self).__init__(*args, **kwargs)
+        if file_type:
+            for form in self.forms:
+                form.fields['file_type'].queryset = file_type
+
+
+class FileDeadlineForm(forms.ModelForm):
     class Meta:
         model = File
         fields = ['document', 'file_type']
 
 FileDeadlineFormset = inlineformset_factory(
-    Deadline, File, form=FileDeadlineForm, extra=0, min_num=0, max_num=8, can_delete=False)
+    Deadline, File, form=FileDeadlineForm, formset=FileDeadlineInlineFormset,
+    extra=1, min_num=0, max_num=8, can_delete=False)
 
 
 class DetailDeadlineForm(forms.ModelForm):

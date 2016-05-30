@@ -39,7 +39,7 @@ class AbstractMassificadoUser(AbstractBaseUser, PermissionsMixin):
         permissions = ()
 
     def __unicode__(self):
-        return self.first_name or self.email
+        return self.first_name or self.username or self.email
 
     def get_full_name(self):
         full_name = '%s %s' % (self.first_name, self.last_name)
