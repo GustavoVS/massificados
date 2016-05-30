@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 from django.utils.translation import ugettext_lazy as _
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -64,6 +65,7 @@ INSTALLED_APPS = [
     'notifications',
     'bootstrap3',
     'rest_framework',
+    'storages',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -109,6 +111,7 @@ WSGI_APPLICATION = 'massificados.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 if 'RDS_DB_NAME' in os.environ:
+    DEBUG = False
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -228,3 +231,22 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 NOTIFICATION_FROM_EMAIL = 'noreply@lightstudios.com.br'
+
+
+if not DEBUG:
+    AWS_STORAGE_BUCKET_NAME = 'massificados-media'
+    AWS_ACCESS_KEY_ID = 'AKIAIC7XGUQ2OFZ62S7Q'
+    AWS_SECRET_ACCESS_KEY = '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'
+
+    # Tell django-storages that when coming up with the URL for an item in S3 storage, keep
+    # it simple - just use this domain plus the path. (If this isn't set, things get complicated).
+    # This controls how the `static` template tag from `staticfiles` gets expanded, if you're using it.
+    # We also use it in the next setting.
+    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+    STATICFILES_LOCATION = 'static'
+    STATICFILES_STORAGE = 'massificados.custom_storages.StaticStorage'
+    STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+
+    MEDIAFILES_LOCATION = 'media'
+    MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+    DEFAULT_FILE_STORAGE = 'massificados.custom_storages.MediaStorage'
