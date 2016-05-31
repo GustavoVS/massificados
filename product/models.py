@@ -73,6 +73,31 @@ class MethodPayment(models.Model):
         return self.name
 
 
+class Rule(models.Model):
+    TYPE_RULE = (
+        ('F', _('Fixing')),
+        ('V', _('Variable')),
+    )
+    name = models.CharField(max_length=100)
+    percent = models.FloatField(null=True, default=0, blank=True)
+    rate = models.FloatField(null=True, default=0, blank=True)
+    fixing_text = models.CharField(max_length=100)
+    type = models.CharField(max_length=1, choices=TYPE_RULE, null=True, blank=True)
+    value = models.FloatField(null=True, default=0, blank=True)
+    rule = models.CharField(max_length=500)
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = _('Rules')
+        abstract = True
+
+
+class RuleProduct(Rule):
+    pass
+
+
 class Product(models.Model):
     KIND_PERSON_CHOICES = (
         ('F', _('Individual')),
@@ -102,6 +127,7 @@ class Product(models.Model):
     rules_declaration = models.CharField(_('Rules'), max_length=100, null=True)
     disclaimer = models.CharField(_('Rules'), max_length=100, null=True)
     method_payment = models.ManyToManyField(MethodPayment)
+    rules = models.ManyToManyField(RuleProduct)
 
     def __unicode__(self):
         return self.name
