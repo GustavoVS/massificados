@@ -121,7 +121,7 @@ class Deadline(models.Model):
 
     def save(self, *a, **kw):
         if not self.status_id:
-            self.status = self.sale.product.begin_status
+                self.status = self.sale.product.begin_status
 
         if self.pk is None:
             resp = super(Deadline, self).save(*a, **kw)
