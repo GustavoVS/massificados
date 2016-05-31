@@ -91,26 +91,27 @@ class Deadline(models.Model):
         ('Y', _('Yearly')),
     )
     active = models.BooleanField(default=True)
-    begin = models.DateField(_('Begin date'), null=True)
-    end = models.DateField(_('End date'), null=True)
+    begin = models.DateField(_('Begin date'), null=True, blank=True)
+    end = models.DateField(_('End date'), null=True, blank=True)
     accept_declaration = models.BooleanField(_('I accept that the GalCorr make contact my client, if necessary'), default=False)
     status = models.ForeignKey(Status)
-    payment = models.FloatField(_('Payment'), null=True)
+    payment = models.FloatField(_('Payment'), null=True, blank=True)
     proposal = models.CharField(_('Proposal'), max_length=100, null=True, blank=True)
     policy = models.CharField(_('Policy'), max_length=100, null=True, blank=True)
-    insured_capital = models.FloatField(_('Insured Capital'), null=True)
-    rate_per_thousand = models.FloatField(_('Rate per Thousand'), null=True)
-    insured_group = models.CharField(_('Insured Group'), max_length=1, choices=INSURED_GROUP_CHOICES, default='O', null=True)
-    costing = models.CharField(_('Costing'), max_length=1, choices=COSTING_CHOICES, default='N', null=True)
-    revenues = models.CharField(_('Revenues'), max_length=1, choices=REVENUES_CHOICES, default='Y', null=True)
+    insured_capital = models.FloatField(_('Insured Capital'), null=True, blank=True)
+    rate_per_thousand = models.FloatField(_('Rate per Thousand'), null=True, blank=True)
+    insured_group = models.CharField(_('Insured Group'), max_length=1, choices=INSURED_GROUP_CHOICES, default='O', null=True, blank=True)
+    costing = models.CharField(_('Costing'), max_length=1, choices=COSTING_CHOICES, default='N', null=True, blank=True)
+    revenues = models.CharField(_('Revenues'), max_length=1, choices=REVENUES_CHOICES, default='Y', null=True, blank=True)
     method_payment = models.ForeignKey(
         MethodPayment,
         null=True,
+        blank=True,
         # default=lambda: Sale.product.method_payment.objects.all()[:0])
     )
     sale = models.ForeignKey(Sale, on_delete=models.CASCADE)
-    lives = models.ForeignKey(NumberLives, null=True,)
-    rules = models.ManyToManyField(RuleDeadLine)
+    lives = models.ForeignKey(NumberLives, null=True, blank=True)
+    rules = models.ManyToManyField(RuleDeadLine, blank=True)
 
     def __unicode__(self):
         return '#%d %s (%s)' % (self.pk, self.sale.buyer, self.sale.product)
