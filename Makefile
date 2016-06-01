@@ -26,8 +26,8 @@ install:
 	make migrate
 
 resetdb:
-	dropdb -U massificados massificados
-	createdb -U massificados --owner massificados --encoding "UTF-8" massificados
+	dropdb  massificados
+	createdb  --owner massificados --encoding "UTF-8" massificados
 	rm -rf */migrations/000*
 	rm -rf */migrations/001*
 	workon massificados & python manage.py makemigrations

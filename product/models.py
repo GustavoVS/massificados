@@ -127,7 +127,10 @@ class Product(models.Model):
     rules_declaration = models.CharField(_('Rules'), max_length=100, null=True)
     disclaimer = models.CharField(_('Rules'), max_length=100, null=True)
     method_payment = models.ManyToManyField(MethodPayment)
-    rules = models.ManyToManyField(RuleProduct)
+    rules = models.ManyToManyField(RuleProduct, blank=True)
+
+    def calc(self):
+        return self.premio * 0.1
 
     def __unicode__(self):
         return self.name

@@ -1,14 +1,19 @@
 {% extends "base-sec.html" %}
 {% load i18n %}
+{% load staticfiles %}
 
 
-{% block section-id %}sec-products{% endblock %}
+{% block section-id %}sec-products
+
+{% endblock %}
 {% block section-title %}
+
     <li><a href="/">{% trans 'Home' %}</a></li>
     <li class="active"><b>{% trans 'Products' %}</b></li>
 {% endblock %}
 
 {% block section-content %}
+
     {% if products %}
         <div id="products-show">
             {% for product in products %}
@@ -28,7 +33,11 @@
                 </div>
             {% endfor %}
         </div>
+
         <div class="row">
+            <img class="img-responsive" src="{% static 'img/partner-sofisa/slide2.jpg' %}" alt="img">
+            <div class="space"></div>
+
             <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
                <div class="list-group">
                 <a class="list-group-item text-center active" data-remote="true"  id="categoria_todos">
@@ -80,92 +89,80 @@
                 {% endif %}
                 </div>
             </div>
-            <div class="products col-lg-9 col-md-9 col-sm-12 col-xs-12 "> {# colunas de produtos #}
-                {% if products_j %}
-                    {% if products_f %}
-                        <div class = "products-pj col-lg-6 col-md-6 col-sm-6" id = "products-pj">
-                    {% else %}
-                        <div class = "products-pj col-lg-12 col-md-12 col-sm-12 col-xs-12" id = "products-pj">
-                    {% endif %}
-                            <h2>{% trans ' For Company' %}</h2>
-                            <hr>
-                            {% for product in products_j %}
-                                <div class = "product-pj">
-                                    {% if products_f %}
-                                        <div class="col-lg-12 col-md-12">
-                                    {% else %}
-                                        <div class="col-lg-4 col-md-4">
-                                    {% endif %}
-                                            <div class="panel panel-primary">
-                                                <div class="panel-heading">
-                                                    <h5>{{ product.name }}</h5>
-                                                    <p>{{ product.introduction }}</p>
-                                                    {% if product in user.group_permissions.product.all or user.is_superuser %}
-                                                        <i class="fa"><img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" class="img-responsive"></i>
-                                                        <i class="fa"><img src="{% if product.icon2 %}{{ product.icon2.url }}{% endif %}" class="img-responsive"></i>
-                                                    {% endif %}
-                                                </div>
-                                                <div class="panel-body">
-                                                    <div class="product-pj-panel-button" >
-                                                        <a data-href="sec-product{{ product.id }}" href="#sec-products" class="product-href page-scroll btn btn-info col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
-                                                            <span class="fa fa-plus"> </span>{% trans ' Know more' %}
-                                                        </a>
-                                                        {% if product in user.group_permissions.product.all or user.is_superuser %}
-                                                            <a href="{% url 'product-new-buyer' product.pk %}" class="page-scroll btn btn-primary col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
-                                                                <span class="fa fa-cart-plus"></span>{% trans ' Contract' %}
-                                                            </a>
-                                                        {% endif %}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div >
+
+        {# Produtos pessoa juridica #}
+        <div class="col-lg-9 col-md-9 hidden-sm hidden-xs">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <div class="col-md-3">
+                        <img class="" width="200px" height="200px" src="{% static 'img/partner-sofisa/forcompany.png' %}" alt="Flower">
+                    </div>
+
+                     <div class="col-md-9" >
+                         {% for product in products_j %}
+                         <div class="col-md-3">
+                            <div class="panel panel-default">
+                              <div class="panel-body">
+                                  <a href="{% url 'product-new-buyer' product.pk %}" role="button">
+                                  {% if product in user.group_permissions.product.all or user.is_superuser %}
+                                      <i class="fa"><img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" class="img-responsive"></i>
+                                      <i class="fa"><img src="{% if product.icon2 %}{{ product.icon2.url }}{% endif %}" class="img-responsive"></i>
+                                  {% endif %}
+                                  </a>
                                 </div>
-                            {% endfor %}
+                              <div class="panel-footer">
+                                  <a href="{% url 'product-new-buyer' product.pk %}" role="button">
+                                  {{ product.name }}
+                                  </a>
+                              </div>
+                            </div>
                         </div>
-                {% endif %}
-                {% if products_f %}
-                    {% if products_j %}
-                        <div class = "products-pf col-lg-6 col-md-6 col-sm-6" id = "products-pf">
-                    {% else %}
-                        <div class = "products-pf col-lg-12 col-md-12 col-sm-12 col-xs-12" id = "products-pf">
-                    {% endif %}
-                            <h2>{% trans ' For People' %}</h2>
-                            <hr>
-                            {% for product in products_f %}
-                                <div class = "product-pf">
-                                    {% if products_j %}
-                                        <div class="col-lg-12 col-md-12">
-                                    {% else %}
-                                        <div class="col-lg-4 col-md-4">
-                                    {% endif %}
-                                            <div class="panel panel-primary">
-                                                <div class="panel-heading">
-                                                    <h5>{{ product.name }}</h5>
-                                                    <p>{{ product.introduction }}</p>
-                                                    {% if product in user.group_permissions.product.all or user.is_superuser %}
-                                                        <i class="fa"><img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" class="img-responsive"></i>
-                                                        <i class="fa"><img src="{% if product.icon2 %}{{ product.icon2.url }}{% endif %}" class="img-responsive"></i>
-                                                    {% endif %}
-                                                </div>
-                                                <div class="panel-body">
-                                                    <div class="product-pf-panel-button" >
-                                                        <a data-href="sec-product{{ product.id }}" href="#sec-products" class="product-href page-scroll btn btn-info col-lg-12 col-md-12 col-sm-6 col-xs-6" role="button">
-                                                            <span class="fa fa-plus"></span>{% trans ' Know more' %}
-                                                        </a>
-                                                        {% if product in user.group_permissions.product.all or user.is_superuser %}
-                                                            <a href="{% url 'product-new-buyer' product.pk %}" class="page-scroll btn btn-primary col-lg-12 col-md-6 col-sm-6 col-xs-6" role="button">
-                                                                <span class="fa fa-cart-plus"></span>{% trans ' Contract' %}
-                                                            </a>
-                                                        {% endif %}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div >
+                         {% endfor %}
+                     </div>
+                </div>
+            </div>
+        </div>
+
+        {# Produtos pessoa fisica #}
+        <div class="col-lg-9 col-md-9 hidden-sm hidden-xs">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <div class="col-md-3">
+                        <img class="" width="200px" height="200px" src="{% static 'img/partner-sofisa/foryou.jpg' %}" alt="Flower">
+                    </div>
+
+                     <div class="col-md-9" >
+                         {% for product in products_f %}
+                         <div class="col-md-3">
+                            <div class="panel panel-default">
+                              <div class="panel-body">
+                                  <a href="{% url 'product-new-buyer' product.pk %}" role="button">
+                                  {% if product in user.group_permissions.product.all or user.is_superuser %}
+                                      <i class="fa"><img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" class="img-responsive"></i>
+                                      <i class="fa"><img src="{% if product.icon2 %}{{ product.icon2.url }}{% endif %}" class="img-responsive"></i>
+                                  {% endif %}
+                                  </a>
                                 </div>
-                            {% endfor %}
+                              <div class="panel-footer">
+                                  <a href="{% url 'product-new-buyer' product.pk %}" role="button">
+                                  {{ product.name }}
+                                  </a>
+                              </div>
+                            </div>
                         </div>
-                {% endif %}
+                         {% endfor %}
+                     </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
             </div>
         </div>
     {% endif %}
+
 {% endblock %}
