@@ -50,12 +50,12 @@ update_deploy:
 	rm -rf */migrations/000*
 	rm -rf */migrations/001*
 	python manage.py makemigrations
-	git add -u
+	git add -A
 	git commit
 	eb deploy
 
 create_deploy:
 	make resetdb
-	git add -u
+	git add -A
 	git commit
 	eb create -db -db.engine postgres
