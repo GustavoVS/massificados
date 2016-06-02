@@ -905,3 +905,8 @@ ul.navbar-nav > li > a {
 	/*margin-left: 3px;*/
 	/*margin-right: 3px*/
 }
+
+.no-margin-top{
+
+	margin-top: 0
+}

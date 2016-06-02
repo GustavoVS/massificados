@@ -102,16 +102,16 @@
                 {{ deadlinesale.management_form }}
 
                 {% if not product.is_lead %}
-                    {% bootstrap_field deadlinesale.0.payment form_group_class='form-group col-md-6' %}
+                    {% bootstrap_field deadlinesale.0.payment form_group_class='form-group col-md-6 mask-float' type="text" %}
                     {% bootstrap_field deadlinesale.0.lives form_group_class='form-group col-md-6' %}
+                    {% bootstrap_field deadlinesale.0.method_payment form_group_class='form-group col-md-6' set_disabled=True %}
+                    {% bootstrap_field deadlinesale.0.insured_group form_group_class='form-group col-md-6' set_disabled=True %}
+                    {% bootstrap_field deadlinesale.0.insured_capital form_group_class='form-group col-md-3' set_disabled=True %}
+                    {% bootstrap_field deadlinesale.0.rate_per_thousand form_group_class='form-group col-md-3' set_disabled=True %}
+                    {% bootstrap_field deadlinesale.0.costing form_group_class='form-group col-md-3' set_disabled=True %}
+                    {% bootstrap_field deadlinesale.0.revenues form_group_class='form-group col-md-3 disabledTextInput' set_disabled=True %}
                     {% bootstrap_field deadlinesale.0.begin form_group_class='form-group col-md-3 mask-date' %}
                     {% bootstrap_field deadlinesale.0.end form_group_class='form-group col-md-3  mask-date' %}
-                    {% bootstrap_field deadlinesale.0.insured_group form_group_class='form-group col-md-6' %}
-                    {% bootstrap_field deadlinesale.0.insured_capital form_group_class='form-group col-md-3' %}
-                    {% bootstrap_field deadlinesale.0.rate_per_thousand form_group_class='form-group col-md-3' %}
-                    {% bootstrap_field deadlinesale.0.costing form_group_class='form-group col-md-3' %}
-                    {% bootstrap_field deadlinesale.0.revenues form_group_class='form-group col-md-3 disabledTextInput' %}
-                    {% bootstrap_field deadlinesale.0.method_payment form_group_class='form-group col-md-6' %}
                     {% bootstrap_field deadlinesale.0.proposal form_group_class='form-group col-md-3' %}
                     {% bootstrap_field deadlinesale.0.policy form_group_class='form-group col-md-3' %}
                     {#   coberturas aqui  #}

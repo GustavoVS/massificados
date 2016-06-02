@@ -23,9 +23,12 @@ class IndexView(MassificadoPageListView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['products_f'] = list(Product.objects.filter(kind_person='F'))*3
-        context['products_j'] = list(Product.objects.filter(kind_person='J'))*2
-        context['products'] = Product.objects.all()
+        # context['products_f'] = list(Product.objects.filter(kind_person='F'))*3
+        # context['products_j'] = list(Product.objects.filter(kind_person='J'))*2
+        # context['products'] = Product.objects.all()
+        if self.request.user.is_authenticated():
+            context['products_f'] = self.request.user.group_permissions.product.filter(kind_person='F')
+            context['products_j'] = self.request.user.group_permissions.product.filter(kind_person='J')
         return context
 
 

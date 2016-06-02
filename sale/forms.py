@@ -3,7 +3,7 @@ from django import forms
 from django.forms.models import inlineformset_factory, BaseInlineFormSet
 from django.utils.translation import ugettext_lazy as _
 from pycpfcnpj import cpfcnpj
-from sale.models import Sale, Buyer, BuyerAddress, Deadline, File, Detail
+from sale.models import Sale, Buyer, BuyerAddress, Deadline, File, Detail, MethodPayment
 
 
 class BuyerForm(forms.ModelForm):
@@ -22,6 +22,12 @@ class BuyerForm(forms.ModelForm):
                 raise forms.ValidationError(_('This field is required'))
 
         return self.cleaned_data.get('responsible')
+
+    def clean_phone(self):
+        if len(self.cleaned_data.get('phone')) < 14:
+            raise forms.ValidationError(_('Invalid Phone Number'))
+
+        return self.cleaned_data.get('phone')
 
     def clean_activity_area(self):
         if self.cleaned_data.get('kind_person') == 'J':
@@ -44,12 +50,22 @@ AddressBuyerFormset = inlineformset_factory(Buyer, BuyerAddress, form=BuyerAddre
 class DeadlineSaleForm(forms.ModelForm):
     # accept_declaration = forms.BooleanField(_('I accept that the GalCorr make contact my client, if necessary'),
     #     required=True)
+    payment = forms.CharField(max_length=18)
 
     class Meta:
         model = Deadline
-        fields = ['begin', 'end', 'payment', 'proposal', 'policy', 'accept_declaration', 'method_payment',
+        fields = ['begin', 'end', 'proposal', 'policy', 'accept_declaration', 'method_payment',
                   'insured_capital', 'rate_per_thousand', 'insured_group', 'costing', 'revenues', 'lives', ]
 
+    def __init__(self, *args, **kwargs):
+        super(DeadlineSaleForm, self).__init__(*args, **kwargs)
+        self.fields['method_payment'].initial = MethodPayment.objects.get(name='Boleto')
+        if self.instance:
+            self.fields['payment'].initial = self.instance.payment
+
+    def clean_payment(self):
+        # payment = self.cleaned_data.get('payment')
+        return float(self.cleaned_data.get('payment').replace('.', '').replace(',', '.'))
     # def clean_status(self):
     #     # todo:
     #     return self.cleaned_data.get('status')
