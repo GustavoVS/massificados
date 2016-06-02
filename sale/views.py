@@ -119,6 +119,16 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
                         subquote.percentage = dl.sale.product.master_percentage
                         subquote.save()
 
+                # repasse do owner.director
+                if dl.sale.owner.director:
+                    if SubQuote.objects.filter(quote=quote, user=dl.sale.owner.director).exists():
+                        subquote = SubQuote.objects.get(quote=quote, user=dl.sale.owner.director)
+                    else:
+                        subquote = SubQuote(quote=quote, user=dl.sale.owner.director)
+                        subquote.value = dl.payment * (dl.sale.product.director_percentage / 100)
+                        subquote.percentage = dl.sale.product.director_percentage
+                        subquote.save()
+
                 # if self.request.POST.get('new-status', ''):
                 #     dl.status_id = self.request.POST.get('new-status', '')
                 #     dl.save()
@@ -251,6 +261,16 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
                         subquote = SubQuote(quote=quote, user=dl.sale.owner.master)
                         subquote.value = dl.payment * (dl.sale.product.master_percentage / 100)
                         subquote.percentage = dl.sale.product.master_percentage
+                        subquote.save()
+
+                # repasse do owner.director
+                if dl.sale.owner.director:
+                    if SubQuote.objects.filter(quote=quote, user=dl.sale.owner.director).exists():
+                        subquote = SubQuote.objects.get(quote=quote, user=dl.sale.owner.director)
+                    else:
+                        subquote = SubQuote(quote=quote, user=dl.sale.owner.director)
+                        subquote.value = dl.payment * (dl.sale.product.director_percentage / 100)
+                        subquote.percentage = dl.sale.product.director_percentage
                         subquote.save()
 
                 for k, v in self.request.POST.iteritems():

@@ -31,7 +31,7 @@ class EntrieUserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'partner', 'group_permissions', 'master', 'agency')
+        fields = ('username', 'first_name', 'last_name', 'email', 'partner', 'group_permissions', 'master', 'director', 'agency')
 
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
@@ -48,3 +48,22 @@ class EntrieUserForm(forms.ModelForm):
         # self.instance.groups.clear()
         # self.instance.groups.add(self.cleaned_data['groups'])
         return r
+
+    # def __init__(self, *args, **kwargs):
+    #     d = kwargs.pop('director_queryset', None)
+    #     super(EntrieUserForm, self).__init__(*args, **kwargs)
+    #     if d:
+    #         self.fields['director'].queryset = d
+
+    # def __init__(self, *args, **kwargs):
+    #     m = kwargs.pop('master_queryset', None)
+    #     super(EntrieUserForm, self).__init__(*args, **kwargs)
+    #     if m:
+    #         self.fields['master'].queryset = m
+
+    # def __init__(self, *args, **kwargs):
+    #     gp = kwargs.pop('group_permissions_queryset', None)
+    #     super(EntrieUserForm, self).__init__(*args, **kwargs)
+    #     if gp:
+    #         self.fields['group_permissions'].queryset = gp
+

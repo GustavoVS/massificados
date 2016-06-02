@@ -47,6 +47,13 @@ class EntrieUserNewView(LoginRequiredMixin, CreateView):
     form_class = EntrieUserForm
     template_name = 'page-entries-user.html'
 
+    # def get_form_kwargs(self):
+    #     kw = super(EntrieUserNewView, self).get_form_kwargs()
+    #     kw['group_permissions_queryset'] = self.request.user.group_permissions.profiles.all()
+    #     # kw['director_queryset'] = MassificadoUser.objects.filter(group_permissions__in=
+    #     #                                                          self.request.user.group_permissions.profiles.all())
+    #     return kw
+
     def get_success_url(self):
         return reverse_lazy('entries-users')
 
@@ -56,6 +63,11 @@ class EntrieUserEditView(LoginRequiredMixin, UpdateView):
     context_object_name = 'user_entrie'
     form_class = EntrieUserForm
     template_name = 'page-entries-user.html'
+
+    # def get_form_kwargs(self):
+    #     kw = super(EntrieUserNewView, self).get_form_kwargs()
+    #     kw['group_permissions_queryset'] = self.request.user.group_permissions.profiles.all()
+    #     return kw
 
     def get_success_url(self):
         return reverse_lazy('entries-users')

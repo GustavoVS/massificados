@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-01 16:46-0300\n"
-"PO-Revision-Date: 2016-06-01 16:49+0000\n"
+"POT-Creation-Date: 2016-06-02 03:56-0300\n"
+"PO-Revision-Date: 2016-06-02 03:57+0000\n"
 "Last-Translator:   <admin@admin.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -33,7 +33,7 @@ msgstr "Data de Criação"
 msgid "Email address"
 msgstr "Endereço de e-mail"
 
-#: .\product\models.py:68 .\product\models.py:106 .\product\models.py:140
+#: .\product\models.py:68 .\product\models.py:106 .\product\models.py:141
 #: .\sale\models.py:14 .\sale\models.py:32 .\user_groups\models.py:8
 msgid "Name"
 msgstr "Nome da Página"
@@ -50,7 +50,7 @@ msgstr "Erro"
 msgid "Variable"
 msgstr "Variável"
 
-#: .\product\models.py:93 .\product\models.py:127 .\product\models.py:128
+#: .\product\models.py:93 .\product\models.py:128 .\product\models.py:129
 msgid "Rules"
 msgstr "Regra"
 
@@ -90,108 +90,108 @@ msgstr "Declaração"
 msgid "Full Declaration"
 msgstr "Declaração Completa"
 
-#: .\product\models.py:126
+#: .\product\models.py:127
 msgid "Other Documentos"
 msgstr "Informação"
 
-#: .\product\models.py:141
+#: .\product\models.py:142
 msgid "Hint"
 msgstr "Dica"
 
-#: .\product\models.py:144
+#: .\product\models.py:145
 msgid "Header"
 msgstr "Cabeçalho"
 
-#: .\product\models.py:145
+#: .\product\models.py:146
 msgid "Broker"
 msgstr ""
 
-#: .\product\models.py:146
+#: .\product\models.py:147
 msgid "Client"
 msgstr "Cliente"
 
-#: .\product\models.py:147
+#: .\product\models.py:148
 msgid "Insured"
 msgstr "Seguradora"
 
-#: .\product\models.py:148
+#: .\product\models.py:149
 msgid "Commercial Protection"
 msgstr "Proteção"
 
-#: .\product\models.py:149
+#: .\product\models.py:150
 msgid "Profile Protection"
 msgstr "Proteção"
 
-#: .\product\models.py:150
+#: .\product\models.py:151
 msgid "Tenant"
 msgstr ""
 
-#: .\product\models.py:151
+#: .\product\models.py:152
 msgid "Process"
 msgstr ""
 
-#: .\product\models.py:152
+#: .\product\models.py:153
 msgid "Legal Opinion"
 msgstr "Pessoa Juridica"
 
-#: .\product\models.py:153
+#: .\product\models.py:154
 msgid "Other information"
 msgstr "Informação"
 
-#: .\product\models.py:154
+#: .\product\models.py:155
 msgid "Collection"
 msgstr "Proteção"
 
-#: .\product\models.py:155
+#: .\product\models.py:156
 msgid "Condition"
 msgstr "Condição"
 
-#: .\product\models.py:156
+#: .\product\models.py:157
 msgid "Footer"
 msgstr ""
 
-#: .\product\models.py:160
+#: .\product\models.py:161
 msgid "Profile Deadline"
 msgstr "Detalhe do Perfil"
 
-#: .\product\models.py:161
+#: .\product\models.py:162
 msgid "Profile Detail"
 msgstr "Detalhe do Perfil"
 
-#: .\product\models.py:165
+#: .\product\models.py:166
 msgid "Input"
 msgstr ""
 
-#: .\product\models.py:166
+#: .\product\models.py:167
 msgid "CheckBox"
 msgstr ""
 
-#: .\product\models.py:167
+#: .\product\models.py:168
 msgid "Float"
 msgstr "Moeda"
 
-#: .\product\models.py:168
+#: .\product\models.py:169
 msgid "Link"
 msgstr "Link"
 
-#: .\product\models.py:169
+#: .\product\models.py:170
 msgid "Select"
 msgstr ""
 
-#: .\product\models.py:170
+#: .\product\models.py:171
 msgid "Date"
 msgstr ""
 
-#: .\product\models.py:171
+#: .\product\models.py:172
 msgid "Text"
 msgstr ""
 
-#: .\product\models.py:172
+#: .\product\models.py:173
 msgid "Percent"
 msgstr ""
 
-#: .\product\models.py:173 .\sale\models.py:21 .\sale\models.py:50
-#: .\sale\models.py:222 .\sale\models.py:234
+#: .\product\models.py:174 .\sale\models.py:50 .\sale\models.py:222
+#: .\sale\models.py:234
 msgid "Number"
 msgstr "Número"
 
@@ -202,6 +202,11 @@ msgstr "Valor inválido para este campo"
 #: .\sale\forms.py:22 .\sale\forms.py:29
 msgid "This field is required"
 msgstr "Esse campo é obrigatório"
+
+#: .\sale\models.py:24
+#, python-format
+msgid "lives %d"
+msgstr "vidas %d"
 
 #: .\sale\models.py:34
 msgid "E-mail"
@@ -224,10 +229,9 @@ msgid "Responsible"
 msgstr "Resposável"
 
 #: .\sale\models.py:39
-#, fuzzy
-#| msgid "Active"
+#| msgid "ActivityArea"
 msgid "Activity"
-msgstr "Ativo"
+msgstr "Área de Atividade"
 
 #: .\sale\models.py:47
 msgid "Street"
@@ -299,7 +303,7 @@ msgstr "Apólice"
 
 #: .\sale\models.py:101
 msgid "Insured Capital"
-msgstr "Seguradora"
+msgstr "Capital Segurado"
 
 #: .\sale\models.py:102
 msgid "Rate per Thousand"
@@ -321,8 +325,18 @@ msgstr "Periodicidade de Faturamento"
 msgid "Method"
 msgstr "Meio de págamento"
 
+#: .\sale\models.py:110
+#, fuzzy
+#| msgid "Method"
+msgid "method"
+msgstr "Meio de págamento"
+
 #: .\sale\models.py:113
 msgid "Lives"
+msgstr "Vidas"
+
+#: .\sale\models.py:113
+msgid "lives"
 msgstr "Vidas"
 
 #: .\sale\models.py:145
@@ -382,23 +396,23 @@ msgstr "Data de Vencimento"
 msgid "Percentage"
 msgstr "Percentual"
 
-#: .\sale\views.py:311
+#: .\sale\views.py:331
 msgid "An error has occurred"
 msgstr "Um erro ocorreu"
 
-#: .\sale\views.py:313
+#: .\sale\views.py:333
 msgid "Select a File Type to upload"
 msgstr "Escolha o tipo de arquivo para upload"
 
-#: .\sale\views.py:315
+#: .\sale\views.py:335
 msgid "Select a File"
 msgstr "Selecione um arquivo"
 
-#: .\sale\views.py:326
+#: .\sale\views.py:346
 msgid "Successfully file uploaded"
 msgstr "Sucesso no upload do arquivo"
 
-#: .\sale\views.py:328
+#: .\sale\views.py:348
 #, python-format
 msgid "Uploaded by <b>%s</b> in <small>%s</small>"
 msgstr "Incluído por <b>%s</b> em <small>%s</small>"
@@ -746,7 +760,6 @@ msgid "Click to read the declaration"
 msgstr "Clique para ler a declarção"
 
 #: .\themes\default\templates\page-sale-section.html:449
-#| msgid "Collection"
 msgid "Choose an action"
 msgstr "Escolha uma ação"
 
@@ -924,6 +937,9 @@ msgstr "Permissões de Acesso"
 #: .\user_groups\models.py:18
 msgid "Profile"
 msgstr "Perfil"
+
+#~ msgid "Area"
+#~ msgstr "Area de Atividade"
 
 #~ msgid "Change to Status"
 #~ msgstr "Modificar para o status"

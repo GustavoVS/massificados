@@ -18,10 +18,10 @@ class ActivityArea(models.Model):
 
 
 class NumberLives(models.Model):
-    number = models.IntegerField(_('Number'), null=True)
+    number = models.IntegerField(null=True)
 
     def __unicode__(self):
-        return 'lives %s' % self.number
+        return _('lives %d') % self.number
 
 
 class Buyer(models.Model):
@@ -36,7 +36,7 @@ class Buyer(models.Model):
     kind_person = models.CharField(_('Kind Person'), max_length=1, choices=KIND_PERSON_CHOICES)
     cpf_cnpj = models.CharField(_('CPF/CNPJ'), max_length=18)
     responsible = models.CharField(_('Responsible'), max_length=50, blank=True, null=True)
-    activity_area = models.ForeignKey(ActivityArea, blank=True, null=True, related_name=_('Activity'),)
+    activity_area = models.ForeignKey(ActivityArea, blank=True, null=True, verbose_name=_('Activity'), )
 
     def __unicode__(self):
         return self.name
@@ -107,10 +107,10 @@ class Deadline(models.Model):
         MethodPayment,
         null=True,
         blank=True,
-        verbose_name=_("Method"), related_name=_('Method'),
+        verbose_name=_("Method"), related_name=_('method'),
     )
     sale = models.ForeignKey(Sale, on_delete=models.CASCADE)
-    lives = models.ForeignKey(NumberLives, null=True, blank=True, verbose_name=_("Lives"), related_name=_('Lives'),)
+    lives = models.ForeignKey(NumberLives, null=True, blank=True, verbose_name=_("Lives"), related_name=_('lives'),)
     rules = models.ManyToManyField(RuleDeadLine, blank=True)
 
     # def __unicode__(self):
