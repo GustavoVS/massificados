@@ -42,6 +42,7 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
         data = super(CreateBuyerView, self).get_context_data(**kwargs)
         product = Product.objects.get(pk=self.kwargs['productpk'])
         data['product'] = product
+        data['rules'] = product.rules.all()
         data['addressbuyer'] = AddressBuyerFormset()
         data['status_deadline'] = product.begin_status
         data['possible_new_status'] = self.request.user.group_permissions.status_set.filter(
@@ -177,6 +178,7 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
         data['show_all'] = True
         data['deadlinesale'] = DeadlineSaleFormset(instance=sale)
         data['sample_file_type'] = sale.product.sample_file_type.all()
+        data['rules'] = sale.product.rules.all()
         num_files = sale.product.sample_file_type.all().count()
         if num_files % 4 == 0:
             data['sample_file_type_cols'] = 3

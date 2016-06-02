@@ -3,28 +3,35 @@ from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 from django.core.management.base import BaseCommand
 from partner.models import Partner
-from product.models import Status, FileType, InsuranceCompany, Branch, Product, Profile, ActionStatus, MethodPayment
+from product.models import Status, FileType, InsuranceCompany, Branch, Product, Profile, ActionStatus, MethodPayment, RuleProduct
 from sale.models import ActivityArea, NumberLives
 from user_account.models import MassificadoUser
 from user_groups.models import MassificadoGroups
 from status_emails.models import ActionStatusEmails, ActionStatusEmailsUsers
 
 
-
-Rules_VIDA =(
+RULES_DEFAULT = (
  ('Morte (Básica)', 100,	3, '', 'V', 0, 'p =  {id_deadline_set-0-payment}; v =  {id_deadline_set-0-lives}; tx=  0.03; ci= (p/12)/(v*tx); if (ci>500000) {value = 50000,00;} else {value = (p/12)/ci);}'),
  ('IEA - Indenização Especial por Acidente', 100,	3, '', 'V', 0, 'p =  {id_deadline_set-0-payment}; v =  {id_deadline_set-0-lives}; tx=  0.03; ci= (p/12)/(v*tx); if (ci>500000) {value = 50000,00;} else {value = (p/12)/ci);}'),
  ('IPA - Invalidez Permanente Total ou Parcial por Acidente', 100,	3, '', 'V', 0, 'p =  {id_deadline_set-0-payment}; v =  {id_deadline_set-0-lives}; tx=  0.03; ci= (p/12)/(v*tx); if (ci>500000) {value = 50000,00;} else {value = (p/12)/ci);}'),
  ('IPD-F - Invalidez Funcional Permanente Total por Doença', 100,	3, '', 'V', 0, 'p =  {id_deadline_set-0-payment}; v =  {id_deadline_set-0-lives}; tx=  0.03; ci= (p/12)/(v*tx); if (ci>500000) {value = 50000,00;} else {value = (p/12)/ci);}'),
  ('Assistência Funeral Individual', 0,	3, 'Serviço', 'F', 3000, 'value = value'),
+ ('Morte - Morte Acidetal', 100, 3, '', 'V', 0, 'p =  {id_deadline_set-0-payment}; v =  {id_deadline_set-0-lives}; tx=  0.03; ci= (p/12)/(v*tx); if (ci>500000) {value = 50000,00;} else {value = (p/12)/ci);}'),
 )
 
-Rules_VIDA =(
- ('Morte (Básica)', 100,	3, '', 'V', 0, 'p =  {id_deadline_set-0-payment}; v =  {id_deadline_set-0-lives}; tx=  0.03; ci= (p/12)/(v*tx); if (ci>500000) {value = 50000,00;} else {value = (p/12)/ci);}'),
- ('IEA - Indenização Especial por Acidente', 100,	3, '', 'V', 0, 'p =  {id_deadline_set-0-payment}; v =  {id_deadline_set-0-lives}; tx=  0.03; ci= (p/12)/(v*tx); if (ci>500000) {value = 50000,00;} else {value = (p/12)/ci);}'),
- ('IPA - Invalidez Permanente Total ou Parcial por Acidente', 100,	3, '', 'V', 0, 'p =  {id_deadline_set-0-payment}; v =  {id_deadline_set-0-lives}; tx=  0.03; ci= (p/12)/(v*tx); if (ci>500000) {value = 50000,00;} else {value = (p/12)/ci);}'),
- ('IPD-F - Invalidez Funcional Permanente Total por Doença', 100,	3, '', 'V', 0, 'p =  {id_deadline_set-0-payment}; v =  {id_deadline_set-0-lives}; tx=  0.03; ci= (p/12)/(v*tx); if (ci>500000) {value = 50000,00;} else {value = (p/12)/ci);}'),
- ('Assistência Funeral Individual', 0,	3, 'Serviço', 'F', 3000, 'value = value'),
+RULES_VIDA_GLOBAL = ('Morte (Básica)', 'IEA - Indenização Especial por Acidente',
+                     'IPA - Invalidez Permanente Total ou Parcial por Acidente',
+                     'IPD-F - Invalidez Funcional Permanente Total por Doença',
+                     'Assistência Funeral Individual',)
+
+RULES_VIDA = ('Morte (Básica)', 'IEA - Indenização Especial por Acidente',
+                     'IPA - Invalidez Permanente Total ou Parcial por Acidente',
+                     'IPD-F - Invalidez Funcional Permanente Total por Doença',
+                     'Assistência Funeral Individual',)
+
+RULES_AP = (
+ 'Morte - Morte Acidetal',
+ 'Assistência Funeral Individual',
 )
 
 
@@ -660,26 +667,26 @@ DEFAULT_PRODUCT = (
     ('Vida', 'Introdução', 'Descrição', ' Declaração', 'J', 'Tokio', 'Vida',
         DEFAULT_FILES_TOKIO,
         'Proposta Gerada', 'Perfil Vida', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10 , 10, 0, FULL_DECLARATION_VIDA, DECLARATION_VIDA,
-        'Em caso de morte acidental, as coberturas básicas e IEA serão somadas', ('Boleto',),),
+        'Em caso de morte acidental, as coberturas básicas e IEA serão somadas', ('Boleto',), RULES_VIDA, ),
     ('Vida Global', 'Introdução', 'Descrição', ' Declaração', 'J', 'Tokio', 'Vida',
          DEFAULT_FILES_TOKIO,
         'Proposta Gerada', 'Perfil Vida Global', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10 , 10, 0, FULL_DECLARATION_VIDA_GLOGAL, DECLARATION_VIDA_GLOGAL,
-        'Em caso de morte acidental, as coberturas básicas e IEA serão somadas', ('Boleto',),),
+        'Em caso de morte acidental, as coberturas básicas e IEA serão somadas', ('Boleto',), RULES_VIDA_GLOBAL, ),
     ('Acidentes Pessoais', 'Introdução', 'Descrição', ' Declaração', 'J', 'Tokio', 'Acidentes Pessoais',
         DEFAULT_FILES_TOKIO,
-        'Proposta Gerada', 'Perfil Acidentes Pessoais', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10, 10, 0, FULL_DECLARATION_AP, DECLARATION_AP, '', ('Boleto',),),
+        'Proposta Gerada', 'Perfil Acidentes Pessoais', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10, 10, 0, FULL_DECLARATION_AP, DECLARATION_AP, '', ('Boleto',), RULES_AP, ),
     ('Garantia Tradicional', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Garantia Tradicional',
         DEFAULT_FILES_GARANTIA,
-        'Lead de Garantia Gerado', 'Perfil Garantia Tradicional', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', '', '', ('Boleto',),),
+        'Lead de Garantia Gerado', 'Perfil Garantia Tradicional', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', '', '', ('Boleto',), '', ),
     ('Garantia Judicial', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Garantia Judicial',
          DEFAULT_FILES_GARANTIA,
-        'Lead de Garantia Gerado', 'Perfil Garantia Judicial', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', '', '', ('Boleto',),),
+        'Lead de Garantia Gerado', 'Perfil Garantia Judicial', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', '', '', ('Boleto',), '', ),
     ('Fiança Locatícia', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Fiança Locatícia',
      DEFAULT_FILES_GARANTIA,
-    'Lead de Garantia Gerado', 'Perfil Fiança Locatícia', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', '', '', ('Boleto',),),
+    'Lead de Garantia Gerado', 'Perfil Fiança Locatícia', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', '', '', ('Boleto',),  '', ),
     ('Saúde', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Saúde',
      DEFAULT_FILES_BENEFICIOS,
-    'Lead de Benefícios Gerado', 'Perfil Saúde', DEFAULT_STATUS_PRODUCT_BENEFICIOS, 10, 10, 10, 1, '', '', '', ('Boleto',),),
+    'Lead de Benefícios Gerado', 'Perfil Saúde', DEFAULT_STATUS_PRODUCT_BENEFICIOS, 10, 10, 10, 1, '', '', '', ('Boleto',),  '', ),
     )
 
 DEFAULT_PROFILE_NAME = (
@@ -988,6 +995,18 @@ class Command(BaseCommand):
                 pe = Profile(name=profile_name)
                 pe.save()
 
+        for rule_name, rule_percent, rule_rate, rule_fixing_text, rule_type, rule_value, rule_rule in RULES_DEFAULT:
+            if not RuleProduct.objects.filter(name=rule_name).exists():
+                r = RuleProduct(name=rule_name,
+                                percent=rule_percent,
+                                rate=rule_rate,
+                                fixing_text=rule_fixing_text,
+                                type=rule_type,
+                                value=rule_value,
+                                rule=rule_rule,
+                                )
+                r.save()
+
         for p_number in range(500):
             if not NumberLives.objects.filter(number=p_number).exists():
                 p = NumberLives(number=p_number)
@@ -1000,7 +1019,7 @@ class Command(BaseCommand):
 
         for product_name, introduction, description, declaration, kind, insurance, branch, files,\
         begin, profile, status_permitted, partner_percentage, owner_percentage, master_percentage, is_lead,\
-        p_declaration_full,  p_declaration, p_rules_declaration, p_methods in DEFAULT_PRODUCT:
+        p_declaration_full,  p_declaration, p_rules_declaration, p_methods, p_rules in DEFAULT_PRODUCT:
             if not Product.objects.filter(name=product_name).exists():
                 product = Product(
                     name=product_name,
@@ -1023,6 +1042,9 @@ class Command(BaseCommand):
                 product.other_documents_declaration ='Outros documentos poderão ser solicitados durante o processo'
                 product.disclaimer = 'Após o envio da proposta, a seguradora irá gerar e enviar o boleto para pagamento'
                 product.save()
+
+                for rule in p_rules:
+                    product.rules.add(RuleProduct.objects.get(name=rule))
 
                 for method in p_methods:
                     product.method_payment.add(MethodPayment.objects.get(name=method))

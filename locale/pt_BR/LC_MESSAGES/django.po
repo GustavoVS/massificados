@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-02 03:56-0300\n"
-"PO-Revision-Date: 2016-06-02 03:57+0000\n"
+"POT-Creation-Date: 2016-06-02 15:17-0300\n"
+"PO-Revision-Date: 2016-06-02 15:19+0000\n"
 "Last-Translator:   <admin@admin.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -229,7 +229,6 @@ msgid "Responsible"
 msgstr "Resposável"
 
 #: .\sale\models.py:39
-#| msgid "ActivityArea"
 msgid "Activity"
 msgstr "Área de Atividade"
 
@@ -396,23 +395,23 @@ msgstr "Data de Vencimento"
 msgid "Percentage"
 msgstr "Percentual"
 
-#: .\sale\views.py:331
+#: .\sale\views.py:333
 msgid "An error has occurred"
 msgstr "Um erro ocorreu"
 
-#: .\sale\views.py:333
+#: .\sale\views.py:335
 msgid "Select a File Type to upload"
 msgstr "Escolha o tipo de arquivo para upload"
 
-#: .\sale\views.py:335
+#: .\sale\views.py:337
 msgid "Select a File"
 msgstr "Selecione um arquivo"
 
-#: .\sale\views.py:346
+#: .\sale\views.py:348
 msgid "Successfully file uploaded"
 msgstr "Sucesso no upload do arquivo"
 
-#: .\sale\views.py:348
+#: .\sale\views.py:350
 #, python-format
 msgid "Uploaded by <b>%s</b> in <small>%s</small>"
 msgstr "Incluído por <b>%s</b> em <small>%s</small>"
@@ -703,76 +702,95 @@ msgstr "Lead de"
 msgid "Quotation of"
 msgstr "Cotação de"
 
-#: .\themes\default\templates\page-sale-section.html:263
+#: .\themes\default\templates\page-sale-section.html:125
+msgid "Clauses"
+msgstr "Coberturas"
+
+#: .\themes\default\templates\page-sale-section.html:129
+msgid "Clause"
+msgstr "Cobertura"
+
+#: .\themes\default\templates\page-sale-section.html:130
+#, python-format
+msgid "%%"
+msgstr ""
+
+#: .\themes\default\templates\page-sale-section.html:131
+#, fuzzy
+#| msgid "Insured Capital"
+msgid "Capital"
+msgstr "Capital Segurado"
+
+#: .\themes\default\templates\page-sale-section.html:304
 msgid "Files"
 msgstr "Perfis"
 
-#: .\themes\default\templates\page-sale-section.html:272
+#: .\themes\default\templates\page-sale-section.html:313
 msgid "Files to Download"
 msgstr "Arquivos para download"
 
-#: .\themes\default\templates\page-sale-section.html:280
-#: .\themes\default\templates\page-sale-section.html:320
-#: .\themes\default\templates\page-sale-section.html:335
+#: .\themes\default\templates\page-sale-section.html:321
+#: .\themes\default\templates\page-sale-section.html:361
+#: .\themes\default\templates\page-sale-section.html:376
 msgid "Download"
 msgstr "Download"
 
-#: .\themes\default\templates\page-sale-section.html:287
+#: .\themes\default\templates\page-sale-section.html:328
 msgid "Uploaded files"
 msgstr "Arquivos enviado"
 
-#: .\themes\default\templates\page-sale-section.html:330
+#: .\themes\default\templates\page-sale-section.html:371
 msgid "Uploaded by"
 msgstr "Enviado por"
 
-#: .\themes\default\templates\page-sale-section.html:331
+#: .\themes\default\templates\page-sale-section.html:372
 msgid "in"
 msgstr "Dica"
 
-#: .\themes\default\templates\page-sale-section.html:345
+#: .\themes\default\templates\page-sale-section.html:386
 msgid "There is no Files in this Sale. Click on \"+\" button to upload files."
 msgstr ""
 "Não há arquivos nessa oportunidade, clique no \"+\" para adicionar novos "
 "arquivos."
 
-#: .\themes\default\templates\page-sale-section.html:353
+#: .\themes\default\templates\page-sale-section.html:394
 msgid "You need to save the Sale to upload Files"
 msgstr "Você precisa salvar a oportunidade para salvar novos arquivos"
 
-#: .\themes\default\templates\page-sale-section.html:390
+#: .\themes\default\templates\page-sale-section.html:431
 msgid "Click to see more about the conditions of the product"
 msgstr "Clique para ver mais sobre as condições do produto"
 
-#: .\themes\default\templates\page-sale-section.html:397
-#: .\themes\default\templates\page-sale-section.html:421
+#: .\themes\default\templates\page-sale-section.html:438
+#: .\themes\default\templates\page-sale-section.html:462
 msgid "Conditions"
 msgstr "Declaração"
 
-#: .\themes\default\templates\page-sale-section.html:403
-#: .\themes\default\templates\page-sale-section.html:427
-#: .\themes\default\templates\page-sale-section.html:498
+#: .\themes\default\templates\page-sale-section.html:444
+#: .\themes\default\templates\page-sale-section.html:468
+#: .\themes\default\templates\page-sale-section.html:539
 #: .\themes\default\templates\parts\submit-form.html:4
 msgid "Close"
 msgstr "Fechar"
 
-#: .\themes\default\templates\page-sale-section.html:414
+#: .\themes\default\templates\page-sale-section.html:455
 msgid "Click to read the declaration"
 msgstr "Clique para ler a declarção"
 
-#: .\themes\default\templates\page-sale-section.html:449
+#: .\themes\default\templates\page-sale-section.html:490
 msgid "Choose an action"
 msgstr "Escolha uma ação"
 
-#: .\themes\default\templates\page-sale-section.html:473
-#: .\themes\default\templates\page-sale-section.html:499
+#: .\themes\default\templates\page-sale-section.html:514
+#: .\themes\default\templates\page-sale-section.html:540
 msgid "Upload File"
 msgstr "Subir um arquivo"
 
-#: .\themes\default\templates\page-sale-section.html:481
+#: .\themes\default\templates\page-sale-section.html:522
 msgid "Change the Filetype"
 msgstr "Tipo de arquivo"
 
-#: .\themes\default\templates\page-sale-section.html:483
+#: .\themes\default\templates\page-sale-section.html:524
 msgid "Select a Filetype"
 msgstr "Escolha um tipo de arquivo"
 
