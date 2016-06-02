@@ -3201,7 +3201,7 @@
         msgImageHeightLarge: 'Height of image file "{name}" cannot exceed {size} px.',
         msgImageResizeError: 'Could not get the image dimensions to resize.',
         msgImageResizeException: 'Error while resizing the image.<pre>{errors}</pre>',
-        dropZoneTitle: 'Drag & drop files here &hellip;',
+        dropZoneTitle: 'Adicione seu arquivo aqui &hellip;',
         previewZoomButtonTitles: {
             prev: 'View previous file',
             next: 'View next file',

@@ -38,7 +38,7 @@
             <img class="img-responsive" src="{% static 'img/partner-sofisa/slide2.jpg' %}" alt="img">
             <div class="space"></div>
 
-            <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+            <div class="col-lg-3 col-md-3">
                <div class="list-group">
                 <a class="list-group-item text-center active" data-remote="true"  id="categoria_todos">
                   {% trans ' All Products' %}
@@ -96,71 +96,71 @@
                 <div class="panel-body">
 
                     <div class="col-md-3">
-                        <img class="" width="200px" height="200px" src="{% static 'img/partner-sofisa/forcompany.png' %}" alt="Flower">
+                        <h4>{% trans 'For you' %}</h4>
+                        <h3>{% trans 'Company' %}</h3>
+                        <img class="" width="160px" height="160px" src="{% static 'img/partner-sofisa/business256.png' %}" alt="Flower">
                     </div>
-
                      <div class="col-md-9" >
+                        <div class="row-flex">
                          {% for product in products_j %}
-                         <div class="col-md-3">
-                            <div class="panel panel-default">
-                              <div class="panel-body">
-                                  <a href="{% url 'product-new-buyer' product.pk %}" role="button">
-                                  {% if product in user.group_permissions.product.all or user.is_superuser %}
-                                      <i class="fa"><img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" class="img-responsive"></i>
-                                      <i class="fa"><img src="{% if product.icon2 %}{{ product.icon2.url }}{% endif %}" class="img-responsive"></i>
-                                  {% endif %}
-                                  </a>
+                             <div class="col-md-3 products-pj">
+                                <div class="panel panel-primary ">
+                                  <div class="panel-body">
+                                      <a href="{% url 'product-new-buyer' product.pk %}" role="button">
+                                      {% if product in user.group_permissions.product.all or user.is_superuser %}
+                                          <i class="fa"><img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" class="img-responsive"></i>
+                                      {% endif %}
+                                      </a>
+                                    </div>
+                                  <div class="panel-footer" >
+                                      <a href="{% url 'product-new-buyer' product.pk %}" role="button">
+                                      {{ product.name }}
+                                      </a>
+                                  </div>
                                 </div>
-                              <div class="panel-footer">
-                                  <a href="{% url 'product-new-buyer' product.pk %}" role="button">
-                                  {{ product.name }}
-                                  </a>
-                              </div>
                             </div>
-                        </div>
                          {% endfor %}
+                        </div>
                      </div>
                 </div>
             </div>
         </div>
+                {# Produtos pessoa fisica #}
+                <div class="col-lg-9 col-md-9 hidden-sm hidden-xs">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
 
-        {# Produtos pessoa fisica #}
-        <div class="col-lg-9 col-md-9 hidden-sm hidden-xs">
-            <div class="panel panel-default">
-                <div class="panel-body">
+                            <div class="col-md-3">
+                                <h4>{% trans 'For' %}</h4>
+                                <h3>{% trans 'You' %}</h3>
+                                <img class="" width="160px" height="160px" src="{% static 'img/partner-sofisa/family256.png' %}" alt="Flower">
+                            </div>
 
-                    <div class="col-md-3">
-                        <img class="" width="200px" height="200px" src="{% static 'img/partner-sofisa/foryou.jpg' %}" alt="Flower">
+                             <div class="col-md-9" >
+                                <div class="row-flex">
+                                     {% for product in products_f %}
+                                         <div class="col-md-3 products-pf">
+                                            <div class="panel panel-primary">
+                                              <div class="panel-body">
+                                                  <a href="{% url 'product-new-buyer' product.pk %}" role="button">
+                                                  {% if product in user.group_permissions.product.all or user.is_superuser %}
+                                                      <i class="fa"><img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" class="img-responsive"></i>
+                                                  {% endif %}
+                                                  </a>
+                                                </div>
+                                              <div class="panel-footer">
+                                                  <a href="{% url 'product-new-buyer' product.pk %}" role="button">
+                                                  {{ product.name }}
+                                                  </a>
+                                              </div>
+                                            </div>
+                                        </div>
+                                     {% endfor %}
+                                 </div>
+                             </div>
+                        </div>
                     </div>
-
-                     <div class="col-md-9" >
-                         {% for product in products_f %}
-                         <div class="col-md-3">
-                            <div class="panel panel-default">
-                              <div class="panel-body">
-                                  <a href="{% url 'product-new-buyer' product.pk %}" role="button">
-                                  {% if product in user.group_permissions.product.all or user.is_superuser %}
-                                      <i class="fa"><img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" class="img-responsive"></i>
-                                      <i class="fa"><img src="{% if product.icon2 %}{{ product.icon2.url }}{% endif %}" class="img-responsive"></i>
-                                  {% endif %}
-                                  </a>
-                                </div>
-                              <div class="panel-footer">
-                                  <a href="{% url 'product-new-buyer' product.pk %}" role="button">
-                                  {{ product.name }}
-                                  </a>
-                              </div>
-                            </div>
-                        </div>
-                         {% endfor %}
-                     </div>
                 </div>
-            </div>
-        </div>
-
-
-
-
             </div>
         </div>
     {% endif %}

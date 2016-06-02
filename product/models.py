@@ -66,7 +66,7 @@ class Status(models.Model):
 
 class MethodPayment(models.Model):
     name = models.CharField(_('Name'), max_length=15)
-    disclaimer= models.CharField(_('Disclaimer'), max_length=100, null=True)
+    disclaimer = models.CharField(_('Disclaimer'), max_length=100, null=True)
     bank = models.ForeignKey(Bank, on_delete=models.CASCADE, null=True)
 
     def __unicode__(self):
@@ -124,10 +124,10 @@ class Product(models.Model):
     begin_status = models.ForeignKey(Status)
     profile = models.ForeignKey(Profile, null=True)
     other_documents_declaration = models.CharField(_('Other Documentos'), max_length=100, null=True)
-    rules_declaration = models.CharField(_('Rules'), max_length=100, null=True)
-    disclaimer = models.CharField(_('Rules'), max_length=100, null=True)
+    rules_declaration = models.CharField(_('Rules'), max_length=100, null=True, blank=True)
+    disclaimer = models.CharField(_('Rules'), max_length=100, null=True, blank=True)
     method_payment = models.ManyToManyField(MethodPayment)
-    rules = models.ManyToManyField(RuleProduct, blank=True)
+    rules = models.ManyToManyField(RuleProduct, blank=True, null=True)
 
     def calc(self):
         return self.premio * 0.1

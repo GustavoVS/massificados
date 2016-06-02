@@ -36,7 +36,7 @@ class Buyer(models.Model):
     kind_person = models.CharField(_('Kind Person'), max_length=1, choices=KIND_PERSON_CHOICES)
     cpf_cnpj = models.CharField(_('CPF/CNPJ'), max_length=18)
     responsible = models.CharField(_('Responsible'), max_length=50, blank=True, null=True)
-    activity_area = models.ForeignKey(ActivityArea, blank=True, null=True)
+    activity_area = models.ForeignKey(ActivityArea, blank=True, null=True, related_name=_('Activity'),)
 
     def __unicode__(self):
         return self.name
@@ -107,14 +107,14 @@ class Deadline(models.Model):
         MethodPayment,
         null=True,
         blank=True,
-        # default=lambda: Sale.product.method_payment.objects.all()[:0])
+        verbose_name=_("Method"), related_name=_('Method'),
     )
     sale = models.ForeignKey(Sale, on_delete=models.CASCADE)
-    lives = models.ForeignKey(NumberLives, null=True, blank=True)
+    lives = models.ForeignKey(NumberLives, null=True, blank=True, verbose_name=_("Lives"), related_name=_('Lives'),)
     rules = models.ManyToManyField(RuleDeadLine, blank=True)
 
-    def __unicode__(self):
-        return '#%d %s (%s)' % (self.pk, self.sale.buyer, self.sale.product)
+    # def __unicode__(self):
+    #     return '#%d %s (%s)' % (self.pk, self.sale.buyer, self.sale.product)
 
     def get_questions(self):
         return self.sale.product.profile.questions_set.get(type_profile='pdl')

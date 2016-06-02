@@ -28,8 +28,9 @@ class AbstractMassificadoUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(_('Staff status'), default=False)
     is_active = models.BooleanField(_('Active'), default=True)
     date_joined = models.DateTimeField(_('Date joined'), default=timezone.now)
-    partner = models.ForeignKey(Partner, null=True)
-    master = models.ForeignKey('self', null=True, blank=True)
+    partner = models.ForeignKey(Partner, null=True, verbose_name=_("Partner"), related_name="Partner")
+    director = models.ForeignKey('self', null=True, blank=True, verbose_name=_("Director"), related_name="Director")
+    master = models.ForeignKey('self', null=True, blank=True, verbose_name=_("Master"), related_name="Master")
     agency = models.CharField(_('Agency'), max_length=30, blank=True, null=True)
 
     class Meta:
@@ -50,4 +51,5 @@ class AbstractMassificadoUser(AbstractBaseUser, PermissionsMixin):
 
 
 class MassificadoUser(AbstractMassificadoUser):
-    group_permissions = models.ForeignKey(MassificadoGroups, null=True)
+    group_permissions = models.ForeignKey(MassificadoGroups, null=True,
+                                          verbose_name=_("Permissions"), related_name="Permissions")

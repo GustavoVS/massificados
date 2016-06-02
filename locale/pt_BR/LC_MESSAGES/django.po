@@ -2,310 +2,445 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-14 16:23-0300\n"
-"PO-Revision-Date: 2016-05-23 15:35+0000\n"
+"POT-Creation-Date: 2016-06-01 16:46-0300\n"
+"PO-Revision-Date: 2016-06-01 16:49+0000\n"
 "Last-Translator:   <admin@admin.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Translated-Using: django-rosetta 0.7.11\n"
 
-#: .\massificados\settings.py:162
+#: .\core\notification.py:25
+msgid "No object found to send the notification"
+msgstr "Objetos não encontrados para enviar a notificação."
+
+#: .\core\notification.py:28
+msgid "No recipients found to send the notification"
+msgstr "Recipientes não encontrados para enviar a notificação."
+
+#: .\massificados\settings.py:160
 msgid "Brazilian Portuguese"
 msgstr "Português Brasileiro"
 
-#: .\massificados\settings.py:163
+#: .\massificados\settings.py:161
 msgid "English"
 msgstr "Inglês"
 
-#: .\partner\models.py:13 .\sale\models.py:18
+#: .\partner\models.py:13 .\sale\models.py:33
 msgid "Date created"
 msgstr "Data de Criação"
 
-#: .\product\models.py:55 .\sale\models.py:14
-msgid "Individual"
-msgstr "Pessoa Fisica"
+#: .\product\models.py:10 .\user_account\models.py:22
+msgid "Email address"
+msgstr "Endereço de e-mail"
 
-#: .\product\models.py:56 .\sale\models.py:15
-msgid "Legal Person"
-msgstr "Pessoa Juridica"
-
-#: .\product\models.py:58 .\product\models.py:78 .\product\models.py:87
-#: .\sale\models.py:17
-#, fuzzy
-#| msgid "Page Name"
+#: .\product\models.py:68 .\product\models.py:106 .\product\models.py:140
+#: .\sale\models.py:14 .\sale\models.py:32 .\user_groups\models.py:8
 msgid "Name"
 msgstr "Nome da Página"
 
-#: .\product\models.py:59
+#: .\product\models.py:69
+msgid "Disclaimer"
+msgstr "Aviso"
+
+#: .\product\models.py:78
+msgid "Fixing"
+msgstr "Erro"
+
+#: .\product\models.py:79
+msgid "Variable"
+msgstr "Variável"
+
+#: .\product\models.py:93 .\product\models.py:127 .\product\models.py:128
+msgid "Rules"
+msgstr "Regra"
+
+#: .\product\models.py:103 .\sale\models.py:29
+msgid "Individual"
+msgstr "Pessoa Fisica"
+
+#: .\product\models.py:104 .\sale\models.py:30
+msgid "Legal Person"
+msgstr "Pessoa Juridica"
+
+#: .\product\models.py:107
 msgid "Image"
 msgstr "Imagem Principal"
 
-#: .\product\models.py:60
+#: .\product\models.py:108
 msgid "Icon 1"
 msgstr "Primeiro ícone"
 
-#: .\product\models.py:61
+#: .\product\models.py:109
 msgid "Icon 2"
 msgstr "Segundo ícone"
 
-#: .\product\models.py:62
-#, fuzzy
-#| msgid "Protection"
+#: .\product\models.py:110
 msgid "Introduction"
 msgstr "Proteção"
 
-#: .\product\models.py:63
+#: .\product\models.py:111
 msgid "Description"
 msgstr "Descrição"
 
-#: .\product\models.py:64
+#: .\product\models.py:112
 msgid "Declaration"
 msgstr "Declaração"
 
-#: .\product\models.py:88
+#: .\product\models.py:113
+msgid "Full Declaration"
+msgstr "Declaração Completa"
+
+#: .\product\models.py:126
+msgid "Other Documentos"
+msgstr "Informação"
+
+#: .\product\models.py:141
 msgid "Hint"
 msgstr "Dica"
 
-#: .\product\models.py:91
+#: .\product\models.py:144
 msgid "Header"
 msgstr "Cabeçalho"
 
-#: .\product\models.py:92
+#: .\product\models.py:145
 msgid "Broker"
 msgstr ""
 
-#: .\product\models.py:93
+#: .\product\models.py:146
 msgid "Client"
 msgstr "Cliente"
 
-#: .\product\models.py:94
+#: .\product\models.py:147
 msgid "Insured"
 msgstr "Seguradora"
 
-#: .\product\models.py:95
-#, fuzzy
-#| msgid "Protection"
+#: .\product\models.py:148
 msgid "Commercial Protection"
 msgstr "Proteção"
 
-#: .\product\models.py:96
-#, fuzzy
-#| msgid "Protection"
+#: .\product\models.py:149
 msgid "Profile Protection"
 msgstr "Proteção"
 
-#: .\product\models.py:97
+#: .\product\models.py:150
 msgid "Tenant"
 msgstr ""
 
-#: .\product\models.py:98
+#: .\product\models.py:151
 msgid "Process"
 msgstr ""
 
-#: .\product\models.py:99
-#, fuzzy
-#| msgid "Legal Person"
+#: .\product\models.py:152
 msgid "Legal Opinion"
 msgstr "Pessoa Juridica"
 
-#: .\product\models.py:100
-#, fuzzy
-#| msgid "Information"
+#: .\product\models.py:153
 msgid "Other information"
 msgstr "Informação"
 
-#: .\product\models.py:101
-#, fuzzy
-#| msgid "Protection"
+#: .\product\models.py:154
 msgid "Collection"
 msgstr "Proteção"
 
-#: .\product\models.py:102
+#: .\product\models.py:155
 msgid "Condition"
 msgstr "Condição"
 
-#: .\product\models.py:103
+#: .\product\models.py:156
 msgid "Footer"
 msgstr ""
 
-#: .\product\models.py:107
-#, fuzzy
-#| msgid "Profile Detail"
+#: .\product\models.py:160
 msgid "Profile Deadline"
 msgstr "Detalhe do Perfil"
 
-#: .\product\models.py:108
+#: .\product\models.py:161
 msgid "Profile Detail"
 msgstr "Detalhe do Perfil"
 
-#: .\product\models.py:112
+#: .\product\models.py:165
 msgid "Input"
 msgstr ""
 
-#: .\product\models.py:113
+#: .\product\models.py:166
 msgid "CheckBox"
 msgstr ""
 
-#: .\product\models.py:114
+#: .\product\models.py:167
 msgid "Float"
 msgstr "Moeda"
 
-#: .\product\models.py:115
+#: .\product\models.py:168
 msgid "Link"
 msgstr "Link"
 
-#: .\product\models.py:116
+#: .\product\models.py:169
 msgid "Select"
 msgstr ""
 
-#: .\product\models.py:117
+#: .\product\models.py:170
 msgid "Date"
 msgstr ""
 
-#: .\product\models.py:118
+#: .\product\models.py:171
 msgid "Text"
 msgstr ""
 
-#: .\product\models.py:119
+#: .\product\models.py:172
 msgid "Percent"
 msgstr ""
 
-#: .\product\models.py:120 .\sale\models.py:33 .\sale\models.py:81
-#: .\sale\models.py:92
+#: .\product\models.py:173 .\sale\models.py:21 .\sale\models.py:50
+#: .\sale\models.py:222 .\sale\models.py:234
 msgid "Number"
 msgstr "Número"
 
-#: .\product\models.py:158
-#: .\themes\default\templates\page-production-section.html:19
-#: .\themes\default\templates\page-sale-section.html:22
-msgid "Buyer"
-msgstr "Comprador"
+#: .\sale\forms.py:16
+msgid "Invalid value for this Field"
+msgstr "Valor inválido para este campo"
 
-#: .\product\models.py:159
-msgid "Insurance Company"
-msgstr "Seguradora"
+#: .\sale\forms.py:22 .\sale\forms.py:29
+msgid "This field is required"
+msgstr "Esse campo é obrigatório"
 
-#: .\product\models.py:160
-msgid "Partner - Superintendent"
-msgstr "Parceiro - Super Intendente"
-
-#: .\product\models.py:161
-msgid "Partner - Administrator"
-msgstr "Parceiro - Administrador"
-
-#: .\product\models.py:162
-msgid "GalCorr - Operational"
-msgstr "GalCorr - Operacional"
-
-#: .\product\models.py:163
-msgid "GalCorr - Commercial"
-msgstr "GalCorr - Comercial"
-
-#: .\product\models.py:164
-msgid "GalCorr - Manager"
-msgstr "GalCorr - Gerente"
-
-#: .\product\models.py:165
-msgid "GalCorr - Administrator"
-msgstr "GalCorr - Administrador"
-
-#: .\sale\models.py:19
+#: .\sale\models.py:34
 msgid "E-mail"
 msgstr "E-mail"
 
-#: .\sale\models.py:20
+#: .\sale\models.py:35
 msgid "Phone"
 msgstr "Telefone"
 
-#: .\sale\models.py:21
-#, fuzzy
-#| msgid "Legal Person"
+#: .\sale\models.py:36
 msgid "Kind Person"
 msgstr "Pessoa Juridica"
 
-#: .\sale\models.py:22
+#: .\sale\models.py:37
 msgid "CPF/CNPJ"
 msgstr "CPF/CNPJ"
 
-#: .\sale\models.py:30
+#: .\sale\models.py:38
+msgid "Responsible"
+msgstr "Resposável"
+
+#: .\sale\models.py:39
+#, fuzzy
+#| msgid "Active"
+msgid "Activity"
+msgstr "Ativo"
+
+#: .\sale\models.py:47
 msgid "Street"
 msgstr "Rua"
 
-#: .\sale\models.py:31
+#: .\sale\models.py:48
 msgid "District"
 msgstr "Bairro"
 
-#: .\sale\models.py:32
+#: .\sale\models.py:49
 msgid "Complement"
 msgstr "Complemento"
 
-#: .\sale\models.py:34
+#: .\sale\models.py:51
 msgid "City"
 msgstr "Cidade"
 
-#: .\sale\models.py:35
+#: .\sale\models.py:52
 msgid "State"
 msgstr "Estado"
 
-#: .\sale\models.py:36
+#: .\sale\models.py:53
 msgid "Postal Code"
 msgstr "CEP"
 
-#: .\sale\models.py:37
-#, fuzzy
-#| msgid "Email address"
+#: .\sale\models.py:54
 msgid "Main Address"
 msgstr "Endereço de e-mail"
 
-#: .\sale\models.py:44
-#, fuzzy
-#| msgid "Date created"
+#: .\sale\models.py:69
 msgid "Date Created"
 msgstr "Data de Criação"
 
-#: .\sale\models.py:55
-msgid "Begin"
-msgstr "Começo"
+#: .\sale\models.py:85
+msgid "Officials and Partners/Directors"
+msgstr "Funcionários e  Sócios/Diretores"
 
-#: .\sale\models.py:56
-msgid "End"
-msgstr "Fim"
+#: .\sale\models.py:88
+msgid "Not Contributory"
+msgstr "Não Contributário"
 
-#: .\sale\models.py:58
+#: .\sale\models.py:91
+msgid "Yearly"
+msgstr "Anual"
+
+#: .\sale\models.py:94
+msgid "Begin date"
+msgstr "Início de vigência"
+
+#: .\sale\models.py:95
+msgid "End date"
+msgstr "Fim de vigência"
+
+#: .\sale\models.py:96
+msgid "I accept that the GalCorr make contact my client, if necessary"
+msgstr "Eu aceito que a GalCorr faça contato com o cliente, se necerrário."
+
+#: .\sale\models.py:98
 msgid "Payment"
-msgstr "Pagamento"
+msgstr "Prêmio"
 
-#: .\sale\models.py:59
-msgid "Detail Count"
-msgstr "Detalhes da Compra"
-
-#: .\sale\models.py:60
+#: .\sale\models.py:99
 msgid "Proposal"
 msgstr "Proposta"
 
-#: .\sale\models.py:61
+#: .\sale\models.py:100
 msgid "Policy"
 msgstr "Apólice"
 
-#: .\sale\models.py:74
-msgid "File"
-msgstr ""
+#: .\sale\models.py:101
+msgid "Insured Capital"
+msgstr "Seguradora"
 
-#: .\sale\models.py:82 .\sale\models.py:93
+#: .\sale\models.py:102
+msgid "Rate per Thousand"
+msgstr "Taxa do Seguro (Por Mil)"
+
+#: .\sale\models.py:103
+msgid "Insured Group"
+msgstr "Grupo Segurado"
+
+#: .\sale\models.py:104
+msgid "Costing"
+msgstr "Custeio do Prêmio"
+
+#: .\sale\models.py:105
+msgid "Revenues"
+msgstr "Periodicidade de Faturamento"
+
+#: .\sale\models.py:110
+msgid "Method"
+msgstr "Meio de págamento"
+
+#: .\sale\models.py:113
+msgid "Lives"
+msgstr "Vidas"
+
+#: .\sale\models.py:145
+#, python-format
+msgid "New Sale [#%d] created"
+msgstr "Nova oportunidade  [#%d] Criada"
+
+#: .\sale\models.py:146
+#, python-format
+msgid "The new Sale [#%d] was created with status %s. Buyer %s, CPF/CNPJ %s "
+msgstr ""
+"A nova oportunidade [#%d] foi crida com status %s. Contratante %s, CPF/CNPJ "
+"%s"
+
+#: .\sale\models.py:173
+#, python-format
+msgid "Sale [%d] has status changed"
+msgstr "A oportunidade [#%d] teve o status modificado"
+
+#: .\sale\models.py:174
+#, python-format
+msgid ""
+"The Sale [%d] has status changed from %s to %s . Buyer %s, CPF/CNPJ %s "
+msgstr ""
+"A oportunidade [%d] teve o status modificado de %s para %s . Contratante %s,"
+" CPF/CNPJ %s"
+
+#: .\sale\models.py:187
+msgid "Data do Upload"
+msgstr "Atualização"
+
+#: .\sale\models.py:212
+#, python-format
+msgid "New file uploaded to Sale [#%d]"
+msgstr "Novo arquivo anexo a oportunidade [#%d]"
+
+#: .\sale\models.py:213
+#, python-format
+msgid "New file uploaded to Sale [#%d] in status %s. Buyer %s, CPF/CNPJ %s"
+msgstr ""
+"Um novo arquivo anexo a oportunidade [#%d] no status %s. Contratante %s, "
+"CPF/CNPJ %s"
+
+#: .\sale\models.py:223 .\sale\models.py:235
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
-#: .\sale\models.py:83 .\sale\models.py:95
+#: .\sale\models.py:224 .\sale\models.py:237
 msgid "Payment Date"
-msgstr ""
+msgstr "Data de Pagamento"
 
-#: .\sale\models.py:84 .\sale\models.py:96
+#: .\sale\models.py:225 .\sale\models.py:238
 msgid "Maturity Date"
-msgstr ""
+msgstr "Data de Vencimento"
 
-#: .\sale\models.py:94
+#: .\sale\models.py:226 .\sale\models.py:236
 msgid "Percentage"
-msgstr ""
+msgstr "Percentual"
+
+#: .\sale\views.py:311
+msgid "An error has occurred"
+msgstr "Um erro ocorreu"
+
+#: .\sale\views.py:313
+msgid "Select a File Type to upload"
+msgstr "Escolha o tipo de arquivo para upload"
+
+#: .\sale\views.py:315
+msgid "Select a File"
+msgstr "Selecione um arquivo"
+
+#: .\sale\views.py:326
+msgid "Successfully file uploaded"
+msgstr "Sucesso no upload do arquivo"
+
+#: .\sale\views.py:328
+#, python-format
+msgid "Uploaded by <b>%s</b> in <small>%s</small>"
+msgstr "Incluído por <b>%s</b> em <small>%s</small>"
+
+#: .\status_emails\models.py:12
+#: .\themes\default\templates\page-production-section.html:24
+#: .\themes\default\templates\page-sale-section.html:36
+msgid "Buyer"
+msgstr "Contratante"
+
+#: .\status_emails\models.py:13
+msgid "Insurance Company"
+msgstr "Seguradora"
+
+#: .\status_emails\models.py:14
+msgid "Owner"
+msgstr "Dodo da cotação"
+
+#: .\status_emails\models.py:15
+#: .\themes\default\templates\page-entries-section.html:17
+#: .\themes\default\templates\page-entries-user-section.html:8
+#: .\themes\default\templates\page-entries-users-section.html:8
+#: .\user_account\forms.py:12 .\user_account\views.py:15
+#: .\user_groups\models.py:13
+msgid "Users"
+msgstr "Usuários"
+
+#: .\themes\default\templates\404-section.html:8
+msgid "Sorry, this page doesn't exist"
+msgstr "Descuple, essa página não existe"
+
+#: .\themes\default\templates\404-section.html:10
+msgid "Click "
+msgstr "Clique"
+
+#: .\themes\default\templates\404-section.html:10
+msgid "Here"
+msgstr "Aqui"
+
+#: .\themes\default\templates\404-section.html:10
+msgid " to go to the Home page"
+msgstr "Para ir à página principal"
 
 #: .\themes\default\templates\_login.html:6
 #: .\themes\default\templates\_login.html:8
@@ -318,7 +453,6 @@ msgid "Senha"
 msgstr "Senha"
 
 #: .\themes\default\templates\_login.html:19
-#: .\themes\default\templates\account\login.html:8
 msgid "Entrar"
 msgstr "Entrar"
 
@@ -326,150 +460,200 @@ msgstr "Entrar"
 msgid "Relembrar"
 msgstr "Relembrar"
 
-#: .\themes\default\templates\_login.html:27
-msgid "Forget the password?"
-msgstr "Esqueceu sua senha?"
-
-#: .\themes\default\templates\header.html:24 .\user_account\forms.py:14
-#: .\user_account\views.py:16
+#: .\themes\default\templates\header.html:25
+#: .\themes\default\templates\page-sale-section.html:11
+#: .\themes\default\templates\sections\products.html:12
+#: .\user_account\forms.py:14 .\user_account\views.py:17
+#: .\user_groups\models.py:9 .\user_groups\models.py:16
 msgid "Products"
 msgstr "Produtos"
 
-#: .\themes\default\templates\header.html:35
+#: .\themes\default\templates\header.html:31 .\user_groups\models.py:10
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: .\themes\default\templates\header.html:40
-#: .\themes\default\templates\page-production-section.html:5
-#| msgid "Products"
+#: .\themes\default\templates\header.html:38
+#: .\themes\default\templates\page-production-section.html:7
+#: .\user_groups\models.py:11
 msgid "Production"
 msgstr "Produção"
 
 #: .\themes\default\templates\header.html:45
-#: .\themes\default\templates\page-entries-profile-section.html:180
-#: .\themes\default\templates\page-entries-section.html:4
+#: .\themes\default\templates\page-entries-profile-section.html:8
+#: .\themes\default\templates\page-entries-profiles-section.html:6
+#: .\themes\default\templates\page-entries-section.html:6
+#: .\themes\default\templates\page-entries-user-section.html:7
+#: .\themes\default\templates\page-entries-users-section.html:7
+#: .\user_groups\models.py:12
 msgid "Entries"
 msgstr "Cadastros"
 
-#: .\themes\default\templates\header.html:50
+#: .\themes\default\templates\header.html:61
+#: .\themes\default\templates\page-notifications-section.html:7
 msgid "Notifications"
 msgstr "Notificações"
 
-#: .\themes\default\templates\header.html:63
+#: .\themes\default\templates\header.html:74
 msgid "My Profile"
 msgstr "Perfil"
 
-#: .\themes\default\templates\header.html:69
+#: .\themes\default\templates\header.html:80
 msgid "Logout"
 msgstr "Sair"
 
-#: .\themes\default\templates\header.html:78
+#: .\themes\default\templates\header.html:89
 msgid "Login"
 msgstr "Entrar"
 
 #: .\themes\default\templates\page-entries-profile-section.html:7
-msgid "Edit Role"
-msgstr "Editar Perfil"
+#: .\themes\default\templates\page-entries-profiles-section.html:5
+#: .\themes\default\templates\page-entries-section.html:5
+#: .\themes\default\templates\page-entries-user-section.html:6
+#: .\themes\default\templates\page-entries-users-section.html:6
+#: .\themes\default\templates\page-notifications-section.html:6
+#: .\themes\default\templates\page-production-section.html:6
+#: .\themes\default\templates\page-sale-section.html:10
+#: .\themes\default\templates\sections\products.html:11
+msgid "Home"
+msgstr "Home"
 
 #: .\themes\default\templates\page-entries-profile-section.html:9
-msgid "Create Role"
-msgstr "Criar Perfil"
-
-#: .\themes\default\templates\page-entries-profile-section.html:184
-msgid "Page Name"
-msgstr "Nome da Página"
-
-#: .\themes\default\templates\page-entries-profile-section.html:187
-msgid "Can View"
-msgstr "Pode Visualizar"
-
-#: .\themes\default\templates\page-entries-profile-section.html:190
-msgid "Can Edit"
-msgstr "Pode Editar"
-
-#: .\themes\default\templates\page-entries-profile-section.html:209
-#, fuzzy
-#| msgid "Products"
-msgid "Product Sale"
-msgstr "Produtos"
-
-#: .\themes\default\templates\page-entries-profiles-section.html:4
-#: .\themes\default\templates\page-entries-section.html:21
+#: .\themes\default\templates\page-entries-profiles-section.html:7
+#: .\themes\default\templates\page-entries-section.html:29
+#: .\user_groups\models.py:14
 msgid "Profiles"
 msgstr "Perfis"
 
-#: .\themes\default\templates\page-entries-profiles-section.html:26
+#: .\themes\default\templates\page-entries-profile-section.html:15
+msgid "Create Role"
+msgstr "Criar Perfil"
+
+#: .\themes\default\templates\page-entries-profile-section.html:26
+msgid "Permissions of Menu"
+msgstr "Permissões"
+
+#: .\themes\default\templates\page-entries-profile-section.html:193
+msgid "For Companies"
+msgstr "Para empresas"
+
+#: .\themes\default\templates\page-entries-profile-section.html:223
+msgid "For People"
+msgstr "Para pessoa"
+
+#: .\themes\default\templates\page-entries-profile-section.html:253
+msgid "Status See"
+msgstr "Status que pode ver"
+
+#: .\themes\default\templates\page-entries-profile-section.html:282
+msgid "Status Edit"
+msgstr "Status que pode editar"
+
+#: .\themes\default\templates\page-entries-profile-section.html:311
+msgid "Status Set"
+msgstr "Status que pode atribuir"
+
+#: .\themes\default\templates\page-entries-profile-section.html:340
+msgid "The user can see the production in those profiles"
+msgstr "O usuário pode ver a produção nos seguintes perfís de acesso"
+
+#: .\themes\default\templates\page-entries-profile-section.html:370
+msgid "Files See"
+msgstr "Arquivos que pode ver"
+
+#: .\themes\default\templates\page-entries-profile-section.html:400
+msgid "Files Download"
+msgstr "Arquivos que pode baixar"
+
+#: .\themes\default\templates\page-entries-profile-section.html:428
+msgid "Save Role"
+msgstr "Criar Perfil"
+
+#: .\themes\default\templates\page-entries-profiles-section.html:21
+msgid "Search for a Profile"
+msgstr "Pesquisar usuário"
+
+#: .\themes\default\templates\page-entries-profiles-section.html:41
 msgid "Edit Profile"
 msgstr "Editar Perfil"
 
-#: .\themes\default\templates\page-entries-section.html:11
-#: .\themes\default\templates\page-entries-users-section.html:5
-#: .\user_account\forms.py:12 .\user_account\views.py:14
-msgid "Users"
-msgstr "Usuários"
-
-#: .\themes\default\templates\page-entries-section.html:12
+#: .\themes\default\templates\page-entries-section.html:18
 msgid "Here you can manage the User Accounts"
 msgstr "Aqui você pode administrar as Contas de Usuário"
 
-#: .\themes\default\templates\page-entries-section.html:13
+#: .\themes\default\templates\page-entries-section.html:19
 msgid "Go to User Accounts"
 msgstr "Ir para as Contas de Úsuário"
 
-#: .\themes\default\templates\page-entries-section.html:22
+#: .\themes\default\templates\page-entries-section.html:30
 msgid "Here you can set pre made Access Profiles for each User Type"
 msgstr "Aqui você pode fazer Perfis de Acesso pra cada Tipo de Usuário"
 
-#: .\themes\default\templates\page-entries-section.html:24
+#: .\themes\default\templates\page-entries-section.html:32
 msgid "Go to User Profiles"
 msgstr "Ir para Perfis de Usuário"
 
-#: .\themes\default\templates\page-entries-user-section.html:9
+#: .\themes\default\templates\page-entries-user-section.html:14
 msgid "Create User"
 msgstr "Criar Usuário"
 
-#: .\themes\default\templates\page-entries-user-section.html:17
-#: .\themes\default\templates\page-entries-user-section.html:24
-msgid "Save User"
-msgstr "Salvar Usuário"
-
-#: .\themes\default\templates\page-entries-user-section.html:19
-#: .\themes\default\templates\page-entries-user-section.html:26
-#: .\themes\default\templates\page-sale-section.html:200
-#: .\themes\default\templates\page-sale-section.html:288
-#: .\themes\default\templates\page-sale-section.html:340
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: .\themes\default\templates\page-entries-users-section.html:14
+#: .\themes\default\templates\page-entries-users-section.html:19
 msgid "Search for a User"
 msgstr "Pesquisar usuário"
 
-#: .\themes\default\templates\page-entries-users-section.html:35
+#: .\themes\default\templates\page-entries-users-section.html:40
+#: .\themes\default\templates\page-entries-users-section.html:42
+msgid "Last "
+msgstr "Sobrenome"
+
+#: .\themes\default\templates\page-entries-users-section.html:42
+msgid "This user do not login"
+msgstr "Esse usuário não pode fazer login"
+
+#: .\themes\default\templates\page-entries-users-section.html:44
 msgid "Edit User"
 msgstr "Editar Usuário"
 
-#: .\themes\default\templates\page-production-section.html:10
-#, fuzzy
-#| msgid "Search for a User"
+#: .\themes\default\templates\page-notifications-section.html:20
+msgid "New"
+msgstr "Nova"
+
+#: .\themes\default\templates\page-notifications-section.html:23
+msgid "All"
+msgstr "Todos"
+
+#: .\themes\default\templates\page-notifications-section.html:39
+#: .\themes\default\templates\page-notifications-section.html:60
+#: .\user_groups\models.py:17
+msgid "Notification"
+msgstr "Notificações"
+
+#: .\themes\default\templates\page-notifications-section.html:40
+msgid "(New)"
+msgstr "(Nova)"
+
+#: .\themes\default\templates\page-notifications-section.html:75
+msgid "There's no notifications"
+msgstr "Não há Notificações"
+
+#: .\themes\default\templates\page-production-section.html:14
 msgid "Search for a Sale"
 msgstr "Pesquisar usuário"
 
-#: .\themes\default\templates\page-production-section.html:20
-#, fuzzy
-#| msgid "Products"
+#: .\themes\default\templates\page-production-section.html:25
+#: .\themes\default\templates\page-sale-section.html:25
 msgid "Product"
-msgstr "Produtos"
+msgstr "Produto"
 
-#: .\themes\default\templates\page-production-section.html:21
-#, fuzzy
-#| msgid "State"
+#: .\themes\default\templates\page-production-section.html:26
+#: .\themes\default\templates\page-sale-section.html:27
 msgid "Status"
 msgstr "Estado"
 
+#: .\themes\default\templates\page-production-section.html:41
+msgid "There's no Sales"
+msgstr "Não há oportunidades"
+
 #: .\themes\default\templates\page-products-section.html:17
-#, fuzzy
-#| msgid "Products"
 msgid "Sell Product"
 msgstr "Produtos"
 
@@ -479,59 +663,117 @@ msgstr "SAC"
 
 #: .\themes\default\templates\page-sacs-section.html:8
 msgid "Fale com a Sofisa - Telefones e SAC"
-msgstr ""
+msgstr "Fale com a Sofisa - Telefones e SAC"
 
 #: .\themes\default\templates\page-sale-section.html:12
-#, fuzzy
-#| msgid "Sale"
-msgid "New Sale"
-msgstr "Venda"
+msgid "Contract"
+msgstr "Contratar"
 
-#: .\themes\default\templates\page-sale-section.html:30
-#, fuzzy
-#| msgid "Email address"
+#: .\themes\default\templates\page-sale-section.html:26
+msgid "Sale Owner"
+msgstr "Dodo da oportunidade"
+
+#: .\themes\default\templates\page-sale-section.html:31
+msgid "Insurance"
+msgstr "Seguradora"
+
+#: .\themes\default\templates\page-sale-section.html:71
 msgid "Address"
 msgstr "Endereço de e-mail"
 
-#: .\themes\default\templates\page-sale-section.html:42
-msgid "Deadline"
-msgstr "Vigência"
+#: .\themes\default\templates\page-sale-section.html:94
+msgid "Lead of"
+msgstr "Lead de"
 
-#: .\themes\default\templates\page-sale-section.html:116
-msgid "Details"
+#: .\themes\default\templates\page-sale-section.html:96
+msgid "Quotation of"
+msgstr "Cotação de"
+
+#: .\themes\default\templates\page-sale-section.html:263
+msgid "Files"
+msgstr "Perfis"
+
+#: .\themes\default\templates\page-sale-section.html:272
+msgid "Files to Download"
+msgstr "Arquivos para download"
+
+#: .\themes\default\templates\page-sale-section.html:280
+#: .\themes\default\templates\page-sale-section.html:320
+#: .\themes\default\templates\page-sale-section.html:335
+msgid "Download"
+msgstr "Download"
+
+#: .\themes\default\templates\page-sale-section.html:287
+msgid "Uploaded files"
+msgstr "Arquivos enviado"
+
+#: .\themes\default\templates\page-sale-section.html:330
+msgid "Uploaded by"
+msgstr "Enviado por"
+
+#: .\themes\default\templates\page-sale-section.html:331
+msgid "in"
+msgstr "Dica"
+
+#: .\themes\default\templates\page-sale-section.html:345
+msgid "There is no Files in this Sale. Click on \"+\" button to upload files."
 msgstr ""
+"Não há arquivos nessa oportunidade, clique no \"+\" para adicionar novos "
+"arquivos."
 
-#: .\themes\default\templates\page-sale-section.html:129
-#: .\themes\default\templates\page-sale-section.html:217
-msgid "Insert Detail"
-msgstr ""
+#: .\themes\default\templates\page-sale-section.html:353
+msgid "You need to save the Sale to upload Files"
+msgstr "Você precisa salvar a oportunidade para salvar novos arquivos"
 
-#: .\themes\default\templates\page-sale-section.html:204
-msgid "Add"
-msgstr ""
+#: .\themes\default\templates\page-sale-section.html:390
+msgid "Click to see more about the conditions of the product"
+msgstr "Clique para ver mais sobre as condições do produto"
 
-#: .\themes\default\templates\page-sale-section.html:292
-#: .\themes\default\templates\page-sale-section.html:337
-#, fuzzy
-#| msgid "Save Role"
+#: .\themes\default\templates\page-sale-section.html:397
+#: .\themes\default\templates\page-sale-section.html:421
+msgid "Conditions"
+msgstr "Declaração"
+
+#: .\themes\default\templates\page-sale-section.html:403
+#: .\themes\default\templates\page-sale-section.html:427
+#: .\themes\default\templates\page-sale-section.html:498
+#: .\themes\default\templates\parts\submit-form.html:4
+msgid "Close"
+msgstr "Fechar"
+
+#: .\themes\default\templates\page-sale-section.html:414
+msgid "Click to read the declaration"
+msgstr "Clique para ler a declarção"
+
+#: .\themes\default\templates\page-sale-section.html:449
+#| msgid "Collection"
+msgid "Choose an action"
+msgstr "Escolha uma ação"
+
+#: .\themes\default\templates\page-sale-section.html:473
+#: .\themes\default\templates\page-sale-section.html:499
+msgid "Upload File"
+msgstr "Subir um arquivo"
+
+#: .\themes\default\templates\page-sale-section.html:481
+msgid "Change the Filetype"
+msgstr "Tipo de arquivo"
+
+#: .\themes\default\templates\page-sale-section.html:483
+msgid "Select a Filetype"
+msgstr "Escolha um tipo de arquivo"
+
+#: .\themes\default\templates\page-sale.html:88
+msgid "Select File"
+msgstr "Escolha um arquivo"
+
+#: .\themes\default\templates\parts\submit-form.html:3
 msgid "Save"
-msgstr "Salvar Perfil"
-
-#: .\themes\default\templates\page-sale-section.html:307
-msgid "Press \"+\" button to insert Items"
-msgstr ""
-
-#: .\themes\default\templates\page-sale-section.html:316
-msgid "Attachements"
-msgstr "Anexos"
-
-#: .\themes\default\templates\page-sale-section.html:332
-msgid "No attachaments"
-msgstr "Sem Anexos"
+msgstr "Salvar"
 
 #: .\themes\default\templates\sections\about.html:4
 msgid "Sobre o Banco Sofisa"
-msgstr ""
+msgstr "Sobre o Banco Sofisa"
 
 #: .\themes\default\templates\sections\about.html:11
 msgid "Quem Somos"
@@ -543,37 +785,64 @@ msgstr "O que fazemos"
 
 #: .\themes\default\templates\sections\contact.html:7
 msgid "Fale conosco "
-msgstr ""
+msgstr "Fale Conosco"
 
-#: .\themes\default\templates\sections\products.html:7
-#, fuzzy
-#| msgid "Products"
-msgid "Produtos"
+#: .\themes\default\templates\sections\index-slider.html:5
+msgid "Massificados"
+msgstr "Massificado"
+
+#: .\themes\default\templates\sections\products.html:44
+msgid " All Products"
 msgstr "Produtos"
 
-#: .\user_account\forms.py:13 .\user_account\views.py:15
+#: .\themes\default\templates\sections\products.html:49
+msgid " For Company"
+msgstr "Para empresas"
+
+#: .\themes\default\templates\sections\products.html:71
+msgid " For People"
+msgstr "Para Pessoas"
+
+#: .\themes\default\templates\sections\products.html:99
+msgid "For you"
+msgstr ""
+
+#: .\themes\default\templates\sections\products.html:100
+#, fuzzy
+#| msgid " For Company"
+msgid "Company"
+msgstr "Para empresas"
+
+#: .\themes\default\templates\sections\products.html:134
+msgid "For"
+msgstr ""
+
+#: .\themes\default\templates\sections\products.html:135
+msgid "You"
+msgstr ""
+
+#: .\user_account\forms.py:13 .\user_account\views.py:16
 msgid "Users Profile"
 msgstr "Perfil de Usuário"
 
-#: .\user_account\forms.py:15 .\user_account\views.py:17
+#: .\user_account\forms.py:15 .\user_account\views.py:18
+#: .\user_groups\models.py:15
 msgid "Partners"
 msgstr "Parceiros"
 
-#: .\user_account\forms.py:16 .\user_account\views.py:18
+#: .\user_account\forms.py:16 .\user_account\views.py:19
 msgid "Campaign"
 msgstr "Campanha"
 
-#: .\user_account\forms.py:17 .\user_account\views.py:19
+#: .\user_account\forms.py:17 .\user_account\views.py:20
 msgid "Sac"
 msgstr "Sac"
 
-#: .\user_account\forms.py:18 .\user_account\views.py:20
+#: .\user_account\forms.py:18 .\user_account\views.py:21
 msgid "DashBoard"
 msgstr "DashBoard"
 
-#: .\user_account\forms.py:19 .\user_account\views.py:21
-#, fuzzy
-#| msgid "Products"
+#: .\user_account\forms.py:19 .\user_account\views.py:22
 msgid "Production Reports"
 msgstr "Produtos"
 
@@ -589,55 +858,147 @@ msgstr "Senha (novamente)"
 msgid "The two password fields didn't match."
 msgstr "As senhas não conferem"
 
-#: .\user_account\models.py:15
+#: .\user_account\models.py:16
 msgid "Username"
 msgstr "Nome do Usuário"
 
-#: .\user_account\models.py:16
+#: .\user_account\models.py:17
 msgid ""
 "Required. 30 characters or fewer. Letters, numbers and ./+/-/_ characters"
 msgstr ""
 "O campo pode conter 30 caracteres ou menos, letras, números e os caracteres "
 "./+/-/_ "
 
-#: .\user_account\models.py:19
+#: .\user_account\models.py:20
 msgid "Enter a valid username."
 msgstr "Coloque um nome de usuário válido"
 
-#: .\user_account\models.py:21
-msgid "Email address"
-msgstr "Endereço de e-mail"
-
-#: .\user_account\models.py:25
+#: .\user_account\models.py:26
 msgid "First name"
 msgstr "Primeiro Nome"
 
-#: .\user_account\models.py:26
+#: .\user_account\models.py:27
 msgid "Last name"
 msgstr "Sobrenome"
 
-#: .\user_account\models.py:27
+#: .\user_account\models.py:28
 msgid "Staff status"
 msgstr "Status Staff"
 
-#: .\user_account\models.py:28
+#: .\user_account\models.py:29
 msgid "Active"
 msgstr "Ativo"
 
-#: .\user_account\models.py:29
+#: .\user_account\models.py:30
 msgid "Date joined"
 msgstr "Data de Criação"
 
+#: .\user_account\models.py:31
+msgid "Partner"
+msgstr "Parceiro"
+
+#: .\user_account\models.py:32
+msgid "Director"
+msgstr "Diretor"
+
 #: .\user_account\models.py:33
+msgid "Master"
+msgstr "Supervisor"
+
+#: .\user_account\models.py:34
+msgid "Agency"
+msgstr "Agencia"
+
+#: .\user_account\models.py:37
 msgid "user"
 msgstr "úsuário"
 
-#: .\user_account\models.py:34
+#: .\user_account\models.py:38
 msgid "users"
 msgstr "usuários"
 
-#~ msgid "Profile"
-#~ msgstr "Perfil"
+#: .\user_account\models.py:55 .\user_groups\models.py:30
+msgid "Permissions"
+msgstr "Permissões de Acesso"
+
+#: .\user_groups\models.py:18
+msgid "Profile"
+msgstr "Perfil"
+
+#~ msgid "Change to Status"
+#~ msgstr "Modificar para o status"
+
+#~ msgid "Choice a new status"
+#~ msgstr "Escolha uma nova ação"
+
+#~ msgid "Cancel"
+#~ msgstr "Cancelar"
+
+#~ msgid " Know more"
+#~ msgstr "Saiba Mais"
+
+#~ msgid " Contract"
+#~ msgstr "Contratar"
+
+#~ msgid "Partner - Superintendent"
+#~ msgstr "Parceiro - Super Intendente"
+
+#~ msgid "Partner - Administrator"
+#~ msgstr "Parceiro - Administrador"
+
+#~ msgid "GalCorr - Operational"
+#~ msgstr "GalCorr - Operacional"
+
+#~ msgid "GalCorr - Commercial"
+#~ msgstr "GalCorr - Comercial"
+
+#~ msgid "GalCorr - Manager"
+#~ msgstr "GalCorr - Gerente"
+
+#~ msgid "GalCorr - Administrator"
+#~ msgstr "GalCorr - Administrador"
+
+#~ msgid "End"
+#~ msgstr "Fim"
+
+#~ msgid "Detail Count"
+#~ msgstr "Detalhes da Compra"
+
+#~ msgid "Forget the password?"
+#~ msgstr "Esqueceu sua senha?"
+
+#~ msgid "Edit Role"
+#~ msgstr "Editar Perfil"
+
+#~ msgid "Page Name"
+#~ msgstr "Nome da Página"
+
+#~ msgid "Can View"
+#~ msgstr "Pode Visualizar"
+
+#~ msgid "Can Edit"
+#~ msgstr "Pode Editar"
+
+#~ msgid "Product Sale"
+#~ msgstr "Produtos"
+
+#~ msgid "Save User"
+#~ msgstr "Salvar Usuário"
+
+#~ msgid "New Sale"
+#~ msgstr "Venda"
+
+#~ msgid "Deadline"
+#~ msgstr "Vigência"
+
+#~ msgid "Attachements"
+#~ msgstr "Anexos"
+
+#~ msgid "No attachaments"
+#~ msgstr "Sem Anexos"
+
+#~ msgid "Produtos"
+#~ msgstr "Produtos"
 
 #~ msgid "Sale"
 #~ msgstr "Venda"
@@ -656,6 +1017,3 @@ msgstr "usuários"
 
 #~ msgid "Sair"
 #~ msgstr "Sair"
-
-#~ msgid "Permissions"
-#~ msgstr "Permissões"

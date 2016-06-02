@@ -31,19 +31,6 @@
                     <p><b>{% trans "Insurance" %}</b>: {{ product.insurance_company.name }}<br></p>
                 {% endif %}
             </div>
-            {% if sale.pk %}
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="new-status">{% trans "Change to Status" %}:</label>
-                        <select name="new-status" id="new-status" class="form-control">
-                            <option value="">{% trans "Choice a new status" %}</option>
-                            {%  for status in possible_new_status %}
-                                <option value="{{ status.pk }}">{{ status.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-            {% endif %}
         </div>
         </div>
         <h2>{% trans 'Buyer' %}</h2>
@@ -453,6 +440,20 @@
                 <div class="disclaimer">
                     {% bootstrap_field deadlinesale.0.accept_declaration form_group_class='' %}
                 </div>
+                <div class="space"></div>
+                {% if sale.pk %}
+{#                    <div class="col-md-12">#}
+                        <div class="form-group">
+{#                            <label for="new-status">{% trans "Action" %}:</label>#}
+                            <select name="new-status" id="new-status" class="form-control">
+                                <option value="">{% trans "Choose an action" %}</option>
+                                {%  for status in possible_new_status %}
+                                    <option value="{{ status.pk }}">{{ status.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+{#                    </div>#}
+                {% endif %}
             </div>
         </div>
 
@@ -494,7 +495,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
                         <button type="button" class="btn btn-primary file-type-save">{% trans "Upload File" %}</button>
                     </div>
                 </div><!-- /.modal-content -->
