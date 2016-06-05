@@ -48,11 +48,11 @@
                                 placeholder="CPF" required="required" title="" type="text">
                     </div>
                     {% bootstrap_field form.name form_group_class='form-group col-md-6' %}
-                    {% bootstrap_field form.phone form_group_class='form-group col-md-6 mask-phone' %}
-                    {% bootstrap_field form.email form_group_class='form-group col-md-6' %}
+                    {% bootstrap_field form.phone form_group_class='form-group col-md-6 mask-phone' layout="horizontal" %}
+                    {% bootstrap_field form.email form_group_class='form-group col-md-6' layout="horizontal" %}
                 {% else %}
                     <div class="form-group col-md-4 mask-cnpj form-required">
-                        <label class="control-label" for="id_{{form.cpf_cnpj.html_name}}">CNPJ</label>
+                        <label class="sr-only" for="id_{{form.cpf_cnpj.html_name}}">CNPJ</label>
                         <input class="form-control cpf_cnpj-auto"
                                 id="id_{{form.cpf_cnpj.html_name}}"
                                 maxlength="{{form.cpf_cnpj.max_length}}"
@@ -60,11 +60,11 @@
                                 value="{{form.cpf_cnpj.value}}"
                                 placeholder="CNPJ" required="required" title="" type="text">
                     </div>
-                    {% bootstrap_field form.responsible form_group_class='form-group col-md-4 form-required' %}
-                    {% bootstrap_field form.activity_area form_group_class='form-group col-md-4 form-required' %}
-                    {% bootstrap_field form.name form_group_class='form-group col-md-4' %}
-                    {% bootstrap_field form.phone form_group_class='form-group col-md-4 mask-phone' %}
-                    {% bootstrap_field form.email form_group_class='form-group col-md-4' %}
+                    {% bootstrap_field form.responsible form_group_class='form-group col-md-4 form-required' layout="inline" addon_before="XXX" %}
+                    {% bootstrap_field form.activity_area form_group_class='form-group col-md-4 form-required' layout="inline" %}
+                    {% bootstrap_field form.name form_group_class='form-group col-md-4' layout="inline" %}
+                    {% bootstrap_field form.phone form_group_class='form-group col-md-4 mask-phone' layout="inline" %}
+                    {% bootstrap_field form.email form_group_class='form-group col-md-4' layout="inline" %}
                 {% endif %}
         </div>
     </div>

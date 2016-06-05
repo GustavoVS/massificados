@@ -4,9 +4,9 @@
 {% block section-title %}ERRO 404{% endblock %}
 {% block section-id %}page-404-sec{% endblock  %}
 {% block section-content %}
-    <div class="well">
-        <p>{% trans "Sorry, this page doesn't exist" %}</p>
-        <p>
-            {% trans "Click "}<a href="{% url 'index_view' %}">{% trans "Here" %}</a>{% trans " to go to the Home page" %}</p>
-    </div>
-{% endblock  %}
+
+        <div class="alert alert-danger text-center">
+            <p>{% trans "Sorry, this page doesn't exist" %}<br>{% trans "Click" %} <a href="{% url 'index_view' %}">{% trans "here" %}</a> {% trans "to go to the Home page" %}</p>
+        </div>
+
+{% endblock %}
