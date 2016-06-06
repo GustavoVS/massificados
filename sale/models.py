@@ -21,7 +21,7 @@ class NumberLives(models.Model):
     number = models.IntegerField(null=True)
 
     def __unicode__(self):
-        return _('lives %d') % self.number
+        return _('%d') % self.number
 
 
 class Buyer(models.Model):
@@ -107,10 +107,10 @@ class Deadline(models.Model):
         MethodPayment,
         null=True,
         blank=True,
-        verbose_name=_("Method"), related_name=_('method'),
+        verbose_name=_("Method"),
     )
     sale = models.ForeignKey(Sale, on_delete=models.CASCADE)
-    lives = models.ForeignKey(NumberLives, null=True, blank=True, verbose_name=_("Lives"), related_name=_('lives'),)
+    lives = models.ForeignKey(NumberLives, null=True, blank=True, verbose_name=_("Lives"), )
     rules = models.ManyToManyField(RuleDeadLine, blank=True)
 
     # def __unicode__(self):

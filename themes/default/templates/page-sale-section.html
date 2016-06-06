@@ -106,7 +106,7 @@
                     {% bootstrap_field deadlinesale.0.lives form_group_class='form-group col-md-6' %}
                     {% bootstrap_field deadlinesale.0.method_payment form_group_class='form-group col-md-6' set_disabled=True %}
                     {% bootstrap_field deadlinesale.0.insured_group form_group_class='form-group col-md-6' set_disabled=True %}
-                    {% bootstrap_field deadlinesale.0.insured_capital form_group_class='form-group col-md-3' set_disabled=True %}
+                    {% bootstrap_field deadlinesale.0.insured_capital form_group_class='form-group col-md-3 mask-float' set_disabled=True %}
                     {% bootstrap_field deadlinesale.0.rate_per_thousand form_group_class='form-group col-md-3' set_disabled=True %}
                     {% bootstrap_field deadlinesale.0.costing form_group_class='form-group col-md-3' set_disabled=True %}
                     {% bootstrap_field deadlinesale.0.revenues form_group_class='form-group col-md-3 disabledTextInput' set_disabled=True %}
@@ -128,8 +128,8 @@
                                                             <thead>
                                                               <tr>
                                                                 <th>{% trans "Clause" %} </th>
-                                                                <th>{% trans "%" %} </th>
-                                                                <th>{% trans "Capital" %} </th>
+                                                                <th style="width: 10%;">{% trans "%" %} </th>
+                                                                <th style="width: 20%;">{% trans "Individual Capital" %} </th>
                                                               </tr>
                                                             </thead>
                                                             <tbody>
@@ -143,11 +143,36 @@
                                                                                 {% else %}
                                                                                     <td>{{ rule.fixing_text }}</td>
                                                                                 {% endif %}
-                                                                                {% if rule.value > 0 %}
-                                                                                    <td name="deadline_set-0-insured_capital-valueV"{{ rule.pk }}>{{ rule.value }}</td>
+                                                                                <td  {% if not rule.value %}
+                                                                                           class="deadline_set-0-rules-valueV"
+                                                                                     {% else %}
+                                                                                           class="deadline_set-0-rules-valueF"
+                                                                                     {% endif %}
+                                                                                >{{ rule.value }}
+                                                                                </td>
+                                                                                {% if not rule.value %}
+                                                                                    <td class="hidden"><input name="deadline_set-0-rules-{{rule.pk }}-value" value="{{ deadline.rules.value|default_if_none:rule.value }}"class="deadline_set-0-rules-valueV"></td>
                                                                                 {% else %}
-                                                                                    <td name="deadline_set-0-insured_capital-valueF"{{ rule.pk }}>{{ rule.value }}</td>
+                                                                                    <td class="hidden"><input name="deadline_set-0-rules-{{rule.pk }}-value" value="{{ deadline.rules.value|default_if_none:rule.value }}"class="deadline_set-0-rules-valueF"></td>
                                                                                 {% endif %}
+                                                                                <td class="hidden">
+                                                                                    <input name="deadline_set-0-rules-{{rule.pk }}-name" value="{{ deadline.rules.name|default_if_none:rule.name }}" class ="deadline_set-0-rules-name">
+                                                                                </td>
+                                                                                <td class="hidden">
+                                                                                    <input name="deadline_set-0-rules-{{rule.pk }}-percent" value="{{ deadline.rules.percent|default_if_none:rule.percent }}" class ="deadline_set-0-rules-percent">
+                                                                                </td>
+                                                                                <td class="hidden">
+                                                                                    <input name="deadline_set-0-rules-{{rule.pk }}-rate" value="{{ deadline.rules.rate|default_if_none:rule.rate }}" class ="deadline_set-0-rules-rate">
+                                                                                </td>
+                                                                                <td class="hidden">
+                                                                                    <input name="deadline_set-0-rules-{{rule.pk }}-fixing_text" value="{{ deadline.rules.fixing_text|default_if_none:rule.fixing_text }}" class ="deadline_set-0-rules-fixing_text">
+                                                                                </td>
+                                                                                <td class="hidden">
+                                                                                    <input name="deadline_set-0-rules-{{rule.pk }}-type " value="{{ deadline.rules.type|default_if_none:rule.type }}" class ="deadline_set-0-rules-type">
+                                                                                </td>
+                                                                                <td class="hidden">
+                                                                                    <input name="deadline_set-0-rules-{{rule.pk }}-rule" value="{{ deadline.rules.rule|default_if_none:rule.rule }}" class ="deadline_set-0-rules-rule">
+                                                                                </td>
                                                                             </div>
                                                                         </td>
                                                                     </tr>
