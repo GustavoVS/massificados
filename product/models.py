@@ -129,6 +129,7 @@ class Product(models.Model):
     disclaimer = models.CharField(_('Rules'), max_length=100, null=True, blank=True)
     method_payment = models.ManyToManyField(MethodPayment)
     rules = models.ManyToManyField(RuleProduct, blank=True,)
+    rules_js = models.TextField(_('Rule JS'), blank=True, null=True)
 
     def calc(self):
         return self.premio * 0.1

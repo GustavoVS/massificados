@@ -81,71 +81,72 @@
                 });
 
             });
-            function calculate() {
-                var P = $('#id_deadline_set-0-payment').val();
-                if(P === ""){
-                     P =  0;
-                }else{
-                     P = P.replace(".","");
-                     P = P.replace(".","");
-                     P = P.replace(".","");
-                     P = P.replace(",",".");
-                     P = parseFloat(P);
-                }
-                var V = $('#id_deadline_set-0-lives').val();
-                if (V===""){V=0}
-                if (V === 0 || P === 0) {
-                    $('#id_deadline_set-0-insured_capital').val(0).removeClass("float-success");
-                    $('#id_deadline_set-0-rate_per_thousand').val(0).removeClass("float-success");
-
-                    $('input.deadline_set-0-rules-valueV').val(0);
-                    $('td.deadline_set-0-rules-valueV').html(0).removeClass("float-success");
-                    $('td.deadline_set-0-rules-valueF').removeClass("float-warning");
-                }
-                else {
+            {% autoescape off %}{{ product.rules_js }}{% endautoescape %}
+{#            function calculate() {#}
+{#                var P = $('#id_deadline_set-0-payment').val();#}
+{#                if(P === ""){#}
+{#                     P =  0;#}
+{#                }else{#}
+{#                     P = P.replace(".","");#}
+{#                     P = P.replace(".","");#}
+{#                     P = P.replace(".","");#}
+{#                     P = P.replace(",",".");#}
+{#                     P = parseFloat(P);#}
+{#                }#}
+{#                var V = $('#id_deadline_set-0-lives').val();#}
+{#                if (V===""){V=0}#}
+{#                if (V === 0 || P === 0) {#}
+{#                    $('#id_deadline_set-0-insured_capital').val(0).removeClass("float-success");#}
+{#                    $('#id_deadline_set-0-rate_per_thousand').val(0).removeClass("float-success");#}
+{##}
+{#                    $('input.deadline_set-0-rules-valueV').val(0);#}
+{#                    $('td.deadline_set-0-rules-valueV').html(0).removeClass("float-success");#}
+{#                    $('td.deadline_set-0-rules-valueF').removeClass("float-warning");#}
+{#                }#}
+{#                else {#}
                     {# Vida Global OK #}
 {#                    var CS = (P/(12*V))/0.03;#}
 {#                    var TXS = (P/(CS))*1000;#}
 {#                    var CSI = CS;#}
 {#                    if (CSI>100000 & CS > 0){CSI=100000}#}
-
+{##}
                     {# Vida Grupo #}
 {#                    var CS = (P/(12*V))/0.03;#}
 {#                    if (CS>100000){CS=100000}#}
 {#                    var CSI = CS;#}
 {#                    CS=CS*V;#}
 {#                    var TXS = (P/(CS))*1000;#}
-
+{##}
                     {# AP #}
-                    var CS = (P/(12*V))/0.03;
-                    if (CS>100000){CS=100000}
-                    var CSI = CS;
-                    CS=CS*V;
-                    var TXS = (P/(CS))*1000;
-
-                    CS  = parseFloat(CS).toFixed(2);
-                    TXS = parseFloat(TXS).toFixed(2);
-                    CSI = parseFloat(CSI).toFixed(2);
-
-                    $('#id_deadline_set-0-insured_capital').val(CS).addClass("float-success");
-                    $('#id_deadline_set-0-rate_per_thousand').val(TXS).addClass("float-success");
-
-                    $('input.deadline_set-0-rules-valueV').val(CSI);
-                    $('td.deadline_set-0-rules-valueV').html(CSI).addClass("float-success");
-                    $('td.deadline_set-0-rules-valueF').addClass("float-warning");
-                }
-
-            }
-
-            $('input#id_deadline_set-0-payment').blur(function(){
-                calculate()
-            });
-            $('input#id_deadline_set-0-payment').keyup(function(){
-                calculate()
-            });
-            $('select#id_deadline_set-0-lives').change(function(){
-                calculate()
-            });
+{#                    var CS = (P/(12*V))/0.03;#}
+{#                    if (CS>100000){CS=100000}#}
+{#                    var CSI = CS;#}
+{#                    CS=CS*V;#}
+{#                    var TXS = (P/(CS))*1000;#}
+{##}
+{#                    CS  = parseFloat(CS).toFixed(2);#}
+{#                    TXS = parseFloat(TXS).toFixed(2);#}
+{#                    CSI = parseFloat(CSI).toFixed(2);#}
+{##}
+{#                    $('#id_deadline_set-0-insured_capital').val(CS).addClass("float-success");#}
+{#                    $('#id_deadline_set-0-rate_per_thousand').val(TXS).addClass("float-success");#}
+{##}
+{#                    $('input.deadline_set-0-rules-valueV').val(CSI);#}
+{#                    $('td.deadline_set-0-rules-valueV').html(CSI).addClass("float-success");#}
+{#                    $('td.deadline_set-0-rules-valueF').addClass("float-warning");#}
+{#                }#}
+{##}
+{#            }#}
+{##}
+{#            $('input#id_deadline_set-0-payment').blur(function(){#}
+{#                calculate()#}
+{#            });#}
+{#            $('input#id_deadline_set-0-payment').keyup(function(){#}
+{#                calculate()#}
+{#            });#}
+{#            $('select#id_deadline_set-0-lives').change(function(){#}
+{#                calculate()#}
+{#            });#}
             {% if sale.pk %}
                 $("#input-file-type").fileinput({
                     uploadUrl: '/api/upload_media',

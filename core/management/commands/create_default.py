@@ -31,8 +31,170 @@ RULES_VIDA = ('Morte (Básica)', 'IEA - Indenização Especial por Acidente',
 
 RULES_AP = (
  'Morte - Morte Acidetal',
- 'Assistência Funeral Individual',
+ 'IPA - Invalidez Permanente Total ou Parcial por Acidente',
 )
+
+RULEJS_VIDA_GLOBAL = '''
+            function calculate() {
+                var P = $('#id_deadline_set-0-payment').val();
+                if(P === ""){
+                     P =  0;
+                }else{
+                     P = P.replace(".","");
+                     P = P.replace(".","");
+                     P = P.replace(".","");
+                     P = P.replace(",",".");
+                     P = parseFloat(P);
+                }
+                var V = $('#id_deadline_set-0-lives').val();
+                if (V===""){V=0}
+                if (V === 0 || P === 0) {
+                    $('#id_deadline_set-0-insured_capital').val(0).removeClass("float-success");
+                    $('#id_deadline_set-0-rate_per_thousand').val(0).removeClass("float-success");
+
+                    $('input.deadline_set-0-rules-valueV').val(0);
+                    $('td.deadline_set-0-rules-valueV').html(0).removeClass("float-success");
+                    $('td.deadline_set-0-rules-valueF').removeClass("float-warning");
+                }
+                else {
+                    var CS = (P/(12*V))/0.03;
+                    var TXS = (P/(CS))*1000;
+                    var CSI = CS;
+                    if (CSI>100000 & CS > 0){CSI=100000}
+
+
+                    CS  = parseFloat(CS).toFixed(2);
+                    TXS = parseFloat(TXS).toFixed(2);
+                    CSI = parseFloat(CSI).toFixed(2);
+
+                    $('#id_deadline_set-0-insured_capital').val(CS).addClass("float-success");
+                    $('#id_deadline_set-0-rate_per_thousand').val(TXS).addClass("float-success");
+
+                    $('input.deadline_set-0-rules-valueV').val(CSI);
+                    $('td.deadline_set-0-rules-valueV').html(CSI).addClass("float-success");
+                    $('td.deadline_set-0-rules-valueF').addClass("float-warning");
+                }
+
+            }
+
+            $('input#id_deadline_set-0-payment').blur(function(){
+                calculate()
+            });
+            $('input#id_deadline_set-0-payment').keyup(function(){
+                calculate()
+            });
+            $('select#id_deadline_set-0-lives').change(function(){
+                calculate()
+            });
+'''
+
+RULEJS_VIDA = '''
+            function calculate() {
+                var P = $('#id_deadline_set-0-payment').val();
+                if(P === ""){
+                     P =  0;
+                }else{
+                     P = P.replace(".","");
+                     P = P.replace(".","");
+                     P = P.replace(".","");
+                     P = P.replace(",",".");
+                     P = parseFloat(P);
+                }
+                var V = $('#id_deadline_set-0-lives').val();
+                if (V===""){V=0}
+                if (V === 0 || P === 0) {
+                    $('#id_deadline_set-0-insured_capital').val(0).removeClass("float-success");
+                    $('#id_deadline_set-0-rate_per_thousand').val(0).removeClass("float-success");
+
+                    $('input.deadline_set-0-rules-valueV').val(0);
+                    $('td.deadline_set-0-rules-valueV').html(0).removeClass("float-success");
+                    $('td.deadline_set-0-rules-valueF').removeClass("float-warning");
+                }
+                else {
+                    var CS = (P/(12*V))/0.03;
+                    if (CS>100000){CS=100000}
+                    var CSI = CS;
+                    CS=CS*V;
+                    var TXS = (P/(CS))*1000;
+
+                    CS  = parseFloat(CS).toFixed(2);
+                    TXS = parseFloat(TXS).toFixed(2);
+                    CSI = parseFloat(CSI).toFixed(2);
+
+                    $('#id_deadline_set-0-insured_capital').val(CS).addClass("float-success");
+                    $('#id_deadline_set-0-rate_per_thousand').val(TXS).addClass("float-success");
+
+                    $('input.deadline_set-0-rules-valueV').val(CSI);
+                    $('td.deadline_set-0-rules-valueV').html(CSI).addClass("float-success");
+                    $('td.deadline_set-0-rules-valueF').addClass("float-warning");
+                }
+
+            }
+
+            $('input#id_deadline_set-0-payment').blur(function(){
+                calculate()
+            });
+            $('input#id_deadline_set-0-payment').keyup(function(){
+                calculate()
+            });
+            $('select#id_deadline_set-0-lives').change(function(){
+                calculate()
+            });
+'''
+
+RULEJS_AP = '''
+            function calculate() {
+                var P = $('#id_deadline_set-0-payment').val();
+                if(P === ""){
+                     P =  0;
+                }else{
+                     P = P.replace(".","");
+                     P = P.replace(".","");
+                     P = P.replace(".","");
+                     P = P.replace(",",".");
+                     P = parseFloat(P);
+                }
+                var V = $('#id_deadline_set-0-lives').val();
+                if (V===""){V=0}
+                if (V === 0 || P === 0) {
+                    $('#id_deadline_set-0-insured_capital').val(0).removeClass("float-success");
+                    $('#id_deadline_set-0-rate_per_thousand').val(0).removeClass("float-success");
+
+                    $('input.deadline_set-0-rules-valueV').val(0);
+                    $('td.deadline_set-0-rules-valueV').html(0).removeClass("float-success");
+                    $('td.deadline_set-0-rules-valueF').removeClass("float-warning");
+                }
+                else {
+                    var CS = (P/(12*V))/0.03;
+                    if (CS>100000){CS=100000}
+                    var CSI = CS;
+                    CS=CS*V;
+                    var TXS = (P/(CS))*1000;
+
+                    CS  = parseFloat(CS).toFixed(2);
+                    TXS = parseFloat(TXS).toFixed(2);
+                    CSI = parseFloat(CSI).toFixed(2);
+
+                    $('#id_deadline_set-0-insured_capital').val(CS).addClass("float-success");
+                    $('#id_deadline_set-0-rate_per_thousand').val(TXS).addClass("float-success");
+
+                    $('input.deadline_set-0-rules-valueV').val(CSI);
+                    $('td.deadline_set-0-rules-valueV').html(CSI).addClass("float-success");
+                    $('td.deadline_set-0-rules-valueF').addClass("float-warning");
+                }
+
+            }
+
+            $('input#id_deadline_set-0-payment').blur(function(){
+                calculate()
+            });
+            $('input#id_deadline_set-0-payment').keyup(function(){
+                calculate()
+            });
+            $('select#id_deadline_set-0-lives').change(function(){
+                calculate()
+            });
+'''
 
 
 FULL_DECLARATION_VIDA = '''<h1><strong>CONDI&Ccedil;&Otilde;ES RESUMIDAS DO PLANO</strong></h1>
@@ -666,26 +828,26 @@ DEFAULT_PRODUCT = (
     ('Vida', 'Introdução', 'Descrição', ' Declaração', 'J', 'Tokio', 'Vida',
         DEFAULT_FILES_TOKIO,
         'Proposta Gerada', 'Perfil Vida', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10 , 10, 0, FULL_DECLARATION_VIDA, DECLARATION_VIDA,
-        'Em caso de morte acidental, as coberturas básicas e IEA serão somadas', ('Boleto',), RULES_VIDA, ),
+        'Em caso de morte acidental, as coberturas básicas e IEA serão somadas', ('Boleto',), RULES_VIDA, RULEJS_VIDA, ),
     ('Vida Global', 'Introdução', 'Descrição', ' Declaração', 'J', 'Tokio', 'Vida',
          DEFAULT_FILES_TOKIO,
         'Proposta Gerada', 'Perfil Vida Global', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10 , 10, 0, FULL_DECLARATION_VIDA_GLOGAL, DECLARATION_VIDA_GLOGAL,
-        'Em caso de morte acidental, as coberturas básicas e IEA serão somadas', ('Boleto',), RULES_VIDA_GLOBAL, ),
+        'Em caso de morte acidental, as coberturas básicas e IEA serão somadas', ('Boleto',), RULES_VIDA_GLOBAL, RULEJS_VIDA_GLOBAL, ),
     ('Acidentes Pessoais', 'Introdução', 'Descrição', ' Declaração', 'J', 'Tokio', 'Acidentes Pessoais',
         DEFAULT_FILES_TOKIO,
-        'Proposta Gerada', 'Perfil Acidentes Pessoais', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10, 10, 0, FULL_DECLARATION_AP, DECLARATION_AP, '', ('Boleto',), RULES_AP, ),
+        'Proposta Gerada', 'Perfil Acidentes Pessoais', DEFAULT_STATUS_PRODUCT_TOKIO, 10, 10, 10, 0, FULL_DECLARATION_AP, DECLARATION_AP, '', ('Boleto',), RULES_AP, RULEJS_AP, ),
     ('Garantia Tradicional', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Garantia Tradicional',
         DEFAULT_FILES_GARANTIA,
-        'Lead de Garantia Gerado', 'Perfil Garantia Tradicional', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', '', '', ('Boleto',), '', ),
+        'Lead de Garantia Gerado', 'Perfil Garantia Tradicional', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', '', '', ('Boleto',), '', '', ),
     ('Garantia Judicial', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Garantia Judicial',
          DEFAULT_FILES_GARANTIA,
-        'Lead de Garantia Gerado', 'Perfil Garantia Judicial', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', '', '', ('Boleto',), '', ),
+        'Lead de Garantia Gerado', 'Perfil Garantia Judicial', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', '', '', ('Boleto',), '',  '', ),
     ('Fiança Locatícia', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Fiança Locatícia',
      DEFAULT_FILES_GARANTIA,
-    'Lead de Garantia Gerado', 'Perfil Fiança Locatícia', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', '', '', ('Boleto',),  '', ),
+    'Lead de Garantia Gerado', 'Perfil Fiança Locatícia', DEFAULT_STATUS_PRODUCT_GARANTIA, 10, 10, 10, 1, '', '', '', ('Boleto',),  '',  '', ),
     ('Saúde', 'Introdução', 'Descrição', ' Declaração', 'F', 'GalCorr', 'Saúde',
      DEFAULT_FILES_BENEFICIOS,
-    'Lead de Benefícios Gerado', 'Perfil Saúde', DEFAULT_STATUS_PRODUCT_BENEFICIOS, 10, 10, 10, 1, '', '', '', ('Boleto',),  '', ),
+    'Lead de Benefícios Gerado', 'Perfil Saúde', DEFAULT_STATUS_PRODUCT_BENEFICIOS, 10, 10, 10, 1, '', '', '', ('Boleto',),  '',  '', ),
     )
 
 DEFAULT_PROFILE_NAME = (
@@ -1019,7 +1181,7 @@ class Command(BaseCommand):
 
         for product_name, introduction, description, declaration, kind, insurance, branch, files,\
         begin, profile, status_permitted, partner_percentage, owner_percentage, master_percentage, is_lead,\
-        p_declaration_full,  p_declaration, p_rules_declaration, p_methods, p_rules in DEFAULT_PRODUCT:
+        p_declaration_full,  p_declaration, p_rules_declaration, p_methods, p_rules, p_rules_js in DEFAULT_PRODUCT:
             if not Product.objects.filter(name=product_name).exists():
                 product = Product(
                     name=product_name,
@@ -1036,6 +1198,7 @@ class Command(BaseCommand):
                     master_percentage=master_percentage,
                     is_lead=is_lead,
                     rules_declaration=p_rules_declaration,
+                    rules_js=p_rules_js,
                 )
                 product.full_declaration = p_declaration_full
                 product.declaration = p_declaration

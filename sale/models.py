@@ -95,7 +95,7 @@ class Deadline(models.Model):
     end = models.DateField(_('End date'), null=True, blank=True)
     accept_declaration = models.BooleanField(_('I accept that the GalCorr make contact my client, if necessary'), default=False)
     status = models.ForeignKey(Status)
-    payment = models.FloatField(_('Payment'), null=True, blank=True)
+    payment = models.FloatField(_('Debt'), null=True, blank=True)
     proposal = models.CharField(_('Proposal'), max_length=100, null=True, blank=True)
     policy = models.CharField(_('Policy'), max_length=100, null=True, blank=True)
     insured_capital = models.FloatField(_('Insured Capital'), null=True, blank=True)
