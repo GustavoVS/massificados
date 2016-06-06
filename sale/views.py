@@ -176,39 +176,31 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
         data['show_all'] = False
         data['product'] = Product.objects.get(pk=self.kwargs['productpk'])
         data['sale'] = sale = self.object.sale_set.all()[0]
-        # if not Product.objects.get(pk=self.kwargs['productpk']).is_lead:
-        data['deadline'] = sale.deadline_set.all()[0]
-        data['show_all'] = True
+        data['deadline'] = deadline = sale.deadline_set.all()[0]
         data['deadlinesale'] = DeadlineSaleFormset(instance=sale)
         data['sample_file_type'] = sale.product.sample_file_type.all()
         data['rules'] = sale.product.rules.all()
-        num_files = sale.product.sample_file_type.all().count()
-        if num_files % 4 == 0:
-            data['sample_file_type_cols'] = 3
-        elif num_files % 3 == 0:
-            data['sample_file_type_cols'] = 4
-        elif num_files % 2 == 0:
-            data['sample_file_type_cols'] = 6
-        elif num_files == 1:
-            data['sample_file_type_cols'] = 12
         data['uploaded_files'] = sale.deadline_set.all()[0].file_set.all()
         data['uploaded_file_types'] = [file_up.file_type for file_up in sale.deadline_set.all()[0].file_set.all()]
-        data['possible_new_status'] = self.request.user.group_permissions.status_set.filter(
-            level__gte=sale.deadline_set.all()[0].status.level).order_by('level')
-        # data['possible_new_status'] = Status.objects.filter(
-        #     level__gte=sale.deadline_set.all()[0].status.level).order_by('level')
-        # if sale.deadline_set.all():
-        #     data['filedeadline'] = FileDeadlineFormset(sale.product.file_type.all(), instance=sale.deadline_set.all()[0])
-        # else:
-        #     data['filedeadline'] = FileDeadlineFormset(sale.product.file_type.all())
 
-        # if sale.deadline_set.all():
-        #     data['detail_deadline'] = DetailDeadlineFormset(instance=sale.deadline_set.all()[0])
-        # else:
-        #     data['detail_deadline'] = DetailDeadlineFormset()
+        group_permissions = self.request.user.group_permissions
+        data['possible_new_status'] = group_permissions.status_set.filter(
+            level__gte=sale.deadline_set.all()[0].status.level).order_by('level')
 
         questions_deadlines = sale.product.profile.question_set.filter(
             type_profile='pdl').order_by('order_number')
+
+        data['edit_disabled'] = not (deadline.status in group_permissions.status_edit.all())
+
+        data['payment_disabled'] = not (deadline.status in group_permissions.status_edit_payment.all())
+        data['payment_see'] = not data['payment_disabled'] or \
+            deadline.status in group_permissions.status_see_payment.all()
+
+        data['deadline_disabled'] = not (deadline.status in group_permissions.status_edit_deadline.all())
+        data['deadline_see'] = not data['deadline_disabled'] or \
+            deadline.status in group_permissions.status_see_deadline.all()
+
+        data['show_all'] = data['deadline_see'] or data['payment_see']
 
         if sale.deadline_set.all():
             deadline = sale.deadline_set.all()[0]
@@ -219,6 +211,17 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
                         deadline=deadline).value
 
         data['questiondeadline'] = questions_deadlines
+
+        num_files = sale.product.sample_file_type.all().count()
+        if num_files % 4 == 0:
+            data['sample_file_type_cols'] = 3
+        elif num_files % 3 == 0:
+            data['sample_file_type_cols'] = 4
+        elif num_files % 2 == 0:
+            data['sample_file_type_cols'] = 6
+        elif num_files == 1:
+            data['sample_file_type_cols'] = 12
+
         return data
 
     def form_valid(self, form):

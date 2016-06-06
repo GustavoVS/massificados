@@ -948,7 +948,7 @@ ul.navbar-nav > li > a {
 .form-group label{
 	margin-top: 0
 }
-.form-group input{
+.form-group input, .form-group select{
 	font-size: 12px;
 	padding-top: 1px;
 	padding-bottom: 1px;

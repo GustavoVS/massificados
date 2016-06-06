@@ -21,12 +21,10 @@ class AbstractMassificadoGroups(models.Model):
     status_see = models.ManyToManyField(Status, related_name='user_status_see', blank=True)
     status_see_payment = models.ManyToManyField(Status, related_name='user_status_see_payment', blank=True)
     status_see_deadline = models.ManyToManyField(Status, related_name='user_status_see_deadline', blank=True)
-    status_see_data = models.ManyToManyField(Status, related_name='user_status_see_data', blank=True)
 
     status_edit = models.ManyToManyField(Status, related_name='user_status_edit', blank=True)
     status_edit_payment = models.ManyToManyField(Status, related_name='user_status_edit_payment', blank=True)
     status_edit_deadline = models.ManyToManyField(Status, related_name='user_status_edit_deadline', blank=True)
-    status_edit_data = models.ManyToManyField(Status, related_name='user_status_edit_data', blank=True)
 
     status_set = models.ManyToManyField(Status, related_name='user_status_set', blank=True)
 

@@ -50,12 +50,12 @@ AddressBuyerFormset = inlineformset_factory(Buyer, BuyerAddress, form=BuyerAddre
 class DeadlineSaleForm(forms.ModelForm):
     # accept_declaration = forms.BooleanField(_('I accept that the GalCorr make contact my client, if necessary'),
     #     required=True)
-    payment = forms.CharField(max_length=18)
+    payment = forms.CharField(max_length=18, required=False)
 
     class Meta:
         model = Deadline
         fields = ['begin', 'end', 'proposal', 'policy', 'accept_declaration', 'method_payment',
-                  'insured_capital', 'rate_per_thousand', 'insured_group', 'costing', 'revenues', 'lives', ]
+                  'insured_capital', 'rate_per_thousand', 'insured_group', 'costing', 'revenues', 'lives', 'payment']
 
     def __init__(self, *args, **kwargs):
         super(DeadlineSaleForm, self).__init__(*args, **kwargs)
@@ -64,8 +64,14 @@ class DeadlineSaleForm(forms.ModelForm):
             self.fields['payment'].initial = self.instance.payment
 
     def clean_payment(self):
-        # payment = self.cleaned_data.get('payment')
-        return float(self.cleaned_data.get('payment').replace('.', '').replace(',', '.'))
+        payment = self.cleaned_data.get('payment')
+        if payment:
+            return float(self.cleaned_data.get('payment').replace('.', '').replace(',', '.'))
+        else:
+            return payment
+
+    def clean_method_payment(self):
+        return MethodPayment.objects.get(name='Boleto')
     # def clean_status(self):
     #     # todo:
     #     return self.cleaned_data.get('status')

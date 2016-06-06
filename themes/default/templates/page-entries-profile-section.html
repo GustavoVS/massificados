@@ -99,19 +99,6 @@
                 {% endfor %}
             </div>
         {% endif %}
-        {% if form.status_see_data.field.choices %}
-            <div class="row">
-                <div class="col-md-12">
-                    <hr><h4>{% trans "Status See Data" %}</h4>
-                    <hr>
-                </div>
-                {% for v, opt in form.status_see_data.field.choices %}
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                        {% include 'parts/checkbox-form.html' with field=form.status_see_data value=v label=opt cb_class="btn-info" %}
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
         {% if form.status_edit.field.choices %}
             <div class="row">
                 <div class="col-md-12">
@@ -144,18 +131,6 @@
                 {% for v, opt in form.status_edit_deadline.field.choices %}
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                         {% include 'parts/checkbox-form.html' with field=form.status_edit_deadline value=v label=opt cb_class="btn-info" %}
-                     </div>
-                {% endfor %}
-            </div>
-        {% endif %}
-        {% if form.status_edit_data.field.choices %}
-            <div class="row">
-                <div class="col-md-12">
-                    <hr><h4>{% trans "Status Edit Data" %}</h4><hr>
-                </div>
-                {% for v, opt in form.status_edit_data.field.choices %}
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                        {% include 'parts/checkbox-form.html' with field=form.status_edit_data value=v label=opt cb_class="btn-info" %}
                      </div>
                 {% endfor %}
             </div>
