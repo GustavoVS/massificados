@@ -9,9 +9,27 @@
 .form-group input[type="checkbox"] + .btn-group > label span {
     width: 20px;
 }
+
 .form-group input[type="checkbox"] + .btn-group > label + .btn  {
     width: 80%;
 }
+
+.form-group input[type="checkbox"] + .btn-group > label  {
+    width: 20%;
+    overflow: hidden;
+}
+
+@media(min-width: 992px) {
+   .form-group input[type="checkbox"] + .btn-group > label + .btn  {
+        width: 85%;
+    }
+
+    .form-group input[type="checkbox"] + .btn-group > label  {
+        width: 15%;
+    }
+
+}
+
 
 
 .form-group input[type="checkbox"] + .btn-group > label span:first-child {

@@ -19,415 +19,199 @@
 {% endblock %}
 {% block section-content %}
     <form action="" method="post" xmlns="http://www.w3.org/1999/html">{% csrf_token %}
-        {# <div class="container"> #}
-                {% bootstrap_field form.name %}
+        {% bootstrap_field form.name %}
+        <div class="row">
+            <div class="col-md-12">
+                <hr><h4>{% trans "Permissions of Menu" %}</h4><hr />
+            </div>
+            {% include 'parts/checkbox-form.html' with field=form.menu_products col_div=True btn_class="btn-primary" %}
+            {% include 'parts/checkbox-form.html' with field=form.menu_dashboard col_div=True btn_class="btn-primary" %}
+            {% include 'parts/checkbox-form.html' with field=form.menu_production col_div=True btn_class="btn-primary" %}
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                {% include 'parts/checkbox-form.html' with field=form.menu_entries btn_class="btn-primary" %}
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    {% include 'parts/checkbox-form.html' with field=form.menu_entries_users %}
+                    {% include 'parts/checkbox-form.html' with field=form.menu_entries_profiles %}
+                    {% include 'parts/checkbox-form.html' with field=form.menu_entries_partners %}
+                    {% include 'parts/checkbox-form.html' with field=form.menu_entries_products %}
+                </div>
+            </div>
+            {% include 'parts/checkbox-form.html' with field=form.menu_notification col_div=True btn_class="btn-primary" %}
+            {% include 'parts/checkbox-form.html' with field=form.menu_profile col_div=True btn_class="btn-primary" %}
+        </div>
+
+        {% if products_j %}
             <div class="row">
                 <div class="col-md-12">
-                    <h4>{% trans "Permissions of Menu" %}</h4><hr />
+                    <hr><h4>{% trans "For Companies" %}</h4><hr>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                    <div class="form-group">
-                        <input
-                            type="checkbox"
-                            name="{{ form.menu_products.html_name }}"
-                            id="{{ form.menu_products.html_name }}"
-                            autocomplete="off"
-                            {% if form.menu_products.value %}checked{% endif %} />
-                        <div class="btn-group ">
-                            <label for="{{ form.menu_products.html_name }}" class="btn btn-primary ">
-                                <span class="glyphicon glyphicon-ok "></span>
-                                <span></span>
-                            </label>
-                            <label for="{{ form.menu_products.html_name }}" class="btn btn-primary active ">
-                                {{ form.menu_products.label }}
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                    <div class="form-group">
-                        <input
-                            type="checkbox"
-                            name="{{ form.menu_dashboard.html_name }}"
-                            id="{{ form.menu_dashboard.html_name }}"
-                            autocomplete="off"
-                            {% if form.menu_dashboard.value %}checked{% endif %}/>
-                        <div class="btn-group ">
-                            <label for="{{ form.menu_dashboard.html_name }}" class="btn btn-primary ">
-                                <span class="glyphicon glyphicon-ok "></span>
-                                <span> </span>
-                            </label>
-                            <label for="{{ form.menu_dashboard.html_name }}" class="btn btn-primary active ">
-                                {{ form.menu_dashboard.label }}
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                    <div class="form-group ">
-                        <input type="checkbox" name="{{ form.menu_production.html_name }}" id="{{ form.menu_production.html_name }}" autocomplete="off"
-                        {% if form.menu_production.value %}checked{% endif %}/>
-                        <div class="btn-group ">
-                            <label for="{{ form.menu_production.html_name }}" class="btn btn-primary ">
-                                <span class="glyphicon glyphicon-ok "></span>
-                                <span> </span>
-                            </label>
-                            <label for="{{ form.menu_production.html_name }}" class="btn btn-primary active ">
-                                {{form.menu_production.label }}
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                    <div class="form-group ">
-                        <input type="checkbox" name="{{ form.menu_entries.html_name }}" id="{{ form.menu_entries.html_name }}" autocomplete="off" {% if form.menu_entries.value %}checked{% endif %}/>
-                        <div class="btn-group ">
-                            <label for="{{ form.menu_entries.html_name }}" class="btn btn-primary ">
-                                <span class="glyphicon glyphicon-ok "></span>
-                                <span> </span>
-                            </label>
-                            <label for="{{ form.menu_entries.html_name }}" class="btn btn-primary active ">
-                                {{ form.menu_entries.label }}
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="form-group ">
-                            <input type="checkbox" name="{{ form.menu_entries_users.html_name }}" id="{{ form.menu_entries_users.html_name }}" autocomplete="off"
-                            {% if form.menu_entries_users.value %}checked{% endif %}/>
-                            <div class="btn-group ">
-                                <label for="{{ form.menu_entries_users.html_name }}" class="btn btn-primary active ">
-                                    <span class="glyphicon glyphicon-ok "></span>
-                                    <span> </span>
-                                </label>
-                                <label for="{{ form.menu_entries_users.html_name }}" class="btn btn-default active ">
-                                    {{ form.menu_entries_users.label }}
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <input
-                                type="checkbox"
-                                name="{{ form.menu_entries_profiles.html_name }}"
-                                id="{{ form.menu_entries_profiles.html_name }}"
-                                autocomplete="off"
-                                {% if form.menu_entries_profiles.value %}checked{% endif %} />
-                            <div class="btn-group ">
-                                <label for="{{ form.menu_entries_profiles.html_name }}" class="btn btn-primary active ">
-                                    <span class="glyphicon glyphicon-ok "></span>
-                                    <span> </span>
-                                </label>
-                                <label for="{{ form.menu_entries_profiles.html_name }}" class="btn btn-default active ">
-                                    {{ form.menu_entries_profiles.label }}
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <input type="checkbox"
-                                name="{{ form.menu_entries_partners.html_name }}"
-                                id="{{ form.menu_entries_partners.html_name }}"
-                                autocomplete="off"
-                            {% if form.menu_entries_partners.value %}checked{% endif %}/>
-                            <div class="btn-group ">
-                                <label for="{{ form.menu_entries_partners.html_name }}" class="btn btn-primary active ">
-                                    <span class="glyphicon glyphicon-ok "></span>
-                                    <span> </span>
-                                </label>
-                                <label for="{{ form.menu_entries_partners.html_name }}" class="btn btn-default active ">
-                                    {{form.menu_entries_partners.label}}
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <input type="checkbox" name="{{ form.menu_entries_products.html_name }}" id="{{ form.menu_entries_products.html_name }}" autocomplete="off"
-                            {% if form.menu_entries_products.value %}checked{% endif %}/>
-                            <div class="btn-group ">
-                                <label for="{{ form.menu_entries_products.html_name }}" class="btn btn-primary active ">
-                                    <span class="glyphicon glyphicon-ok "></span>
-                                    <span> </span>
-                                </label>
-                                <label for="{{ form.menu_entries_products.html_name }}" class="btn btn-default active ">
-                                    {{ form.menu_entries_products.label }}
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                    <div class="form-group ">
-                        <input type="checkbox" name="{{ form.menu_notification.html_name }}" id="{{ form.menu_notification.html_name }}" autocomplete="off" {% if form.menu_notification.value %}checked{% endif %}/>
-                        <div class="btn-group ">
-                            <label for="{{ form.menu_notification.html_name }}" class="btn btn-primary ">
-                                <span class="glyphicon glyphicon-ok "></span>
-                                <span> </span>
-                            </label>
-                            <label for="{{ form.menu_notification.html_name }}" class="btn btn-primary active ">
-                                {{ form.menu_notification.label }}
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                    <div class="form-group ">
-                        <input type="checkbox" name="{{form.menu_profile.html_name}}" id="{{form.menu_profile.html_name}}" autocomplete="off" {% if form.menu_profile.value %}checked
-                        {% endif %} />
-                        <div class="btn-group ">
-                            <label for="{{form.menu_profile.html_name}}" class="btn btn-primary ">
-                                <span class="glyphicon glyphicon-ok "></span>
-                                <span> </span>
-                            </label>
-                            <label for="{{form.menu_profile.html_name}}" class="btn btn-primary active ">
-                                {{ form.menu_profile.label }}
-                            </label>
-                        </div>
-                    </div>
-                </div>
+                {% for product in products_j %}
+                    {% include 'parts/checkbox-form.html' with field=form.product col_div=True m2m_obj=product %}
+                {% endfor %}
             </div>
-
-            {{form.errors}}
-
+        {% endif %}
+        {% if products_f %}
             <div class="row">
-                {% if products_j %}
-                    <div class="col-md-12">
-                        <h4>{% trans "For Companies" %}</h4>
-                    </div>
-                    {% for product in products_j %}
-                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                            <div class="form-group ">
-                                <input  type="checkbox"
-                                        name="{{ form.product.html_name }}"
-                                        value="{{ product.pk }}"
-                                        id="{{ form.product.html_name }}-{{ product.pk }}"
-                                        autocomplete="off"
-                                        {% if product.pk in form.product.value %}checked{% endif %}/>
-                                <div class="btn-group ">
-                                    <label for="{{ form.product.html_name }}-{{ product.pk }}"
-                                            class="btn btn-primary " >
-                                        <span class="glyphicon glyphicon-ok "></span>
-                                        <span> </span>
-                                    </label>
-                                    <label for="{{ form.product.html_name }}-{{ product.pk }}"
-                                            class="btn btn-default active ">
-                                        {{ product.name }}
-                                    </label>
-                                </div>
-                            </div>
-                         </div>
-                    {% endfor %}
-                {% endif %}
+                <div class="col-md-12">
+                    <hr><h4>{% trans "For People" %}</h4><hr>
+                </div>
+                {% for product in products_f %}
+                    {% include 'parts/checkbox-form.html' with field=form.product col_div=True m2m_obj=product %}
+                {% endfor %}
             </div>
+        {% endif %}
+        {% if form.status_see.field.choices %}
             <div class="row">
-                {% if products_f %}
-                    <div class="col-md-12">
-                        <h4>{% trans "For People" %}</h4>
-                    </div>
-                    {% for product in products_f %}
-                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                            <div class="form-group ">
-                                <input  type="checkbox"
-                                        name="{{ form.product.html_name }}"
-                                        value="{{ product.pk }}"
-                                        id="{{ form.product.html_name }}-{{ product.pk }}"
-                                        autocomplete="off"
-                                        {% if product.pk in form.product.value %}checked{% endif %}/>
-                                <div class="btn-group ">
-                                    <label for="{{ form.product.html_name }}-{{ product.pk }}"
-                                            class="btn btn-primary " >
-                                        <span class="glyphicon glyphicon-ok "></span>
-                                        <span> </span>
-                                    </label>
-                                    <label for="{{ form.product.html_name }}-{{ product.pk }}"
-                                            class="btn btn-default active ">
-                                        {{ product.name }}
-                                    </label>
-                                </div>
-                            </div>
-                         </div>
-                    {% endfor %}
-                {% endif %}
-            </div>
-            <div class="row">
-                {% if form.status_see.field.choices %}
-                    <div class="col-md-12">
-                        <h4>{% trans "Status See" %}</h4>
-                    </div>
+                <div class="col-md-12">
+                    <hr><h4>{% trans "Status See" %}</h4>
                     <hr>
-                    {% for v, opt in form.status_see.field.choices %}
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <div class="form-group ">
-                                <input  type="checkbox"
-                                        name="{{form.status_see.html_name}}"
-                                        value="{{v}}"
-                                        id="{{ form.status_see.html_name }}-{{ v }}" autocomplete="off"
-                                        {% if v in form.status_see.value %}checked{% endif %}/>
-                                <div class="btn-group ">
-                                    <label for="{{ form.status_see.html_name }}-{{ v }}" class="btn btn-info ">
-                                        <span class="glyphicon glyphicon-ok "></span>
-                                        <span> </span>
-                                    </label>
-                                    <label for="{{ form.status_see.html_name }}-{{ v }}"
-                                            class="btn btn-default active ">
-                                            {{ opt }}
-                                    </label>
-                                </div>
-                            </div>
-                         </div>
-                    {% endfor %}
-                {% endif %}
-            </div>
-            <div class="row">
-                {% if form.status_edit.field.choices %}
-                    <div class="col-md-12">
-                        <h4>{% trans "Status Edit" %}</h4>
+                </div>
+                {% for v, opt in form.status_see.field.choices %}
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        {% include 'parts/checkbox-form.html' with field=form.status_see value=v label=opt cb_class="btn-info" %}
                     </div>
-                    <hr>
-                    {% for v, opt in form.status_edit.field.choices %}
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <div class="form-group ">
-                                <input  type="checkbox"
-                                        name="{{form.status_edit.html_name}}"
-                                        value="{{v}}"
-                                        id="{{ form.status_edit.html_name }}-{{ v }}" autocomplete="off"
-                                        {% if v in form.status_edit.value %}checked{% endif %}/>
-                                <div class="btn-group ">
-                                    <label for="{{ form.status_edit.html_name }}-{{ v }}" class="btn btn-info ">
-                                        <span class="glyphicon glyphicon-ok "></span>
-                                        <span> </span>
-                                    </label>
-                                    <label for="{{ form.status_edit.html_name }}-{{ v }}"
-                                            class="btn btn-default active ">
-                                            {{ opt }}
-                                    </label>
-                                </div>
-                            </div>
-                         </div>
-                    {% endfor %}
-                {% endif %}
+                {% endfor %}
             </div>
+        {% endif %}
+        {% if form.status_see_payment.field.choices %}
             <div class="row">
-                {% if form.status_set.field.choices %}
-                    <div class="col-md-12">
-                        <h4>{% trans "Status Set" %}</h4>
-                    </div>
+                <div class="col-md-12">
+                    <hr><h4>{% trans "Status See Payment" %}</h4>
                     <hr>
-                    {% for v, opt in form.status_set.field.choices %}
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <div class="form-group ">
-                                <input  type="checkbox"
-                                        name="{{form.status_set.html_name}}"
-                                        value="{{v}}"
-                                        id="{{ form.status_set.html_name }}-{{ v }}" autocomplete="off"
-                                        {% if v in form.status_set.value %}checked{% endif %}/>
-                                <div class="btn-group ">
-                                    <label for="{{ form.status_set.html_name }}-{{ v }}" class="btn btn-info ">
-                                        <span class="glyphicon glyphicon-ok "></span>
-                                        <span> </span>
-                                    </label>
-                                    <label for="{{ form.status_set.html_name }}-{{ v }}"
-                                            class="btn btn-default active ">
-                                            {{ opt }}
-                                    </label>
-                                </div>
-                            </div>
-                         </div>
-                    {% endfor %}
-                {% endif %}
+                </div>
+                {% for v, opt in form.status_see_payment.field.choices %}
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        {% include 'parts/checkbox-form.html' with field=form.status_see_payment value=v label=opt cb_class="btn-info" %}
+                    </div>
+                {% endfor %}
             </div>
+        {% endif %}
+        {% if form.status_see_deadline.field.choices %}
             <div class="row">
-                {% if form.profiles.field.choices %}
-                    <div class="col-md-12">
-                        <h4>{% trans "The user can see the production in those profiles" %}</h4>
-                    </div>
+                <div class="col-md-12">
+                    <hr><h4>{% trans "Status See Deadline" %}</h4>
                     <hr>
-                    {% for v, opt in form.profiles.field.choices %}
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <div class="form-group ">
-                                <input  type="checkbox"
-                                        name="{{ form.profiles.html_name }}"
-                                        value="{{ v }}"
-                                        id="{{ form.profiles.html_name }}-{{v}}"
-                                        autocomplete="off"
-                                        {% if v in form.profiles.value %}checked{% endif %}/>
-                                <div class="btn-group ">
-                                    <label for="{{ form.profiles.html_name }}-{{v}}" class="btn btn-warning ">
-                                        <span class="glyphicon glyphicon-ok "></span>
-                                        <span class="glyphicon glyphicon-user "></span>
-                                        <span> </span>
-                                    </label>
-                                    <label for="{{ form.profiles.html_name }}-{{v}}" class="btn btn-default active ">
-                                        {{ opt }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% endif %}
+                </div>
+                {% for v, opt in form.status_see_deadline.field.choices %}
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        {% include 'parts/checkbox-form.html' with field=form.status_see_deadline value=v label=opt cb_class="btn-info" %}
+                    </div>
+                {% endfor %}
             </div>
+        {% endif %}
+        {% if form.status_see_data.field.choices %}
             <div class="row">
-                {% if form.filetype_see.field.choices %}
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <h4>{% trans "Files See" %}</h4>
-                    </div>
+                <div class="col-md-12">
+                    <hr><h4>{% trans "Status See Data" %}</h4>
                     <hr>
-                    {% for v, opt in form.filetype_see.field.choices %}
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <div class="form-group ">
-                                <input  type="checkbox"
-                                    name="{{ form.filetype_see.html_name }}"
-                                    value="{{ v }}"
-                                    id="{{ form.filetype_see.html_name }}-{{v}}"
-                                    autocomplete="off"
-                                    {% if v in form.filetype_see.value %}checked{% endif %}/>
-                                <div class="btn-group ">
-                                    <label for="{{ form.filetype_see.html_name }}-{{v}}" class="btn btn-info ">
-                                        <span class="glyphicon glyphicon-ok "></span>
-                                        <span class="glyphicon glyphicon-file "></span>
-                                        <span> </span>
-                                    </label>
-                                    <label for="{{ form.filetype_see.html_name }}-{{v}}" class="btn btn-default active ">
-                                        {{ opt }}
-                                    </label>
-                                </div>
-                            </div>
-                         </div>
-                    {% endfor %}
-                {% endif %}
+                </div>
+                {% for v, opt in form.status_see_data.field.choices %}
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        {% include 'parts/checkbox-form.html' with field=form.status_see_data value=v label=opt cb_class="btn-info" %}
+                    </div>
+                {% endfor %}
             </div>
+        {% endif %}
+        {% if form.status_edit.field.choices %}
             <div class="row">
-                {% if form.filetype_download.field.choices %}
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <h4>{% trans "Files Download" %}</h4>
+                <div class="col-md-12">
+                    <hr><h4>{% trans "Status Edit" %}</h4><hr>
+                </div>
+                {% for v, opt in form.status_edit.field.choices %}
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        {% include 'parts/checkbox-form.html' with field=form.status_edit value=v label=opt cb_class="btn-info" %}
+                     </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if form.status_edit_payment.field.choices %}
+            <div class="row">
+                <div class="col-md-12">
+                    <hr><h4>{% trans "Status Edit Payment" %}</h4><hr>
+                </div>
+                {% for v, opt in form.status_edit_payment.field.choices %}
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        {% include 'parts/checkbox-form.html' with field=form.status_edit_payment value=v label=opt cb_class="btn-info" %}
+                     </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if form.status_edit_deadline.field.choices %}
+            <div class="row">
+                <div class="col-md-12">
+                    <hr><h4>{% trans "Status Edit Deadline" %}</h4><hr>
+                </div>
+                {% for v, opt in form.status_edit_deadline.field.choices %}
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        {% include 'parts/checkbox-form.html' with field=form.status_edit_deadline value=v label=opt cb_class="btn-info" %}
+                     </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if form.status_edit_data.field.choices %}
+            <div class="row">
+                <div class="col-md-12">
+                    <hr><h4>{% trans "Status Edit Data" %}</h4><hr>
+                </div>
+                {% for v, opt in form.status_edit_data.field.choices %}
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        {% include 'parts/checkbox-form.html' with field=form.status_edit_data value=v label=opt cb_class="btn-info" %}
+                     </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if form.status_set.field.choices %}
+            <div class="row">
+                <div class="col-md-12">
+                    <hr><h4>{% trans "Status Set" %}</h4><hr>
+                </div>
+                {% for v, opt in form.status_set.field.choices %}
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        {% include 'parts/checkbox-form.html' with field=form.status_set value=v label=opt cb_class="btn-info" %}
+                     </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if form.profiles.field.choices %}
+            <div class="row">
+                <div class="col-md-12">
+                    <hr><h4>{% trans "The user can see the production in those profiles" %}</h4><hr>
+                </div>
+                {% for v, opt in form.profiles.field.choices %}
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        {% include 'parts/checkbox-form.html' with field=form.profiles value=v label=opt cb_class="btn-warning" add_icon="user" %}
                     </div>
-                    <hr>
-                    {% for v, opt in form.filetype_download.field.choices %}
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <div class="form-group ">
-                                <input  type="checkbox"
-                                    name="{{ form.filetype_download.html_name }}"
-                                    value="{{ v }}"
-                                    id="{{ form.filetype_download.html_name }}-{{v}}"
-                                    autocomplete="off"
-                                    {% if v in form.filetype_download.value %}checked{% endif %}/>
-                                <div class="btn-group ">
-                                    <label for="{{ form.filetype_download.html_name }}-{{v}}" class="btn btn-info ">
-                                        <span class="glyphicon glyphicon-ok "></span>
-                                        <span class="glyphicon glyphicon-file "></span>
-                                        <span> </span>
-                                    </label>
-                                    <label for="{{ form.filetype_download.html_name }}-{{v}}" class="btn btn-default active ">
-                                        {{ opt }}
-                                    </label>
-                                </div>
-                            </div>
-                         </div>
-                    {% endfor %}
-                {% endif %}
+                {% endfor %}
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                {% trans "Save Role" as text_submit %}
-                {% url 'entries-profiles' as url %}
-                {% include 'parts/submit-form.html' with save_text=text_submit url_cancel=url %}
+        {% endif %}
+        {% if form.filetype_see.field.choices %}
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <hr><h4>{% trans "Files See" %}</h4><hr>
+                </div>
+                {% for v, opt in form.filetype_see.field.choices %}
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        {% include 'parts/checkbox-form.html' with field=form.filetype_see value=v label=opt cb_class="btn-info" add_icon="file" %}
+                     </div>
+                {% endfor %}
             </div>
+        {% endif %}
+        {% if form.filetype_download.field.choices %}
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <hr><h4>{% trans "Files Download" %}</h4><hr>
+                </div>
+                {% for v, opt in form.filetype_download.field.choices %}
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        {% include 'parts/checkbox-form.html' with field=form.filetype_download value=v label=opt cb_class="btn-info" add_icon="file" %}
+                     </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            {% trans "Save Role" as text_submit %}
+            {% url 'entries-profiles' as url %}
+            {% include 'parts/submit-form.html' with save_text=text_submit url_cancel=url %}
+        </div>
     </form>
 {% endblock %}
