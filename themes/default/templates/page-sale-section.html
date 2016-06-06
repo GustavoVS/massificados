@@ -432,7 +432,7 @@
         <div class="well">
             <div class="row">
                 {% if not product.is_lead and product.full_declaration %}
-                    <div class="modal-default">
+                    <div class="modal-default col-md-12">
                         <a href="#conditiosmodal"  data-toggle="modal">
                             <span class="fa fa-plus"> </span>
                             {% trans "Click to see more about the conditions of the product" %}
@@ -456,7 +456,7 @@
                     </div>
                 {% endif %}
                 {% if not product.is_lead and product.declaration %}
-                    <div class="modal-default">
+                    <div class="modal-default col-md-12">
                         <a href="#declarationmodal"  data-toggle="modal">
                             <span class="fa fa-plus"> </span>
                             {% trans "Click to read the declaration" %}
@@ -485,10 +485,12 @@
                         <p><b>* {{ product.rules_declaration }}</b></p>
                     </div>
                 {% endif %}
-                <div class="disclaimer">
-                    {% bootstrap_field deadlinesale.0.accept_declaration form_group_class='' %}
-                </div>
-                <div class="space"></div>
+                {% if product.is_lead %}
+                    <div class="disclaimer">
+                        {% bootstrap_field deadlinesale.0.accept_declaration form_group_class='' %}
+                    </div>
+                    <div class="space"></div>
+                {% endif %}
                 {% if sale.pk %}
 {#                    <div class="col-md-12">#}
                         <div class="form-group">
