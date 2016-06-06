@@ -5,7 +5,7 @@
 
 <div class="space"></div>
 <div class = "form-group">
-    <button type="submit" class="btn btn-success ">{{ save_text|default:save_text_default }}</button>
+    <button type="submit" class="btn btn-success" {% if set_disabled %}disabled{% endif %}>{{ save_text|default:save_text_default }}</button>
     <a href="{{ url_cancel }}" role="button" class="btn btn-default">{{ cancel_text_default }}</a>
 </div>
 <div class="space"></div>

@@ -19,7 +19,13 @@ class AbstractMassificadoGroups(models.Model):
     product = models.ManyToManyField(Product, blank=True)
 
     status_see = models.ManyToManyField(Status, related_name='user_status_see', blank=True)
+    status_see_payment = models.ManyToManyField(Status, related_name='user_status_see_payment', blank=True)
+    status_see_deadline = models.ManyToManyField(Status, related_name='user_status_see_deadline', blank=True)
+
     status_edit = models.ManyToManyField(Status, related_name='user_status_edit', blank=True)
+    status_edit_payment = models.ManyToManyField(Status, related_name='user_status_edit_payment', blank=True)
+    status_edit_deadline = models.ManyToManyField(Status, related_name='user_status_edit_deadline', blank=True)
+
     status_set = models.ManyToManyField(Status, related_name='user_status_set', blank=True)
 
     profiles = models.ManyToManyField('self', blank=True)
@@ -36,3 +42,4 @@ class AbstractMassificadoGroups(models.Model):
 
 class MassificadoGroups(AbstractMassificadoGroups):
     pass
+

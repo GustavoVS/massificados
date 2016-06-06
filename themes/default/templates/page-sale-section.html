@@ -14,7 +14,7 @@
 
 
 {% block section-content %}
-    <form action="" method="post" class="form">
+    <form action="" method="post" class="form" id="sale-form">
         {% csrf_token %}
         {% if product.pk %}
             <input type="hidden" name="productpk" value="{{ product.pk }}">
@@ -35,60 +35,56 @@
         </div>
         <h2>{% trans 'Buyer' %}</h2>
         <div class="well">
+                <div class="row">
+                    <input type="hidden" name="{{form.kind_person.html_name}}" value="{{product.kind_person}}">
+                    {% if product.kind_person == 'F' %}
+                        <div class="form-group col-md-6 mask-cpf form-required">
+                            <label class="control-label" for="id_{{form.cpf_cnpj.html_name}}">CPF</label>
+                            <input class="form-control cpf_cnpj-auto"
+                                    id="id_{{form.cpf_cnpj.html_name}}"
+                                    maxlength="{{form.cpf_cnpj.max_length}}"
+                                    name="{{form.cpf_cnpj.html_name}}"
+                                    value="{{form.cpf_cnpj.value}}"
+                                    placeholder="CPF" required="required" title="" type="text"
+                                    {% if edit_disabled %}disabled{% endif %}>
+                        </div>
+                        {% bootstrap_field form.name form_group_class='form-group col-md-6' set_disabled=edit_disabled%}
+                        {% bootstrap_field form.phone form_group_class='form-group col-md-6 mask-phone' set_disabled=edit_disabled%}
+                        {% bootstrap_field form.email form_group_class='form-group col-md-6' set_disabled=edit_disabled%}
+                    {% else %}
+                        <div class="form-group col-md-4 mask-cnpj form-required">
+                            <label class="sr-only" for="id_{{form.cpf_cnpj.html_name}}">CNPJ</label>
+                            <input class="form-control cpf_cnpj-auto"
+                                    id="id_{{form.cpf_cnpj.html_name}}"
+                                    maxlength="{{form.cpf_cnpj.max_length}}"
+                                    name="{{form.cpf_cnpj.html_name}}"
+                                    value="{{form.cpf_cnpj.value}}"
+                                    placeholder="CNPJ" required="required" title="" type="text"
+                                    {% if edit_disabled %}disabled{% endif %}>
+                        </div>
+                        {% bootstrap_field form.responsible form_group_class='form-group col-md-4 form-required' layout="inline" set_disabled=edit_disabled%}
+                        {% bootstrap_field form.activity_area form_group_class='form-group col-md-4 form-required' layout="inline" set_disabled=edit_disabled%}
+                        {% bootstrap_field form.name form_group_class='form-group col-md-4' layout="inline" set_disabled=edit_disabled%}
+                        {% bootstrap_field form.phone form_group_class='form-group col-md-4 mask-phone' layout="inline" set_disabled=edit_disabled%}
+                        {% bootstrap_field form.email form_group_class='form-group col-md-4' layout="inline" set_disabled=edit_disabled%}
+                    {% endif %}
+            </div>
+        </div>
+        <h2>{% trans 'Address' %}</h2>
+        <div class="well">
             <div class="row">
-                <input type="hidden" name="{{form.kind_person.html_name}}" value="{{product.kind_person}}">
-                {% if product.kind_person == 'F' %}
-                    <div class="form-group col-md-6 mask-cpf form-required">
-                        <label class="control-label" for="id_{{form.cpf_cnpj.html_name}}">CPF</label>
-                        <input class="form-control cpf_cnpj-auto"
-                                id="id_{{form.cpf_cnpj.html_name}}"
-                                maxlength="{{form.cpf_cnpj.max_length}}"
-                                name="{{form.cpf_cnpj.html_name}}"
-                                value="{{form.cpf_cnpj.value}}"
-                                placeholder="CPF" required="required" title="" type="text">
-                    </div>
-                    {% bootstrap_field form.name form_group_class='form-group col-md-6' %}
-                    {% bootstrap_field form.phone form_group_class='form-group col-md-6 mask-phone' layout="horizontal" %}
-                    {% bootstrap_field form.email form_group_class='form-group col-md-6' layout="horizontal" %}
-                {% else %}
-                    <div class="form-group col-md-4 mask-cnpj form-required">
-                        <label class="sr-only" for="id_{{form.cpf_cnpj.html_name}}">CNPJ</label>
-                        <input class="form-control cpf_cnpj-auto"
-                                id="id_{{form.cpf_cnpj.html_name}}"
-                                maxlength="{{form.cpf_cnpj.max_length}}"
-                                name="{{form.cpf_cnpj.html_name}}"
-                                value="{{form.cpf_cnpj.value}}"
-                                placeholder="CNPJ" required="required" title="" type="text">
-                    </div>
-                    {% bootstrap_field form.responsible form_group_class='form-group col-md-4 form-required' layout="inline" %}
-                    {% bootstrap_field form.activity_area form_group_class='form-group col-md-4 form-required' layout="inline" %}
-                    {% bootstrap_field form.name form_group_class='form-group col-md-4' layout="inline" %}
-                    {% bootstrap_field form.phone form_group_class='form-group col-md-4 mask-phone' layout="inline" %}
-                    {% bootstrap_field form.email form_group_class='form-group col-md-4' layout="inline" %}
-                {% endif %}
+                {{ addressbuyer.management_form }}
+                {% bootstrap_field addressbuyer.0.postal_code form_group_class="form-group col-md-3 mask-cep cep-auto" set_disabled=edit_disabled%}
+                {% bootstrap_field addressbuyer.0.state form_group_class="form-group col-md-3" set_disabled=edit_disabled%}
+                {% bootstrap_field addressbuyer.0.city form_group_class="form-group col-md-3" set_disabled=edit_disabled%}
+                {% bootstrap_field addressbuyer.0.district form_group_class="form-group col-md-3" set_disabled=edit_disabled%}
+                {% bootstrap_field addressbuyer.0.street form_group_class="form-group col-md-6" set_disabled=edit_disabled%}
+                {% bootstrap_field addressbuyer.0.number form_group_class="form-group col-md-3 mask-number" set_disabled=edit_disabled%}
+                {% bootstrap_field addressbuyer.0.complement form_group_class="form-group col-md-3" set_disabled=edit_disabled%}
+                {{ addressbuyer.0.id }}
+                {{ addressbuyer.0.buyer }}
+            </div>
         </div>
-    </div>
-    <h2>{% trans 'Address' %}</h2>
-    <div class="well">
-        <div class="row">
-            {{ addressbuyer.management_form }}
-            {% bootstrap_field addressbuyer.0.postal_code form_group_class="form-group col-md-3 mask-cep cep-auto" %}
-            {# <div class="clearfix"></div> #}
-            {% bootstrap_field addressbuyer.0.state form_group_class="form-group col-md-3" %}
-            {% bootstrap_field addressbuyer.0.city form_group_class="form-group col-md-3" %}
-            {% bootstrap_field addressbuyer.0.district form_group_class="form-group col-md-3" %}
-            {% bootstrap_field addressbuyer.0.street form_group_class="form-group col-md-6" %}
-            {% bootstrap_field addressbuyer.0.number form_group_class="form-group col-md-3 mask-number" %}
-            {% bootstrap_field addressbuyer.0.complement form_group_class="form-group col-md-3" %}
-            {{ addressbuyer.0.id }}
-            {{ addressbuyer.0.buyer }}
-            {# {% for form in addressbuyer.forms %} #}
-                {# {% for field in form %} #}
-                    {# {% bootstrap_field field form_group_class='form-group col-md-4' %} #}
-                {# {% endfor %} #}
-            {# {% endfor %} #}
-        </div>
-    </div>
     {% if show_all %}
         <h2>{% if product.is_lead %}
                 {% trans "Lead of" %}
@@ -100,23 +96,35 @@
         <div class="well">
             <div class="row">
                 {{ deadlinesale.management_form }}
-
                 {% if not product.is_lead %}
-                    {% bootstrap_field deadlinesale.0.payment form_group_class='form-group col-md-6 mask-float' type="text" %}
-                    {% bootstrap_field deadlinesale.0.lives form_group_class='form-group col-md-6' %}
-                    {% bootstrap_field deadlinesale.0.method_payment form_group_class='form-group col-md-6' set_disabled=True %}
-                    {% bootstrap_field deadlinesale.0.insured_group form_group_class='form-group col-md-6' set_disabled=True %}
-                    {% bootstrap_field deadlinesale.0.insured_capital form_group_class='form-group col-md-3 mask-float' set_disabled=True %}
-                    {% bootstrap_field deadlinesale.0.rate_per_thousand form_group_class='form-group col-md-3' set_disabled=True %}
-                    {% bootstrap_field deadlinesale.0.costing form_group_class='form-group col-md-3' set_disabled=True %}
-                    {% bootstrap_field deadlinesale.0.revenues form_group_class='form-group col-md-3 disabledTextInput' set_disabled=True %}
-                    {% bootstrap_field deadlinesale.0.begin form_group_class='form-group col-md-3 mask-date' %}
-                    {% bootstrap_field deadlinesale.0.end form_group_class='form-group col-md-3  mask-date' %}
-                    {% bootstrap_field deadlinesale.0.proposal form_group_class='form-group col-md-3' %}
-                    {% bootstrap_field deadlinesale.0.policy form_group_class='form-group col-md-3' %}
-                    {#   coberturas aqui  #}
-
-                    {% if rules %}
+                    {% if payment_see %}
+                        {% bootstrap_field deadlinesale.0.payment form_group_class='form-group col-md-6 mask-float' type="text" set_disabled=payment_disabled %}
+                        {% bootstrap_field deadlinesale.0.lives form_group_class='form-group col-md-6' set_disabled=payment_disabled %}
+                        {% bootstrap_field deadlinesale.0.method_payment form_group_class='form-group col-md-6' set_disabled=True %}
+                        {% bootstrap_field deadlinesale.0.insured_capital form_group_class='form-group col-md-3 mask-float' set_disabled=True %}
+                        {% bootstrap_field deadlinesale.0.rate_per_thousand form_group_class='form-group col-md-3' set_disabled=True %}
+                    {% else %}
+                        <input type="hidden" name="deadlinesale.0.payment.html_name" value="deadlinesale.0.payment.value">
+                        <input type="hidden" name="deadlinesale.0.lives.html_name" value="deadlinesale.0.lives.value">
+                        <input type="hidden" name="deadlinesale.0.method_payment.html_name" value="deadlinesale.0.method_payment.value">
+                        <input type="hidden" name="deadlinesale.0.insured_capital.html_name" value="deadlinesale.0.insured_capital.value">
+                        <input type="hidden" name="deadlinesale.0.rate_per_thousand.html_name" value="deadlinesale.0.rate_per_thousand.value">
+                    {% endif %}
+                    {% if deadline_see %}
+                        {% bootstrap_field deadlinesale.0.begin form_group_class='form-group col-md-3 mask-date' set_disabled=deadline_disabled %}
+                        {% bootstrap_field deadlinesale.0.end form_group_class='form-group col-md-3  mask-date' set_disabled=deadline_disabled %}
+                        {% bootstrap_field deadlinesale.0.proposal form_group_class='form-group col-md-3' set_disabled=deadline_disabled %}
+                        {% bootstrap_field deadlinesale.0.policy form_group_class='form-group col-md-3' set_disabled=deadline_disabled %}
+                    {% else %}
+                        <input type="hidden" name="deadlinesale.0.begin.html_name" value="deadlinesale.0.begin.value">
+                        <input type="hidden" name="deadlinesale.0.end.html_name" value="deadlinesale.0.end.value">
+                        <input type="hidden" name="deadlinesale.0.proposal.html_name" value="deadlinesale.0.proposal.value">
+                        <input type="hidden" name="deadlinesale.0.policy.html_name" value="deadlinesale.0.policy.value">
+                    {% endif %}
+                    <input type="hidden" name="{{ deadlinesale.0.insured_group.html_name }}" value="{{ deadlinesale.0.insured_group.value }}">
+                    <input type="hidden" name="{{ deadlinesale.0.costing.html_name }}" value="{{ deadlinesale.0.costing.value }}">
+                    <input type="hidden" name="{{ deadlinesale.0.revenues.html_name }}" value="{{ deadlinesale.0.revenues.value }}">
+                    {% if rules and payment_see %}
                         <div class="table-default">
                                 <div class="row">
                                     <section class="content">
@@ -189,22 +197,35 @@
                         </div>
                     {% endif %}
                 {% else %}
-                    {% bootstrap_field deadlinesale.0.payment form_group_class='form-group col-md-6' %}
-                    {% bootstrap_field deadlinesale.0.begin form_group_class='form-group col-md-3 mask-date' %}
-                    {% bootstrap_field deadlinesale.0.end form_group_class='form-group col-md-3  mask-date' %}
-                    {% bootstrap_field deadlinesale.0.proposal form_group_class='form-group col-md-6' %}
-                    {% bootstrap_field deadlinesale.0.policy form_group_class='form-group col-md-6' %}
-                {% endif %}
-                <div class="col-md-12">
-                    {% if not product.is_lead %}
-                        {% if product.disclaimer %}
-                            <div class="disclaimer">
-                                <div class="space"></div>
-                                <p><span class="fa fa-warning"> </span><b> {{ product.disclaimer }}</b></p>
-                            </div>
-                        {% endif %}
+                    {% if payment_see %}
+                        {% bootstrap_field deadlinesale.0.payment form_group_class='form-group col-md-6' set_disabled=payment_disabled %}
+                    {% else %}
+                        <input type="hidden" name="deadlinesale.0.payment.html_name" value="deadlinesale.0.payment.value">
                     {% endif %}
-                </div>
+                    {% if deadline_see %}
+                        {% bootstrap_field deadlinesale.0.begin form_group_class='form-group col-md-3 mask-date' set_disabled=deadline_disabled %}
+                        {% bootstrap_field deadlinesale.0.end form_group_class='form-group col-md-3  mask-date' set_disabled=deadline_disabled %}
+                        {% bootstrap_field deadlinesale.0.proposal form_group_class='form-group col-md-6' set_disabled=deadline_disabled %}
+                        {% bootstrap_field deadlinesale.0.policy form_group_class='form-group col-md-6' set_disabled=deadline_disabled %}
+                    {% else %}
+                        <input type="hidden" name="deadlinesale.0.begin.html_name" value="deadlinesale.0.begin.value">
+                        <input type="hidden" name="deadlinesale.0.end.html_name" value="deadlinesale.0.end.value">
+                        <input type="hidden" name="deadlinesale.0.proposal.html_name" value="deadlinesale.0.proposal.value">
+                        <input type="hidden" name="deadlinesale.0.policy.html_name" value="deadlinesale.0.policy.value">
+                    {% endif %}
+                {% endif %}
+                {% if product_see %}
+                    <div class="col-md-12">
+                        {% if not product.is_lead %}
+                            {% if product.disclaimer %}
+                                <div class="disclaimer">
+                                    <div class="space"></div>
+                                    <p><span class="fa fa-warning"> </span><b> {{ product.disclaimer }}</b></p>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                {% endif %}
                 {{ deadlinesale.0.id }}
                 {{ deadlinesale.0.sale }}
 
@@ -458,7 +479,7 @@
         <div class="well">
             <div class="row">
                 {% if not product.is_lead and product.full_declaration %}
-                    <div class="modal-default">
+                    <div class="modal-default col-md-12">
                         <a href="#conditiosmodal"  data-toggle="modal">
                             <span class="fa fa-plus"> </span>
                             {% trans "Click to see more about the conditions of the product" %}
@@ -482,7 +503,7 @@
                     </div>
                 {% endif %}
                 {% if not product.is_lead and product.declaration %}
-                    <div class="modal-default">
+                    <div class="modal-default col-md-12">
                         <a href="#declarationmodal"  data-toggle="modal">
                             <span class="fa fa-plus"> </span>
                             {% trans "Click to read the declaration" %}
@@ -511,10 +532,12 @@
                         <p><b>* {{ product.rules_declaration }}</b></p>
                     </div>
                 {% endif %}
-                <div class="disclaimer">
-                    {% bootstrap_field deadlinesale.0.accept_declaration form_group_class='' %}
-                </div>
-                <div class="space"></div>
+                {% if product.is_lead %}
+                    <div class="disclaimer">
+                        {% bootstrap_field deadlinesale.0.accept_declaration form_group_class='' %}
+                    </div>
+                    <div class="space"></div>
+                {% endif %}
                 {% if sale.pk %}
 {#                    <div class="col-md-12">#}
                         <div class="form-group">
@@ -533,7 +556,7 @@
 
         {% if not sale.pk or sale.deadline_set.all.0.status in user.group_permissions.status_edit.all %}
             {% url 'index_view' as url %}
-            {% include 'parts/submit-form.html' with url_cancel=url %}
+            {% include 'parts/submit-form.html' with url_cancel=url set_disabled=True %}
         {% endif %}
     </form>
     {% if sale.pk %}

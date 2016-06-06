@@ -197,7 +197,22 @@
                 });
             {% endif %}
 
+
+            $("#sale-form :input").change(function() {
+                $("#sale-form")
+                    .submit(function(){
+                        window.onbeforeunload = null;
+                        return true;
+                    })
+                    .data("changed",true)
+                    .find('button[type="submit"]')
+                    .removeAttr('disabled');
+                window.onbeforeunload = function(){
+                   return "{% trans 'You have unsaved changes. Do you want to exit the page?' %}"
+                }
+            });
         });
+
         $(function() {
             $('#filedeadline_formset  .thumbnail').formset({
                 prefix: '{{ filedeadline.prefix }}',

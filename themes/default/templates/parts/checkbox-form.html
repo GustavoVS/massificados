@@ -1,0 +1,47 @@
+{% if col_div %}<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">{% endif %}
+    <div class="form-group">
+        <input
+            type="checkbox"
+            name="{{ field.html_name }}"
+            id="{{ field.html_name }}{% if value %}-{{ value }}{% elif m2m_obj %}-{{ m2m_obj.pk }}{% endif %}"
+            {% if value %}
+                value={{ value }}
+            {% elif m2m_obj %}
+                value={{m2m_obj.pk}}
+            {% endif %}
+            autocomplete="off"
+            {% if value %}
+                {% if value in field.value %}checked{% endif %}
+            {% elif m2m_obj %}
+                {% if m2m_obj.pk in field.value %}checked{% endif %}
+            {% else %}
+                {% if field.value %}checked{% endif %}
+            {% endif %}/>
+        <div class="btn-group ">
+            <label for="{{ field.html_name }}{% if value %}-{{ value }}{% elif m2m_obj %}-{{ m2m_obj.pk }}{% endif %}" class="btn {{ cb_class|default:'btn-primary' }} ">
+                <span class="glyphicon glyphicon-ok"></span>
+                {% if add_icon %}
+                    <span class="glyphicon glyphicon-{{ add_icon }}"></span>
+                {% endif %}
+                <span></span>
+            </label>
+            <label title="{% if label %}
+                                {{ label }}
+                            {% elif m2m_obj %}
+                                {{ m2m_obj.name|default:m2m_obj }}
+                            {% else %}
+                                {{ field.label }}
+                            {% endif %}"
+                    for="{{ field.html_name }}{% if value %}-{{ value }}{% elif m2m_obj %}-{{ m2m_obj.pk }}{% endif %}"
+                    class="btn {{ btn_class|default:'btn-default' }}">
+                {% if label %}
+                    {{ label }}
+                {% elif m2m_obj %}
+                    {{ m2m_obj.name|default:m2m_obj }}
+                {% else %}
+                    {{ field.label }}
+                {% endif %}
+            </label>
+        </div>
+    </div>
+{% if col_div %}</div>{% endif %}

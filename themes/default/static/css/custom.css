@@ -36,6 +36,7 @@ h1 {
 }
 h2 {
 	padding-left: 15px;
+	font-size: 24px;
 }
 
 a {
@@ -933,4 +934,23 @@ ul.navbar-nav > li > a {
 	color: black;
 	text-align: justify;
 	font-weight: bold;
+}
+
+
+.well{
+	padding: 19px 10px 10px;
+}
+
+.form-group{
+	margin-bottom: 9px;
+}
+
+.form-group label{
+	margin-top: 0
+}
+.form-group input, .form-group select{
+	font-size: 12px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	height: 30px;
 }
