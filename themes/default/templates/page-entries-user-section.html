@@ -21,7 +21,10 @@
     <form action="" method="post" class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-2 col-md-offset-2">
         {% csrf_token %}
         {% bootstrap_form form %}
+
+
+        {% trans "Save User" as text_submit %}
         {% url 'entries-users' as url %}
-        {% include 'parts/submit-form.html' with url_cancel=url save_text="Save User" %}
+        {% include 'parts/submit-form.html' with save_text=text_submit url_cancel=url %}
     </form>
 {% endblock %}

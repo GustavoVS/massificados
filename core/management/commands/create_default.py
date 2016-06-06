@@ -321,8 +321,7 @@ DEFAULT_STATUS_PROFILE_GALCORR_ADM_SEE = (
     ('Lead de Garantia Gerado', 2), ('Lead de Garantia Cancelado', 2), ('Solicitação de Cotação de Garantia', 3),
     ('Cotação de Garantia Gerada', 4),
     ('Cotação de Garantia não Gerada - Faltam documentos', 4),
-    ('Cotação de Garantia Negada', 5), ('Cotação de Garantia Aprovada', 6),
-    ('Lead de Benefícios Gerado', 2), ('Lead de Benefícios Cancelado', 2), ('Solicitação de Cotação de Benefícios', 3),
+    ('Cotação de Garantia Negada', 5), ('Cotação de Garantia Aprovada', 6), ('Lead de Benefícios Gerado', 2), ('Lead de Benefícios Cancelado', 2), ('Solicitação de Cotação de Benefícios', 3),
     ('Cotação de Benefícios Gerada', 4),
     ('Cotação de Benefícios não Gerada - Faltam documentos', 4),
     ('Cotação de Benefícios Negada', 5), ('Cotação de Benefícios Aprovada', 6),
@@ -1007,10 +1006,11 @@ class Command(BaseCommand):
                                 )
                 r.save()
 
-        for p_number in range(500):
+        for p_number in range(501):
             if not NumberLives.objects.filter(number=p_number).exists():
-                p = NumberLives(number=p_number)
-                p.save()
+                if p_number > 0:
+                    p = NumberLives(number=p_number)
+                    p.save()
 
         # for profile in DEFAULT_PROFILE_NAME:
         #     if not MassificadoGroups.objects.filter(name=profile).exists():
