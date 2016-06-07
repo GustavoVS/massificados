@@ -39,6 +39,11 @@ h2 {
 	font-size: 24px;
 }
 
+#sale-form h4 {
+	padding-left: 05px;
+	font-size: 18px;
+}
+
 a {
 	color: #5b777f;
 	transition: all 0.5s;

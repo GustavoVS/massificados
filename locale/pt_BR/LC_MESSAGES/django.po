@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-07 05:27+0000\n"
-"PO-Revision-Date: 2016-06-07 05:29+0000\n"
+"POT-Creation-Date: 2016-06-07 06:22+0000\n"
+"PO-Revision-Date: 2016-06-07 06:37+0000\n"
 "Last-Translator:   <admin@admin.com.development>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -95,10 +95,8 @@ msgid "Other Documentos"
 msgstr "Informação"
 
 #: product/models.py:132
-#, fuzzy
-#| msgid "Rules"
 msgid "Rule JS"
-msgstr "Regra"
+msgstr "Regra JS"
 
 #: product/models.py:143
 msgid "Hint"
@@ -196,8 +194,8 @@ msgstr ""
 msgid "Percent"
 msgstr ""
 
-#: product/models.py:175 sale/models.py:50 sale/models.py:222
-#: sale/models.py:234
+#: product/models.py:175 sale/models.py:50 sale/models.py:256
+#: sale/models.py:268
 msgid "Number"
 msgstr "Número"
 
@@ -213,7 +211,7 @@ msgstr "Esse campo é obrigatório"
 msgid "Invalid Phone Number"
 msgstr ""
 
-#: sale/forms.py:53
+#: sale/forms.py:53 themes/default/templates/page-production-section.html:58
 msgid "Payment"
 msgstr "Prêmio"
 
@@ -306,11 +304,11 @@ msgstr "Eu aceito que a GalCorr faça contato com o cliente, se necerrário."
 msgid "Debt"
 msgstr "Prêmio"
 
-#: sale/models.py:99
+#: sale/models.py:99 themes/default/templates/page-production-section.html:63
 msgid "Proposal"
 msgstr "Proposta"
 
-#: sale/models.py:100
+#: sale/models.py:100 themes/default/templates/page-production-section.html:64
 msgid "Policy"
 msgstr "Apólice"
 
@@ -342,24 +340,24 @@ msgstr "Meio de págamento"
 msgid "Lives"
 msgstr "Vidas"
 
-#: sale/models.py:145
+#: sale/models.py:146
 #, python-format
 msgid "New Sale [#%d] created"
 msgstr "Nova oportunidade  [#%d] Criada"
 
-#: sale/models.py:146
+#: sale/models.py:147
 #, python-format
 msgid "The new Sale [#%d] was created with status %s. Buyer %s, CPF/CNPJ %s "
 msgstr ""
 "A nova oportunidade [#%d] foi crida com status %s. Contratante %s, CPF/CNPJ "
 "%s"
 
-#: sale/models.py:173
+#: sale/models.py:174
 #, python-format
 msgid "Sale [%d] has status changed"
 msgstr "A oportunidade [#%d] teve o status modificado"
 
-#: sale/models.py:174
+#: sale/models.py:175
 #, python-format
 msgid ""
 "The Sale [%d] has status changed from %s to %s . Buyer %s, CPF/CNPJ %s "
@@ -367,35 +365,35 @@ msgstr ""
 "A oportunidade [%d] teve o status modificado de %s para %s . Contratante %s,"
 " CPF/CNPJ %s"
 
-#: sale/models.py:187
+#: sale/models.py:188
 msgid "Data do Upload"
 msgstr "Atualização"
 
-#: sale/models.py:212
+#: sale/models.py:213
 #, python-format
 msgid "New file uploaded to Sale [#%d]"
 msgstr "Novo arquivo anexo a oportunidade [#%d]"
 
-#: sale/models.py:213
+#: sale/models.py:214
 #, python-format
 msgid "New file uploaded to Sale [#%d] in status %s. Buyer %s, CPF/CNPJ %s"
 msgstr ""
 "Um novo arquivo anexo a oportunidade [#%d] no status %s. Contratante %s, "
 "CPF/CNPJ %s"
 
-#: sale/models.py:223 sale/models.py:235
+#: sale/models.py:257 sale/models.py:269
 msgid "Value"
 msgstr "Valor"
 
-#: sale/models.py:224 sale/models.py:237
+#: sale/models.py:258 sale/models.py:271
 msgid "Payment Date"
 msgstr "Data de Pagamento"
 
-#: sale/models.py:225 sale/models.py:238
+#: sale/models.py:259 sale/models.py:272
 msgid "Maturity Date"
 msgstr "Data de Vencimento"
 
-#: sale/models.py:226 sale/models.py:236
+#: sale/models.py:260 sale/models.py:270
 msgid "Percentage"
 msgstr "Percentual"
 
@@ -421,7 +419,6 @@ msgid "Uploaded by <b>%s</b> in <small>%s</small>"
 msgstr "Incluído por <b>%s</b> em <small>%s</small>"
 
 #: status_emails/models.py:12
-#: themes/default/templates/page-production-section.html:24
 #: themes/default/templates/page-sale-section.html:36
 msgid "Buyer"
 msgstr "Contratante"
@@ -444,21 +441,17 @@ msgstr "Usuários"
 
 #: themes/default/templates/404-section.html:9
 msgid "Sorry, this page doesn't exist"
-msgstr "Descuple, essa página não existe"
+msgstr "Desculpe, essa página não existe"
 
 #: themes/default/templates/404-section.html:9
-#, fuzzy
-#| msgid "Click "
 msgid "Click"
 msgstr "Clique"
 
 #: themes/default/templates/404-section.html:9
 msgid "here"
-msgstr ""
+msgstr "Aqui"
 
 #: themes/default/templates/404-section.html:9
-#, fuzzy
-#| msgid " to go to the Home page"
 msgid "to go to the Home page"
 msgstr "Para ir à página principal"
 
@@ -493,6 +486,7 @@ msgstr "Dashboard"
 
 #: themes/default/templates/header.html:36
 #: themes/default/templates/page-production-section.html:7
+#: themes/default/templates/page-production-section.html:32
 #: user_groups/models.py:11
 msgid "Production"
 msgstr "Produção"
@@ -564,30 +558,24 @@ msgid "Status See"
 msgstr "Status que pode ver"
 
 #: themes/default/templates/page-entries-profile-section.html:79
-#| msgid "Status See"
 msgid "Status See Payment"
-msgstr "Status que pode ver"
+msgstr "Status que pode ver - Prêmio"
 
 #: themes/default/templates/page-entries-profile-section.html:92
-#, fuzzy
-#| msgid "Status See"
 msgid "Status See Deadline"
-msgstr "Status que pode ver"
+msgstr "Status que pode ver - Vigência"
 
 #: themes/default/templates/page-entries-profile-section.html:105
 msgid "Status Edit"
 msgstr "Status que pode editar"
 
 #: themes/default/templates/page-entries-profile-section.html:117
-#| msgid "Status Edit"
 msgid "Status Edit Payment"
-msgstr "Status que pode editar"
+msgstr "Status que pode editar - Prêmio"
 
 #: themes/default/templates/page-entries-profile-section.html:129
-#, fuzzy
-#| msgid "Status Edit"
 msgid "Status Edit Deadline"
-msgstr "Status que pode editar"
+msgstr "Status que pode editar -Vigência"
 
 #: themes/default/templates/page-entries-profile-section.html:141
 msgid "Status Set"
@@ -637,7 +625,7 @@ msgstr "Ir para Perfis de Usuário"
 msgid "Create User"
 msgstr "Criar Usuário"
 
-#: themes/default/templates/page-entries-user-section.html:26
+#: themes/default/templates/page-entries-user-section.html:25
 msgid "Save User"
 msgstr "Salvar Usuário"
 
@@ -680,21 +668,76 @@ msgstr "(Nova)"
 msgid "There's no notifications"
 msgstr "Não há Notificações"
 
-#: themes/default/templates/page-production-section.html:14
+#: themes/default/templates/page-production-section.html:15
 msgid "Search for a Sale"
-msgstr "Pesquisar usuário"
+msgstr "Pesquisar uma oportunidade"
 
-#: themes/default/templates/page-production-section.html:25
+#: themes/default/templates/page-production-section.html:40
+msgid "Quote"
+msgstr "Comissão"
+
+#: themes/default/templates/page-production-section.html:45
+#: themes/default/templates/page-production-section.html:46
+msgid "Effective"
+msgstr "Vigência"
+
+#: themes/default/templates/page-production-section.html:54
+#: user_account/models.py:32
+msgid "Director"
+msgstr "Diretor"
+
+#: themes/default/templates/page-production-section.html:55
+#: user_account/models.py:33
+msgid "Master"
+msgstr "Supervisor"
+
+#: themes/default/templates/page-production-section.html:56
+msgid "Manager"
+msgstr "Gerente"
+
+#: themes/default/templates/page-production-section.html:57
 #: themes/default/templates/page-sale-section.html:25
 msgid "Product"
 msgstr "Produto"
 
-#: themes/default/templates/page-production-section.html:26
+#: themes/default/templates/page-production-section.html:59
+msgid "Dir"
+msgstr ""
+
+#: themes/default/templates/page-production-section.html:60
+msgid "Sup"
+msgstr ""
+
+#: themes/default/templates/page-production-section.html:61
+msgid "Ger"
+msgstr ""
+
+#: themes/default/templates/page-production-section.html:65
+msgid "Begin"
+msgstr "Início"
+
+#: themes/default/templates/page-production-section.html:66
+msgid "End"
+msgstr "Fim"
+
+#: themes/default/templates/page-production-section.html:67
+msgid "P"
+msgstr ""
+
+#: themes/default/templates/page-production-section.html:68
+msgid "B"
+msgstr ""
+
+#: themes/default/templates/page-production-section.html:69
+msgid "A"
+msgstr ""
+
+#: themes/default/templates/page-production-section.html:70
 #: themes/default/templates/page-sale-section.html:27
 msgid "Status"
 msgstr "Status"
 
-#: themes/default/templates/page-production-section.html:41
+#: themes/default/templates/page-production-section.html:136
 msgid "There's no Sales"
 msgstr "Não há oportunidades"
 
@@ -734,101 +777,101 @@ msgstr "Lead de"
 msgid "Quotation of"
 msgstr "Cotação de"
 
-#: themes/default/templates/page-sale-section.html:135
+#: themes/default/templates/page-sale-section.html:145
 msgid "Clauses"
 msgstr "Coberturas"
 
-#: themes/default/templates/page-sale-section.html:139
+#: themes/default/templates/page-sale-section.html:149
 msgid "Clause"
 msgstr "Cobertura"
 
-#: themes/default/templates/page-sale-section.html:140
+#: themes/default/templates/page-sale-section.html:150
 #, python-format
 msgid "%%"
 msgstr ""
 
-#: themes/default/templates/page-sale-section.html:141
+#: themes/default/templates/page-sale-section.html:151
 msgid "Individual Capital"
 msgstr "Capital individual"
 
-#: themes/default/templates/page-sale-section.html:357
+#: themes/default/templates/page-sale-section.html:367
 msgid "Files"
 msgstr "Arquivos"
 
-#: themes/default/templates/page-sale-section.html:366
+#: themes/default/templates/page-sale-section.html:376
 msgid "Files to Download"
 msgstr "Arquivos para download"
 
-#: themes/default/templates/page-sale-section.html:374
-#: themes/default/templates/page-sale-section.html:414
-#: themes/default/templates/page-sale-section.html:429
+#: themes/default/templates/page-sale-section.html:384
+#: themes/default/templates/page-sale-section.html:424
+#: themes/default/templates/page-sale-section.html:439
 msgid "Download"
 msgstr "Download"
 
-#: themes/default/templates/page-sale-section.html:381
+#: themes/default/templates/page-sale-section.html:391
 msgid "Uploaded files"
 msgstr "Arquivos enviado"
 
-#: themes/default/templates/page-sale-section.html:424
+#: themes/default/templates/page-sale-section.html:434
 msgid "Uploaded by"
 msgstr "Enviado por"
 
-#: themes/default/templates/page-sale-section.html:425
+#: themes/default/templates/page-sale-section.html:435
 msgid "in"
 msgstr "Dica"
 
-#: themes/default/templates/page-sale-section.html:439
+#: themes/default/templates/page-sale-section.html:449
 msgid "There is no Files in this Sale. Click on \"+\" button to upload files."
 msgstr ""
 "Não há arquivos nessa oportunidade, clique no \"+\" para adicionar novos "
 "arquivos."
 
-#: themes/default/templates/page-sale-section.html:447
+#: themes/default/templates/page-sale-section.html:457
 msgid "You need to save the Sale to upload Files"
 msgstr "Você precisa salvar a oportunidade para salvar novos arquivos"
 
-#: themes/default/templates/page-sale-section.html:485
+#: themes/default/templates/page-sale-section.html:495
 msgid "Click to see more about the conditions of the product"
 msgstr "Clique para ver mais sobre as condições do produto"
 
-#: themes/default/templates/page-sale-section.html:492
-#: themes/default/templates/page-sale-section.html:516
+#: themes/default/templates/page-sale-section.html:502
+#: themes/default/templates/page-sale-section.html:526
 msgid "Conditions"
 msgstr "Declaração"
 
-#: themes/default/templates/page-sale-section.html:498
-#: themes/default/templates/page-sale-section.html:522
-#: themes/default/templates/page-sale-section.html:595
+#: themes/default/templates/page-sale-section.html:508
+#: themes/default/templates/page-sale-section.html:532
+#: themes/default/templates/page-sale-section.html:605
 #: themes/default/templates/parts/submit-form.html:4
 msgid "Close"
 msgstr "Fechar"
 
-#: themes/default/templates/page-sale-section.html:509
+#: themes/default/templates/page-sale-section.html:519
 msgid "Click to read the declaration"
 msgstr "Clique para ler a declaração"
 
-#: themes/default/templates/page-sale-section.html:546
+#: themes/default/templates/page-sale-section.html:556
 msgid "Choose an action"
 msgstr "Escolha uma ação"
 
-#: themes/default/templates/page-sale-section.html:570
-#: themes/default/templates/page-sale-section.html:596
+#: themes/default/templates/page-sale-section.html:580
+#: themes/default/templates/page-sale-section.html:606
 msgid "Upload File"
 msgstr "Subir um arquivo"
 
-#: themes/default/templates/page-sale-section.html:578
+#: themes/default/templates/page-sale-section.html:588
 msgid "Change the Filetype"
 msgstr "Tipo de arquivo"
 
-#: themes/default/templates/page-sale-section.html:580
+#: themes/default/templates/page-sale-section.html:590
 msgid "Select a Filetype"
 msgstr "Escolha um tipo de arquivo"
 
-#: themes/default/templates/page-sale.html:154
+#: themes/default/templates/page-sale.html:157
 msgid "Select File"
 msgstr "Escolha um arquivo"
 
-#: themes/default/templates/page-sale.html:211
+#: themes/default/templates/page-sale.html:214
 msgid "You have unsaved changes. Do you want to exit the page?"
 msgstr ""
 
@@ -959,14 +1002,6 @@ msgstr "Data de Criação"
 msgid "Partner"
 msgstr "Parceiro"
 
-#: user_account/models.py:32
-msgid "Director"
-msgstr "Diretor"
-
-#: user_account/models.py:33
-msgid "Master"
-msgstr "Supervisor"
-
 #: user_account/models.py:34
 msgid "Agency"
 msgstr "Agencia"
@@ -1040,9 +1075,6 @@ msgstr "Perfil"
 
 #~ msgid "GalCorr - Administrator"
 #~ msgstr "GalCorr - Administrador"
-
-#~ msgid "End"
-#~ msgstr "Fim"
 
 #~ msgid "Detail Count"
 #~ msgstr "Detalhes da Compra"

@@ -20,20 +20,20 @@
             <input type="hidden" name="productpk" value="{{ product.pk }}">
         {% endif %}
         <div class="well">
-        <div class="row">
-            <div class="col-md-6">
-                <p><b>{% trans "Product" %}</b>: {{ product }}</p>
-                <p><b>{% trans "Sale Owner" %}</b>: {{ sale.owner|default:user }}</p>
-                <p><b>{% trans "Status" %}</b>:
-                    {% if sale.pk %}{{ deadline.status }}{% else %}{{ status_deadline }}{% endif %}
-                </p>
-                {% if not product.is_lead %}
-                    <p><b>{% trans "Insurance" %}</b>: {{ product.insurance_company.name }}<br></p>
-                {% endif %}
+            <div class="row">
+                <div class="col-md-12">
+                    <p><b>{% trans "Product" %}</b> {{ product }}</p>
+                    <p><b>{% trans "Sale Owner" %}</b> {{ sale.owner|default:user }}</p>
+                    <p><b>{% trans "Status" %}</b>
+                        {% if sale.pk %}{{ deadline.status }}{% else %}{{ status_deadline }}{% endif %}
+                    </p>
+                    {% if not product.is_lead %}
+                        <p><b>{% trans "Insurance" %}</b> {{ product.insurance_company.name }}<br></p>
+                    {% endif %}
+                </div>
             </div>
         </div>
-        </div>
-        <h2>{% trans 'Buyer' %}</h2>
+        <h4>{% trans 'Buyer' %}</h4>
         <div class="well">
                 <div class="row">
                     <input type="hidden" name="{{form.kind_person.html_name}}" value="{{product.kind_person}}">
@@ -70,7 +70,7 @@
                     {% endif %}
             </div>
         </div>
-        <h2>{% trans 'Address' %}</h2>
+        <h4>{% trans 'Address' %}</h4>
         <div class="well">
             <div class="row">
                 {{ addressbuyer.management_form }}
@@ -86,13 +86,13 @@
             </div>
         </div>
     {% if show_all %}
-        <h2>{% if product.is_lead %}
+        <h4>{% if product.is_lead %}
                 {% trans "Lead of" %}
             {% else %}
                 {% trans "Quotation of" %}
             {% endif %}
             {{product}}
-        </h2>
+        </h4>
         <div class="well">
             <div class="row">
                 {{ deadlinesale.management_form }}
@@ -215,8 +215,8 @@
                     {% if deadline_see %}
                         {% bootstrap_field deadlinesale.0.begin form_group_class='form-group col-md-3 mask-date' set_disabled=deadline_disabled %}
                         {% bootstrap_field deadlinesale.0.end form_group_class='form-group col-md-3  mask-date' set_disabled=deadline_disabled %}
-                        {% bootstrap_field deadlinesale.0.proposal form_group_class='form-group col-md-6' set_disabled=deadline_disabled %}
-                        {% bootstrap_field deadlinesale.0.policy form_group_class='form-group col-md-6' set_disabled=deadline_disabled %}
+                        {% bootstrap_field deadlinesale.0.proposal form_group_class='form-group col-md-3' set_disabled=deadline_disabled %}
+                        {% bootstrap_field deadlinesale.0.policy form_group_class='form-group col-md-3' set_disabled=deadline_disabled %}
                     {% else %}
                         <input type="hidden" name="deadlinesale.0.begin.html_name" value="deadlinesale.0.begin.value">
                         <input type="hidden" name="deadlinesale.0.end.html_name" value="deadlinesale.0.end.value">
@@ -224,7 +224,7 @@
                         <input type="hidden" name="deadlinesale.0.policy.html_name" value="deadlinesale.0.policy.value">
                     {% endif %}
                 {% endif %}
-                {% if product_see %}
+                {% if deadline_see %}
                     <div class="col-md-12">
                         {% if not product.is_lead %}
                             {% if product.disclaimer %}
@@ -364,7 +364,7 @@
 
         {% endif %}
         {% if not sale.pk and product.is_lead == false %}
-            <h2>{% trans 'Files' %}</h2>
+            <h4>{% trans 'Files' %}</h4>
             <div class="well">
                 {# <div class="thumbnail col-md-3" style="display: none" id="file_empty_form"> #}
                     {# <div class="caption"> #}

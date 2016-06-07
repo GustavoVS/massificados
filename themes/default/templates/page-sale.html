@@ -81,6 +81,7 @@
                 });
 
             });
+            {% autoescape off %}{{ product.rules_js }}{% endautoescape %}
             {% if product.rules_js %}
                 {% autoescape off %}{{ product.rules_js }}{% endautoescape %}
             {% endif %}
