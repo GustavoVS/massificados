@@ -81,7 +81,9 @@
                 });
 
             });
-            {% autoescape off %}{{ product.rules_js }}{% endautoescape %}
+            {% if product.rules_js %}
+                {% autoescape off %}{{ product.rules_js }}{% endautoescape %}
+            {% endif %}
 {#            function calculate() {#}
 {#                var P = $('#id_deadline_set-0-payment').val();#}
 {#                if(P === ""){#}

@@ -57,6 +57,21 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
         data['question_detail'] = product.profile.question_set.filter(
             type_profile='pdt').order_by('order_number')
 
+        group_permissions = self.request.user.group_permissions
+
+        data['possible_new_status'] = self.request.user.group_permissions.status_set.filter(
+            level__gte=product.begin_status.level).select_related()
+
+        data['payment_disabled'] = not (product.begin_status in group_permissions.status_edit_payment.all())
+        data['payment_see'] = not data['payment_disabled'] or \
+            product.begin_status in group_permissions.status_see_payment.all()
+
+        data['deadline_disabled'] = not (product.begin_status in group_permissions.status_edit_deadline.all())
+        data['deadline_see'] = not data['deadline_disabled'] or \
+            product.begin_status in group_permissions.status_see_deadline.all()
+
+        data['show_all'] = data['deadline_see'] or data['payment_see']
+
         num_files = product.sample_file_type.all().count()
         if num_files % 4 == 0:
             data['sample_file_type_cols'] = 3
@@ -162,6 +177,7 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         # todo: if "permissions" to redirect to determineted url
         return reverse_lazy('index_view')
+        # return self.request
 
 
 class EditBuyerView(LoginRequiredMixin, UpdateView):
@@ -306,8 +322,8 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
         return response
 
     def get_success_url(self):
-        # todo: if "permissions" to redirect to determineted url
         return reverse_lazy('index_view')
+        # return self.request
 
 
 @api_view(['GET', ])

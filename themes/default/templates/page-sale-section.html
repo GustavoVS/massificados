@@ -98,7 +98,17 @@
                 {{ deadlinesale.management_form }}
                 {% if not product.is_lead %}
                     {% if payment_see %}
-                        {% bootstrap_field deadlinesale.0.payment form_group_class='form-group col-md-6 mask-float' type="text" set_disabled=payment_disabled %}
+                        {# {% bootstrap_field deadlinesale.0.payment form_group_class='form-group col-md-6 mask-float' type="text" set_disabled=payment_disabled %} #}
+                        <div class="form-group col-md-6 mask-float">
+                            <label class="control-label" for="id_{{ deadlinesale.0.payment.html_name }}">{{ deadlinesale.0.payment.label }}</label>
+                            <input  class="form-control"
+                                    id="id_{{ deadlinesale.0.payment.html_name }}"
+                                    maxlength="18"
+                                    name="{{ deadlinesale.0.payment.html_name }}"
+                                    placeholder="{{ deadlinesale.0.payment.label }}"
+                                    type="text"
+                                    value="{{ deadlinesale.0.payment.value|floatformat:2 }}">
+                        </div>
                         {% bootstrap_field deadlinesale.0.lives form_group_class='form-group col-md-6' set_disabled=payment_disabled %}
                         {% bootstrap_field deadlinesale.0.method_payment form_group_class='form-group col-md-6' set_disabled=True %}
                         {% bootstrap_field deadlinesale.0.insured_capital form_group_class='form-group col-md-3 mask-float' set_disabled=True %}
@@ -148,7 +158,7 @@
                                                                             <div class="media-body">
                                                                                 {{ rule.name }}
                                                                                 {% if rule.percent > 0 %}
-                                                                                    <td>{{ rule.percent }}</td>
+                                                                                    <td>{{ rule.percent|floatformat:2 }}</td>
                                                                                 {% else %}
                                                                                     <td>{{ rule.fixing_text }}</td>
                                                                                 {% endif %}
@@ -157,7 +167,7 @@
                                                                                      {% else %}
                                                                                            class="deadline_set-0-rules-valueF"
                                                                                      {% endif %}
-                                                                                >{{ rule.value }}
+                                                                                >{{ rule.value|floatformat:2 }}
                                                                                 </td>
                                                                                 {% if not rule.value %}
                                                                                     <td class="hidden"><input name="deadline_set-0-rules-{{rule.pk }}-value" value="{{ deadline.rules.value|default_if_none:rule.value }}"class="deadline_set-0-rules-valueV"></td>

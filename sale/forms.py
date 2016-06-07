@@ -50,7 +50,7 @@ AddressBuyerFormset = inlineformset_factory(Buyer, BuyerAddress, form=BuyerAddre
 class DeadlineSaleForm(forms.ModelForm):
     # accept_declaration = forms.BooleanField(_('I accept that the GalCorr make contact my client, if necessary'),
     #     required=True)
-    payment = forms.CharField(max_length=18, required=False)
+    payment = forms.CharField(max_length=18, required=False, label=_('Payment'))
 
     class Meta:
         model = Deadline
@@ -60,8 +60,9 @@ class DeadlineSaleForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(DeadlineSaleForm, self).__init__(*args, **kwargs)
         self.fields['method_payment'].initial = MethodPayment.objects.get(name='Boleto')
-        if self.instance:
-            self.fields['payment'].initial = self.instance.payment
+        # if self.instance and self.instance.payment:
+        #     import ipdb; ipdb.set_trace()
+        #     self.fields['payment'].initial = ('%.2f' % self.instance.payment)
 
     def clean_payment(self):
         payment = self.cleaned_data.get('payment')
