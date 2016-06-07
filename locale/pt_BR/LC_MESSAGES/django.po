@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-06 03:04-0300\n"
-"PO-Revision-Date: 2016-06-06 03:04+0000\n"
+"POT-Creation-Date: 2016-06-06 23:14-0300\n"
+"PO-Revision-Date: 2016-06-06 23:15+0000\n"
 "Last-Translator:   <admin@admin.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -95,10 +95,8 @@ msgid "Other Documentos"
 msgstr "Informação"
 
 #: .\product\models.py:132
-#, fuzzy
-#| msgid "Rules"
 msgid "Rule JS"
-msgstr "Regra"
+msgstr "Regra JS"
 
 #: .\product\models.py:143
 msgid "Hint"
@@ -303,10 +301,13 @@ msgid "Debt"
 msgstr "Prêmio"
 
 #: .\sale\models.py:99
+#: .\themes\default\templates\page-production-section.html:52
+#: .\themes\default\templates\page-production-section.html:53
 msgid "Proposal"
 msgstr "Proposta"
 
 #: .\sale\models.py:100
+#: .\themes\default\templates\page-production-section.html:54
 msgid "Policy"
 msgstr "Apólice"
 
@@ -395,29 +396,28 @@ msgstr "Data de Vencimento"
 msgid "Percentage"
 msgstr "Percentual"
 
-#: .\sale\views.py:345
+#: .\sale\views.py:363
 msgid "An error has occurred"
 msgstr "Um erro ocorreu"
 
-#: .\sale\views.py:347
+#: .\sale\views.py:365
 msgid "Select a File Type to upload"
 msgstr "Escolha o tipo de arquivo para upload"
 
-#: .\sale\views.py:349
+#: .\sale\views.py:367
 msgid "Select a File"
 msgstr "Selecione um arquivo"
 
-#: .\sale\views.py:360
+#: .\sale\views.py:378
 msgid "Successfully file uploaded"
 msgstr "Sucesso no upload do arquivo"
 
-#: .\sale\views.py:362
+#: .\sale\views.py:380
 #, python-format
 msgid "Uploaded by <b>%s</b> in <small>%s</small>"
 msgstr "Incluído por <b>%s</b> em <small>%s</small>"
 
 #: .\status_emails\models.py:12
-#: .\themes\default\templates\page-production-section.html:24
 #: .\themes\default\templates\page-sale-section.html:36
 msgid "Buyer"
 msgstr "Contratante"
@@ -441,21 +441,17 @@ msgstr "Usuários"
 
 #: .\themes\default\templates\404-section.html:9
 msgid "Sorry, this page doesn't exist"
-msgstr "Descuple, essa página não existe"
+msgstr "Desculpe, essa página não existe"
 
 #: .\themes\default\templates\404-section.html:9
-#, fuzzy
-#| msgid "Click "
 msgid "Click"
 msgstr "Clique"
 
 #: .\themes\default\templates\404-section.html:9
 msgid "here"
-msgstr ""
+msgstr "Aqui"
 
 #: .\themes\default\templates\404-section.html:9
-#, fuzzy
-#| msgid " to go to the Home page"
 msgid "to go to the Home page"
 msgstr "Para ir à página principal"
 
@@ -491,6 +487,7 @@ msgstr "Dashboard"
 
 #: .\themes\default\templates\header.html:36
 #: .\themes\default\templates\page-production-section.html:7
+#: .\themes\default\templates\page-production-section.html:32
 #: .\user_groups\models.py:11
 msgid "Production"
 msgstr "Produção"
@@ -545,43 +542,59 @@ msgstr "Perfis"
 msgid "Create Role"
 msgstr "Criar Perfil"
 
-#: .\themes\default\templates\page-entries-profile-section.html:26
+#: .\themes\default\templates\page-entries-profile-section.html:25
 msgid "Permissions of Menu"
 msgstr "Permissões"
 
-#: .\themes\default\templates\page-entries-profile-section.html:193
+#: .\themes\default\templates\page-entries-profile-section.html:46
 msgid "For Companies"
 msgstr "Para empresas"
 
-#: .\themes\default\templates\page-entries-profile-section.html:223
+#: .\themes\default\templates\page-entries-profile-section.html:56
 msgid "For People"
 msgstr "Para pessoa"
 
-#: .\themes\default\templates\page-entries-profile-section.html:253
+#: .\themes\default\templates\page-entries-profile-section.html:66
 msgid "Status See"
 msgstr "Status que pode ver"
 
-#: .\themes\default\templates\page-entries-profile-section.html:282
+#: .\themes\default\templates\page-entries-profile-section.html:79
+msgid "Status See Payment"
+msgstr "Status que pode ver - Prêmio"
+
+#: .\themes\default\templates\page-entries-profile-section.html:92
+msgid "Status See Deadline"
+msgstr "Status que pode ver - Vigência"
+
+#: .\themes\default\templates\page-entries-profile-section.html:105
 msgid "Status Edit"
 msgstr "Status que pode editar"
 
-#: .\themes\default\templates\page-entries-profile-section.html:311
+#: .\themes\default\templates\page-entries-profile-section.html:117
+msgid "Status Edit Payment"
+msgstr "Status que pode editar - Prêmio"
+
+#: .\themes\default\templates\page-entries-profile-section.html:129
+msgid "Status Edit Deadline"
+msgstr "Status que pode editar -Vigência"
+
+#: .\themes\default\templates\page-entries-profile-section.html:141
 msgid "Status Set"
 msgstr "Status que pode atribuir"
 
-#: .\themes\default\templates\page-entries-profile-section.html:340
+#: .\themes\default\templates\page-entries-profile-section.html:153
 msgid "The user can see the production in those profiles"
 msgstr "O usuário pode ver a produção nos seguintes perfís de acesso"
 
-#: .\themes\default\templates\page-entries-profile-section.html:370
+#: .\themes\default\templates\page-entries-profile-section.html:165
 msgid "Files See"
 msgstr "Arquivos que pode ver"
 
-#: .\themes\default\templates\page-entries-profile-section.html:400
+#: .\themes\default\templates\page-entries-profile-section.html:177
 msgid "Files Download"
 msgstr "Arquivos que pode baixar"
 
-#: .\themes\default\templates\page-entries-profile-section.html:428
+#: .\themes\default\templates\page-entries-profile-section.html:187
 msgid "Save Role"
 msgstr "Salvar Perfil"
 
@@ -613,7 +626,7 @@ msgstr "Ir para Perfis de Usuário"
 msgid "Create User"
 msgstr "Criar Usuário"
 
-#: .\themes\default\templates\page-entries-user-section.html:26
+#: .\themes\default\templates\page-entries-user-section.html:25
 msgid "Save User"
 msgstr "Salvar Usuário"
 
@@ -656,21 +669,79 @@ msgstr "(Nova)"
 msgid "There's no notifications"
 msgstr "Não há Notificações"
 
-#: .\themes\default\templates\page-production-section.html:14
+#: .\themes\default\templates\page-production-section.html:15
 msgid "Search for a Sale"
-msgstr "Pesquisar usuário"
+msgstr "Pesquisar uma oportunidade"
 
-#: .\themes\default\templates\page-production-section.html:25
+#: .\themes\default\templates\page-production-section.html:37
+msgid "Quote"
+msgstr "Comissão"
+
+#: .\themes\default\templates\page-production-section.html:39
+msgid "Effective"
+msgstr "Vigência"
+
+#: .\themes\default\templates\page-production-section.html:44
+#: .\user_account\models.py:32
+msgid "Director"
+msgstr "Diretor"
+
+#: .\themes\default\templates\page-production-section.html:45
+#: .\user_account\models.py:33
+msgid "Master"
+msgstr "Supervisor"
+
+#: .\themes\default\templates\page-production-section.html:46
+msgid "Manager"
+msgstr "Gerente"
+
+#: .\themes\default\templates\page-production-section.html:47
 #: .\themes\default\templates\page-sale-section.html:25
 msgid "Product"
 msgstr "Produto"
 
-#: .\themes\default\templates\page-production-section.html:26
+#: .\themes\default\templates\page-production-section.html:48
+msgid "Payment"
+msgstr "Prêmio"
+
+#: .\themes\default\templates\page-production-section.html:49
+msgid "Dir"
+msgstr ""
+
+#: .\themes\default\templates\page-production-section.html:50
+msgid "Sup"
+msgstr ""
+
+#: .\themes\default\templates\page-production-section.html:51
+msgid "Ger"
+msgstr ""
+
+#: .\themes\default\templates\page-production-section.html:55
+msgid "Begin"
+msgstr "Início"
+
+#: .\themes\default\templates\page-production-section.html:56
+msgid "End"
+msgstr "Fim"
+
+#: .\themes\default\templates\page-production-section.html:57
+msgid "P"
+msgstr ""
+
+#: .\themes\default\templates\page-production-section.html:58
+msgid "B"
+msgstr ""
+
+#: .\themes\default\templates\page-production-section.html:59
+msgid "A"
+msgstr ""
+
+#: .\themes\default\templates\page-production-section.html:60
 #: .\themes\default\templates\page-sale-section.html:27
 msgid "Status"
 msgstr "Status"
 
-#: .\themes\default\templates\page-production-section.html:41
+#: .\themes\default\templates\page-production-section.html:128
 msgid "There's no Sales"
 msgstr "Não há oportunidades"
 
@@ -698,111 +769,115 @@ msgstr "Dono da oportunidade"
 msgid "Insurance"
 msgstr "Seguradora"
 
-#: .\themes\default\templates\page-sale-section.html:71
+#: .\themes\default\templates\page-sale-section.html:73
 msgid "Address"
 msgstr "Endereço"
 
-#: .\themes\default\templates\page-sale-section.html:94
+#: .\themes\default\templates\page-sale-section.html:90
 msgid "Lead of"
 msgstr "Lead de"
 
-#: .\themes\default\templates\page-sale-section.html:96
+#: .\themes\default\templates\page-sale-section.html:92
 msgid "Quotation of"
 msgstr "Cotação de"
 
-#: .\themes\default\templates\page-sale-section.html:127
+#: .\themes\default\templates\page-sale-section.html:137
 msgid "Clauses"
 msgstr "Coberturas"
 
-#: .\themes\default\templates\page-sale-section.html:131
+#: .\themes\default\templates\page-sale-section.html:141
 msgid "Clause"
 msgstr "Cobertura"
 
-#: .\themes\default\templates\page-sale-section.html:132
+#: .\themes\default\templates\page-sale-section.html:142
 #, python-format
 msgid "%%"
 msgstr ""
 
-#: .\themes\default\templates\page-sale-section.html:133
+#: .\themes\default\templates\page-sale-section.html:143
 msgid "Individual Capital"
 msgstr "Capital individual"
 
-#: .\themes\default\templates\page-sale-section.html:336
+#: .\themes\default\templates\page-sale-section.html:359
 msgid "Files"
 msgstr "Arquivos"
 
-#: .\themes\default\templates\page-sale-section.html:345
+#: .\themes\default\templates\page-sale-section.html:368
 msgid "Files to Download"
 msgstr "Arquivos para download"
 
-#: .\themes\default\templates\page-sale-section.html:353
-#: .\themes\default\templates\page-sale-section.html:393
-#: .\themes\default\templates\page-sale-section.html:408
+#: .\themes\default\templates\page-sale-section.html:376
+#: .\themes\default\templates\page-sale-section.html:416
+#: .\themes\default\templates\page-sale-section.html:431
 msgid "Download"
 msgstr "Download"
 
-#: .\themes\default\templates\page-sale-section.html:360
+#: .\themes\default\templates\page-sale-section.html:383
 msgid "Uploaded files"
 msgstr "Arquivos enviado"
 
-#: .\themes\default\templates\page-sale-section.html:403
+#: .\themes\default\templates\page-sale-section.html:426
 msgid "Uploaded by"
 msgstr "Enviado por"
 
-#: .\themes\default\templates\page-sale-section.html:404
+#: .\themes\default\templates\page-sale-section.html:427
 msgid "in"
 msgstr "Dica"
 
-#: .\themes\default\templates\page-sale-section.html:418
+#: .\themes\default\templates\page-sale-section.html:441
 msgid "There is no Files in this Sale. Click on \"+\" button to upload files."
 msgstr ""
 "Não há arquivos nessa oportunidade, clique no \"+\" para adicionar novos "
 "arquivos."
 
-#: .\themes\default\templates\page-sale-section.html:426
+#: .\themes\default\templates\page-sale-section.html:449
 msgid "You need to save the Sale to upload Files"
 msgstr "Você precisa salvar a oportunidade para salvar novos arquivos"
 
-#: .\themes\default\templates\page-sale-section.html:464
+#: .\themes\default\templates\page-sale-section.html:487
 msgid "Click to see more about the conditions of the product"
 msgstr "Clique para ver mais sobre as condições do produto"
 
-#: .\themes\default\templates\page-sale-section.html:471
-#: .\themes\default\templates\page-sale-section.html:495
+#: .\themes\default\templates\page-sale-section.html:494
+#: .\themes\default\templates\page-sale-section.html:518
 msgid "Conditions"
 msgstr "Declaração"
 
-#: .\themes\default\templates\page-sale-section.html:477
-#: .\themes\default\templates\page-sale-section.html:501
-#: .\themes\default\templates\page-sale-section.html:572
+#: .\themes\default\templates\page-sale-section.html:500
+#: .\themes\default\templates\page-sale-section.html:524
+#: .\themes\default\templates\page-sale-section.html:597
 #: .\themes\default\templates\parts\submit-form.html:4
 msgid "Close"
 msgstr "Fechar"
 
-#: .\themes\default\templates\page-sale-section.html:488
+#: .\themes\default\templates\page-sale-section.html:511
 msgid "Click to read the declaration"
 msgstr "Clique para ler a declaração"
 
-#: .\themes\default\templates\page-sale-section.html:523
+#: .\themes\default\templates\page-sale-section.html:548
 msgid "Choose an action"
 msgstr "Escolha uma ação"
 
-#: .\themes\default\templates\page-sale-section.html:547
-#: .\themes\default\templates\page-sale-section.html:573
+#: .\themes\default\templates\page-sale-section.html:572
+#: .\themes\default\templates\page-sale-section.html:598
 msgid "Upload File"
 msgstr "Subir um arquivo"
 
-#: .\themes\default\templates\page-sale-section.html:555
+#: .\themes\default\templates\page-sale-section.html:580
 msgid "Change the Filetype"
 msgstr "Tipo de arquivo"
 
-#: .\themes\default\templates\page-sale-section.html:557
+#: .\themes\default\templates\page-sale-section.html:582
 msgid "Select a Filetype"
 msgstr "Escolha um tipo de arquivo"
 
-#: .\themes\default\templates\page-sale.html:154
+#: .\themes\default\templates\page-sale.html:89
 msgid "Select File"
 msgstr "Escolha um arquivo"
+
+#: .\themes\default\templates\page-sale.html:146
+msgid "You have unsaved changes. Do you want to exit the page?"
+msgstr ""
 
 #: .\themes\default\templates\parts\submit-form.html:3
 msgid "Save"
@@ -932,14 +1007,6 @@ msgstr "Data de Criação"
 msgid "Partner"
 msgstr "Parceiro"
 
-#: .\user_account\models.py:32
-msgid "Director"
-msgstr "Diretor"
-
-#: .\user_account\models.py:33
-msgid "Master"
-msgstr "Supervisor"
-
 #: .\user_account\models.py:34
 msgid "Agency"
 msgstr "Agencia"
@@ -952,7 +1019,7 @@ msgstr "úsuário"
 msgid "users"
 msgstr "usuários"
 
-#: .\user_account\models.py:55 .\user_groups\models.py:30
+#: .\user_account\models.py:55 .\user_groups\models.py:36
 msgid "Permissions"
 msgstr "Permissões de Acesso"
 
@@ -962,9 +1029,6 @@ msgstr "Perfil"
 
 #~ msgid "lives %d"
 #~ msgstr "vidas %d"
-
-#~ msgid "Payment"
-#~ msgstr "Prêmio"
 
 #~ msgid "Here"
 #~ msgstr "Aqui"
@@ -1016,9 +1080,6 @@ msgstr "Perfil"
 
 #~ msgid "GalCorr - Administrator"
 #~ msgstr "GalCorr - Administrador"
-
-#~ msgid "End"
-#~ msgstr "Fim"
 
 #~ msgid "Detail Count"
 #~ msgstr "Detalhes da Compra"

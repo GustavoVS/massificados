@@ -51,11 +51,26 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
         data['deadlinesale'] = DeadlineSaleFormset()
         data['sample_file_type'] = product.sample_file_type.all()
         # data['filedeadline'] = FileDeadlineFormset(product.file_type.all())
+
+        group_permissions = self.request.user.group_permissions
+
         data['questiondeadline'] = product.profile.question_set.filter(
             type_profile='pdl').order_by('order_number')
         # data['detail_deadline'] = DetailDeadlineFormset()
         data['question_detail'] = product.profile.question_set.filter(
             type_profile='pdt').order_by('order_number')
+
+        data['edit_disabled'] = not (product.begin_status in group_permissions.status_edit.all())
+
+        data['payment_disabled'] = not (product.begin_status in group_permissions.status_edit_payment.all())
+
+        data['payment_see'] = not data['payment_disabled'] or product.begin_status in group_permissions.status_see_payment.all()
+
+        data['deadline_disabled'] = not (product.begin_status in group_permissions.status_edit_deadline.all())
+
+        data['deadline_see'] = not data['deadline_disabled'] or product.begin_status in group_permissions.status_see_deadline.all()
+
+        data['show_all'] = data['deadline_see'] or data['payment_see']
 
         num_files = product.sample_file_type.all().count()
         if num_files % 4 == 0:
@@ -98,18 +113,18 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
                         quote = Quote.objects.get(deadline=dl)
                     else:
                         quote = Quote(deadline=dl,)
-                        quote.value = dl.payment * (dl.sale.product.partner_percentage / 100)
-                        quote.percentage = dl.sale.product.partner_percentage
-                        quote.save()
+                    quote.value = dl.payment * (dl.sale.product.partner_percentage / 100)
+                    quote.percentage = dl.sale.product.partner_percentage
+                    quote.save()
 
                     # repasse do owner
                     if SubQuote.objects.filter(quote=quote, user=dl.sale.owner).exists():
                         subquote = SubQuote.objects.get(quote=quote, user=dl.sale.owner)
                     else:
                         subquote = SubQuote(quote=quote, user=dl.sale.owner,)
-                        subquote.value = dl.payment * (dl.sale.product.owner_percentage / 100)
-                        subquote.percentage = dl.sale.product.owner_percentage
-                        subquote.save()
+                    subquote.value = dl.payment * (dl.sale.product.owner_percentage / 100)
+                    subquote.percentage = dl.sale.product.owner_percentage
+                    subquote.save()
 
                     # repasse do owner.master
                     if dl.sale.owner.master:
@@ -117,9 +132,9 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
                             subquote = SubQuote.objects.get(quote=quote, user=dl.sale.owner.master)
                         else:
                             subquote = SubQuote(quote=quote, user=dl.sale.owner.master)
-                            subquote.value = dl.payment * (dl.sale.product.master_percentage / 100)
-                            subquote.percentage = dl.sale.product.master_percentage
-                            subquote.save()
+                        subquote.value = dl.payment * (dl.sale.product.master_percentage / 100)
+                        subquote.percentage = dl.sale.product.master_percentage
+                        subquote.save()
 
                     # repasse do owner.director
                     if dl.sale.owner.director:
@@ -127,9 +142,9 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
                             subquote = SubQuote.objects.get(quote=quote, user=dl.sale.owner.director)
                         else:
                             subquote = SubQuote(quote=quote, user=dl.sale.owner.director)
-                            subquote.value = dl.payment * (dl.sale.product.director_percentage / 100)
-                            subquote.percentage = dl.sale.product.director_percentage
-                            subquote.save()
+                        subquote.value = dl.payment * (dl.sale.product.director_percentage / 100)
+                        subquote.percentage = dl.sale.product.director_percentage
+                        subquote.save()
                 except:
                     pass
 
@@ -249,18 +264,18 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
                         quote = Quote.objects.get(deadline=dl)
                     else:
                         quote = Quote(deadline=dl,)
-                        quote.value = dl.payment * (dl.sale.product.partner_percentage / 100)
-                        quote.percentage = dl.sale.product.partner_percentage
-                        quote.save()
+                    quote.value = dl.payment * (dl.sale.product.partner_percentage / 100)
+                    quote.percentage = dl.sale.product.partner_percentage
+                    quote.save()
 
                     # repasse do owner
                     if SubQuote.objects.filter(quote=quote, user=dl.sale.owner).exists():
                         subquote = SubQuote.objects.get(quote=quote, user=dl.sale.owner)
                     else:
                         subquote = SubQuote(quote=quote, user=dl.sale.owner,)
-                        subquote.value = dl.payment * (dl.sale.product.owner_percentage / 100)
-                        subquote.percentage = dl.sale.product.owner_percentage
-                        subquote.save()
+                    subquote.value = dl.payment * (dl.sale.product.owner_percentage / 100)
+                    subquote.percentage = dl.sale.product.owner_percentage
+                    subquote.save()
 
                     # repasse do owner.master
                     if dl.sale.owner.master:
@@ -268,9 +283,9 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
                             subquote = SubQuote.objects.get(quote=quote, user=dl.sale.owner.master)
                         else:
                             subquote = SubQuote(quote=quote, user=dl.sale.owner.master)
-                            subquote.value = dl.payment * (dl.sale.product.master_percentage / 100)
-                            subquote.percentage = dl.sale.product.master_percentage
-                            subquote.save()
+                        subquote.value = dl.payment * (dl.sale.product.master_percentage / 100)
+                        subquote.percentage = dl.sale.product.master_percentage
+                        subquote.save()
 
                     # repasse do owner.director
                     if dl.sale.owner.director:
@@ -278,9 +293,9 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
                             subquote = SubQuote.objects.get(quote=quote, user=dl.sale.owner.director)
                         else:
                             subquote = SubQuote(quote=quote, user=dl.sale.owner.director)
-                            subquote.value = dl.payment * (dl.sale.product.director_percentage / 100)
-                            subquote.percentage = dl.sale.product.director_percentage
-                            subquote.save()
+                        subquote.value = dl.payment * (dl.sale.product.director_percentage / 100)
+                        subquote.percentage = dl.sale.product.director_percentage
+                        subquote.save()
                 except:
                     pass
 

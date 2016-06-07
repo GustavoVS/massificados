@@ -112,6 +112,7 @@ class Deadline(models.Model):
     sale = models.ForeignKey(Sale, on_delete=models.CASCADE)
     lives = models.ForeignKey(NumberLives, null=True, blank=True, verbose_name=_("Lives"), )
     rules = models.ManyToManyField(RuleDeadLine, blank=True)
+    # Quote = models.ManyToManyField(Quote, blank=True)
 
     # def __unicode__(self):
     #     return '#%d %s (%s)' % (self.pk, self.sale.buyer, self.sale.product)
@@ -218,31 +219,6 @@ class File(models.Model):
         return resp
 
 
-class Quote(models.Model):
-    number = models.IntegerField(_('Number'), null=True, default=1)
-    value = models.FloatField(_('Value'), null=True, default=0)
-    payment_date = models.DateField(_('Payment Date'), null=True, blank=True)
-    maturity_date = models.DateField(_('Maturity Date'), default=timezone.now, null=True, blank=True)
-    percentage = models.FloatField(_('Percentage'), default=100, null=True, blank=True)
-    deadline = models.ForeignKey(Deadline)
-
-    def __unicode__(self):
-        return 'Quote %s' % self.number
-
-
-class SubQuote(models.Model):
-    number = models.IntegerField(_('Number'), null=True, default=1)
-    value = models.FloatField(_('Value'), null=True, default=0)
-    percentage = models.FloatField(_('Percentage'), default=0, null=True, blank=True)
-    payment_date = models.DateField(_('Payment Date'), null=True, blank=True)
-    maturity_date = models.DateField(_('Maturity Date'), default=timezone.now, null=True, blank=True)
-    quote = models.ForeignKey(Quote)
-    user = models.ForeignKey(MassificadoUser)
-
-    def __unicode__(self):
-        return 'Sub Quote %d' % self.number
-
-
 class Detail(models.Model):
     name = models.CharField(max_length=50)
     deadline = models.ForeignKey(
@@ -274,3 +250,28 @@ class ResponseDeadline(Response):
 
 class ResponseDetail(Response):
     detail = models.ForeignKey(Detail)
+
+
+class Quote(models.Model):
+    number = models.IntegerField(_('Number'), null=True, default=1)
+    value = models.FloatField(_('Value'), null=True, default=0)
+    payment_date = models.DateField(_('Payment Date'), null=True, blank=True)
+    maturity_date = models.DateField(_('Maturity Date'), default=timezone.now, null=True, blank=True)
+    percentage = models.FloatField(_('Percentage'), default=100, null=True, blank=True)
+    deadline = models.ForeignKey(Deadline)
+
+    def __unicode__(self):
+        return 'Quote %s' % self.number
+
+
+class SubQuote(models.Model):
+    number = models.IntegerField(_('Number'), null=True, default=1)
+    value = models.FloatField(_('Value'), null=True, default=0)
+    percentage = models.FloatField(_('Percentage'), default=0, null=True, blank=True)
+    payment_date = models.DateField(_('Payment Date'), null=True, blank=True)
+    maturity_date = models.DateField(_('Maturity Date'), default=timezone.now, null=True, blank=True)
+    quote = models.ForeignKey(Quote)
+    user = models.ForeignKey(MassificadoUser)
+
+    def __unicode__(self):
+        return 'Sub Quote %d' % self.number
