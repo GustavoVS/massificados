@@ -63,12 +63,12 @@ RULEJS_VIDA_GLOBAL = '''
                     if (CSI>100000 & CS > 0){CSI=100000}
 
 
-                    CS  = parseFloat(CS).toFixed(2);
+                    CS  = parseFloat(CS).toFixed(2).replace(",",".");
                     TXS = parseFloat(TXS).toFixed(2).replace(",",".");
-                    CSI = parseFloat(CSI).toFixed(2).replace(",",".");
+                    CSI = parseFloat(CSI).toFixed(2).replace(".",",");
 
                     $('#id_deadline_set-0-insured_capital').val(CS).addClass("float-success");
-                    $('#id_deadline_set-0-rate_per_thousand').html(TXS).addClass("float-success");
+                    $('#id_deadline_set-0-rate_per_thousand').val(TXS).addClass("float-success");
 
                     $('input.deadline_set-0-rules-valueV').val(CSI);
                     $('td.deadline_set-0-rules-valueV').html(CSI).addClass("float-success");
@@ -117,12 +117,12 @@ RULEJS_VIDA = '''
                     CS=CS*V;
                     var TXS = (P/(CS))*1000;
 
-                    CS  = parseFloat(CS).toFixed(2);
+                    CS  = parseFloat(CS).toFixed(2).replace(",",".");
                     TXS = parseFloat(TXS).toFixed(2).replace(",",".");
-                    CSI = parseFloat(CSI).toFixed(2).replace(",",".");
+                    CSI = parseFloat(CSI).toFixed(2).replace(".",",");
 
                     $('#id_deadline_set-0-insured_capital').val(CS).addClass("float-success");
-                    $('#id_deadline_set-0-rate_per_thousand').html(TXS).addClass("float-success");
+                    $('#id_deadline_set-0-rate_per_thousand').val(TXS).addClass("float-success");
 
                     $('input.deadline_set-0-rules-valueV').val(CSI);
                     $('td.deadline_set-0-rules-valueV').html(CSI).addClass("float-success");
@@ -171,12 +171,12 @@ RULEJS_AP = '''
                     CS=CS*V;
                     var TXS = (P/(CS))*1000;
 
-                    CS  = parseFloat(CS).toFixed(2);
+                    CS  = parseFloat(CS).toFixed(2).replace(",",".");
                     TXS = parseFloat(TXS).toFixed(2).replace(",",".");
-                    CSI = parseFloat(CSI).toFixed(2).replace(",",".");
+                    CSI = parseFloat(CSI).toFixed(2).replace(".",",");
 
                     $('#id_deadline_set-0-insured_capital').val(CS).addClass("float-success");
-                    $('#id_deadline_set-0-rate_per_thousand').html(TXS).addClass("float-success");
+                    $('#id_deadline_set-0-rate_per_thousand').vla(TXS).addClass("float-success");
 
                     $('input.deadline_set-0-rules-valueV').val(CSI);
                     $('td.deadline_set-0-rules-valueV').html(CSI).addClass("float-success");

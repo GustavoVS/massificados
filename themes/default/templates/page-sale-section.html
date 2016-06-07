@@ -376,7 +376,7 @@
             </div>
 
         {% endif %}
-        {% if not sale.pk and product.is_lead == false %}
+        {% if product.is_lead or sale.pk  %}
             <h4>{% trans 'Files' %}</h4>
             <div class="well">
                 {# <div class="thumbnail col-md-3" style="display: none" id="file_empty_form"> #}
