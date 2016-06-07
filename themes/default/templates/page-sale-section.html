@@ -4,6 +4,7 @@
 {# formset 1 #}
 {% load bootstrap3 %}
 {% load account %}
+{% load humanize %}
 
 {% block section-id %}page-sake-sec{% endblock %}
 {% block section-title %}
@@ -111,8 +112,20 @@
                         </div>
                         {% bootstrap_field deadlinesale.0.lives form_group_class='form-group col-md-6' set_disabled=payment_disabled %}
                         {% bootstrap_field deadlinesale.0.method_payment form_group_class='form-group col-md-6' set_disabled=True %}
-                        {% bootstrap_field deadlinesale.0.insured_capital form_group_class='form-group col-md-3 mask-float' set_disabled=True %}
-                        {% bootstrap_field deadlinesale.0.rate_per_thousand form_group_class='form-group col-md-3' set_disabled=True %}
+                        <div class="form-group col-md-3">
+                            <label class="control-label" for="id_{{ deadlinesale.0.insured_capital.html_name }}">{{ deadlinesale.0.insured_capital.label }}</label>
+                            <input class="form-control" id="id_{{ deadlinesale.0.insured_capital.html_name }}" name="{{ deadlinesale.0.insured_capital.html_name }}"
+                                   placeholder="{{ deadlinesale.0.insured_capital.label }}" step="any" title="" type="text"
+                                   value="{{ deadlinesale.0.insured_capital.value|floatformat:2|intcomma }}" readonly>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label" for="id_{{ deadlinesale.0.rate_per_thousand.html_name }}">{{ deadlinesale.0.rate_per_thousand.label }}</label>
+                            <input class="form-control" id="id_{{ deadlinesale.0.rate_per_thousand.html_name }}" name="{{ deadlinesale.0.rate_per_thousand.html_name }}"
+                                   placeholder="{{ deadlinesale.0.rate_per_thousand.label }}" step="any" title="" type="text"
+                                   value="{{ deadlinesale.0.rate_per_thousand.value|floatformat:2|intcomma }}" readonly>
+                        </div>
+{#                        {% bootstrap_field deadlinesale.0.insured_capital form_group_class='form-group col-md-3' %}#}
+{#                        {% bootstrap_field deadlinesale.0.rate_per_thousand form_group_class='form-group col-md-3' %}#}
                     {% else %}
                         <input type="hidden" name="deadlinesale.0.payment.html_name" value="deadlinesale.0.payment.value">
                         <input type="hidden" name="deadlinesale.0.lives.html_name" value="deadlinesale.0.lives.value">

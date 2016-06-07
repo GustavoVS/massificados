@@ -328,10 +328,10 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
                             id=rule_pk,
                             deadline=form.instance,
                             defaults={
-                                'value': self.request.POST.get('rule-%s-value' % rule_pk, '').replace(',', '.'),
+                                'value': self.request.POST.get('rule-%s-value' % rule_pk, '').replace('.', '').replace(',', '.'),
                                 'name': self.request.POST.get('rule-%s-name' % rule_pk, ''),
-                                'percent': self.request.POST.get('rule-%s-percent' % rule_pk, '').replace(',', '.'),
-                                'rate': self.request.POST.get('rule-%s-rate' % rule_pk, '').replace(',', '.'),
+                                'percent': self.request.POST.get('rule-%s-percent' % rule_pk, '').replace('.', '').replace(',', '.'),
+                                'rate': self.request.POST.get('rule-%s-rate' % rule_pk, '').replace('.', '').replace(',', '.'),
                                 'fixing_text': self.request.POST.get('rule-%s-fixing_text' % rule_pk, ''),
                                 'type': self.request.POST.get('rule-%s-type' % rule_pk, ''),
                                 'rule': self.request.POST.get('rule-%s-rule' % rule_pk, '')
