@@ -221,7 +221,7 @@
                     {% endif %}
                 {% else %}
                     {% if payment_see %}
-                        {% bootstrap_field deadlinesale.0.payment form_group_class='form-group col-md-6' set_disabled=payment_disabled %}
+                        {% bootstrap_field deadlinesale.0.payment form_group_class='form-group col-md-12' set_disabled=payment_disabled %}
                     {% else %}
                         <input type="hidden" name="deadlinesale.0.payment.html_name" value="deadlinesale.0.payment.value">
                     {% endif %}
