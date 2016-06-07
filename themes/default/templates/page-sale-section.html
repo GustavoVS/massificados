@@ -180,19 +180,19 @@
                                                                              {% else %}
                                                                                    class="deadline_set-0-rules-valueF"
                                                                              {% endif %}
-                                                                        >{{ rule.value|floatformat:2 }}
+                                                                        >{{ rule.value|floatformat:2|intcomma }}
                                                                         </td>
                                                                         <input type="hidden" name="rule_pk-{{ rule.pk }}">
                                                                         {% if rule.type == 'V' %}
                                                                             <input
                                                                                 type="hidden"
                                                                                 name="rule-{{ rule.pk }}-value"
-                                                                                value="{{ rule.value }}"
+                                                                                value="{{ rule.value|floatformat:2 }}"
                                                                                 class="deadline_set-0-rules-valueV">
                                                                         {% else %}
                                                                             <input
                                                                                 type="hidden" name="rule-{{ rule.pk }}-value"
-                                                                                value="{{ rule.value }}"
+                                                                                value="{{ rule.value|floatformat:2 }}"
                                                                                 class="deadline_set-0-rules-valueF">
                                                                         {% endif %}
                                                                         <input type="hidden" name="rule-{{ rule.pk }}-name" value="{{ rule.name }}"
