@@ -81,7 +81,7 @@ class DeadlineSaleForm(forms.ModelForm):
         else:
             return insured_capital
 
-    def clean_rate_per_thousand():
+    def clean_rate_per_thousand(self):
         rate_per_thousand = self.cleaned_data.get('rate_per_thousand')
         if rate_per_thousand:
             return float(self.cleaned_data.get('rate_per_thousand').replace('.', '').replace(',', '.'))
