@@ -6,7 +6,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.paginator import Paginator
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView
-from .models import Sale, Partner, Buyer, BuyerAddress, Status, ResponseDeadline, Quote, SubQuote, File
+from .models import Sale, Partner, Buyer, BuyerAddress, Status, \
+    ResponseDeadline, Quote, SubQuote, File, RuleDeadline
 from .forms import BuyerForm, AddressBuyerFormset, DeadlineSaleFormset
 from product.models import Product, Question
 from rest_framework import status
@@ -161,6 +162,19 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
                             deadline=form.instance
                         )
                         response_deadline.save()
+                    elif k.split('-')[0] == 'rule_pk':
+                        rule_pk = k.split('-')[1]
+                        rule = RuleDeadline(
+                            deadline=form.instance,
+                            value=self.request.POST.get('rule-%s-value' % rule_pk, '').replace(',', '.'),
+                            name=self.request.POST.get('rule-%s-name' % rule_pk, ''),
+                            percent=self.request.POST.get('rule-%s-percent' % rule_pk, '').replace(',', '.'),
+                            rate=self.request.POST.get('rule-%s-rate' % rule_pk, '').replace(',', '.'),
+                            fixing_text=self.request.POST.get('rule-%s-fixing_text' % rule_pk, ''),
+                            type=self.request.POST.get('rule-%s-type' % rule_pk, ''),
+                            rule=self.request.POST.get('rule-%s-rule' % rule_pk, ''),
+                        )
+                        rule.save()
 
                 # details = DetailDeadlineFormset(self.request.POST, instance=form.instance)
                 # for detail_form in details.forms:
@@ -195,7 +209,7 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
         data['deadline'] = deadline = sale.deadline_set.all()[0]
         data['deadlinesale'] = DeadlineSaleFormset(instance=sale)
         data['sample_file_type'] = sale.product.sample_file_type.all()
-        data['rules'] = sale.product.rules.all()
+        data['rules'] = deadline.ruledeadline_set.all()
         data['uploaded_files'] = sale.deadline_set.all()[0].file_set.all()
         data['uploaded_file_types'] = [file_up.file_type for file_up in sale.deadline_set.all()[0].file_set.all()]
 
@@ -307,6 +321,21 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
                             question=q,
                             deadline=form.instance,
                             defaults={'value': v}
+                        )
+                    elif k.split('-')[0] == 'rule_pk':
+                        rule_pk = k.split('-')[1]
+                        RuleDeadline.objects.update_or_create(
+                            id=rule_pk,
+                            deadline=form.instance,
+                            defaults={
+                                'value': self.request.POST.get('rule-%s-value' % rule_pk, '').replace(',', '.'),
+                                'name': self.request.POST.get('rule-%s-name' % rule_pk, ''),
+                                'percent': self.request.POST.get('rule-%s-percent' % rule_pk, '').replace(',', '.'),
+                                'rate': self.request.POST.get('rule-%s-rate' % rule_pk, '').replace(',', '.'),
+                                'fixing_text': self.request.POST.get('rule-%s-fixing_text' % rule_pk, ''),
+                                'type': self.request.POST.get('rule-%s-type' % rule_pk, ''),
+                                'rule': self.request.POST.get('rule-%s-rule' % rule_pk, '')
+                            }
                         )
 
                 # details = DetailDeadlineFormset(self.request.POST, instance=form.instance)

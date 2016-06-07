@@ -154,46 +154,46 @@
                                                             <tbody>
                                                                 {% for rule in rules %}
                                                                     <tr data-status="all">
+                                                                        <td>{{ rule.name }}</td>
                                                                         <td>
-                                                                            <div class="media-body">
-                                                                                {{ rule.name }}
-                                                                                {% if rule.percent > 0 %}
-                                                                                    <td>{{ rule.percent|floatformat:2 }}</td>
-                                                                                {% else %}
-                                                                                    <td>{{ rule.fixing_text }}</td>
-                                                                                {% endif %}
-                                                                                <td  {% if not rule.value %}
-                                                                                           class="deadline_set-0-rules-valueV"
-                                                                                     {% else %}
-                                                                                           class="deadline_set-0-rules-valueF"
-                                                                                     {% endif %}
-                                                                                >{{ rule.value|floatformat:2 }}
-                                                                                </td>
-                                                                                {% if not rule.value %}
-                                                                                    <td class="hidden"><input name="deadline_set-0-rules-{{rule.pk }}-value" value="{{ deadline.rules.value|default_if_none:rule.value }}"class="deadline_set-0-rules-valueV"></td>
-                                                                                {% else %}
-                                                                                    <td class="hidden"><input name="deadline_set-0-rules-{{rule.pk }}-value" value="{{ deadline.rules.value|default_if_none:rule.value }}"class="deadline_set-0-rules-valueF"></td>
-                                                                                {% endif %}
-                                                                                <td class="hidden">
-                                                                                    <input name="deadline_set-0-rules-{{rule.pk }}-name" value="{{ deadline.rules.name|default_if_none:rule.name }}" class ="deadline_set-0-rules-name">
-                                                                                </td>
-                                                                                <td class="hidden">
-                                                                                    <input name="deadline_set-0-rules-{{rule.pk }}-percent" value="{{ deadline.rules.percent|default_if_none:rule.percent }}" class ="deadline_set-0-rules-percent">
-                                                                                </td>
-                                                                                <td class="hidden">
-                                                                                    <input name="deadline_set-0-rules-{{rule.pk }}-rate" value="{{ deadline.rules.rate|default_if_none:rule.rate }}" class ="deadline_set-0-rules-rate">
-                                                                                </td>
-                                                                                <td class="hidden">
-                                                                                    <input name="deadline_set-0-rules-{{rule.pk }}-fixing_text" value="{{ deadline.rules.fixing_text|default_if_none:rule.fixing_text }}" class ="deadline_set-0-rules-fixing_text">
-                                                                                </td>
-                                                                                <td class="hidden">
-                                                                                    <input name="deadline_set-0-rules-{{rule.pk }}-type " value="{{ deadline.rules.type|default_if_none:rule.type }}" class ="deadline_set-0-rules-type">
-                                                                                </td>
-                                                                                <td class="hidden">
-                                                                                    <input name="deadline_set-0-rules-{{rule.pk }}-rule" value="{{ deadline.rules.rule|default_if_none:rule.rule }}" class ="deadline_set-0-rules-rule">
-                                                                                </td>
-                                                                            </div>
+                                                                            {% if rule.percent > 0 %}
+                                                                                {{ rule.percent|floatformat:2 }}
+                                                                            {% else %}
+                                                                                {{ rule.fixing_text }}
+                                                                            {% endif %}
                                                                         </td>
+                                                                        <td  {% if rule.value %}
+                                                                                   class="deadline_set-0-rules-valueF"
+                                                                             {% else %}
+                                                                                   class="deadline_set-0-rules-valueV"
+                                                                             {% endif %}
+                                                                        >{{ rule.value|floatformat:2 }}
+                                                                        </td>
+                                                                        <input type="hidden" name="rule_pk-{{ rule.pk }}">
+                                                                        {% if rule.value %}
+                                                                            <input
+                                                                                type="hidden" name="rule-{{ rule.pk }}-value"
+                                                                                value="{{ rule.value }}"
+                                                                                class="deadline_set-0-rules-valueF">
+                                                                        {% else %}
+                                                                            <input
+                                                                                type="hidden"
+                                                                                name="rule-{{ rule.pk }}-value"
+                                                                                value="{{ rule.value }}"
+                                                                                class="deadline_set-0-rules-valueV">
+                                                                        {% endif %}
+                                                                        <input type="hidden" name="rule-{{ rule.pk }}-name" value="{{ rule.name }}"
+                                                                            class="deadline_set-0-rules-name">
+                                                                        <input type="hidden" name="rule-{{ rule.pk }}-percent" value="{{ rule.percent }}"
+                                                                            class="deadline_set-0-rules-percent">
+                                                                        <input type="hidden" name="rule-{{ rule.pk }}-rate" value="{{ rule.rate }}"
+                                                                            class="deadline_set-0-rules-rate">
+                                                                        <input type="hidden" name="rule-{{ rule.pk }}-fixing_text" value="{{ rule.fixing_text }}"
+                                                                            class="deadline_set-0-rules-fixing_text">
+                                                                        <input type="hidden" name="rule-{{ rule.pk }}-type " value="{{ rule.type }}"
+                                                                            class="deadline_set-0-rules-type">
+                                                                        <input type="hidden" name="rule-{{ rule.pk }}-rule" value="{{ rule.rule }}"
+                                                                            class="deadline_set-0-rules-rule">
                                                                     </tr>
                                                                 {% endfor %}
                                                             </tbody>
