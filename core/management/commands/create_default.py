@@ -176,7 +176,7 @@ RULEJS_AP = '''
                     CSI = parseFloat(CSI).toFixed(2).replace(".",",");
 
                     $('#id_deadline_set-0-insured_capital').val(CS).addClass("float-success");
-                    $('#id_deadline_set-0-rate_per_thousand').vla(TXS).addClass("float-success");
+                    $('#id_deadline_set-0-rate_per_thousand').val(TXS).addClass("float-success");
 
                     $('input.deadline_set-0-rules-valueV').val(CSI);
                     $('td.deadline_set-0-rules-valueV').html(CSI).addClass("float-success");
