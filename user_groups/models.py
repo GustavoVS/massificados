@@ -16,6 +16,7 @@ class AbstractMassificadoGroups(models.Model):
     menu_entries_products = models.BooleanField(_('Products'), default=False, blank=True)
     menu_notification = models.BooleanField(_('Notification'), default=False, blank=True)
     menu_profile = models.BooleanField(_('Profile'), default=False, blank=True)
+    quote_see = models.BooleanField(_('See Quote'), default=False, blank=True)
     product = models.ManyToManyField(Product, blank=True)
 
     status_see = models.ManyToManyField(Status, related_name='user_status_see', blank=True)

@@ -53,7 +53,7 @@
                         {% bootstrap_field form.email form_group_class='form-group col-md-6' set_disabled=edit_disabled%}
                     {% else %}
                         <div class="form-group col-md-4 mask-cnpj form-required">
-                            <label class="sr-only" for="id_{{form.cpf_cnpj.html_name}}">CNPJ</label>
+                            <label class="control-label" for="id_{{form.cpf_cnpj.html_name}}">CNPJ</label>
                             <input class="form-control cpf_cnpj-auto"
                                     id="id_{{form.cpf_cnpj.html_name}}"
                                     maxlength="{{form.cpf_cnpj.max_length}}"
@@ -62,11 +62,11 @@
                                     placeholder="CNPJ" required="required" title="" type="text"
                                     {% if edit_disabled %}disabled{% endif %}>
                         </div>
-                        {% bootstrap_field form.responsible form_group_class='form-group col-md-4 form-required' layout="inline" set_disabled=edit_disabled%}
-                        {% bootstrap_field form.activity_area form_group_class='form-group col-md-4 form-required' layout="inline" set_disabled=edit_disabled%}
-                        {% bootstrap_field form.name form_group_class='form-group col-md-4' layout="inline" set_disabled=edit_disabled%}
-                        {% bootstrap_field form.phone form_group_class='form-group col-md-4 mask-phone' layout="inline" set_disabled=edit_disabled%}
-                        {% bootstrap_field form.email form_group_class='form-group col-md-4' layout="inline" set_disabled=edit_disabled%}
+                        {% bootstrap_field form.responsible form_group_class='form-group col-md-4 form-required' set_disabled=edit_disabled%}
+                        {% bootstrap_field form.activity_area form_group_class='form-group col-md-4 form-required' set_disabled=edit_disabled%}
+                        {% bootstrap_field form.name form_group_class='form-group col-md-4' set_disabled=edit_disabled%}
+                        {% bootstrap_field form.phone form_group_class='form-group col-md-4 mask-phone' set_disabled=edit_disabled%}
+                        {% bootstrap_field form.email form_group_class='form-group col-md-4' set_disabled=edit_disabled%}
                     {% endif %}
             </div>
         </div>

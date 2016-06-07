@@ -22,6 +22,7 @@ class MassificadoGroupsEditForm(forms.ModelForm):
             'menu_entries_products',
             'menu_notification',
             'menu_profile',
+            'quote_see',
             'product',
             'status_see',
             'status_see_payment',

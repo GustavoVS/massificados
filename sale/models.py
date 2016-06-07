@@ -116,6 +116,12 @@ class Deadline(models.Model):
     # def __unicode__(self):
     #     return '#%d %s (%s)' % (self.pk, self.sale.buyer, self.sale.product)
 
+    # @property
+    # def file_policy(self):
+    #     if self.file_set.filter(file_type__name='Apólice').exists():
+    #         return self.file_set.get(file_type__name='Apólice')
+    #     return False
+
     def get_questions(self):
         return self.sale.product.profile.questions_set.get(type_profile='pdl')
 
