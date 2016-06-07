@@ -166,10 +166,10 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
                         rule_pk = k.split('-')[1]
                         rule = RuleDeadline(
                             deadline=form.instance,
-                            value=self.request.POST.get('rule-%s-value' % rule_pk, '').replace(',', '.'),
+                            value=self.request.POST.get('rule-%s-value' % rule_pk, '').replace('.', '').replace(',', '.'),
                             name=self.request.POST.get('rule-%s-name' % rule_pk, ''),
-                            percent=self.request.POST.get('rule-%s-percent' % rule_pk, '').replace(',', '.'),
-                            rate=self.request.POST.get('rule-%s-rate' % rule_pk, '').replace(',', '.'),
+                            percent=self.request.POST.get('rule-%s-percent' % rule_pk, '').replace('.', '').replace(',', '.'),
+                            rate=self.request.POST.get('rule-%s-rate' % rule_pk, '').replace('.', '').replace(',', '.'),
                             fixing_text=self.request.POST.get('rule-%s-fixing_text' % rule_pk, ''),
                             type=self.request.POST.get('rule-%s-type' % rule_pk, ''),
                             rule=self.request.POST.get('rule-%s-rule' % rule_pk, ''),
