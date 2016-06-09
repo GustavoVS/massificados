@@ -28,11 +28,12 @@ THEMES_DIR = os.path.join(BASE_DIR, 'themes')
 SECRET_KEY = 'rjy@i6@99qth)#8o!)z!hjk^mi@l7d6$#gfa_pu!91@i&2jtbf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = [
-    '*',
-]
+# ALLOWED_HOSTS = [
+#     '*',
+# ]
+ALLOWED_HOSTS = ['localhost']
 
 AUTH_USER_MODEL = 'user_account.MassificadoUser'
 

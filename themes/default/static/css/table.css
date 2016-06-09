@@ -138,3 +138,11 @@
 .table-default .table-default-filter .media .summary {
 	font-size: 14px;
 }
+
+.light-studio-table-default table, th, td {
+        font-size: 12px;
+        padding: 8px 2px 8px 2px !important;
+    }
+.light-studio-table-default th, td {
+        text-align: center;
+    }

@@ -31,7 +31,7 @@
                     <div class="panel-body">
                         <div class="table-container">
                             <h4 class="title"> {% trans "Production" %} </h4>
-                            <table class="table table-bordered">
+                            <table class="table table-bordered light-studio-default">
                                 <thead>
                                  <tr>
                                      <th colspan="5" class="hidden-sm hidden-xs">&nbsp;</th>
@@ -94,11 +94,11 @@
                                                        {{ sale.product }}
                                                     </a>
                                                 </td>
-                                                <td class="hidden-xs">{{ sale.deadline_set.all.0.payment|floatformat:2|intcomma }}</td>
+                                                <td class="hidden-xs">{{ sale.deadline_set.all.0.payment|floatformat:1|intcomma }}</td>
                                                 {% if user.group_permissions.quote_see %}
-                                                    <td class="hidden-xs">{{ sale.deadline_set.all.0.quote_set.all.0.subquote_set.all.2.value|floatformat:2|intcomma }}</td>
-                                                    <td class="hidden-xs">{{ sale.deadline_set.all.0.quote_set.all.0.subquote_set.all.1.value|floatformat:2|intcomma }}</td>
-                                                    <td class="hidden-xs">{{ sale.deadline_set.all.0.quote_set.all.0.subquote_set.all.0.value|floatformat:2|intcomma }}</td>
+                                                    <td class="hidden-xs">{{ sale.deadline_set.all.0.quote_set.all.0.subquote_set.all.2.value|floatformat:1|intcomma }}</td>
+                                                    <td class="hidden-xs">{{ sale.deadline_set.all.0.quote_set.all.0.subquote_set.all.1.value|floatformat:1|intcomma }}</td>
+                                                    <td class="hidden-xs">{{ sale.deadline_set.all.0.quote_set.all.0.subquote_set.all.0.value|floatformat:1|intcomma }}</td>
                                                 {% endif %}
 {#                                                <td>{{ sale.create_timestamp|date:"d/M/Y" }}</div></td>#}
                                                 <td class="hidden-md hidden-sm hidden-xs">
@@ -113,10 +113,9 @@
                                                 </td>
                                                 <td>{{ sale.deadline_set.all.0.begin|date:"d/M/Y" }}</td>
                                                 <td class="hidden-xs">{{ sale.deadline_set.all.0.end|date:"d/M/Y" }}</td>
-                                                <td class="hidden-md hidden-sm hidden-xs">
-                                                    <span class="fa fa-file-pdf-o fa-2x" style="color: #2e6da4"></span></td>
-                                                <td class="hidden-md hidden-sm hidden-xs"><span class="fa fa-file-pdf-o fa-2x" style="color: #2e6da4"></span></td>
-                                                <td class="hidden-md hidden-sm hidden-xs"><span class="fa fa-file-pdf-o fa-2x" style="color: #2e6da4"></span></td>
+                                                <td class="hidden-md hidden-sm hidden-xs"><span class="fa fa-file-pdf-o" style="color: #2e6da4"></span></td>
+                                                <td class="hidden-md hidden-sm hidden-xs"><span class="fa fa-file-pdf-o" style="color: #2e6da4"></span></td>
+                                                <td class="hidden-md hidden-sm hidden-xs"><span class="fa fa-file-pdf-o" style="color: #2e6da4"></span></td>
                                                 <td>
                                                     <a href="{% url 'product-edit-buyer' sale.product.pk sale.buyer.pk %}">
                                                         <div>{{ sale.deadline_set.all.0.status }}</div>
@@ -201,11 +200,11 @@
     </div>
 </div>
 <style>
-    table, th, td {
+ table, th, td {
         font-size: 12px;
         padding: 8px 2px 8px 2px !important;
     }
-    th, td {
+ th, td {
         text-align: center;
     }
 </style>

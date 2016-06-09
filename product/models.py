@@ -8,6 +8,7 @@ class InsuranceCompany(models.Model):
     name = models.CharField(max_length=30)
     susep = models.CharField(max_length=12)
     email = models.EmailField(_('Email address'), blank=True)
+    icon = models.ImageField(_('Icon'), upload_to='uploads/%Y/%m/%d/', blank=True)
 
     def __unicode__(self):
         return self.name
@@ -124,7 +125,7 @@ class Product(models.Model):
     director_percentage = models.FloatField(null=True, default=0, blank=True)
     begin_status = models.ForeignKey(Status)
     profile = models.ForeignKey(Profile, null=True)
-    other_documents_declaration = models.CharField(_('Other Documentos'), max_length=100, null=True)
+    other_documents_declaration = models.CharField(_('Other Documentos'), max_length=100, null=True, default=True)
     rules_declaration = models.CharField(_('Rules'), max_length=100, null=True, blank=True)
     disclaimer = models.CharField(_('Rules'), max_length=100, null=True, blank=True)
     method_payment = models.ManyToManyField(MethodPayment)

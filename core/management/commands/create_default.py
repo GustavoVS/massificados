@@ -62,6 +62,14 @@ RULEJS_VIDA_GLOBAL = '''
                     var CSI = CS;
                     if (CSI>100000 & CS > 0){CSI=100000}
 
+                    if(CSI >0)
+                     {
+                         $('.table-clauses').removeClass("hidden");
+                     }
+                    else
+                    {
+                        $('.table-clauses').addClass("hidden");
+                     }
 
                     CS  = parseFloat(CS).toFixed(2).replace(",",".");
                     TXS = parseFloat(TXS).toFixed(2).replace(",",".");
@@ -116,6 +124,14 @@ RULEJS_VIDA = '''
                     var CSI = CS;
                     CS=CS*V;
                     var TXS = (P/(CS))*1000;
+                    if(CSI >0)
+                     {
+                         $('.table-clauses').removeClass("hidden");
+                     }
+                    else
+                    {
+                        $('.table-clauses').addClass("hidden");
+                     }
 
                     CS  = parseFloat(CS).toFixed(2).replace(",",".");
                     TXS = parseFloat(TXS).toFixed(2).replace(",",".");
@@ -170,6 +186,15 @@ RULEJS_AP = '''
                     var CSI = CS;
                     CS=CS*V;
                     var TXS = (P/(CS))*1000;
+
+                    if(CSI >0)
+                     {
+                         $('.table-clauses').removeClass("hidden");
+                     }
+                    else
+                    {
+                        $('.table-clauses').addClass("hidden");
+                     }
 
                     CS  = parseFloat(CS).toFixed(2).replace(",",".");
                     TXS = parseFloat(TXS).toFixed(2).replace(",",".");

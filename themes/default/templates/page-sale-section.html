@@ -20,20 +20,14 @@
         {% if product.pk %}
             <input type="hidden" name="productpk" value="{{ product.pk }}">
         {% endif %}
-        <div class="well">
+{#        <div class="well">#}
             <div class="row">
-                <div class="col-md-12">
-                    <p><b>{% trans "Product" %}</b> {{ product }}</p>
-                    <p><b>{% trans "Sale Owner" %}</b> {{ sale.owner|default:user }}</p>
-                    <p><b>{% trans "Status" %}</b>
-                        {% if sale.pk %}{{ deadline.status }}{% else %}{{ status_deadline }}{% endif %}
-                    </p>
-                    {% if not product.is_lead %}
-                        <p><b>{% trans "Insurance" %}</b> {{ product.insurance_company.name }}<br></p>
-                    {% endif %}
+                <div class="col-md-12" style="padding:0px">
+                    <div class="col-md-6" style="text-align: left; padding:0px 0px 0px 0px;"><b>{% trans "Sale Owner" %}</b> {{ sale.owner|default:user }}</div>
+                    <div class="col-md-6" style="text-align: right; padding:0px 0px 0px 0px;" ><b>{% trans "Status" %}</b> {% if sale.pk %}{{ deadline.status }}{% else %} {% trans "Open" %}{% endif %}</div>
                 </div>
             </div>
-        </div>
+{#        </div>#}
         <h4>{% trans 'Buyer' %}</h4>
         <div class="well">
                 <div class="row">
@@ -100,7 +94,38 @@
                 {% if not product.is_lead %}
                     {% if payment_see %}
                         {# {% bootstrap_field deadlinesale.0.payment form_group_class='form-group col-md-6 mask-float' type="text" set_disabled=payment_disabled %} #}
-                        <div class="form-group col-md-6 mask-float">
+                        <div class="col-md-4">
+                            {% if product.insurance_company.icon %}
+                                    <i class="fa"><img src="{{ product.icon1.url }}" style="height: 30px"
+                                                       class="img-responsive" title ="{% trans "Product" %} {{ product.name }}"></i>
+                                    {% if not product.is_lead %}
+                                        {% if product.insurance_company.icon.url %}
+                                            <i class="fa"><img src="{{ product.insurance_company.icon.url }}" style="height: 30px"
+                                                               class="img-responsive" title ="{% trans "Insurance" %} {{ product.insurance_company.name }}"></i>
+                                        {% else %}
+                                            <b> {{ product.insurance_company.name }}</b>
+                                        {% endif %}
+                                    {% endif %}
+                            {% else %}
+                                <div class="form-group col-md-6 " style="padding: 0px 15px 0px 0px;">
+                                    <label class="control-label">{% trans "Product" %}</label>
+                                    <input  class="form-control" disabled="disabled" value="{{ product.name }}">
+                                </div>
+                                <div class="form-group col-md-6 " style="padding: 0px 0px 0px 15px;">
+                                    <label class="control-label">{% trans "Insurance" %}</label>
+                                    <input  class="form-control" disabled="disabled" value="{{ product.insurance_company.name }}">
+                                </div>
+{#                                    <div class="col-md-6" style="padding: 15px 0px 0px 0px; text-align: left ">#}
+{#                                        <b>{% trans "Product" %}</b> {{ product.name }}#}
+{#                                    </div>#}
+{#                                    <div class="col-md-6" style="padding: 15px 0px 0px 0px; text-align: right ">#}
+{#                                        {% if not product.is_lead %}#}
+{#                                            <b>{% trans "Insurance" %}</b> {{ product.insurance_company.name }}#}
+{#                                        {% endif %}#}
+{#                                    </div>#}
+                            {% endif %}
+                        </div>
+                        <div class="form-group col-md-4 mask-float">
                             <label class="control-label" for="id_{{ deadlinesale.0.payment.html_name }}">{{ deadlinesale.0.payment.label }}</label>
                             <input  class="form-control"
                                     id="id_{{ deadlinesale.0.payment.html_name }}"
@@ -110,15 +135,15 @@
                                     type="text"
                                     value="{{ deadlinesale.0.payment.value|floatformat:2 }}">
                         </div>
-                        {% bootstrap_field deadlinesale.0.lives form_group_class='form-group col-md-6' set_disabled=payment_disabled %}
-                        {% bootstrap_field deadlinesale.0.method_payment form_group_class='form-group col-md-6' set_disabled=True %}
-                        <div class="form-group col-md-3">
+                        {% bootstrap_field deadlinesale.0.lives form_group_class='form-group col-md-4' set_disabled=payment_disabled %}
+                        {% bootstrap_field deadlinesale.0.method_payment form_group_class='form-group col-md-4' set_disabled=True %}
+                        <div class="form-group col-md-4">
                             <label class="control-label" for="id_{{ deadlinesale.0.insured_capital.html_name }}">{{ deadlinesale.0.insured_capital.label }}</label>
                             <input class="form-control" id="id_{{ deadlinesale.0.insured_capital.html_name }}" name="{{ deadlinesale.0.insured_capital.html_name }}"
                                    placeholder="{{ deadlinesale.0.insured_capital.label }}" step="any" title="" type="text"
                                    value="{{ deadlinesale.0.insured_capital.value|floatformat:2|intcomma }}" readonly>
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <label class="control-label" for="id_{{ deadlinesale.0.rate_per_thousand.html_name }}">{{ deadlinesale.0.rate_per_thousand.label }}</label>
                             <input class="form-control" id="id_{{ deadlinesale.0.rate_per_thousand.html_name }}" name="{{ deadlinesale.0.rate_per_thousand.html_name }}"
                                    placeholder="{{ deadlinesale.0.rate_per_thousand.label }}" step="any" title="" type="text"
@@ -134,10 +159,10 @@
                         <input type="hidden" name="deadlinesale.0.rate_per_thousand.html_name" value="deadlinesale.0.rate_per_thousand.value">
                     {% endif %}
                     {% if deadline_see %}
-                        {% bootstrap_field deadlinesale.0.begin form_group_class='form-group col-md-3 mask-date' set_disabled=deadline_disabled %}
-                        {% bootstrap_field deadlinesale.0.end form_group_class='form-group col-md-3  mask-date' set_disabled=deadline_disabled %}
-                        {% bootstrap_field deadlinesale.0.proposal form_group_class='form-group col-md-3' set_disabled=deadline_disabled %}
-                        {% bootstrap_field deadlinesale.0.policy form_group_class='form-group col-md-3' set_disabled=deadline_disabled %}
+                        {% bootstrap_field deadlinesale.0.begin form_group_class='form-group col-md-2 mask-date' set_disabled=deadline_disabled %}
+                        {% bootstrap_field deadlinesale.0.end form_group_class='form-group col-md-2  mask-date' set_disabled=deadline_disabled %}
+                        {% bootstrap_field deadlinesale.0.proposal form_group_class='form-group col-md-4' set_disabled=deadline_disabled %}
+                        {% bootstrap_field deadlinesale.0.policy form_group_class='form-group col-md-4' set_disabled=deadline_disabled %}
                     {% else %}
                         <input type="hidden" name="deadlinesale.0.begin.html_name" value="deadlinesale.0.begin.value">
                         <input type="hidden" name="deadlinesale.0.end.html_name" value="deadlinesale.0.end.value">
@@ -148,75 +173,81 @@
                     <input type="hidden" name="{{ deadlinesale.0.costing.html_name }}" value="{{ deadlinesale.0.costing.value }}">
                     <input type="hidden" name="{{ deadlinesale.0.revenues.html_name }}" value="{{ deadlinesale.0.revenues.value }}">
                     {% if rules and payment_see %}
-                        <div class="table-default">
-                                <div class="row">
-                                    <section class="content">
-                                        <div class="col-md-12">
-                                            <div class="panel panel-default">
-                                                <div class="panel-body">
-                                                    <div class="table-container">
-                                                        <h4 class="title"> {% trans "Clauses" %} </h4>
-                                                        <table class="table table-striped">
-                                                            <thead>
-                                                              <tr>
-                                                                <th>{% trans "Clause" %} </th>
-                                                                <th style="width: 10%;">{% trans "%" %} </th>
-                                                                <th style="width: 20%;">{% trans "Individual Capital" %} </th>
-                                                              </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                {% for rule in rules %}
-                                                                    <tr data-status="all">
-                                                                        <td>{{ rule.name }}</td>
-                                                                        <td>
-                                                                            {% if rule.percent > 0 %}
-                                                                                {{ rule.percent|floatformat:2 }}
-                                                                            {% else %}
-                                                                                {{ rule.fixing_text }}
-                                                                            {% endif %}
-                                                                        </td>
-                                                                        <td  {% if rule.type == 'V' %}
-                                                                                   class="deadline_set-0-rules-valueV"
-                                                                             {% else %}
-                                                                                   class="deadline_set-0-rules-valueF"
-                                                                             {% endif %}
-                                                                        >{{ rule.value|floatformat:2|intcomma }}
-                                                                        </td>
-                                                                        <input type="hidden" name="rule_pk-{{ rule.pk }}">
-                                                                        {% if rule.type == 'V' %}
-                                                                            <input
-                                                                                type="hidden"
-                                                                                name="rule-{{ rule.pk }}-value"
-                                                                                value="{{ rule.value|floatformat:2 }}"
-                                                                                class="deadline_set-0-rules-valueV">
+                        <div class="table-default table-clauses {% if product.pk %}hidden{% endif %}">
+                            <div class="row">
+                                <section class="content">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body" style="padding: 8px">
+                                                <div class="table-container">
+{#                                                        <h4 class="title"> {% trans "Clauses" %} </h4>#}
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                          <tr>
+                                                            <th>{% trans "Clauses" %} </th>
+                                                            <th style="width: 10%;">{% trans "% Part" %} </th>
+                                                            <th style="width: 20%;">{% trans "Individual Capital" %} </th>
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for rule in rules %}
+                                                                <tr data-status="all">
+                                                                    <td style="padding: 0px; border-top: 0px">{{ rule.name }}</td>
+                                                                    <td style="padding: 0px; border-top: 0px">
+                                                                        {% if rule.percent > 0 %}
+                                                                            {{ rule.percent|floatformat:2 }}
                                                                         {% else %}
-                                                                            <input
-                                                                                type="hidden" name="rule-{{ rule.pk }}-value"
-                                                                                value="{{ rule.value|floatformat:2 }}"
-                                                                                class="deadline_set-0-rules-valueF">
+                                                                            {{ rule.fixing_text }}
                                                                         {% endif %}
-                                                                        <input type="hidden" name="rule-{{ rule.pk }}-name" value="{{ rule.name }}"
-                                                                            class="deadline_set-0-rules-name">
-                                                                        <input type="hidden" name="rule-{{ rule.pk }}-percent" value="{{ rule.percent }}"
-                                                                            class="deadline_set-0-rules-percent">
-                                                                        <input type="hidden" name="rule-{{ rule.pk }}-rate" value="{{ rule.rate }}"
-                                                                            class="deadline_set-0-rules-rate">
-                                                                        <input type="hidden" name="rule-{{ rule.pk }}-fixing_text" value="{{ rule.fixing_text }}"
-                                                                            class="deadline_set-0-rules-fixing_text">
-                                                                        <input type="hidden" name="rule-{{ rule.pk }}-type" value="{{ rule.type }}"
-                                                                            class="deadline_set-0-rules-type">
-                                                                        <input type="hidden" name="rule-{{ rule.pk }}-rule" value="{{ rule.rule }}"
-                                                                            class="deadline_set-0-rules-rule">
-                                                                    </tr>
-                                                                {% endfor %}
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
+                                                                    </td>
+                                                                    <td  {% if rule.type == 'V' %}
+                                                                               class="deadline_set-0-rules-valueV"
+                                                                         {% else %}
+                                                                               class="deadline_set-0-rules-valueF"
+                                                                         {% endif %}
+                                                                        style="padding: 0px; border-top: 0px"
+                                                                    >{{ rule.value|floatformat:2|intcomma }}
+                                                                    </td>
+                                                                    <input type="hidden" name="rule_pk-{{ rule.pk }}">
+                                                                    {% if rule.type == 'V' %}
+                                                                        <input
+                                                                            type="hidden"
+                                                                            name="rule-{{ rule.pk }}-value"
+                                                                            value="{{ rule.value|floatformat:2 }}"
+                                                                            class="deadline_set-0-rules-valueV">
+                                                                    {% else %}
+                                                                        <input
+                                                                            type="hidden" name="rule-{{ rule.pk }}-value"
+                                                                            value="{{ rule.value|floatformat:2 }}"
+                                                                            class="deadline_set-0-rules-valueF">
+                                                                    {% endif %}
+                                                                    <input type="hidden" name="rule-{{ rule.pk }}-name" value="{{ rule.name }}"
+                                                                        class="deadline_set-0-rules-name">
+                                                                    <input type="hidden" name="rule-{{ rule.pk }}-percent" value="{{ rule.percent }}"
+                                                                        class="deadline_set-0-rules-percent">
+                                                                    <input type="hidden" name="rule-{{ rule.pk }}-rate" value="{{ rule.rate }}"
+                                                                        class="deadline_set-0-rules-rate">
+                                                                    <input type="hidden" name="rule-{{ rule.pk }}-fixing_text" value="{{ rule.fixing_text }}"
+                                                                        class="deadline_set-0-rules-fixing_text">
+                                                                    <input type="hidden" name="rule-{{ rule.pk }}-type" value="{{ rule.type }}"
+                                                                        class="deadline_set-0-rules-type">
+                                                                    <input type="hidden" name="rule-{{ rule.pk }}-rule" value="{{ rule.rule }}"
+                                                                        class="deadline_set-0-rules-rule">
+                                                                </tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                    {% if product.rules_declaration %}
+                                                        <div class="disclaimer">
+                                                            <p><b>* {{ product.rules_declaration }}</b></p>
+                                                        </div>
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         </div>
-                                    </section>
-                                </div>
+                                    </div>
+                                </section>
+                            </div>
                         </div>
                     {% endif %}
                 {% else %}
@@ -237,17 +268,64 @@
                         <input type="hidden" name="deadlinesale.0.policy.html_name" value="deadlinesale.0.policy.value">
                     {% endif %}
                 {% endif %}
-                {% if deadline_see %}
+                {% if payment_see %}
                     <div class="col-md-12">
                         {% if not product.is_lead %}
                             {% if product.disclaimer %}
                                 <div class="disclaimer">
-                                    <div class="space"></div>
                                     <p><span class="fa fa-warning"> </span><b> {{ product.disclaimer }}</b></p>
                                 </div>
                             {% endif %}
                         {% endif %}
                     </div>
+                    {% if not product.is_lead and product.full_declaration %}
+                        <div class="modal-default col-md-12">
+                            <a href="#conditiosmodal"  data-toggle="modal">
+                                <span class="fa fa-plus"> </span>
+                                {% trans "Conditions of the product" %}
+                            </a>
+                            <div id="conditiosmodal" class="modal fade">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h1 class="modal-title">{% trans "Conditions" %}</h1>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% autoescape off %}{{ product.full_declaration }}{% endautoescape %}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if not product.is_lead and product.declaration %}
+                        <div class="modal-default col-md-12">
+                            <a href="#declarationmodal"  data-toggle="modal">
+                                <span class="fa fa-plus"> </span>
+                                {% trans "Declaration" %}
+                            </a>
+                            <div id="declarationmodal" class="modal fade">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h1 class="modal-title">{% trans "Conditions" %}</h1>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% autoescape off %}{{ product.declaration }}{% endautoescape %}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
                 {% endif %}
                 {{ deadlinesale.0.id }}
                 {{ deadlinesale.0.sale }}
@@ -376,206 +454,160 @@
             </div>
 
         {% endif %}
-        {% if product.is_lead or sale.pk  %}
-            <h4>{% trans 'Files' %}</h4>
-            <div class="well">
-                {# <div class="thumbnail col-md-3" style="display: none" id="file_empty_form"> #}
-                    {# <div class="caption"> #}
-                        {# {% bootstrap_field filedeadline.empty_form.file_type %} #}
-                        {# {% bootstrap_field filedeadline.empty_form.document layout="inline"%} #}
-                    {# </div> #}
+{#        {% if product.is_lead or sale.pk  %}#}
+        <h4>{% trans 'Files' %}</h4>
+        <div class="well">
+            {# <div class="thumbnail col-md-3" style="display: none" id="file_empty_form"> #}
+                {# <div class="caption"> #}
+                    {# {% bootstrap_field filedeadline.empty_form.file_type %} #}
+                    {# {% bootstrap_field filedeadline.empty_form.document layout="inline"%} #}
                 {# </div> #}
-                {% if sample_file_type %}
-                    <h4>{% trans "Files to Download" %}</h4>
-                    <div class="row-flex">
-                        {% for file in sample_file_type %}
-                            <div class="thumbnail col-md-{{ sample_file_type_cols|default:'3' }}" id="{{ f.prefix }}-row">
-                                <div class="caption text-center">
-                                    <h4 class="text-center">{{ file }}</h4>
-                                    <p>{{ file.short_desc }}</p>
-                                    <a href="{{file.document.url}}" role="button" class="btn btn-info" target="_blank">
-                                        <span class="fa fa-file-o"></span> {% trans "Download" %}
-                                    </a>
+            {# </div> #}
+            {% if sample_file_type %}
+                <h4>{% trans "Files to Download" %}</h4>
+                <div class="row-flex">
+                    {% for file in sample_file_type %}
+                        <div class="thumbnail col-md-{{ sample_file_type_cols|default:'3' }}" id="{{ f.prefix }}-row">
+                            <div class="caption text-center">
+                                <h4 class="text-center">{{ file }}</h4>
+                                <p>{{ file.short_desc }}</p>
+                                <a href="{{file.document.url}}" role="button" class="btn btn-info" target="_blank">
+                                    <span class="fa fa-file-o"></span> {% trans "Download" %}
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <h4>{% trans "Uploaded files" %}
+                {% if sale.pk and sale.deadline_set.all.0.status in user.group_permissions.status_edit.all %}
+                    <button type="button" class="btn btn-success upload-file"
+                            data-toggle="modal" data-target="#file-sale-modal">
+                        <span class="fa fa-plus"></span>
+                    </button>
+                    <div class="clearfix"></div>
+                {% endif %}
+            </h4>
+            <div class="row">
+                <div class="col-md-3">
+                    {% for file_type in product.file_type.all %}
+                        <p> <span id="file_type_uploaded-{{file_type.pk}}" class="fa
+                                {% if file_type in uploaded_file_types %}
+                                    fa-check text-success
+                                {% else %}
+                                    fa-circle
+                                {% endif %}
+                            "></span>
+                            {{ file_type }}
+                        </p>
+                    {% endfor %}
+                </div>
+
+                <div class="col-md-9">
+                    {% if sale.pk %}
+                        <div class="row-flex" id="uploaded_files">
+                            <div class="hidden" id="empty_uploaded_file">
+                                <div class="col-md-4 thumbnail">
+                                    <div class="caption text-center">
+                                        <h4>__file-type__</h4>
+                                        <p>__file-type-txt__</p>
+                                        <a href="__file-type-url__" role="button" class="btn btn-info" target="_blank">
+                                            <span class="fa fa-file-o"></span> {% trans "Download" %}
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-                <h4>{% trans "Uploaded files" %}
-                    {% if sale.pk and sale.deadline_set.all.0.status in user.group_permissions.status_edit.all %}
-                        <button type="button" class="btn btn-success upload-file"
-                                data-toggle="modal" data-target="#file-sale-modal">
-                            <span class="fa fa-plus"></span>
-                        </button>
-                        <div class="clearfix"></div>
-                    {% endif %}
-                </h4>
-                <div class="row">
-                    <div class="col-md-3">
-                        {% for file_type in product.file_type.all %}
-                            <p> <span id="file_type_uploaded-{{file_type.pk}}" class="fa
-                                    {% if file_type in uploaded_file_types %}
-                                        fa-check text-success
-                                    {% else %}
-                                        fa-remove text-danger
-                                    {% endif %}
-                                "></span>
-                                {{ file_type }}
-                            </p>
-                        {% endfor %}
-                    </div>
-
-                    <div class="col-md-9">
-                        {% if sale.pk %}
-                            <div class="row-flex" id="uploaded_files">
-                                <div class="hidden" id="empty_uploaded_file">
-                                    <div class="col-md-4 thumbnail">
-                                        <div class="caption text-center">
-                                            <h4>__file-type__</h4>
-                                            <p>__file-type-txt__</p>
-                                            <a href="__file-type-url__" role="button" class="btn btn-info" target="_blank">
+                            {% for file in deadline.file_set.all %}
+                                <div class="col-md-4 thumbnail">
+                                    <div class="caption text-center">
+                                        <h4>{{ file }}</h4>
+                                        <p>
+                                            {% trans "Uploaded by" %} <b>{{ file.uploaded_by }}</b>
+                                            <small>{% trans "in" %} {{ file.upload_date }}</small>
+                                        </p>
+                                        {% if file.file_type in user.group_permissions.filetype_download.all %}
+                                            <a href="{{file.document.url}}" role="button" class="btn btn-info" target="_blank">
                                                 <span class="fa fa-file-o"></span> {% trans "Download" %}
                                             </a>
-                                        </div>
+                                        {% endif %}
                                     </div>
                                 </div>
-                                {% for file in deadline.file_set.all %}
-                                    <div class="col-md-4 thumbnail">
-                                        <div class="caption text-center">
-                                            <h4>{{ file }}</h4>
-                                            <p>
-                                                {% trans "Uploaded by" %} <b>{{ file.uploaded_by }}</b>
-                                                <small>{% trans "in" %} {{ file.upload_date }}</small>
-                                            </p>
-                                            {% if file.file_type in user.group_permissions.filetype_download.all %}
-                                                <a href="{{file.document.url}}" role="button" class="btn btn-info" target="_blank">
-                                                    <span class="fa fa-file-o"></span> {% trans "Download" %}
-                                                </a>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                {% empty %}
-                                    <div class="space"></div>
-                                    <div class="alert alert-info" role="alert" id="no-files-alert">
-                                        <span class="fa fa-cloud-upload" aria-hidden="true"></span>
-                                        <span class="sr-only">Info:</span>
-                                        {% trans 'There is no Files in this Sale. Click on "+" button to upload files.' %}
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            <div class="alert alert-info" role="alert">
+{#                            {% empty %}#}
+                            {% endfor %}
+                        </div>
+{#                    {% else %}#}
+                    {% endif %}
+                </div>
+                <div class="col-md-12">
+                    {% if sale.pk %}
+                        {% if not deadline.file_set.all %}
+                            <div class="alert alert-info" role="alert" id="no-files-alert">
                                 <span class="fa fa-cloud-upload" aria-hidden="true"></span>
                                 <span class="sr-only">Info:</span>
-                                {% trans "You need to save the Sale to upload Files" %}
+                                {% trans 'There is no Files in this Sale. Click on "+" button to upload files.' %}
                             </div>
                         {% endif %}
-                    </div>
+                    {% else %}
+                        <div class="alert alert-info" role="alert">
+                            <span class="fa fa-cloud-upload" aria-hidden="true"></span>
+                            <span class="sr-only">Info:</span>
+                            {% trans "You need to save the Sale to upload Files" %}
+                        </div>
+                    {% endif %}
                 </div>
-                {# {{ filedeadline.management_form }} #}
-                {# <div id="filedeadline_formset"> #}
-                    {# <div class="row"> #}
-                        {# {% for f in filedeadline %} #}
-                            {# <div class="thumbnail col-md-3" id="{{ f.prefix }}-row"> #}
-                                {# <div class="caption"> #}
-                                    {# {% bootstrap_field f.file_type %} #}
-                                    {# {% if f.document %} #}
-                                        {# {{ f.document }} #}
-                                    {# {% else %} #}
-                                        {# {% bootstrap_field filedeadline.empty_form.document layout="inline" %} #}
-                                    {# {% endif %} #}
-                                {# </div> #}
+            </div>
+            {# {{ filedeadline.management_form }} #}
+            {# <div id="filedeadline_formset"> #}
+                {# <div class="row"> #}
+                    {# {% for f in filedeadline %} #}
+                        {# <div class="thumbnail col-md-3" id="{{ f.prefix }}-row"> #}
+                            {# <div class="caption"> #}
+                                {# {% bootstrap_field f.file_type %} #}
+                                {# {% if f.document %} #}
+                                    {# {{ f.document }} #}
+                                {# {% else %} #}
+                                    {# {% bootstrap_field filedeadline.empty_form.document layout="inline" %} #}
+                                {# {% endif %} #}
                             {# </div> #}
-                        {# {% empty %} #}
-                            {# <div class="thumbnail" style="display:none"></div> #}
-                        {# {% endfor %} #}
-                    {# </div> #}
+                        {# </div> #}
+                    {# {% empty %} #}
+                        {# <div class="thumbnail" style="display:none"></div> #}
+                    {# {% endfor %} #}
                 {# </div> #}
-                {% if product.other_documents_declaration %}
-                    <div class="disclaimer">
+            {# </div> #}
+            {% if product.other_documents_declaration %}
+                <div class="disclaimer col-md-12">
+                    <span class="fa fa-file-text"> </span><b> {{ product.other_documents_declaration }}</b>
+                </div>
+                <div class="space"></div>
+            {% endif %}
+        </div>
+{#        {% endif %}#}
+        {% if product.is_lead or sale.pk %}
+            <div class="well">
+                <div class="row">
+                    {% if product.is_lead %}
+                        <div class="disclaimer">
+                            {% bootstrap_field deadlinesale.0.accept_declaration form_group_class='' %}
+                        </div>
                         <div class="space"></div>
-                        <p><span class="fa fa-file-text"> </span><b> {{ product.other_documents_declaration }}</b></p>
-                    </div>
-                {% endif %}
+                    {% endif %}
+                    {% if sale.pk %}
+    {#                    <div class="col-md-12">#}
+                            <div class="form-group">
+    {#                            <label for="new-status">{% trans "Action" %}:</label>#}
+                                <select name="new-status" id="new-status" class="form-control">
+                                    <option value="">{% trans "Choose an action" %}</option>
+                                    {%  for status in possible_new_status %}
+                                        <option value="{{ status.pk }}">{{ status.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+    {#                    </div>#}
+                    {% endif %}
+                </div>
             </div>
         {% endif %}
-        <div class="well">
-            <div class="row">
-                {% if not product.is_lead and product.full_declaration %}
-                    <div class="modal-default col-md-12">
-                        <a href="#conditiosmodal"  data-toggle="modal">
-                            <span class="fa fa-plus"> </span>
-                            {% trans "Click to see more about the conditions of the product" %}
-                        </a>
-                        <div id="conditiosmodal" class="modal fade">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                        <h1 class="modal-title">{% trans "Conditions" %}</h1>
-                                    </div>
-                                    <div class="modal-body">
-                                        {% autoescape off %}{{ product.full_declaration }}{% endautoescape %}
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-                {% if not product.is_lead and product.declaration %}
-                    <div class="modal-default col-md-12">
-                        <a href="#declarationmodal"  data-toggle="modal">
-                            <span class="fa fa-plus"> </span>
-                            {% trans "Click to read the declaration" %}
-                        </a>
-                        <div id="declarationmodal" class="modal fade">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                        <h1 class="modal-title">{% trans "Conditions" %}</h1>
-                                    </div>
-                                    <div class="modal-body">
-                                        {% autoescape off %}{{ product.declaration }}{% endautoescape %}
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-                {% if product.rules_declaration %}
-                    <div class="disclaimer">
-                        <div class="space"></div>
-                        <p><b>* {{ product.rules_declaration }}</b></p>
-                    </div>
-                {% endif %}
-                {% if product.is_lead %}
-                    <div class="disclaimer">
-                        {% bootstrap_field deadlinesale.0.accept_declaration form_group_class='' %}
-                    </div>
-                    <div class="space"></div>
-                {% endif %}
-                {% if sale.pk %}
-{#                    <div class="col-md-12">#}
-                        <div class="form-group">
-{#                            <label for="new-status">{% trans "Action" %}:</label>#}
-                            <select name="new-status" id="new-status" class="form-control">
-                                <option value="">{% trans "Choose an action" %}</option>
-                                {%  for status in possible_new_status %}
-                                    <option value="{{ status.pk }}">{{ status.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-{#                    </div>#}
-                {% endif %}
-            </div>
-        </div>
 
         {% if not sale.pk or sale.deadline_set.all.0.status in user.group_permissions.status_edit.all %}
             {% url 'index_view' as url %}
