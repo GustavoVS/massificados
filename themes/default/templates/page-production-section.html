@@ -90,9 +90,13 @@
                                                 <td class="hidden-sm hidden-xs">{{ sale.owner.master }}</td>
                                                 <td class="hidden-sm hidden-xs">{{ sale.owner }}</td>
                                                 <td>
-                                                    <a href="{% url 'product-edit-buyer' sale.product.pk sale.buyer.pk %}">
-                                                       {{ sale.product }}
-                                                    </a>
+                                                    {% if sale.deadline_set.all.0.status in user.group_permissions.status_edit.all or sale.deadline_set.all.0.status in user.group_permissions.status_edit_payment.all or sale.deadline_set.all.0.status in user.group_permissions.status_edit_deadline.all %}
+                                                        <a href="{% url 'product-edit-buyer' sale.product.pk sale.buyer.pk %}">
+                                                           {{ sale.product }}
+                                                        </a>
+                                                    {% else %}
+                                                        {{ sale.product }}
+                                                    {% endif %}
                                                 </td>
                                                 <td class="hidden-xs">{{ sale.deadline_set.all.0.payment|floatformat:1|intcomma }}</td>
                                                 {% if user.group_permissions.quote_see %}
@@ -102,9 +106,13 @@
                                                 {% endif %}
 {#                                                <td>{{ sale.create_timestamp|date:"d/M/Y" }}</div></td>#}
                                                 <td class="hidden-md hidden-sm hidden-xs">
-                                                    <a href="{% url 'product-edit-buyer' sale.product.pk sale.buyer.pk %}">
+                                                    {% if sale.deadline_set.all.0.status in user.group_permissions.status_edit.all or sale.deadline_set.all.0.status in user.group_permissions.status_edit_payment.all or sale.deadline_set.all.0.status in user.group_permissions.status_edit_deadline.all%}
+                                                        <a href="{% url 'product-edit-buyer' sale.product.pk sale.buyer.pk %}">
+                                                            {{ sale.deadline_set.all.0.proposal }} {{ sale.create_timestamp|date:"d/M/Y" }}
+                                                        </a>
+                                                    {% else %}
                                                         {{ sale.deadline_set.all.0.proposal }} {{ sale.create_timestamp|date:"d/M/Y" }}
-                                                    </a>
+                                                    {% endif %}
                                                 </td>
                                                 <td>
                                                     <a href="{% url 'product-edit-buyer' sale.product.pk sale.buyer.pk %}">
@@ -117,11 +125,23 @@
                                                 <td class="hidden-md hidden-sm hidden-xs"><span class="fa fa-file-pdf-o" style="color: #2e6da4"></span></td>
                                                 <td class="hidden-md hidden-sm hidden-xs"><span class="fa fa-file-pdf-o" style="color: #2e6da4"></span></td>
                                                 <td>
-                                                    <a href="{% url 'product-edit-buyer' sale.product.pk sale.buyer.pk %}">
+                                                    {% if sale.deadline_set.all.0.status in user.group_permissions.status_edit.all or sale.deadline_set.all.0.status in user.group_permissions.status_edit_payment.all or sale.deadline_set.all.0.status in user.group_permissions.status_edit_deadline.all%}
+                                                        <a href="{% url 'product-edit-buyer' sale.product.pk sale.buyer.pk %}">
+                                                            <div>{{ sale.deadline_set.all.0.status }}</div>
+                                                        </a>
+                                                    {% else %}
                                                         <div>{{ sale.deadline_set.all.0.status }}</div>
-                                                    </a>
+                                                    {% endif %}
                                                 </td>
-                                                <td><span class="fa fa-times fa-2x" style="color: #a94442"></span></td>
+                                                <td>
+                                                    {% if sale.deadline_set.all.0.status == sale.product.begin_status %}
+                                                        <a href="">
+                                                            <span class="fa fa-times fa-2x" style="color: #a94442"></span>
+                                                        </a>
+                                                    {% else %}
+                                                        <span class="fa fa-times fa-2x" style="color: #9d9d9d"></span>
+                                                    {% endif %}
+                                                </td>
                                                 <td class="hidden-sm hidden-xs">
                                                     <div class="ckbox">
                                                         <input type="checkbox" id="checkbox-line-"{{sale.pk }} class="checkbox-line">
