@@ -1129,7 +1129,7 @@ class Command(BaseCommand):
             u.save()
 
         for user_profile, user_password, user_partner, user_email, user_name in USERS:
-            if not MassificadoUser.objects.filter(email=user_email).exists():
+            if not MassificadoUser.objects.filter(email=user_email, username=user_name).exists():
                 user = MassificadoUser(username=user_name,
                                        email=user_email,
                                        password=user_password,
