@@ -15,6 +15,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import BuyerSerializer, BuyerAddressSerializer
 from django.utils.datastructures import MultiValueDictKeyError
+from easy_pdf.views import PDFTemplateView
 
 
 class ProductionView(LoginRequiredMixin, ListView):
@@ -169,9 +170,11 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
                         rule_pk = k.split('-')[1]
                         rule = RuleDeadline(
                             deadline=form.instance,
-                            value=self.request.POST.get('rule-%s-value' % rule_pk, '').replace('.', '').replace(',', '.'),
+                            value=self.request.POST.get('rule-%s-value' % rule_pk, '').replace(
+                                '.', '').replace(',', '.'),
                             name=self.request.POST.get('rule-%s-name' % rule_pk, ''),
-                            percent=self.request.POST.get('rule-%s-percent' % rule_pk, '').replace('.', '').replace(',', '.'),
+                            percent=self.request.POST.get('rule-%s-percent' % rule_pk, '').replace(
+                                '.', '').replace(',', '.'),
                             rate=self.request.POST.get('rule-%s-rate' % rule_pk, '').replace('.', '').replace(',', '.'),
                             fixing_text=self.request.POST.get('rule-%s-fixing_text' % rule_pk, ''),
                             type=self.request.POST.get('rule-%s-type' % rule_pk, ''),
@@ -361,6 +364,21 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse_lazy('index_view')
         # return self.request
+
+
+class ProposePDF(PDFTemplateView):
+    template_name = "pdf/propose.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(ProposePDF, self).get_context_data(
+            pagesize="A4",
+            title="Hi there!",
+            **kwargs
+        )
+        context['sale'] = Sale.objects.get(id=self.kwargs['salepk'])
+        context['address'] = context['sale'].buyer.buyeraddress_set.all()[0]
+        context['deadline'] = context['sale'].deadline_set.all()[0]
+        return context
 
 
 @api_view(['GET', ])

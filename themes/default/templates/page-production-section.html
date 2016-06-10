@@ -113,7 +113,11 @@
                                                 </td>
                                                 <td>{{ sale.deadline_set.all.0.begin|date:"d/M/Y" }}</td>
                                                 <td class="hidden-xs">{{ sale.deadline_set.all.0.end|date:"d/M/Y" }}</td>
-                                                <td class="hidden-md hidden-sm hidden-xs"><span class="fa fa-file-pdf-o" style="color: #2e6da4"></span></td>
+                                                <td class="hidden-md hidden-sm hidden-xs">
+                                                    <a href="{% url "propose-pdf" sale.pk %}" target="_blank">
+                                                        <span class="fa fa-file-pdf-o" style="color: #2e6da4"></span>
+                                                    </a>
+                                                </td>
                                                 <td class="hidden-md hidden-sm hidden-xs"><span class="fa fa-file-pdf-o" style="color: #2e6da4"></span></td>
                                                 <td class="hidden-md hidden-sm hidden-xs"><span class="fa fa-file-pdf-o" style="color: #2e6da4"></span></td>
                                                 <td>

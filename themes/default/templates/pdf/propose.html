@@ -1,0 +1,243 @@
+{% extends "easy_pdf/base.html" %}
+{% load staticfiles %}
+
+{% block extra_style %}
+    <style type="text/css">
+        @page {
+            margin-left: 1cm;
+            margin-right: 1cm;
+            margin-top: 2cm;
+            margin-bottom: 2cm;
+
+        }
+        table{
+            margin-top: 6px;
+        }
+        td{
+            border: 1px solid #000;
+            padding-bottom: 0;
+            padding-top: 3px;
+            padding-left: 2px;
+        }
+        .blank{
+            border: none;
+            text-align: right;
+        }
+        .no-t{border-top: none;}
+        .no-b{border-bottom: none;}
+        .no-a{
+            border:none;
+        }
+        .h{background-color: #BDBDBD}
+        .head{background-color: #000; color: #FFF}
+        .no-b{border-bottom: 0px}
+        .center{text-align: center}
+        .signature{padding-top: 50px}
+        .big{
+            font-weight: bold;
+            /*font-size: 16px*/
+        }
+        h1, h2{
+            font-size: 13px
+        }
+        /*.logotipo{
+            background: black url('{% static 'img/partner-sofisa/slide1.jpg' %}');
+            height: 100%;
+            width: 100%;
+            float: left
+        }*/
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div id="content">
+        <table>
+            <tbody>
+                <tr>
+                    <td colspan="4" class="no-a"></td>
+                    <td colspan="4" class="no-a center big">
+                        SEGURO DE PESSOAS - AP COLETIVO<br/>
+                        PROPOSTA DE CONTRATAÇÃO
+                    </td>
+                    <td colspan="4" class="no-a"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p>&nbsp;</p>
+        <table>
+            <tbody>
+                <tr>
+                    <td colspan="2" class="head">DADOS DO ESTIPULANTE</td>
+                    <td colspan="2">Nº APÓLICE: {{ deadline.policy|default_if_none:'' }}</td>
+                    <td colspan="2">Nº CONTRATO: {{ deadline.proposal|default_if_none:'' }}</td>
+                </tr>
+                <tr>
+                  <td class="h" colspan="4">Razão Social:</td>
+                  <td class="h" colspan="2">CNPJ:</td>
+                </tr>
+                <tr>
+                    <td colspan="4">{{ sale.buyer|default_if_none:'' }}</td>
+                    <td colspan="2">{{ sale.buyer.cpf_cnpj|default_if_none:'' }}</td>
+                </tr>
+                <tr>
+                    <td class="h" colspan="4">Endereço:</td>
+                    <td class="h">Nº:</td>
+                    <td class="h">Complemento:</td>
+                </tr>
+                <tr>
+                    <td colspan="4">{{ address.street|default_if_none:'' }}</td>
+                    <td>{{ address.number|default_if_none:'' }}</td>
+                    <td>{{ address.complement|default_if_none:'' }}</td>
+                </tr>
+                <tr>
+                    <td class="h" colspan="2">Bairro:</td>
+                    <td class="h" colspan="2">Cidade:</td>
+                    <td class="h">UF:</td>
+                    <td class="h">CEP:</td>
+                </tr>
+                <tr>
+                    <td colspan="2">{{ address.district|default_if_none:'' }}</td>
+                    <td colspan="2">{{ address.city|default_if_none:'' }}</td>
+                    <td>{{ address.state|default_if_none:'' }}</td>
+                    <td>{{ address.postal_code|default_if_none:'' }}</td>
+                </tr>
+                <tr>
+                    <td class="h" colspan="2">Responsável:</td>
+                    <td class="h" colspan="2">Tel/Fax:</td>
+                    <td class="h" colspan="2">E-mail:</td>
+                </tr>
+                <tr>
+                    <td colspan="2">{{ sale.buyer.responsible|default_if_none:'' }}</td>
+                    <td colspan="2">{{ sale.buyer.phone|default_if_none:'' }}</td>
+                    <td colspan="2">{{ sale.buyer.email|default_if_none:'' }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <table>
+            <tbody>
+                <tr>
+                    <td colspan="12" class="head center">DADOS DO SEGURO</td>
+                </tr>
+                <tr>
+                  <td class="h" colspan="8">Coberturas:</td>
+                  <td class="h" colspan="1">% Part.</td>
+                  <td class="h" colspan="3">Capital Segurado Individual:</td>
+                </tr>
+                {% for rule in deadline.ruledeadline_set.all %}
+                    <tr>
+                      <td class="no-t{% if not forloop.last %} no-b{% endif %}" colspan="8">{{ rule.name|default_if_none:'' }}</td>
+                      <td class="no-t{% if not forloop.last %} no-b{% endif %}" colspan="1">{{ rule.percent|default_if_none:'' }}</td>
+                      <td class="no-t{% if not forloop.last %} no-b{% endif %}" colspan="3">{{ rule.value|default_if_none:'' }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <table>
+            <tbody>
+                <tr>
+                    <td colspan="12" class="head center">DADOS DE IMPLANTAÇÃO</td>
+                </tr>
+                <tr>
+                    <td class="h" colspan="4">Grupo Segurado:</td>
+                    <td class="h" colspan="4">Custeio do Prêmio</td>
+                    <td class="h" colspan="4">Periodicidade de Faturamento:</td>
+                </tr>
+                <tr>
+                  <td colspan="4">Funcionários e Sócios/Diretores</td>
+                  <td colspan="4">Não Contributário</td>
+                  <td colspan="4">anual</td>
+                </tr>
+                <tr>
+                    <td class="h" colspan="2">Nº de Vidas:</td>
+                    <td class="h" colspan="3">Capital Segurado Total:</td>
+                    <td class="h" colspan="3">Taxa do Seguro (por mil):</td>
+                    <td class="h" colspan="4">Prêmio do Seguro:</td>
+                </tr>
+                <tr>
+                    <td colspan="2">{{ deadline.lives|default_if_none:'' }}</td>
+                    <td colspan="3">{{ deadline.insured_capital|default_if_none:'' }}</td>
+                    <td colspan="3">{{ deadline.rate_per_thousand|default_if_none:'' }}</td>
+                    <td colspan="4">{{ deadline.payment|default_if_none:'' }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <table>
+            <tbody>
+                <tr><td class="head center" colspan="12">DADOS DO CORRETOR</td></tr>
+                <tr>
+                    <td colspan="8" class="h">Nome/Razão Social:</td>
+                    <td colspan="2" class="h">Código Interno:</td>
+                    <td colspan="2" class="h">Código Op.:</td>
+                </tr>
+                <tr>
+                    <td colspan="8">{{ sale.owner.partner.name|default_if_none:'' }}</td>
+                    <td colspan="2">{{ sale.owner.partner.internal_code|default_if_none:'' }}</td>
+                    <td colspan="2">{{ sale.owner.partner.operational_code|default_if_none:'' }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <table>
+            <tr>
+                <td class="head center" colspan="12">DECLARAÇÃO E AUTORIZAÇÃO DE DESCONTO</td>
+            </tr>
+            <tr>
+                <td colspan="12">
+                    {% autoescape off %}
+                        {{ sale.product.declaration|default_if_none:'' }}
+                    {% endautoescape %}
+                </td>
+            </tr>
+            <tr>
+                <td class="blank" colspan="12">Processo SUSEP 005.306/00</td>
+            </tr>
+            <tr>
+                <td colspan="4" class="h">Local:</td>
+                <td colspan="4" class="h">Data:</td>
+                <td colspan="4" class="h">Início de Vigência do Seguro:</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp;</td>
+                <td colspan="4">{% now "j \d\e F \d\e Y" %}</td>
+                <td colspan="4">{{ sale.begin|default_if_none:'' }}</td>
+            </tr>
+            <tr>
+                <td colspan="1" class="h">NAC:</td>
+                <td colspan="3" class="h">Gerente Comercial:</td>
+                <td colspan="4" class="h">Diretoria:</td>
+                <td colspan="4" class="h">Sucursal:</td>
+            </tr>
+            <tr>
+                <td colspan="1">&nbsp;</td>
+                <td colspan="3">{{ sale.owner|default_if_none:'' }}</td>
+                <td colspan="4">{{ sale.owner.director|default_if_none:'' }}</td>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr><td colspan="12" class="blank">&nbsp;</td></tr>
+            <tr>
+                <td colspan="4" class="signature no-b">&nbsp;</td>
+                <td colspan="4" class="signature no-b">&nbsp;</td>
+                <td colspan="4" class="signature no-b">&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="4" rowspan="2" class="no-t center">
+                    {{ sale.product.insurance_company|default_if_none:'' }}
+                </td>
+                <td colspan="4" class="no-t no-b center">
+                    Estipulante
+                </td>
+                <td colspan="4" class="no-t no-b center">
+                    Corretor de Seguros
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" class="no-t center">
+                    (Assinatura sob carimbo)
+                </td>
+                <td colspan="4" class="no-t center">
+                    (Assinatura sob carimbo)
+                </td>
+            </tr>
+        </table>
+
+    </div>
+{% endblock %}
