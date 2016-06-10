@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-09 17:04-0300\n"
-"PO-Revision-Date: 2016-06-09 17:05+0000\n"
+"POT-Creation-Date: 2016-06-09 20:07-0300\n"
+"PO-Revision-Date: 2016-06-10 00:35+0000\n"
 "Last-Translator:   <admin@admin.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -34,8 +34,6 @@ msgid "Email address"
 msgstr "Endereço de e-mail"
 
 #: .\product\models.py:11
-#, fuzzy
-#| msgid "Icon 1"
 msgid "Icon"
 msgstr "Primeiro ícone"
 
@@ -89,7 +87,7 @@ msgid "Description"
 msgstr "Descrição"
 
 #: .\product\models.py:113
-#: .\themes\default\templates\page-sale-section.html:309
+#: .\themes\default\templates\page-sale-section.html:259
 msgid "Declaration"
 msgstr "Declaração"
 
@@ -216,7 +214,7 @@ msgstr "Esse campo é obrigatório"
 
 #: .\sale\forms.py:28
 msgid "Invalid Phone Number"
-msgstr ""
+msgstr "Telefone inválido"
 
 #: .\sale\forms.py:53
 #: .\themes\default\templates\page-production-section.html:60
@@ -407,29 +405,29 @@ msgstr "Data de Vencimento"
 msgid "Percentage"
 msgstr "Percentual"
 
-#: .\sale\views.py:393
+#: .\sale\views.py:396
 msgid "An error has occurred"
 msgstr "Um erro ocorreu"
 
-#: .\sale\views.py:395
+#: .\sale\views.py:398
 msgid "Select a File Type to upload"
 msgstr "Escolha o tipo de arquivo para upload"
 
-#: .\sale\views.py:397
+#: .\sale\views.py:400
 msgid "Select a File"
 msgstr "Selecione um arquivo"
 
-#: .\sale\views.py:408
+#: .\sale\views.py:411
 msgid "Successfully file uploaded"
 msgstr "Sucesso no upload do arquivo"
 
-#: .\sale\views.py:410
+#: .\sale\views.py:413
 #, python-format
 msgid "Uploaded by <b>%s</b> in <small>%s</small>"
 msgstr "Incluído por <b>%s</b> em <small>%s</small>"
 
 #: .\status_emails\models.py:12
-#: .\themes\default\templates\page-sale-section.html:31
+#: .\themes\default\templates\page-sale-section.html:408
 msgid "Buyer"
 msgstr "Contratante"
 
@@ -603,7 +601,7 @@ msgstr "Arquivos que pode ver"
 
 #: .\themes\default\templates\page-entries-profile-section.html:177
 msgid "Files Download"
-msgstr "Arquivos que pode baixar"
+msgstr "Arquivos que pode baixar ou subir"
 
 #: .\themes\default\templates\page-entries-profile-section.html:188
 msgid "Quote Permissions"
@@ -712,8 +710,8 @@ msgid "Manager"
 msgstr "Gerente"
 
 #: .\themes\default\templates\page-production-section.html:59
-#: .\themes\default\templates\page-sale-section.html:100
-#: .\themes\default\templates\page-sale-section.html:111
+#: .\themes\default\templates\page-sale-section.html:61
+#: .\themes\default\templates\page-sale-section.html:72
 msgid "Product"
 msgstr "Produto"
 
@@ -750,7 +748,7 @@ msgid "A"
 msgstr ""
 
 #: .\themes\default\templates\page-production-section.html:74
-#: .\themes\default\templates\page-sale-section.html:27
+#: .\themes\default\templates\page-sale-section.html:35
 msgid "Status"
 msgstr "Status"
 
@@ -778,83 +776,84 @@ msgstr "Contratar"
 msgid "Sale Owner"
 msgstr "Dono da oportunidade"
 
-#: .\themes\default\templates\page-sale-section.html:27
+#: .\themes\default\templates\page-sale-section.html:29
+msgid "Opening of Lead"
+msgstr "Abertura de novo lead"
+
+#: .\themes\default\templates\page-sale-section.html:31
+#| msgid "Proposal"
+msgid "Proposal Accession"
+msgstr "Proposta de Adesão"
+
+#: .\themes\default\templates\page-sale-section.html:35
 msgid "Open"
 msgstr "Aberto"
 
-#: .\themes\default\templates\page-sale-section.html:68
-msgid "Address"
-msgstr "Endereço"
-
-#: .\themes\default\templates\page-sale-section.html:85
-msgid "Lead of"
-msgstr "Lead de"
-
-#: .\themes\default\templates\page-sale-section.html:87
-msgid "Quotation of"
-msgstr "Cotação de"
-
-#: .\themes\default\templates\page-sale-section.html:104
-#: .\themes\default\templates\page-sale-section.html:115
+#: .\themes\default\templates\page-sale-section.html:65
+#: .\themes\default\templates\page-sale-section.html:76
 msgid "Insurance"
 msgstr "Seguradora"
 
-#: .\themes\default\templates\page-sale-section.html:187
+#: .\themes\default\templates\page-sale-section.html:137
 msgid "Clauses"
 msgstr "Coberturas"
 
-#: .\themes\default\templates\page-sale-section.html:188
+#: .\themes\default\templates\page-sale-section.html:138
 #, python-format
 msgid "%% Part"
 msgstr ""
 
-#: .\themes\default\templates\page-sale-section.html:189
+#: .\themes\default\templates\page-sale-section.html:139
 msgid "Individual Capital"
 msgstr "Capital individual"
 
-#: .\themes\default\templates\page-sale-section.html:285
+#: .\themes\default\templates\page-sale-section.html:235
 msgid "Conditions of the product"
 msgstr "Condições do produto"
 
-#: .\themes\default\templates\page-sale-section.html:292
-#: .\themes\default\templates\page-sale-section.html:316
+#: .\themes\default\templates\page-sale-section.html:242
+#: .\themes\default\templates\page-sale-section.html:266
 msgid "Conditions"
 msgstr "Declaração"
 
-#: .\themes\default\templates\page-sale-section.html:298
-#: .\themes\default\templates\page-sale-section.html:322
+#: .\themes\default\templates\page-sale-section.html:248
+#: .\themes\default\templates\page-sale-section.html:272
 #: .\themes\default\templates\page-sale-section.html:652
 #: .\themes\default\templates\parts\submit-form.html:4
 msgid "Close"
 msgstr "Fechar"
 
-#: .\themes\default\templates\page-sale-section.html:458
+#: .\themes\default\templates\page-sale-section.html:445
+msgid "Address"
+msgstr "Endereço"
+
+#: .\themes\default\templates\page-sale-section.html:460
 msgid "Files"
 msgstr "Arquivos"
 
-#: .\themes\default\templates\page-sale-section.html:467
+#: .\themes\default\templates\page-sale-section.html:469
 msgid "Files to Download"
 msgstr "Arquivos para download"
 
-#: .\themes\default\templates\page-sale-section.html:475
-#: .\themes\default\templates\page-sale-section.html:515
-#: .\themes\default\templates\page-sale-section.html:530
+#: .\themes\default\templates\page-sale-section.html:477
+#: .\themes\default\templates\page-sale-section.html:517
+#: .\themes\default\templates\page-sale-section.html:532
 msgid "Download"
 msgstr "Download"
 
-#: .\themes\default\templates\page-sale-section.html:482
+#: .\themes\default\templates\page-sale-section.html:484
 msgid "Uploaded files"
 msgstr "Arquivos a serem enviados"
 
-#: .\themes\default\templates\page-sale-section.html:525
+#: .\themes\default\templates\page-sale-section.html:527
 msgid "Uploaded by"
 msgstr "Enviado por"
 
-#: .\themes\default\templates\page-sale-section.html:526
+#: .\themes\default\templates\page-sale-section.html:528
 msgid "in"
 msgstr "Dica"
 
-#: .\themes\default\templates\page-sale-section.html:548
+#: .\themes\default\templates\page-sale-section.html:549
 msgid "There is no Files in this Sale. Click on \"+\" button to upload files."
 msgstr ""
 "Não há arquivos nessa oportunidade, clique no \"+\" para adicionar novos "
@@ -887,7 +886,7 @@ msgstr "Escolha um arquivo"
 
 #: .\themes\default\templates\page-sale.html:149
 msgid "You have unsaved changes. Do you want to exit the page?"
-msgstr ""
+msgstr "Atenção."
 
 #: .\themes\default\templates\parts\submit-form.html:3
 msgid "Save"
@@ -1040,6 +1039,15 @@ msgstr "Perfil"
 #: .\user_groups\models.py:19
 msgid "See Quote"
 msgstr "Pode visualizar Comissões e Repasses"
+
+#~ msgid "Direct contracting"
+#~ msgstr "Contratação direta"
+
+#~ msgid "Lead of"
+#~ msgstr "Lead de"
+
+#~ msgid "Quotation of"
+#~ msgstr "Cotação de"
 
 #~ msgid "Clause"
 #~ msgstr "Cobertura"
