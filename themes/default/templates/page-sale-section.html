@@ -22,78 +22,48 @@
         {% endif %}
 {#        <div class="well">#}
             <div class="row">
-                <div class="col-md-12" style="padding:0px">
-                    <div class="col-md-6" style="text-align: left; padding:0px 0px 0px 0px;"><b>{% trans "Sale Owner" %}</b> {{ sale.owner|default:user }}</div>
-                    <div class="col-md-6" style="text-align: right; padding:0px 0px 0px 0px;" ><b>{% trans "Status" %}</b> {% if sale.pk %}{{ deadline.status }}{% else %} {% trans "Open" %}{% endif %}</div>
-                </div>
+{#                <div class="col-md-12" style="padding:0px">#}
+                    <div class="col-md-4" style="text-align: left; padding: 0px 0px 0px 0px;">
+                        <h4 style="font-weight: bold; color: #9d9d9d;">{% if product.is_lead %}
+                                {% trans "Opening of Lead" %}
+                            {% else %}
+                                {% trans "Proposal Accession" %}
+                            {% endif %}
+                        </h4>
+                    </div>
+                    <div class="col-md-4" style="padding: 10px 0px 0px 15px; color: #9d9d9d;">
+                        <b>{% trans "Sale Owner" %}</b> {{ sale.owner|default:user }}
+                    </div>
+                    <div class="col-md-4" style="padding: 10px 0px 0px 15px; color: #9d9d9d;" >
+                        <b>{% trans "Status" %}</b>
+                        {% if sale.pk %}
+                            {{ deadline.status }}
+                        {% else %}
+                            {% trans "Open" %}
+                        {% endif %}
+                    </div>
+{#                </div>#}
             </div>
 {#        </div>#}
-        <h4>{% trans 'Buyer' %}</h4>
-        <div class="well">
-                <div class="row">
-                    <input type="hidden" name="{{form.kind_person.html_name}}" value="{{product.kind_person}}">
-                    {% if product.kind_person == 'F' %}
-                        <div class="form-group col-md-6 mask-cpf form-required">
-                            <label class="control-label" for="id_{{form.cpf_cnpj.html_name}}">CPF</label>
-                            <input class="form-control cpf_cnpj-auto"
-                                    id="id_{{form.cpf_cnpj.html_name}}"
-                                    maxlength="{{form.cpf_cnpj.max_length}}"
-                                    name="{{form.cpf_cnpj.html_name}}"
-                                    value="{{form.cpf_cnpj.value}}"
-                                    placeholder="CPF" required="required" title="" type="text"
-                                    {% if edit_disabled %}disabled{% endif %}>
-                        </div>
-                        {% bootstrap_field form.name form_group_class='form-group col-md-6' set_disabled=edit_disabled%}
-                        {% bootstrap_field form.phone form_group_class='form-group col-md-6 mask-phone' set_disabled=edit_disabled%}
-                        {% bootstrap_field form.email form_group_class='form-group col-md-6' set_disabled=edit_disabled%}
-                    {% else %}
-                        <div class="form-group col-md-4 mask-cnpj form-required">
-                            <label class="control-label" for="id_{{form.cpf_cnpj.html_name}}">CNPJ</label>
-                            <input class="form-control cpf_cnpj-auto"
-                                    id="id_{{form.cpf_cnpj.html_name}}"
-                                    maxlength="{{form.cpf_cnpj.max_length}}"
-                                    name="{{form.cpf_cnpj.html_name}}"
-                                    value="{{form.cpf_cnpj.value}}"
-                                    placeholder="CNPJ" required="required" title="" type="text"
-                                    {% if edit_disabled %}disabled{% endif %}>
-                        </div>
-                        {% bootstrap_field form.responsible form_group_class='form-group col-md-4 form-required' set_disabled=edit_disabled%}
-                        {% bootstrap_field form.activity_area form_group_class='form-group col-md-4 form-required' set_disabled=edit_disabled%}
-                        {% bootstrap_field form.name form_group_class='form-group col-md-4' set_disabled=edit_disabled%}
-                        {% bootstrap_field form.phone form_group_class='form-group col-md-4 mask-phone' set_disabled=edit_disabled%}
-                        {% bootstrap_field form.email form_group_class='form-group col-md-4' set_disabled=edit_disabled%}
-                    {% endif %}
-            </div>
-        </div>
-        <h4>{% trans 'Address' %}</h4>
-        <div class="well">
-            <div class="row">
-                {{ addressbuyer.management_form }}
-                {% bootstrap_field addressbuyer.0.postal_code form_group_class="form-group col-md-3 mask-cep cep-auto" set_disabled=edit_disabled%}
-                {% bootstrap_field addressbuyer.0.state form_group_class="form-group col-md-3" set_disabled=edit_disabled%}
-                {% bootstrap_field addressbuyer.0.city form_group_class="form-group col-md-3" set_disabled=edit_disabled%}
-                {% bootstrap_field addressbuyer.0.district form_group_class="form-group col-md-3" set_disabled=edit_disabled%}
-                {% bootstrap_field addressbuyer.0.street form_group_class="form-group col-md-6" set_disabled=edit_disabled%}
-                {% bootstrap_field addressbuyer.0.number form_group_class="form-group col-md-3 mask-number" set_disabled=edit_disabled%}
-                {% bootstrap_field addressbuyer.0.complement form_group_class="form-group col-md-3" set_disabled=edit_disabled%}
-                {{ addressbuyer.0.id }}
-                {{ addressbuyer.0.buyer }}
-            </div>
-        </div>
     {% if show_all %}
-        <h4>{% if product.is_lead %}
-                {% trans "Lead of" %}
-            {% else %}
-                {% trans "Quotation of" %}
-            {% endif %}
-            {{product}}
-        </h4>
+{#        <h4>{{product}}</h4>#}
         <div class="well">
             <div class="row">
                 {{ deadlinesale.management_form }}
                 {% if not product.is_lead %}
                     {% if payment_see %}
                         {# {% bootstrap_field deadlinesale.0.payment form_group_class='form-group col-md-6 mask-float' type="text" set_disabled=payment_disabled %} #}
+                        <div class="form-group col-md-4 mask-float">
+                            <label class="control-label" for="id_{{ deadlinesale.0.payment.html_name }}">{{ deadlinesale.0.payment.label }}</label>
+                            <input  class="form-control"
+                                    id="id_{{ deadlinesale.0.payment.html_name }}"
+                                    maxlength="18"
+                                    name="{{ deadlinesale.0.payment.html_name }}"
+                                    placeholder="{{ deadlinesale.0.payment.label }}"
+                                    type="text"
+                                    value="{{ deadlinesale.0.payment.value|floatformat:2 }}">
+                        </div>
+                        {% bootstrap_field deadlinesale.0.lives form_group_class='form-group col-md-4' set_disabled=payment_disabled %}
                         <div class="col-md-4">
                             {% if product.insurance_company.icon %}
                                     <i class="fa"><img src="{{ product.icon1.url }}" style="height: 30px"
@@ -125,17 +95,6 @@
 {#                                    </div>#}
                             {% endif %}
                         </div>
-                        <div class="form-group col-md-4 mask-float">
-                            <label class="control-label" for="id_{{ deadlinesale.0.payment.html_name }}">{{ deadlinesale.0.payment.label }}</label>
-                            <input  class="form-control"
-                                    id="id_{{ deadlinesale.0.payment.html_name }}"
-                                    maxlength="18"
-                                    name="{{ deadlinesale.0.payment.html_name }}"
-                                    placeholder="{{ deadlinesale.0.payment.label }}"
-                                    type="text"
-                                    value="{{ deadlinesale.0.payment.value|floatformat:2 }}">
-                        </div>
-                        {% bootstrap_field deadlinesale.0.lives form_group_class='form-group col-md-4' set_disabled=payment_disabled %}
                         {% bootstrap_field deadlinesale.0.method_payment form_group_class='form-group col-md-4' set_disabled=True %}
                         <div class="form-group col-md-4">
                             <label class="control-label" for="id_{{ deadlinesale.0.insured_capital.html_name }}">{{ deadlinesale.0.insured_capital.label }}</label>
@@ -176,10 +135,10 @@
                         <div class="table-default table-clauses {% if product.pk %}hidden{% endif %}">
                             <div class="row">
                                 <section class="content">
-                                    <div class="col-md-12">
-                                        <div class="panel panel-default">
+                                    <div class="col-md-12" >
+{#                                        <div class="panel panel-default">#}
                                             <div class="panel-body" style="padding: 8px">
-                                                <div class="table-container">
+                                                <div class="table-container" >
 {#                                                        <h4 class="title"> {% trans "Clauses" %} </h4>#}
                                                     <table class="table table-striped">
                                                         <thead>
@@ -244,7 +203,7 @@
                                                     {% endif %}
                                                 </div>
                                             </div>
-                                        </div>
+{#                                        </div>#}
                                     </div>
                                 </section>
                             </div>
@@ -258,7 +217,7 @@
                     {% endif %}
                     {% if deadline_see %}
                         {% bootstrap_field deadlinesale.0.begin form_group_class='form-group col-md-3 mask-date' set_disabled=deadline_disabled %}
-                        {% bootstrap_field deadlinesale.0.end form_group_class='form-group col-md-3  mask-date' set_disabled=deadline_disabled %}
+                        {% bootstrap_field deadlinesale.0.end form_group_class='form-group col-md-3 mask-date' set_disabled=deadline_disabled %}
                         {% bootstrap_field deadlinesale.0.proposal form_group_class='form-group col-md-3' set_disabled=deadline_disabled %}
                         {% bootstrap_field deadlinesale.0.policy form_group_class='form-group col-md-3' set_disabled=deadline_disabled %}
                     {% else %}
@@ -329,7 +288,6 @@
                 {% endif %}
                 {{ deadlinesale.0.id }}
                 {{ deadlinesale.0.sale }}
-
                 {% for question in questiondeadline %}
                     {% if question.type_data = 'input' or question.type_data = 'link' or question.type_data = 'float' or question.type_data = 'percent' or question.type_data = 'date' or question.type_data = 'number'%}
                         <div class="form-group col-md-{{ question.col_width|default:'4'}}{% if question.is_required %} form-required{% endif %}">
@@ -455,7 +413,64 @@
 
         {% endif %}
 {#        {% if product.is_lead or sale.pk  %}#}
-        <h4>{% trans 'Files' %}</h4>
+        <h4 style="font-weight: bold; color: #9d9d9d; padding: 0px">{% trans 'Buyer' %}</h4>
+        <div class="well">
+                <div class="row">
+                    <input type="hidden" name="{{form.kind_person.html_name}}" value="{{product.kind_person}}">
+                    {% if product.kind_person == 'F' %}
+                        <div class="form-group col-md-6 mask-cpf form-required">
+                            <label class="control-label" for="id_{{form.cpf_cnpj.html_name}}">CPF</label>
+                            <input class="form-control cpf_cnpj-auto"
+                                    id="id_{{form.cpf_cnpj.html_name}}"
+                                    maxlength="{{form.cpf_cnpj.max_length}}"
+                                    name="{{form.cpf_cnpj.html_name}}"
+                                    value="{{form.cpf_cnpj.value}}"
+                                    placeholder="CPF" required="required" title="" type="text"
+                                    {% if edit_disabled %}disabled{% endif %}>
+                        </div>
+                        {% bootstrap_field form.name form_group_class='form-group col-md-6' set_disabled=edit_disabled%}
+                        {% bootstrap_field form.phone form_group_class='form-group col-md-6 mask-phone' set_disabled=edit_disabled%}
+                        {% bootstrap_field form.email form_group_class='form-group col-md-6' set_disabled=edit_disabled%}
+                    {% else %}
+                        <div class="form-group col-md-4 mask-cnpj form-required">
+                            <label class="control-label" for="id_{{form.cpf_cnpj.html_name}}">CNPJ</label>
+                            <input class="form-control cpf_cnpj-auto"
+                                    id="id_{{form.cpf_cnpj.html_name}}"
+                                    maxlength="{{form.cpf_cnpj.max_length}}"
+                                    name="{{form.cpf_cnpj.html_name}}"
+                                    value="{{form.cpf_cnpj.value}}"
+                                    placeholder="CNPJ" required="required" title="" type="text"
+                                    {% if edit_disabled %}disabled{% endif %}>
+                        </div>
+
+                        {% if product.is_lead %}
+                            {% bootstrap_field form.name form_group_class='form-group col-md-4' set_disabled=edit_disabled%}
+                            {% bootstrap_field form.activity_area form_group_class='form-group col-md-4 form-required' set_disabled=edit_disabled%}
+                        {% else %}
+                            {% bootstrap_field form.name form_group_class='form-group col-md-8' set_disabled=edit_disabled%}
+                        {% endif %}
+                        {% bootstrap_field form.responsible form_group_class='form-group col-md-4 form-required' set_disabled=edit_disabled%}
+                        {% bootstrap_field form.phone form_group_class='form-group col-md-4 mask-phone' set_disabled=edit_disabled%}
+                        {% bootstrap_field form.email form_group_class='form-group col-md-4' set_disabled=edit_disabled%}
+                    {% endif %}
+            </div>
+        </div>
+        <h4 style="font-weight: bold; color: #9d9d9d; padding: 0px">{% trans 'Address' %}</h4>
+        <div class="well">
+            <div class="row">
+                {{ addressbuyer.management_form }}
+                {% bootstrap_field addressbuyer.0.postal_code form_group_class="form-group col-md-3 mask-cep cep-auto" set_disabled=edit_disabled%}
+                {% bootstrap_field addressbuyer.0.state form_group_class="form-group col-md-3" set_disabled=edit_disabled%}
+                {% bootstrap_field addressbuyer.0.city form_group_class="form-group col-md-3" set_disabled=edit_disabled%}
+                {% bootstrap_field addressbuyer.0.number form_group_class="form-group col-md-3 mask-number" set_disabled=edit_disabled%}
+                {% bootstrap_field addressbuyer.0.street form_group_class="form-group col-md-6" set_disabled=edit_disabled%}
+                {% bootstrap_field addressbuyer.0.complement form_group_class="form-group col-md-3" set_disabled=edit_disabled%}
+                {% bootstrap_field addressbuyer.0.district form_group_class="form-group col-md-3" set_disabled=edit_disabled%}
+                {{ addressbuyer.0.id }}
+                {{ addressbuyer.0.buyer }}
+            </div>
+        </div>
+        <h4 style="font-weight: bold; color: #9d9d9d; padding: 0px">{% trans 'Files' %}</h4>
         <div class="well">
             {# <div class="thumbnail col-md-3" style="display: none" id="file_empty_form"> #}
                 {# <div class="caption"> #}
@@ -490,7 +505,7 @@
             </h4>
             <div class="row">
                 <div class="col-md-3">
-                    {% for file_type in product.file_type.all %}
+                    {% for file_type in filetype_see %}
                         <p> <span id="file_type_uploaded-{{file_type.pk}}" class="fa
                                 {% if file_type in uploaded_file_types %}
                                     fa-check text-success
@@ -541,17 +556,11 @@
                 <div class="col-md-12">
                     {% if sale.pk %}
                         {% if not deadline.file_set.all %}
-                            <div class="alert alert-info" role="alert" id="no-files-alert">
-                                <span class="fa fa-cloud-upload" aria-hidden="true"></span>
-                                <span class="sr-only">Info:</span>
-                                {% trans 'There is no Files in this Sale. Click on "+" button to upload files.' %}
+                            <div  role="alert" id="no-files-alert">
                             </div>
                         {% endif %}
                     {% else %}
-                        <div class="alert alert-info" role="alert">
-                            <span class="fa fa-cloud-upload" aria-hidden="true"></span>
-                            <span class="sr-only">Info:</span>
-                            {% trans "You need to save the Sale to upload Files" %}
+                        <div  role="alert">
                         </div>
                     {% endif %}
                 </div>
@@ -633,7 +642,7 @@
                                 <label for="new-status">{% trans "Change the Filetype" %}:</label>
                                 <select name="file-type-pk" id="file-type-pk" class="form-control">
                                     <option value="">---{% trans "Select a Filetype" %}---</option>
-                                    {% for filetype in product.file_type.all  %}
+                                    {% for filetype in filetype_download %}
                                         {% if filetype not in uploaded_file_types %}
                                             <option value="{{ filetype.pk }}">{{ filetype }}</option>
                                         {% endif %}

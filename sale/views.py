@@ -46,8 +46,6 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
         data['rules'] = product.rules.all()
         data['addressbuyer'] = AddressBuyerFormset()
         data['status_deadline'] = product.begin_status
-        data['possible_new_status'] = self.request.user.group_permissions.status_set.filter(
-            level__gte=product.begin_status.level).select_related()
         data['show_all'] = True
         data['deadlinesale'] = DeadlineSaleFormset()
         data['sample_file_type'] = product.sample_file_type.all()
@@ -63,8 +61,10 @@ class CreateBuyerView(LoginRequiredMixin, CreateView):
         data['possible_new_status'] = group_permissions.status_set.filter(
             level__gte=product.begin_status.level).select_related()
 
-        data['possible_new_file'] = group_permissions. status_set.filter(
-            level__gte=product.begin_status.level).select_related()
+        data['filetype_download'] = group_permissions.filetype_download.filter(
+            pk__in=product.file_type.all()).select_related()
+        data['filetype_see'] = group_permissions.filetype_see.filter(
+            pk__in=product.file_type.all()).select_related()
 
         data['payment_disabled'] = not (product.begin_status in group_permissions.status_edit_payment.all())
         data['payment_see'] = not data['payment_disabled'] or \
@@ -222,6 +222,11 @@ class EditBuyerView(LoginRequiredMixin, UpdateView):
 
         questions_deadlines = sale.product.profile.question_set.filter(
             type_profile='pdl').order_by('order_number')
+
+        data['filetype_download'] = group_permissions.filetype_download.filter(
+            pk__in=sale.product.file_type.all()).select_related()
+        data['filetype_see'] = group_permissions.filetype_see.filter(
+            pk__in=sale.product.file_type.all()).select_related()
 
         data['edit_disabled'] = not (deadline.status in group_permissions.status_edit.all())
 
