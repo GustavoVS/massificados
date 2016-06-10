@@ -19,23 +19,21 @@ class IndexView(MassificadoPageListView):
     context_object_name = 'home_product'
     template_name = "index.html"
 
-
     def get_queryset(self):
         return Product.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         if self.request.user.is_authenticated():
-            context['products_f'] = list(self.request.user.group_permissions.product.filter(kind_person='F'))*3
-            context['products_j'] = list(self.request.user.group_permissions.product.filter(kind_person='J'))*4
+            context['products_f'] = list(self.request.user.group_permissions.product.filter(kind_person='F')) * 3
+            context['products_j'] = list(self.request.user.group_permissions.product.filter(kind_person='J')) * 4
         return context
 
     def dispatch(self, request, *args, **kwargs):
-        if not self.request.user.group_permissions.menu_products:
+        if self.request.user.is_authenticated() and not self.request.user.group_permissions.menu_products:
             return redirect('production')
 
         return super(IndexView, self).dispatch(request, *args, **kwargs)
-
 
 
 class EntriesView(LoginRequiredMixin, MassificadoPageListView):
