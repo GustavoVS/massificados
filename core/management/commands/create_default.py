@@ -1129,12 +1129,15 @@ class Command(BaseCommand):
             u.save()
 
         for user_profile, user_password, user_partner, user_email, user_name in USERS:
-            if not MassificadoUser.objects.filter(email=user_email).exists():
-                user = MassificadoUser(username=user_name,
-                                       email=user_email,
-                                       password=user_password,
-                                       partner=Partner.objects.get(name=user_partner))
-                user.save()
+            if not MassificadoUser.objects.filter(email=user_email, username=user_name).exists():
+                try:
+                    user = MassificadoUser(username=user_name,
+                                           email=user_email,
+                                           password=user_password,
+                                           partner=Partner.objects.get(name=user_partner))
+                    user.save()
+                except:
+                    pass
 
         for area_name in AREA:
             if not ActivityArea.objects.filter(name=area_name).exists():
@@ -1346,11 +1349,14 @@ class Command(BaseCommand):
                     group.save()
 
         for user_profile, user_password, user_partner, user_email, user_name in USERS:
-                user = MassificadoUser.objects.get(email=user_email)
-                user.set_password('galcorr')
-                user.group_permissions = MassificadoGroups.objects.get(name=user_profile)
-                if "Parceiro" in user_profile:
-                    user.master = MassificadoUser.objects.get(username='SupervisorSofisa')
-                user.save()
+                try:
+                    user = MassificadoUser.objects.get(email=user_email)
+                    user.set_password('galcorr')
+                    user.group_permissions = MassificadoGroups.objects.get(name=user_profile)
+                    if "Parceiro" in user_profile:
+                        user.master = MassificadoUser.objects.get(username='SupervisorSofisa')
+                    user.save()
+                except:
+                    pass
 
 

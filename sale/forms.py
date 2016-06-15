@@ -28,13 +28,13 @@ class BuyerForm(forms.ModelForm):
             raise forms.ValidationError(_('Invalid Phone Number'))
 
         return self.cleaned_data.get('phone')
+    #todo: Validar se for lead
+    # def clean_activity_area(self):
+    #     if self.cleaned_data.get('kind_person') == 'J':
+    #         if not self.cleaned_data.get('activity_area'):
+    #             raise forms.ValidationError(_('This field is required'))
 
-    def clean_activity_area(self):
-        if self.cleaned_data.get('kind_person') == 'J':
-            if not self.cleaned_data.get('activity_area'):
-                raise forms.ValidationError(_('This field is required'))
-
-        return self.cleaned_data.get('activity_area')
+    #     return self.cleaned_data.get('activity_area')
 
 
 class BuyerAddressForm(forms.ModelForm):

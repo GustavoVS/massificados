@@ -21,7 +21,7 @@ from django.contrib import admin
 from django.conf import settings
 
 from core.views import IndexView, EntriesView
-from sale.views import ProductionView, CreateBuyerView, EditBuyerView, user_cnpj, upload_media
+from sale.views import ProductionView, CreateBuyerView, EditBuyerView, ProposePDF, user_cnpj, upload_media
 from user_account.views import (EntriesProfilesView, EntriesUsersView, EntrieUserNewView, EntrieUserEditView,
                                 NotificationsView)
 from user_groups.views import EntrieProfileNewView, EntrieProfileEditView
@@ -59,6 +59,7 @@ urlpatterns = [
 
     url(r'^inbox/notifications/', include(notifications.urls, namespace='notifications-api')),
 
+    url(r'^propose/(?P<salepk>[0-9]+)/$', ProposePDF.as_view(), name='propose-pdf'),
 
     # api
     url(r'^api/user_cnpj', user_cnpj),
