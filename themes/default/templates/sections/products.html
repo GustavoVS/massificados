@@ -97,51 +97,79 @@
         <div class="col-lg-12 col-md-12 ">
           <div class="panel panel-default">
               <div class="panel-body">
-                  <div class="col-md-2 products-pj-img">
+                  <div class="col-md-1 products-pj-img">
                       <h3 class="no-margin-top"><small>{% trans 'For your' %}</small><br>{% trans 'Company' %}</h3>
-                      <img class="img-responsive" src="{% static 'img/partner-sofisa/business256.png' %}" alt="Flower">
+{#                      <img class="img-responsive" src="{% static 'img/partner-sofisa/business256.png' %}" alt="Flower">#}
                   </div>
-                   <div class="col-md-10 hidden-md "  >
+                   <div class="col-md-11 hidden-md "  >
                       <div class="row-flex">
                        {% for product in products_j %}
-                           <div class="col-md-2 products-pj">
-                              <div class="panel panel-primary ">
-                                <div class="panel-body">
+{#                           <div class="col-md-2 products-pj">#}
+{#                              <div class="panel panel-primary ">#}
+{#                                <div class="panel-body">#}
+{#                                    <a href="{% url 'product-new-buyer' product.pk %}" role="button">#}
+{#                                    {% if product in user.group_permissions.product.all or user.is_superuser %}#}
+{#                                        <i class="fa"><img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" class="img-responsive"></i>#}
+{#                                    {% endif %}#}
+{#                                    </a>#}
+{#                                  </div>#}
+{#                                <div class="panel-footer" >#}
+{#                                    <a href="{% url 'product-new-buyer' product.pk %}" role="button">#}
+{#                                    {{ product.name }}#}
+{#                                    </a>#}
+{#                                </div>#}
+{#                              </div>#}
+{#                          </div>#}
+                                <div class="col-md-2 hidden-sm hidden-xs">
                                     <a href="{% url 'product-new-buyer' product.pk %}" role="button">
-                                    {% if product in user.group_permissions.product.all or user.is_superuser %}
-                                        <i class="fa"><img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" class="img-responsive"></i>
-                                    {% endif %}
-                                    </a>
-                                  </div>
-                                <div class="panel-footer" >
-                                    <a href="{% url 'product-new-buyer' product.pk %}" role="button">
-                                    {{ product.name }}
+                                        <div class="solucao_call">
+                                            <div class="col-md-12">
+                                                <div class="solucao_call_img">
+                                                        <img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" alt="+{{ product.name }}" title="+{{ product.name }}" class="img-responsive">
+                                                </div>
+                                            </div>
+                                            <div class="solucao_call_title">
+                                                <h5>+<span class="bold_name">{{ product.name }}</span></h5>
+                                            </div>
+                                        </div>
                                     </a>
                                 </div>
-                              </div>
-                          </div>
                        {% endfor %}
                       </div>
                    </div>
-                   <div class="col-md-10 hidden-lg "  >
+                   <div class="col-md-11 hidden-lg "  >
                       <div class="row-flex">
                        {% for product in products_j %}
-                           <div class="col-md-3 products-pj">
-                              <div class="panel panel-primary ">
-                                <div class="panel-body">
+{#                           <div class="col-md-3 products-pj">#}
+{#                              <div class="panel panel-primary ">#}
+{#                                <div class="panel-body">#}
+{#                                    <a href="{% url 'product-new-buyer' product.pk %}" role="button">#}
+{#                                    {% if product in user.group_permissions.product.all or user.is_superuser %}#}
+{#                                        <i class="fa"><img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" class="img-responsive"></i>#}
+{#                                    {% endif %}#}
+{#                                    </a>#}
+{#                                  </div>#}
+{#                                <div class="panel-footer" >#}
+{#                                    <a href="{% url 'product-new-buyer' product.pk %}" role="button">#}
+{#                                    {{ product.name }}#}
+{#                                    </a>#}
+{#                                </div>#}
+{#                              </div>#}
+{#                          </div>#}
+                                <div class="col-md-3 hidden-sm hidden-xs">
                                     <a href="{% url 'product-new-buyer' product.pk %}" role="button">
-                                    {% if product in user.group_permissions.product.all or user.is_superuser %}
-                                        <i class="fa"><img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" class="img-responsive"></i>
-                                    {% endif %}
-                                    </a>
-                                  </div>
-                                <div class="panel-footer" >
-                                    <a href="{% url 'product-new-buyer' product.pk %}" role="button">
-                                    {{ product.name }}
+                                        <div class="solucao_call">
+                                            <div class="col-md-12">
+                                                <div class="solucao_call_img">
+                                                        <img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" alt="+{{ product.name }}" title="+{{ product.name }}" class="img-responsive">
+                                                </div>
+                                            </div>
+                                            <div class="solucao_call_title">
+                                                <h5>+<span class="bold_name">{{ product.name }}</span></h5>
+                                            </div>
+                                        </div>
                                     </a>
                                 </div>
-                              </div>
-                          </div>
                        {% endfor %}
                       </div>
                    </div>
@@ -152,51 +180,79 @@
             <div class="panel panel-default">
                 <div class="panel-body">
 
-                    <div class="col-md-2 products-pf-img">
+                    <div class="col-md-1 products-pf-img">
                         <h3 class="no-margin-top"><small>{% trans 'For' %}</small><br>{% trans 'You' %}</h3>
-                        <img class="img-responsive"  src="{% static 'img/partner-sofisa/family256.png' %}" alt="Flower">
+{#                        <img class="img-responsive"  src="{% static 'img/partner-sofisa/family256.png' %}" alt="Flower">#}
                     </div>
 
-                     <div class="col-md-10 hidden-md" >
+                     <div class="col-md-11 hidden-md" >
                         <div class="row-flex">
                              {% for product in products_f %}
-                                 <div class="col-md-2 products-pf">
-                                    <div class="panel panel-primary">
-                                      <div class="panel-body">
-                                          <a href="{% url 'product-new-buyer' product.pk %}" role="button">
-                                          {% if product in user.group_permissions.product.all or user.is_superuser %}
-                                              <i class="fa"><img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" class="img-responsive"></i>
-                                          {% endif %}
-                                          </a>
+{#                                 <div class="col-md-2 products-pf">#}
+{#                                    <div class="panel panel-primary">#}
+{#                                        <div class="panel-body">#}
+{#                                          <a href="{% url 'product-new-buyer' product.pk %}" role="button">#}
+{#                                          {% if product in user.group_permissions.product.all or user.is_superuser %}#}
+{#                                              <i class="fa"><img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" class="img-responsive"></i>#}
+{#                                          {% endif %}#}
+{#                                          </a>#}
+{#                                        </div>#}
+{#                                      <div class="panel-footer">#}
+{#                                          <a href="{% url 'product-new-buyer' product.pk %}" role="button">#}
+{#                                          {{ product.name }}#}
+{#                                          </a>#}
+{#                                      </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+                                <div class="col-md-2 hidden-sm hidden-xs">
+                                    <a href="{% url 'product-new-buyer' product.pk %}" role="button">
+                                        <div class="solucao_call">
+                                            <div class="col-md-12">
+                                                <div class="solucao_call_img">
+                                                        <img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" alt="+{{ product.name }}" title="+{{ product.name }}" class="img-responsive">
+                                                </div>
+                                            </div>
+                                            <div class="solucao_call_title">
+                                                <h5>+<span class="bold_name">{{ product.name }}</span></h5>
+                                            </div>
                                         </div>
-                                      <div class="panel-footer">
-                                          <a href="{% url 'product-new-buyer' product.pk %}" role="button">
-                                          {{ product.name }}
-                                          </a>
-                                      </div>
-                                    </div>
+                                    </a>
                                 </div>
                              {% endfor %}
                          </div>
                      </div>
-                     <div class="col-md-10 hidden-lg" >
+                     <div class="col-md-11 hidden-lg" >
                         <div class="row-flex">
                              {% for product in products_f %}
-                                 <div class="col-md-3 products-pf">
-                                    <div class="panel panel-primary">
-                                      <div class="panel-body">
-                                          <a href="{% url 'product-new-buyer' product.pk %}" role="button">
-                                          {% if product in user.group_permissions.product.all or user.is_superuser %}
-                                              <i class="fa"><img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" class="img-responsive"></i>
-                                          {% endif %}
-                                          </a>
+{#                                 <div class="col-md-3 products-pf">#}
+{#                                    <div class="panel panel-primary">#}
+{#                                      <div class="panel-body">#}
+{#                                          <a href="{% url 'product-new-buyer' product.pk %}" role="button">#}
+{#                                          {% if product in user.group_permissions.product.all or user.is_superuser %}#}
+{#                                              <i class="fa"><img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" class="img-responsive"></i>#}
+{#                                          {% endif %}#}
+{#                                          </a>#}
+{#                                        </div>#}
+{#                                      <div class="panel-footer">#}
+{#                                          <a href="{% url 'product-new-buyer' product.pk %}" role="button">#}
+{#                                          {{ product.name }}#}
+{#                                          </a>#}
+{#                                      </div>#}
+{#                                    </div>#}
+{#                                 </div>#}
+                                <div class="col-md-3 hidden-sm hidden-xs">
+                                    <a href="{% url 'product-new-buyer' product.pk %}" role="button">
+                                        <div class="solucao_call">
+                                            <div class="col-md-12">
+                                                <div class="solucao_call_img">
+                                                        <img src="{% if product.icon1 %}{{ product.icon1.url }}{% endif %}" alt="+{{ product.name }}" title="+{{ product.name }}" class="img-responsive">
+                                                </div>
+                                            </div>
+                                            <div class="solucao_call_title">
+                                                <h5>+<span class="bold_name">{{ product.name }}</span></h5>
+                                            </div>
                                         </div>
-                                      <div class="panel-footer">
-                                          <a href="{% url 'product-new-buyer' product.pk %}" role="button">
-                                          {{ product.name }}
-                                          </a>
-                                      </div>
-                                    </div>
+                                    </a>
                                 </div>
                              {% endfor %}
                          </div>

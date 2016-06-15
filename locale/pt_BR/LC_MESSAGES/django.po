@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-09 20:07-0300\n"
-"PO-Revision-Date: 2016-06-10 00:35+0000\n"
+"PO-Revision-Date: 2016-06-14 10:12+0000\n"
 "Last-Translator:   <admin@admin.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -589,7 +589,7 @@ msgstr "Status que pode editar -Campos de Vigência"
 
 #: .\themes\default\templates\page-entries-profile-section.html:141
 msgid "Status Set"
-msgstr "Status que pode atribuir - (Ação que o usuároi pode fazer)"
+msgstr "Status que pode atribuir - (Ação que o usuário pode fazer)"
 
 #: .\themes\default\templates\page-entries-profile-section.html:153
 msgid "The user can see the production in those profiles"

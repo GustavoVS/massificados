@@ -4,6 +4,7 @@ body, html {
     -webkit-font-smoothing: antialiased !important;
     color: #1c424d;
 }
+body {line-height:1.5;font-size:15px;color:#555;background-repeat:repeat;font-family:'Century Gothic', CenturyGothic, AppleGothic, sans-serif;}
 .backgroundimg {
     position: fixed;
     top: 0;

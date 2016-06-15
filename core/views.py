@@ -31,8 +31,9 @@ class IndexView(MassificadoPageListView):
         return context
 
     def dispatch(self, request, *args, **kwargs):
-        if not self.request.user.group_permissions.menu_products:
-            return redirect('production')
+        if self.request.user.is_authenticated():
+            if not self.request.user.group_permissions.menu_products:
+                return redirect('production')
 
         return super(IndexView, self).dispatch(request, *args, **kwargs)
 
